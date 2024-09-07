@@ -13,6 +13,7 @@ public class PlayerCameraController : MonoBehaviour
     private void Start()
     {
         camTransform = Camera.main.transform;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {

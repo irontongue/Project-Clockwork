@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inputVector.x = Input.GetAxisRaw("Horizontal");
         inputVector.z = Input.GetAxisRaw("Vertical");
-        print(lastPlayerVelocity.magnitude);
+       
         inputVector.Normalize(); // normalize the vector, so you dont move faster when moving left and foward.
         float preservedGravity = currentVelocity.y;
 
