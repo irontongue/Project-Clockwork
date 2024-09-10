@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
-public enum WeaponType{Shotgun, Sniper, Smg}
+public enum WeaponType{Shotgun, Sniper, Smg, TeslaCoil }
 
 public class AllWeaponStats : MonoBehaviour
 {
     public WeaponStats[] weaponStats;
-    private void Start()
+    private void Awake()
     {
         InitializeDictionary();
     }
@@ -23,20 +24,18 @@ public class AllWeaponStats : MonoBehaviour
             weaponStatsDic.Add(d_Key[i], i);
         }
     }
+    private void printDic()
+    {
+        foreach(KeyValuePair<WeaponType, int> kvp in weaponStatsDic)
+        {
+            print(string.Format("Key = {0}, Value = {1})", kvp.Key, kvp.Value));
+        }
+    }
     #region Editor Buttons and weapon stats Serialized editing
     [SerializeField] Dictionary<WeaponType, int> weaponStatsDic = new Dictionary<WeaponType, int>();
     [SerializeField] WeaponType weaponTypeToAdd;
     [SerializeField] int[] d_Value = new int[0];
     [SerializeField] WeaponType[] d_Key = new WeaponType[0];
-
-    [ContextMenu("printDic")]
-    public void printDic()
-    {
-        for (int i = 0; i < weaponStatsDic.Count; i++)
-        {
-            print(weaponStatsDic.Count);
-        }
-    }
     public void AddWeaponStats()
     {
         if (ContainsWeaponType())
@@ -177,11 +176,19 @@ public class WeaponStats
     //[HideInInspector]
     public float attackSpeed;
     //[HideInInspector]
+    public float coolDown;
+    //[HideInInspector]
+    public float range;
+    //[HideInInspector]
     public float chargeUpTime;
     //[HideInInspector]
     public float bulletSpread;
     //[HideInInspector]
+    public int numberOfBullets = 1;
+    //
     public float lockOnDistance;
+    //
+    public int bounces;
 }
 #endregion
 
@@ -267,10 +274,15 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty weaponType = weapon.FindPropertyRelative("weaponType");
             SerializedProperty damage = weapon.FindPropertyRelative("damage");
             SerializedProperty attackSpeed = weapon.FindPropertyRelative("attackSpeed");
+            SerializedProperty coolDown = weapon.FindPropertyRelative("coolDown");
+            SerializedProperty range = weapon.FindPropertyRelative("range");
             SerializedProperty chargeUpTime = weapon.FindPropertyRelative("chargeUpTime");
             SerializedProperty bulletSpread = weapon.FindPropertyRelative("bulletSpread");
+            SerializedProperty numberOfBullets = weapon.FindPropertyRelative("numberOfBullets");
             SerializedProperty lockOnDistance = weapon.FindPropertyRelative("lockOnDistance");
-            if(!showAllWeapons)
+            SerializedProperty bounces = weapon.FindPropertyRelative("bounces");
+
+            if (!showAllWeapons)
             {
                 if (weaponType.intValue != (int)_weaponType)
                     continue;
@@ -283,11 +295,14 @@ public class WeapopnStatsEditor : Editor
 
             EditorGUILayout.PropertyField(damage);
             EditorGUILayout.PropertyField(attackSpeed);
+            EditorGUILayout.PropertyField(coolDown);
             // Draw properties based on the selected weapon type
             switch ((WeaponType)weaponType.enumValueIndex)
             {
                 case WeaponType.Shotgun:
                     EditorGUILayout.PropertyField(bulletSpread);
+                    EditorGUILayout.PropertyField(range);
+                    EditorGUILayout.IntSlider(numberOfBullets, 1, 1000);
                     // Add other properties specific to Shotgun
                     break;
 
@@ -300,6 +315,9 @@ public class WeapopnStatsEditor : Editor
                 case WeaponType.Smg:
                     EditorGUILayout.PropertyField(lockOnDistance);
                     // Add other properties specific to SMG
+                    break;
+                case WeaponType.TeslaCoil:
+                    EditorGUILayout.PropertyField(bounces);
                     break;
             }
 

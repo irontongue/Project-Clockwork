@@ -9,9 +9,24 @@ public class AutomaticWeaponBase : MonoBehaviour
     [SerializeField] protected WeaponType weaponType;
     protected WeaponStats stats;
     protected Camera cam;
-    Transform playerTransform;
-    
-    
+    protected Transform playerTransform;
+    [SerializeField]protected LayerMask enemyLayerMask = 8;
+    [SerializeField] protected LayerMask excludePlayerLayerMask = ~(1<<6);
+
+    protected bool onCooldown = false;
+    protected float coolDownTime = 0;
+
+    protected bool firing = false;
+    protected struct EnemyHitPacket
+    {
+        public EnemyInfo enemyInfo;
+        public Vector3 hitPosition;
+    }
+    protected struct EnemiesHitPacket
+    {
+        public EnemyInfo[] enemyInfos;
+        public Vector3[] hitPositions;
+    }
     virtual protected void Start()
     {
         playerTransform = transform.root;
@@ -75,7 +90,6 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected EnemyInfo GetFirstEnemyBehindPlayer(float distance, float size, LayerMask layerMask)
     {
         return GetFirstEnemyInDirection(-1, distance, size, layerMask);
-
     }
     /// <summary>
     /// Gets the first enemy in the forward or backward vector (direction = 1 for forward) (direction = -1 for backward)
@@ -93,10 +107,22 @@ public class AutomaticWeaponBase : MonoBehaviour
             direction = 1;
         }
 
-        Collider hit = Physics.OverlapBox(playerTransform.position + direction * size * transform.forward, new Vector3(size, size, size), playerTransform.rotation, layerMask)[0];
-
-        if(hit)
-            return hit.GetComponent<EnemyInfo>();
+        Collider[] hit = Physics.OverlapBox(playerTransform.position + direction * size * transform.forward, new Vector3(size, size, distance *0.5f), playerTransform.rotation, layerMask);
+        if (hit.Length == 0)
+        {
+            return null;
+        }
+        
+        RaycastHit rayHit = new RaycastHit();
+        foreach(Collider col in hit)
+        {
+            if (Physics.Raycast(playerTransform.position, (col.transform.position - playerTransform.position).normalized, out rayHit, distance, excludePlayerLayerMask))
+            { break; }
+        }
+        if (1 << rayHit.transform.gameObject.layer == (int)enemyLayerMask)
+        {
+            return rayHit.transform.GetComponent<EnemyInfo>();
+        }
         else
             return null;
     }
@@ -123,10 +149,25 @@ public class AutomaticWeaponBase : MonoBehaviour
         }
     }
     /// <summary>
+    /// base to fire any weapon and should be overwritten.
+    /// call base.Shoot() at the end of the overided statement to loop any weapon to shoot multiple bullets.
+    /// </summary>
+    /// <param name="iterator"></param>
+    public virtual void Shoot(int iterator = 1)
+    {
+        if(iterator == stats.numberOfBullets)
+        {
+            return;
+        }
+
+        iterator++;
+        Shoot(iterator);
+    }
+    /// <summary>
     /// Helper function
     /// ticks _time up by deltaTime and speed.
     /// </summary>
-    /// <param name="time"> Reference to own timer float </param>
+    /// <param name="_time"> Reference to own timer float </param>
     /// <param name="speed">1 = 1 second, 2 = 0.5f second</param>
     /// <returns>true if time >= 1 </returns>
     protected bool Timer(ref float _time, float speed)

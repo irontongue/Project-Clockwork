@@ -15,8 +15,10 @@ public class EnemyDamageHandler : MonoBehaviour
     /// Damages the enemy
     /// </summary>
     /// <param name="damage"></param>
-    public void DealDamage(float amount)
+    public void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body)
     {
+        if (bodyPart == BodyPart.Head)
+            amount *= 2;
         ChangeHealth(-amount);
     }
     /// <summary>

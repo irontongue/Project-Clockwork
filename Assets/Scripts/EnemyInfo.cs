@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -19,4 +20,16 @@ public class EnemyInfo : MonoBehaviour
 
     [Header("Scripts")]
     public EnemyDamageHandler damageHandler;
+    private void Start()
+    {
+        try 
+        {
+            damageHandler = GetComponent<EnemyDamageHandler>();
+        }
+        catch
+        {
+            Debug.LogWarning("Enemy Did not have a DamageHandler!");
+            damageHandler = transform.AddComponent<EnemyDamageHandler>();
+        }
+    }
 }
