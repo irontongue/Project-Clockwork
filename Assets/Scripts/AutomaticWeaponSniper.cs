@@ -38,7 +38,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
             else
                 return;
         }
-        enemyObj = RayCastForwardGameObject(enemyLayerMask);
+        enemyObj = RayCastForwardGameObject(everythingEnemy);
 
         if (enemyObj != null)
         {
@@ -77,7 +77,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     {
         if (playFX)
             muzzleFlashPFX.Play();
-        enemyObj.GetComponent<EnemyDamageHandler>().DealDamage(stats.damage);
+        enemyObj.GetComponent<EnemyInfo>().DealDamage(stats.damage);
     }
     public void FinishAnimation()
     {

@@ -23,6 +23,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        if (waves.Length == 0)
+        {
+            Debug.LogWarning("EnemeySpawner: Waves have not been set.");
+            return;
+        }
         StartWave();
     }
     private void Update()

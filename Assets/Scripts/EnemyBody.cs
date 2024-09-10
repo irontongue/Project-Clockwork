@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum BodyPart {Head, Body}
-public class EnemyBody : MonoBehaviour
+public class EnemyBody : EnemyDamageHandler
 {
     EnemyInfo info;
     [SerializeField] BodyPart bodyPart;
@@ -14,7 +14,7 @@ public class EnemyBody : MonoBehaviour
     }
     public void DealDamage(float damage)
     {
-        info.damageHandler.DealDamage(damage, bodyPart);
+        info.DealDamage(damage, bodyPart);
     }
 
 }

@@ -12,6 +12,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected Transform playerTransform;
     [SerializeField]protected LayerMask enemyLayerMask = 8;
     [SerializeField] protected LayerMask excludePlayerLayerMask = ~(1<<6);
+    protected LayerMask everythingEnemy = 1 << 3 | 1 << 7;
 
     protected bool onCooldown = false;
     protected float coolDownTime = 0;
@@ -133,7 +134,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     /// <param name="amount"></param>
     protected void DamageEnemy(EnemyInfo enemyInfo, float amount)
     {
-        enemyInfo.damageHandler.DealDamage(amount);
+        enemyInfo.DealDamage(amount);
     }
     /// <summary>
     /// Deal damage to multple enemies
@@ -145,7 +146,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         foreach(EnemyInfo info in enemyInfos)
         {
-            info.damageHandler.DealDamage(amount);
+            info.DealDamage(amount);
         }
     }
     /// <summary>

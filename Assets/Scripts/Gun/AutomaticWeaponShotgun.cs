@@ -36,16 +36,26 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     //        Gizmos.DrawCube(hit.point, new Vector3(0.1f, 0.1f,0.1f));
     //    }
     //}
+    bool resetRotation = false;
     void Update()
     {
         if (firing)
+        {
+            if(resetRotation == false)resetRotation = true;
+            transform.LookAt(enemyInfo.transform); // TO DO: Need to add Min/Max rotation here
             return;
+        }
         if(onCooldown)
         {
             if(Timer(ref coolDownTime, stats.coolDown))
                 onCooldown = false;
             else
                 return;
+        }
+        if(resetRotation)
+        {
+            resetRotation = false;
+            transform.LookAt(Vector3.forward);
         }
         if (!Timer(ref updateTime, 10))
             return;
@@ -60,7 +70,6 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         onCooldown = true;
         firing = true;
         anim.SetTrigger("Shoot");
-        transform.LookAt(enemyInfo.transform);
     }
     public override void Shoot(int iterator = 0)
     {
@@ -81,7 +90,7 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
             {
                 if(1 << hit.transform.gameObject.layer == enemyLayer) // 8 == 1<<3 == enemy layer // 128 == Body layer
                 {
-                    hit.transform.GetComponent<EnemyInfo>().damageHandler.DealDamage(stats.damage);
+                    hit.transform.GetComponent<EnemyInfo>().DealDamage(stats.damage);
                 }
                 else if(1 << hit.transform.gameObject.layer == enemyBodyLayer)
                 {

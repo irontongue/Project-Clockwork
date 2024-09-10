@@ -10,26 +10,55 @@ using UnityEngine;
 /// </summary>
 public enum EnemyType { a, b, c }
 
-public class EnemyInfo : MonoBehaviour
+public class EnemyInfo : EnemyDamageHandler
 {
+    #region Stats
     [Header("Stats")]
     public EnemyType enemyType;
     public float maxHealth = 10f;
     public float health = 10f;
     public float speed = 5f;
+    #endregion
 
-    [Header("Scripts")]
-    public EnemyDamageHandler damageHandler;
-    private void Start()
+    #region Damage Handling
+    /// <summary>
+    /// Damages the enemy
+    /// </summary>
+    /// <param name="damage"></param>
+    public void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body)
     {
-        try 
+        if (bodyPart == BodyPart.Head)
+            amount *= 2;
+        ChangeHealth(-amount);
+    }
+    /// <summary>
+    /// Heals the enemy
+    /// </summary>
+    /// <param name="amount"></param>
+    public void HealHealth(float amount)
+    {
+        ChangeHealth(amount);
+    }
+    /// <summary>
+    /// Directly Changes the health on enemy info
+    /// </summary>
+    /// <param name="amount"></param>
+    void ChangeHealth(float amount)
+    {
+        health = Mathf.Clamp(health + amount, 0, maxHealth);
+        if (health == 0)
         {
-            damageHandler = GetComponent<EnemyDamageHandler>();
-        }
-        catch
-        {
-            Debug.LogWarning("Enemy Did not have a DamageHandler!");
-            damageHandler = transform.AddComponent<EnemyDamageHandler>();
+            DeathEvent();
         }
     }
+    /// <summary>
+    /// If enemy health hits 0 this is called
+    /// What happens when the enemy dies
+    /// </summary>
+    void DeathEvent()
+    {
+        print("DeathEvent");
+        gameObject.SetActive(false);
+    }
+    #endregion
 }

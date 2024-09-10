@@ -30,7 +30,10 @@ public class AIBase : EnemyInfo
 
     protected virtual void Update()
     {
-        if(pathingToPoint)
+        //transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
+        transform.LookAt(player.transform.position);
+
+        if (pathingToPoint)
         {
             if (agent.remainingDistance > 0.1f)
                 return;

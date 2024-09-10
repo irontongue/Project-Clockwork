@@ -76,7 +76,7 @@ public class BasePrimaryWeapon : MonoBehaviour
     //damage the given enemy, has room for a modifyer if any abilitys should want to add to it in the future
     protected void DamageEnemy(EnemyInfo enemy, float modifyer = 1)
     {
-        enemy.damageHandler.DealDamage(damage * modifyer);
+        enemy.DealDamage(damage * modifyer);
     }    
     //returns false if there is no ammo, returns true if reload sucseeded 
     protected bool CanReloadWeapon()
