@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build.Content;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class AutomaticWeaponBase : MonoBehaviour
@@ -51,7 +52,12 @@ public class AutomaticWeaponBase : MonoBehaviour
         }
         return null;
     }
-
+    protected RaycastHit RayCastForwardRayHit(LayerMask layerMask, float distance = float.MaxValue)
+    {
+        RaycastHit hit;
+        Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distance, layerMask);
+        return hit;
+    }
     /// <summary>
     /// Returns all enemies  within a radius
     /// Useful for explosions
@@ -73,6 +79,20 @@ public class AutomaticWeaponBase : MonoBehaviour
         return info;
     }
     /// <summary>
+    /// Returns a single enemy within a radius
+    /// </summary>
+    /// <param name="radius"></param>
+    /// <param name="position"></param>
+    /// <param name="layerMask"></param>
+    /// <returns></returns>
+    protected EnemyInfo GetEnemyInSphere(float radius, Vector3 position, LayerMask layerMask)
+    {
+        Collider[] hits = Physics.OverlapSphere(position, radius, layerMask);
+        if (hits.Length == 0)
+            return null;
+        return hits[0].GetComponent<EnemyInfo>();
+    }
+    /// <summary>
     /// Returns GetFirstEnemyInDirection in the forward vector
     /// </summary>
     /// <param name="distance"></param>
@@ -92,13 +112,20 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         return GetFirstEnemyInDirection(-1, distance, size, layerMask);
     }
+    float s = 0;
+    float d = 0;
+    private void OnDrawGizmos()
+    {
+        //if(playerTransform)
+        //Gizmos.DrawCube(playerTransform.position + 1 * d * playerTransform.forward, new Vector3(s, s, d));
+    }
     /// <summary>
     /// Gets the first enemy in the forward or backward vector (direction = 1 for forward) (direction = -1 for backward)
     /// uses sphereCast
     /// </summary>
     /// <param name="direction"></param>
     /// <param name="distance"></param>
-    /// <param name="size"></param>
+    /// <param name="size">Horizontal size</param>
     /// <returns>First enemy in the forward or backward vector</returns>
     protected EnemyInfo GetFirstEnemyInDirection(int direction, float distance, float size, LayerMask layerMask)
     {
@@ -107,8 +134,12 @@ public class AutomaticWeaponBase : MonoBehaviour
             Debug.LogWarning($"GetFirstEnemyInDirection: direction = {direction}, setting to forward (1)");
             direction = 1;
         }
-
-        Collider[] hit = Physics.OverlapBox(playerTransform.position + direction * size * transform.forward, new Vector3(size, size, distance *0.5f), playerTransform.rotation, layerMask);
+        size = size * 0.5f;
+        distance = distance * 0.5f;
+        s = size;
+        d = distance;
+        Collider[] hit = Physics.OverlapBox(playerTransform.position + (direction * distance * playerTransform.forward), new Vector3(size, size, distance), Quaternion.identity, layerMask); // WRONG WRONG WRONG FIX FIX FIX
+        
         if (hit.Length == 0)
         {
             return null;
@@ -117,9 +148,11 @@ public class AutomaticWeaponBase : MonoBehaviour
         RaycastHit rayHit = new RaycastHit();
         foreach(Collider col in hit)
         {
-            if (Physics.Raycast(playerTransform.position, (col.transform.position - playerTransform.position).normalized, out rayHit, distance, excludePlayerLayerMask))
+            if (Physics.Raycast(playerTransform.position, (col.transform.position - playerTransform.position).normalized, out rayHit, float.MaxValue, excludePlayerLayerMask))
             { break; }
         }
+        if (!rayHit.transform)
+            return null;
         if (1 << rayHit.transform.gameObject.layer == (int)enemyLayerMask)
         {
             return rayHit.transform.GetComponent<EnemyInfo>();
@@ -163,6 +196,23 @@ public class AutomaticWeaponBase : MonoBehaviour
 
         iterator++;
         Shoot(iterator);
+    }
+    /// <summary>
+    /// simple Cooldown function to be put at the start of the weapon Update Loop
+    /// set onCooldown to true after firing the weapon
+    /// e.g.
+    /// if(UpdateCoolDown())
+    ///     return;
+    /// </summary>
+    /// <returns>true when onCooldown == false</returns>
+    protected bool UpdateCoolDown()
+    {
+        if (onCooldown)
+        {
+            if (Timer(ref coolDownTime, stats.coolDown))
+                onCooldown = false;
+        }
+        return !onCooldown;
     }
     /// <summary>
     /// Helper function

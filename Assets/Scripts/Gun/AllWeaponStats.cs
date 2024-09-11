@@ -189,6 +189,7 @@ public class WeaponStats
     public float lockOnDistance;
     //
     public int bounces;
+    public float bounceRange;
 }
 #endregion
 
@@ -253,7 +254,7 @@ public class WeapopnStatsEditor : Editor
         //END
         EditorGUIUtility.labelWidth = 150;
 
-        EditorGUILayout.PropertyField(WeaponStatsArray, new GUIContent("WeaponStats"), true); //SERIALIZED ARRAY EXPOSE
+        //EditorGUILayout.PropertyField(WeaponStatsArray, new GUIContent("WeaponStats"), true); //SERIALIZED ARRAY EXPOSE
         EditorGUILayout.Space(); //ADD SPACE
 
         EditorGUILayout.BeginHorizontal();
@@ -281,6 +282,8 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty numberOfBullets = weapon.FindPropertyRelative("numberOfBullets");
             SerializedProperty lockOnDistance = weapon.FindPropertyRelative("lockOnDistance");
             SerializedProperty bounces = weapon.FindPropertyRelative("bounces");
+            SerializedProperty bounceRange = weapon.FindPropertyRelative("bounceRange");
+
 
             if (!showAllWeapons)
             {
@@ -291,7 +294,7 @@ public class WeapopnStatsEditor : Editor
             if (i < myTarget.weaponStats.Length)
                 EditorGUILayout.LabelField(myTarget.weaponStats[i].weaponType.ToString(), EditorStyles.boldLabel);
 
-            EditorGUILayout.PropertyField(weaponType);
+            //EditorGUILayout.PropertyField(weaponType);
 
             EditorGUILayout.PropertyField(damage);
             EditorGUILayout.PropertyField(attackSpeed);
@@ -317,7 +320,11 @@ public class WeapopnStatsEditor : Editor
                     // Add other properties specific to SMG
                     break;
                 case WeaponType.TeslaCoil:
+
+                    EditorGUILayout.PropertyField(range);
                     EditorGUILayout.PropertyField(bounces);
+                    EditorGUILayout.PropertyField(bounceRange);
+
                     break;
             }
 

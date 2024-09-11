@@ -12,9 +12,9 @@ public class EnemyBody : EnemyDamageHandler
     {
         info = GetComponentInParent<EnemyInfo>();    
     }
-    public void DealDamage(float damage)
+    public override void DealDamage(float damage, BodyPart bodyPart = BodyPart.Body)
     {
-        info.DealDamage(damage, bodyPart);
+        info.DealDamage(damage, this.bodyPart);
     }
 
 }

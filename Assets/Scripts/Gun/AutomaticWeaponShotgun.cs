@@ -45,14 +45,9 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
             transform.LookAt(enemyInfo.transform); // TO DO: Need to add Min/Max rotation here
             return;
         }
-        if(onCooldown)
-        {
-            if(Timer(ref coolDownTime, stats.coolDown))
-                onCooldown = false;
-            else
-                return;
-        }
-        if(resetRotation)
+        if (!UpdateCoolDown())
+            return;
+        if (resetRotation)
         {
             resetRotation = false;
             transform.LookAt(Vector3.forward);
@@ -60,7 +55,7 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         if (!Timer(ref updateTime, 10))
             return;
 
-        enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range +5, 2, enemyLayerMask);
+        enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, 7, enemyLayerMask);
         if(enemyInfo == null)
         {
             print("enemyInfoWasNull");

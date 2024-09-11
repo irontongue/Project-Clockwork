@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LightningAmount: 0.155
+    - _LightningAmount: 0.255
     - _NoiseScale: 6.36
     - _Power: 1.19
     - _QueueControl: 0
@@ -59,6 +59,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.6698113, g: 1.8186102, b: 2, a: 1}
     - _LightningEdgeWidth: {r: 15, g: 0.005, b: 0, a: 0}
-    - _LightningSpeed: {r: 1, g: 0.5, b: 0, a: 0}
-    - _LightningWidth: {r: 15, g: 0.01, b: 0, a: 0}
+    - _LightningSpeed: {r: 2.98, g: 0.5, b: 0, a: 0}
+    - _LightningWidth: {r: 102.03, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []

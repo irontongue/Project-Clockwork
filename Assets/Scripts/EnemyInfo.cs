@@ -25,7 +25,7 @@ public class EnemyInfo : EnemyDamageHandler
     /// Damages the enemy
     /// </summary>
     /// <param name="damage"></param>
-    public void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body)
+    public override void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body)
     {
         if (bodyPart == BodyPart.Head)
             amount *= 2;
