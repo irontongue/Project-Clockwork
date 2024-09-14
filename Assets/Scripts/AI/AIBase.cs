@@ -6,17 +6,23 @@ using UnityEngine.AI;
 public class AIBase : EnemyInfo
 {
 
-    GameObject player;
+    protected GameObject player;
     [SerializeField] protected NavMeshAgent agent;
     [Header("Attack Settings")]
 
     [SerializeField] protected float attackRange;
     [SerializeField] protected float seccondsBetweenAttacks;
+    [Header("Audio Settings")]
+    [SerializeField] AudioClip[] attackSounds;
     [Header("Agent Settings")]
-    [SerializeField] LayerMask walkableMask;
+    [SerializeField] protected LayerMask walkableMask;
+    EnemySpawner spawner;
+    AudioSource source;
 
-    protected bool aiBuisy;
-    float lastTimeSinceAttack;
+    
+
+     public bool aiBuisy = false;
+ 
     protected float DistanceToPlayer()
     {
         return Vector3.Distance(transform.position, player.transform.position);
@@ -24,7 +30,9 @@ public class AIBase : EnemyInfo
     protected virtual void Start()
     {
         player = FindAnyObjectByType<PlayerMovement>().gameObject;
-  
+        aiBuisy = false;
+        spawner = FindAnyObjectByType<EnemySpawner>();
+        source = GetComponent<AudioSource>();
     }
  
 
@@ -40,7 +48,7 @@ public class AIBase : EnemyInfo
 
             aiBuisy = false;
         }
-        lastTimeSinceAttack -= Time.deltaTime;
+       
     }
     bool pathingToPoint;
     public void PathToPoint(Vector3 point)
@@ -74,15 +82,16 @@ public class AIBase : EnemyInfo
 
         return false;
     }
-    protected bool ReadyToAttack()
-    {
-        if (lastTimeSinceAttack > 0)
-            return false;
-        return true;
-    }
+  
 
     protected void DamagePlayer()
     {
-        lastTimeSinceAttack = seccondsBetweenAttacks;
+        source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)]);
     }
+    protected override void DeathEvent()
+    {
+        spawner.EnemyKilled();
+        base.DeathEvent();
+    }
+
 }

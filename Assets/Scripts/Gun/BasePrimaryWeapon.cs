@@ -61,7 +61,7 @@ public class BasePrimaryWeapon : MonoBehaviour
             if (weaponReloadTimer <= 0)
                 ReloadWeapon();
         }
-        print("can Fire");
+      
     }
     // try to get any enemy infrom of the player
     protected EnemyInfo RayCastForward()
