@@ -12,7 +12,7 @@ public class MeleeEnemy : AIBase
     protected override void Update()
     {
         base.Update();
-        if (aiBuisy)
+        if (aiBuisy || !agent.enabled)
             return;
         switch(state)
         {
@@ -26,8 +26,6 @@ public class MeleeEnemy : AIBase
                 Attacking();
                 break;
         }
-
-        print(state);
     }
 
     void Idle()

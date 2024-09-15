@@ -55,7 +55,7 @@ public class EnemyInfo : EnemyDamageHandler
     /// If enemy health hits 0 this is called
     /// What happens when the enemy dies
     /// </summary>
-    void DeathEvent()
+    virtual protected void DeathEvent()
     {
         print("DeathEvent");
         gameObject.SetActive(false);
