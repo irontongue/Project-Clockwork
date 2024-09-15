@@ -2971,6 +2971,7 @@ MonoBehaviour:
     attackSpeed: 0
     coolDown: 0
     range: 0
+    boxCheckWidth: 20
     chargeUpTime: 0
     bulletSpread: 0
     numberOfBullets: 1
@@ -2982,6 +2983,7 @@ MonoBehaviour:
     attackSpeed: 1
     coolDown: 1
     range: 0
+    boxCheckWidth: 20
     chargeUpTime: 1
     bulletSpread: 0
     numberOfBullets: 1
@@ -2993,6 +2995,7 @@ MonoBehaviour:
     attackSpeed: 1
     coolDown: 1
     range: 6
+    boxCheckWidth: 20
     chargeUpTime: 1
     bulletSpread: 5
     numberOfBullets: 6
@@ -3003,16 +3006,18 @@ MonoBehaviour:
     damage: 1
     attackSpeed: 1
     coolDown: 1
-    range: 5
+    range: 15
+    boxCheckWidth: 20
     chargeUpTime: 0
     bulletSpread: 0
     numberOfBullets: 1
     lockOnDistance: 0
-    bounces: 3
+    bounces: 5
     bounceRange: 10
   weaponTypeToAdd: 3
   d_Value: 00000000010000000200000003000000
   d_Key: 02000000010000000000000003000000
+  weaponToEdit: 3
 --- !u!114 &1213568003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3057,7 +3062,7 @@ GameObject:
   - component: {fileID: 1257299163}
   - component: {fileID: 1257299164}
   m_Layer: 0
-  m_Name: Line
+  m_Name: LightningLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3071,12 +3076,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257299162}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1403550911}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1257299164
 LineRenderer:
@@ -3089,7 +3094,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -3123,7 +3128,7 @@ LineRenderer:
   m_Positions: []
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -3177,7 +3182,7 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
 --- !u!1 &1257431732
@@ -3684,7 +3689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1403550911
 Transform:
   m_ObjectHideFlags: 0
@@ -3698,7 +3703,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1257299163}
   - {fileID: 1200209712}
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3723,7 +3727,7 @@ MonoBehaviour:
     m_Bits: 191
   lineRen: {fileID: 1257299164}
   lightningMuzzlePosition: {fileID: 1200209712}
-  lightningActiveTime: 0.5
+  lightningActiveTime: 5
 --- !u!1 &1413520439
 GameObject:
   m_ObjectHideFlags: 0
@@ -9986,7 +9990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &740173387039909272
 Transform:
   m_ObjectHideFlags: 0
@@ -20890,6 +20894,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 7355660458922205005}
   - {fileID: 1213568001}
+  - {fileID: 1257299163}
   - {fileID: 1804121571}
   - {fileID: 410087041}
   - {fileID: 1413520442}

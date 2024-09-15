@@ -19,16 +19,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected float coolDownTime = 0;
 
     protected bool firing = false;
-    protected struct EnemyHitPacket
-    {
-        public EnemyInfo enemyInfo;
-        public Vector3 hitPosition;
-    }
-    protected struct EnemiesHitPacket
-    {
-        public EnemyInfo[] enemyInfos;
-        public Vector3[] hitPositions;
-    }
+
     virtual protected void Start()
     {
         playerTransform = transform.root;
@@ -36,7 +27,7 @@ public class AutomaticWeaponBase : MonoBehaviour
         stats = FindAnyObjectByType<AllWeaponStats>().GetWeaponStat(weaponType);
     }
     /// <summary>
-    /// returns the first GameObject infront of the crosshair
+    /// returns the first GameObject in front of the crosshair
     /// returns null if no objects present
     /// takes distance in units otherwise infinite distance
     /// </summary>
@@ -52,6 +43,12 @@ public class AutomaticWeaponBase : MonoBehaviour
         }
         return null;
     }
+    /// <summary>
+    /// Returns the RayCastHit of the first collider infront of the crosshair
+    /// </summary>
+    /// <param name="layerMask"></param>
+    /// <param name="distance"></param>
+    /// <returns></returns>
     protected RaycastHit RayCastForwardRayHit(LayerMask layerMask, float distance = float.MaxValue)
     {
         RaycastHit hit;
@@ -85,12 +82,26 @@ public class AutomaticWeaponBase : MonoBehaviour
     /// <param name="position"></param>
     /// <param name="layerMask"></param>
     /// <returns></returns>
-    protected EnemyInfo GetEnemyInSphere(float radius, Vector3 position, LayerMask layerMask)
+    protected EnemyInfo GetEnemyInSphere(float radius, Vector3 position, LayerMask layerMask, List<Transform> enemyTransforms = null)
     {
         Collider[] hits = Physics.OverlapSphere(position, radius, layerMask);
         if (hits.Length == 0)
             return null;
-        return hits[0].GetComponent<EnemyInfo>();
+        if(enemyTransforms != null)
+        {
+            foreach(Collider c in hits)
+            {
+                if(!enemyTransforms.Contains(c.transform))
+                    return c.GetComponent<EnemyInfo>();
+            }
+            return null;
+        }
+        else
+        {
+            print("o no");
+            return hits[0].GetComponent<EnemyInfo>();
+        }
+
     }
     /// <summary>
     /// Returns GetFirstEnemyInDirection in the forward vector
@@ -112,33 +123,33 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         return GetFirstEnemyInDirection(-1, distance, size, layerMask);
     }
-    float s = 0;
-    float d = 0;
+    float s = 0; //Exposed variables for debugging
+    float d= 0;
     private void OnDrawGizmos()
     {
-        //if(playerTransform)
-        //Gizmos.DrawCube(playerTransform.position + 1 * d * playerTransform.forward, new Vector3(s, s, d));
+        //if (playerTransform)
+            //Gizmos.DrawCube(Camera.main.transform.position +  1  * d*0.5f * Camera.main.transform.forward, new Vector3(s, s, d));;
     }
     /// <summary>
     /// Gets the first enemy in the forward or backward vector (direction = 1 for forward) (direction = -1 for backward)
     /// uses sphereCast
     /// </summary>
     /// <param name="direction"></param>
-    /// <param name="distance"></param>
-    /// <param name="size">Horizontal size</param>
+    /// <param name="length"></param>
+    /// <param name="width"></param>
     /// <returns>First enemy in the forward or backward vector</returns>
-    protected EnemyInfo GetFirstEnemyInDirection(int direction, float distance, float size, LayerMask layerMask)
+    protected EnemyInfo GetFirstEnemyInDirection(int direction, float length, float width, LayerMask layerMask)
     {
         if (direction != 1 && direction != -1)
         {
             Debug.LogWarning($"GetFirstEnemyInDirection: direction = {direction}, setting to forward (1)");
             direction = 1;
         }
-        size = size * 0.5f;
-        distance = distance * 0.5f;
-        s = size;
-        d = distance;
-        Collider[] hit = Physics.OverlapBox(playerTransform.position + (direction * distance * playerTransform.forward), new Vector3(size, size, distance), Quaternion.identity, layerMask); // WRONG WRONG WRONG FIX FIX FIX
+        width = width * 0.5f;
+        length = length * 0.5f;
+        //s = size;
+        //d = distance;
+        Collider[] hit = Physics.OverlapBox(playerTransform.position + (direction * length * 0.5f * cam.transform.forward), new Vector3(width, width, length), Quaternion.identity, layerMask);
         
         if (hit.Length == 0)
         {

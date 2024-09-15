@@ -162,6 +162,7 @@ public class AllWeaponStats : MonoBehaviour
         d_Value = new int[0];
 
     }
+    public WeaponType weaponToEdit;// = WeaponType.Sniper;
     #endregion
 }
 
@@ -179,6 +180,8 @@ public class WeaponStats
     public float coolDown;
     //[HideInInspector]
     public float range;
+    //[HideInInspector]
+    public float boxCheckWidth = 20;
     //[HideInInspector]
     public float chargeUpTime;
     //[HideInInspector]
@@ -204,9 +207,9 @@ public class WeapopnStatsEditor : Editor
     private SerializedProperty weaponTypeToAdd;
     private SerializedProperty dictionaryKey;
     private SerializedProperty dictionaryValue;
+    private SerializedProperty weaponToEdit;
 
     bool removeWeaponToggle;
-    WeaponType _weaponType = WeaponType.Sniper;
     bool showAllWeapons = false;
 
     private void OnEnable()
@@ -218,6 +221,8 @@ public class WeapopnStatsEditor : Editor
 
         dictionaryValue = serializedObject.FindProperty("d_Value");
         dictionaryKey = serializedObject.FindProperty("d_Key");
+
+        weaponToEdit = serializedObject.FindProperty("weaponToEdit");
     }
     public override void OnInspectorGUI()
     {
@@ -261,7 +266,8 @@ public class WeapopnStatsEditor : Editor
 
         EditorGUIUtility.labelWidth = 90;
 
-        _weaponType = (WeaponType)EditorGUILayout.EnumPopup("Weapon To Edit", _weaponType);//Weapon TYPE ENUM POPUP
+        //weaponToEdit = (WeaponType)EditorGUILayout.EnumPopup("Weapon To Edit", weaponToEdit);//Weapon TYPE ENUM POPUP
+        EditorGUILayout.PropertyField(weaponToEdit, new GUIContent("Weapon To Edit"));
         showAllWeapons = EditorGUILayout.Toggle("Show All Weapon", showAllWeapons); //BOOL EXPOSE
 
         EditorGUILayout.Space(); //ADD SPACE
@@ -277,6 +283,7 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty attackSpeed = weapon.FindPropertyRelative("attackSpeed");
             SerializedProperty coolDown = weapon.FindPropertyRelative("coolDown");
             SerializedProperty range = weapon.FindPropertyRelative("range");
+            SerializedProperty boxCheckWidth = weapon.FindPropertyRelative("boxCheckWidth");
             SerializedProperty chargeUpTime = weapon.FindPropertyRelative("chargeUpTime");
             SerializedProperty bulletSpread = weapon.FindPropertyRelative("bulletSpread");
             SerializedProperty numberOfBullets = weapon.FindPropertyRelative("numberOfBullets");
@@ -287,7 +294,7 @@ public class WeapopnStatsEditor : Editor
 
             if (!showAllWeapons)
             {
-                if (weaponType.intValue != (int)_weaponType)
+                if (weaponType.intValue != weaponToEdit.intValue)
                     continue;
             }
             // Draw the weapon type dropdown

@@ -7,16 +7,16 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     float updateTime = 0;
     [SerializeField]LineRenderer lineRen;
     [SerializeField] Transform lightningMuzzlePosition;
-    [SerializeField] float lightningActiveTime = 0.5f;
+    [SerializeField] float lightningActiveTime = 5f;
     EnemyInfo enemyInfo;
     protected override void Start()
     {
         base.Start();
-        if(lineRen = null) 
+        if(lineRen == null) 
         {
             Debug.LogWarning("On Tesla Coil: Line Renderer needs to be assigned");
         }
-        if(lightningMuzzlePosition = null)
+        if(lightningMuzzlePosition == null)
         {
             Debug.LogWarning("On Tesla Coil: Transform - Lightning Muzzle Position has not been assigned, using this transform instead");
             lightningMuzzlePosition = transform;
@@ -29,6 +29,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     {
         if(firing)
         {
+            UpdateLineRenPositons();
             if(!Timer(ref lightningTime, lightningActiveTime))
                 return;
             lineRen.gameObject.SetActive(false);
@@ -39,7 +40,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         if(!Timer(ref updateTime, 10f)) // Stop physics checks from going every frame when missing
             return;
         
-        if(!(enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, stats.range, enemyLayerMask))) // Get Enemy inside a square infron to the player
+        if(!(enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, stats.boxCheckWidth, enemyLayerMask))) // Get Enemy inside a square infron to the player
             return;
 
         onCooldown = true;
@@ -47,24 +48,43 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         ZapEnemy();
 
     }
-
+    //TO DO:
+    //ON hit Keep track of enemes previously hit
+    //Line ren positions need to be set every frame
+    //line ren positions are for some reason
+    List<Transform> enemyTransforms = new List<Transform>();
     void ZapEnemy()
     {
+        print("Zap Enemy");
+        enemyTransforms.Clear(); // Reset Enemy List
+
         int remainingBounces = stats.bounces;
         EnemyInfo info = enemyInfo;
-        lineRen.positionCount = remainingBounces + 2; // 2 for the inital line between the tesla coil and enemy
-        enemyInfo.DealDamage(stats.damage);
+        lineRen.positionCount = remainingBounces + 1; // 2 for the inital line between the tesla coil and enemy
 
         lineRen.SetPosition(0, lightningMuzzlePosition.position);
         lineRen.SetPosition(1, enemyInfo.transform.position);
 
+        enemyInfo.DealDamage(stats.damage);
+        enemyTransforms.Add(info.transform);
+
+        //lineRen.SetPosition(0, lightningMuzzlePosition.position);
+        //lineRen.SetPosition(1, enemyInfo.transform.position);
+
         for (int i = 2; i < remainingBounces + 2; i++) 
         {
+            print(i);
             info = GetAdjacentEnemyInCircle(3, info.transform.position);
             if (info == null)
                 break;
+            enemyTransforms.Add(info.transform);
             info.DealDamage(stats.damage);
-            lineRen.SetPosition(i, info.transform.position);
+            //lineRen.SetPosition(i, info.transform.position);
+        }
+        print(enemyTransforms.Count + " - " + lineRen.positionCount);
+        if(enemyTransforms.Count < lineRen.positionCount - 1) 
+        {
+            lineRen.positionCount = enemyTransforms.Count + 1;
         }
         lineRen.gameObject.SetActive(true);
     }
@@ -80,10 +100,19 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         for(int i = 0; i < iterations; i++) 
         {
             float distance = stats.bounceRange / iterations;
-            enemyInfo = GetEnemyInSphere(distance, center, enemyLayerMask);
+            enemyInfo = GetEnemyInSphere(distance, center, enemyLayerMask, enemyTransforms);
             if(enemyInfo)
                 return enemyInfo;
         }
         return null;
+    }
+    void UpdateLineRenPositons()
+    {
+        lineRen.SetPosition(0, lightningMuzzlePosition.position);
+        for(int i = 1; i < enemyTransforms.Count; i++)
+        {
+            print("i: " + i);
+            lineRen.SetPosition(i, enemyTransforms[i].position);
+        }
     }
 }
