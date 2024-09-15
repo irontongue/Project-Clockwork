@@ -10,7 +10,8 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     EnemyInfo enemyInfo;
     float updateTime = 0;
     [SerializeField]ParticleSystem muzzleFlashPFX;
-    [SerializeField]ParticleSystem bulletHitPFX;
+    [SerializeField]ParticleSystem terrainHitPFX;
+    [SerializeField]ParticleSystem bloodHitPFX;
     LayerMask enemyLayer = 1 << 3;
     LayerMask enemyBodyLayer = 1 << 7;
     protected override void Start()
@@ -42,7 +43,7 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         if (firing)
         {
             if(resetRotation == false)resetRotation = true;
-            transform.LookAt(enemyInfo.transform); // TO DO: Need to add Min/Max rotation here
+            //transform.LookAt(enemyInfo.transform); // TO DO: Need to add Min/Max rotation here
             return;
         }
         if (!UpdateCoolDown())
@@ -50,12 +51,12 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         if (resetRotation)
         {
             resetRotation = false;
-            transform.LookAt(Vector3.forward);
+            transform.LookAt(cam.transform.forward);
         }
         if (!Timer(ref updateTime, 10))
             return;
 
-        enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, 7, enemyLayerMask);
+        enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, stats.boxCheckWidth, enemyLayerMask);
         if(enemyInfo == null)
         {
             print("enemyInfoWasNull");
@@ -79,19 +80,21 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         for(int i = 0; i < stats.numberOfBullets; i++)
         {
             Quaternion randomRot = Quaternion.Euler(Random.Range(0, stats.bulletSpread), Random.Range(0, stats.bulletSpread), 0);
-            Vector3 randDir = dir;//randomRot * dir;
+            Vector3 randDir = randomRot * dir;
             Physics.Raycast(playerTransform.position, randDir, out hit);
             if(hit.transform != null)
             {
-                if(1 << hit.transform.gameObject.layer == enemyLayer) // 8 == 1<<3 == enemy layer // 128 == Body layer
+                EnemyDamageHandler dh;
+                if(dh = hit.transform.GetComponent<EnemyDamageHandler>())
                 {
-                    hit.transform.GetComponent<EnemyInfo>().DealDamage(stats.damage);
+                    dh.DealDamage(stats.damage);
+                    Instantiate(bloodHitPFX, hit.point, Quaternion.identity).transform.LookAt(transform);
+
                 }
-                else if(1 << hit.transform.gameObject.layer == enemyBodyLayer)
+                else
                 {
-                    hit.transform.GetComponent<EnemyBody>().DealDamage(stats.damage) ;
+                    Instantiate(terrainHitPFX, hit.point, Quaternion.identity).transform.LookAt(transform);
                 }
-                Instantiate(bulletHitPFX, hit.point, Quaternion.identity).transform.LookAt(transform);
             }
         }
     }

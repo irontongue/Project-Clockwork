@@ -8,6 +8,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     [SerializeField]LineRenderer lineRen;
     [SerializeField] Transform lightningMuzzlePosition;
     [SerializeField] float lightningActiveTime = 5f;
+    [SerializeField] ParticleSystem smokePFX;
     EnemyInfo enemyInfo;
     protected override void Start()
     {
@@ -73,15 +74,14 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
 
         for (int i = 2; i < remainingBounces + 2; i++) 
         {
-            print(i);
             info = GetAdjacentEnemyInCircle(3, info.transform.position);
             if (info == null)
                 break;
             enemyTransforms.Add(info.transform);
             info.DealDamage(stats.damage);
+            Instantiate(smokePFX, info.transform.position, Quaternion.identity);
             //lineRen.SetPosition(i, info.transform.position);
         }
-        print(enemyTransforms.Count + " - " + lineRen.positionCount);
         if(enemyTransforms.Count < lineRen.positionCount - 1) 
         {
             lineRen.positionCount = enemyTransforms.Count + 1;
@@ -97,9 +97,9 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     EnemyInfo GetAdjacentEnemyInCircle(int iterations, Vector3 center)
     {
         EnemyInfo enemyInfo;
-        for(int i = 0; i < iterations; i++) 
+        for(int i = iterations; i > 0; i--) 
         {
-            float distance = stats.bounceRange / iterations;
+            float distance = stats.bounceRange / i;
             enemyInfo = GetEnemyInSphere(distance, center, enemyLayerMask, enemyTransforms);
             if(enemyInfo)
                 return enemyInfo;

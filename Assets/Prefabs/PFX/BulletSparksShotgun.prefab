@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 246225042234028414}
   - component: {fileID: 4135667708046086501}
   m_Layer: 0
-  m_Name: BulletSparks
+  m_Name: BulletSparksShotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -980,7 +980,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 5
+        scalar: 1
         minScalar: 30
         maxCurve:
           serializedVersion: 2

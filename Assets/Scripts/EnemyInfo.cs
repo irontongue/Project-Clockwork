@@ -57,7 +57,6 @@ public class EnemyInfo : EnemyDamageHandler
     /// </summary>
     virtual protected void DeathEvent()
     {
-        print("DeathEvent");
         gameObject.SetActive(false);
     }
     #endregion

@@ -8,7 +8,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
 {
     [SerializeField] Image donutImage;
     [SerializeField] ParticleSystem muzzleFlashPFX;
-    [SerializeField] ParticleSystem hitPFX;
+    [SerializeField] ParticleSystem bloodHitPFX;
     Animator anim;
     GameObject enemyObj;
     float aimTimer = 0;
@@ -23,7 +23,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
             if (muzzleFlashPFX == null) { Debug.LogError("On Sniper, There is no MuzzleFlashPFX to assign"); }
             
         }
-        if(hitPFX == null) 
+        if(bloodHitPFX == null) 
         {
             Debug.LogWarning("On Sniper, Hit PFX needs to be assigned");
         }
@@ -86,28 +86,15 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     /// <param name="playFX"></param>
     public void ShootAtTarget(bool playFX = true)
     {
+        print("shootAtTarget");
         if (playFX)
             muzzleFlashPFX.Play();
         RaycastHit hit = RayCastForwardRayHit(everythingEnemy);
         if(hit.transform != null)
         {
-            try
-            {
-                hit.transform.GetComponent<EnemyDamageHandler>().DealDamage(stats.damage);
-            }
-            catch 
-            {
-                Debug.LogWarning("Sniper did not hit enemy on the second raycast?");
-                enemyObj.GetComponent<EnemyInfo>().DealDamage(stats.damage);
-            }
-            if(hitPFX)
-                Instantiate(hitPFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
-
-        }
-        else
-        {
-            Debug.LogWarning("Sniper Did not hit second raycast?");
-            enemyObj.GetComponent<EnemyInfo>().DealDamage(stats.damage);
+            hit.transform.GetComponent<EnemyDamageHandler>().DealDamage(stats.damage);
+            if(bloodHitPFX)
+                Instantiate(bloodHitPFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
         }
     }
     public void FinishAnimation()

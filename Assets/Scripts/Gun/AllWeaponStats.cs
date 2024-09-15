@@ -313,6 +313,7 @@ public class WeapopnStatsEditor : Editor
                     EditorGUILayout.PropertyField(bulletSpread);
                     EditorGUILayout.PropertyField(range);
                     EditorGUILayout.IntSlider(numberOfBullets, 1, 1000);
+                    EditorGUILayout.PropertyField(boxCheckWidth, new GUIContent("WidthCheck"));
                     // Add other properties specific to Shotgun
                     break;
 

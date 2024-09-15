@@ -19,7 +19,13 @@ public class BasePrimaryWeapon : MonoBehaviour
     [SerializeField] protected int magCapacity;
     [SerializeField] protected int maxAmmoReserve;
 
-    
+    [SerializeField] protected ParticleSystem muzzleFlashPFX;
+    [SerializeField] protected ParticleSystem terrainHitPFX;
+    [SerializeField] protected ParticleSystem bloodHitPFX;
+
+
+
+
     protected int currentAmmoInMag;
     int currentReserveAmmo;
     AudioSource source;
@@ -44,6 +50,7 @@ public class BasePrimaryWeapon : MonoBehaviour
 
         currentAmmoInMag = magCapacity;
         currentReserveAmmo = maxAmmoReserve;
+        animator = GetComponent<Animator>();
 
         UpdateAmmoUI();
         
@@ -64,19 +71,23 @@ public class BasePrimaryWeapon : MonoBehaviour
       
     }
     // try to get any enemy infrom of the player
-    protected EnemyInfo RayCastForward()
+    protected EnemyDamageHandler RayCastForward()
     {
+        muzzleFlashPFX.Play();
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range, enemyMask))
         {
-            return hit.transform.GetComponent<EnemyInfo>();
+            Instantiate(bloodHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
+            return hit.transform.GetComponent<EnemyDamageHandler>();
         }
+        Instantiate(terrainHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
+
         return null;
     }
-    //damage the given enemy, has room for a modifyer if any abilitys should want to add to it in the future
-    protected void DamageEnemy(EnemyInfo enemy, float modifyer = 1)
+    //damage the given enemy, has room for a modifier if any abilitys should want to add to it in the future
+    protected void DamageEnemy(EnemyDamageHandler enemy, float modifier = 1)
     {
-        enemy.DealDamage(damage * modifyer);
+        enemy.DealDamage(damage * modifier);
     }    
     //returns false if there is no ammo, returns true if reload sucseeded 
     protected bool CanReloadWeapon()
@@ -121,7 +132,7 @@ public class BasePrimaryWeapon : MonoBehaviour
 
     protected void DamageFowardEnemy()
     {
-        EnemyInfo enemy = RayCastForward();
+        EnemyDamageHandler enemy = RayCastForward();
 
         if (enemy == null)
             return;
@@ -162,13 +173,13 @@ public class BasePrimaryWeapon : MonoBehaviour
     {
         if (animator == null)
             return;
-        animator.SetTrigger("fire");
+        animator.SetTrigger("Fire");
     }
     protected void PlayReloadAnimation()
     {
         if (animator == null)
             return;
-        animator.SetTrigger("reload");
+        animator.SetTrigger("Reload");
     }
 
 }
