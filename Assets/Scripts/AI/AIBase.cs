@@ -86,7 +86,12 @@ public class AIBase : EnemyInfo
 
     protected void DamagePlayer()
     {
-        source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)]);
+        try
+        {
+            source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)]);
+        }
+        catch { }
+        
     }
     protected override void DeathEvent()
     {

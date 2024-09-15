@@ -43,10 +43,15 @@ public class EnemySpawner : MonoBehaviour
         currentWaveIndex++;
         enemysKilled = 0;
         spawnedEnemies = 0;
-        if (currentWaveIndex > waves.Length)
+        if (currentWaveIndex >= waves.Length)
+        {
+            print("no more waves!");
             return;
+        }
+          
 
         waveSpawning = true;
+       
         currentWave = waves[currentWaveIndex];
     }
 
@@ -66,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject spawnedEnemy = Instantiate(currentWave.enemies[Random.Range(0, currentWave.enemies.Length - 1)]);
         try
         {
-            NavMesh.SamplePosition(currentWave.spawnPoints[Random.Range(0, currentWave.spawnPoints.Length)].transform.position, out NavMeshHit hit, 2, walkableMask);
+            NavMesh.SamplePosition(currentWave.spawnPoints[Random.Range(0, currentWave.spawnPoints.Length)].transform.position, out NavMeshHit hit, 3, walkableMask);
             spawnedEnemy.transform.position = hit.position;
             spawnedEnemy.GetComponent<NavMeshAgent>().enabled = true;
         }

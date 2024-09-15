@@ -9,14 +9,17 @@ public class Revolver : BasePrimaryWeapon
     {
         base.Update();
 
+        if ((Input.GetKeyDown(KeyCode.R) || currentAmmoInMag <= 0) && CanReloadWeapon() && !weaponReloading)
+        {
+            StartReload();
+            return;
+        }
+
         if (!CanFire())
             return;
 
-        if(Input.GetKeyDown(KeyCode.R) && CanReloadWeapon())
-        {
-            ReloadWeapon();
-            return;
-        }
+     
+       
 
         if (!Input.GetMouseButtonDown(0))
             return;

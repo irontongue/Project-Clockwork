@@ -20,7 +20,7 @@ public class BasePrimaryWeapon : MonoBehaviour
     [SerializeField] protected int maxAmmoReserve;
 
     
-    int currentAmmoInMag;
+    protected int currentAmmoInMag;
     int currentReserveAmmo;
     AudioSource source;
     Animator animator;
@@ -31,7 +31,7 @@ public class BasePrimaryWeapon : MonoBehaviour
 
     Camera cam;
 
-    bool weaponReloading;
+    protected bool weaponReloading;
     float weaponReloadTimer;
 
     // youll be happy james, im finally getting any external refrences at runtime.
@@ -57,7 +57,7 @@ public class BasePrimaryWeapon : MonoBehaviour
         if(weaponReloading)
         {
             weaponReloadTimer -= Time.deltaTime;
-             
+            
             if (weaponReloadTimer <= 0)
                 ReloadWeapon();
         }
@@ -114,7 +114,7 @@ public class BasePrimaryWeapon : MonoBehaviour
 
     protected bool CanFire()
     {
-        if (currentReserveAmmo > 0 && timeSinceLastShot <= 0 && !weaponReloading)
+        if (currentReserveAmmo > 0 && timeSinceLastShot <= 0 && !weaponReloading && currentAmmoInMag > 0)
             return true;
         return false;
     }
