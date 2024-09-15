@@ -79,7 +79,7 @@ public class RangedEnemy : AIBase
                 Vector2 randomPos = Random.insideUnitCircle * findNewPosRange;
                 Vector3 testPos = new Vector3((transform.position.x ) + (transform.forward.x * -findNewPosRange), transform.position.y, (transform.position.z) + (transform.forward.z * -findNewPosRange));
                 NavMesh.SamplePosition(testPos, out NavMeshHit hit, findNewPosRange, walkableMask);
-                print(hit.position);
+               
                 if (DistanceToPlayer() < Vector3.Distance(transform.position, hit.position))
                 {
                     newPos = hit.position;
@@ -157,7 +157,7 @@ public class RangedEnemy : AIBase
             
 
             DamagePlayer();
-            print("damagedPlayer");
+        
             attacked = true;
             timeSinceLastAttack = afterAttackTimer;
         }
@@ -168,7 +168,7 @@ public class RangedEnemy : AIBase
         {
             attacked = false;
             state = State.Idle;
-            print("idle time");
+      
         }
     }
 }
