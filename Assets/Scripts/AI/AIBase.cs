@@ -12,12 +12,14 @@ public class AIBase : EnemyInfo
 
     [SerializeField] protected float attackRange;
     [SerializeField] protected float seccondsBetweenAttacks;
+    [SerializeField] protected float damage = 1;
     [Header("Audio Settings")]
     [SerializeField] AudioClip[] attackSounds;
     [Header("Agent Settings")]
     [SerializeField] protected LayerMask walkableMask;
     EnemySpawner spawner;
     AudioSource source;
+    
 
     
 
@@ -83,14 +85,19 @@ public class AIBase : EnemyInfo
         return false;
     }
   
-
-    protected void DamagePlayer()
+    protected void AttackEffects()
     {
         try
         {
             source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)]);
         }
         catch { }
+    }
+    protected virtual void DamagePlayer()
+    {
+        AttackEffects();
+
+        player.GetComponent<PlayerDamageHandler>().Damage(damage);
         
     }
     protected override void DeathEvent()

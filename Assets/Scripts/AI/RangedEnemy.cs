@@ -17,6 +17,9 @@ public class RangedEnemy : AIBase
     [SerializeField] float playerTooCloseRange; // how close does the player have to get till i run
     [SerializeField] float findNewPosRange; // how far away should i look for a new range if the player aproaches me
     [SerializeField] int findNewPosTrys; // how many times should i search for a new pos
+
+    [SerializeField] GameObject projectile;
+    [SerializeField] float projectileSpeed;
   //  [SerializeField] float cantSeePlayerTriesBeforeLeavingAttack;
 
 
@@ -129,6 +132,16 @@ public class RangedEnemy : AIBase
     bool attacked;
     float timeSinceLastAttack;
     //float noVisionTries;
+
+    protected override void DamagePlayer()
+    {
+        AttackEffects();
+        GameObject spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation);
+        spawnedProjectile.transform.LookAt(player.transform.position);
+        spawnedProjectile.GetComponent<Projectile>().damage = damage;
+        spawnedProjectile.GetComponent<Projectile>().speed = -projectileSpeed;
+        print(spawnedProjectile.name);
+    }
     void Attacking()
     {
         print("Attacking");
