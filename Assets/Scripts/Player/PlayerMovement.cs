@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         remainingJumps = extraJumps;
-        maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 0) * baseSpeed;
+        maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 1) * baseSpeed;
 
     }
 
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSliding)
             return;
 
-        if (!isGrounded)
+        if (!isActuallyGrounded)
         {
             currentVelocity.x = lastPlayerVelocity.x;
             currentVelocity.z = lastPlayerVelocity.z;
@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
         currentVelocity = walkVector;
         currentVelocity.y = preservedGravity;
+        print("VELCANCED");
     }
 
     #endregion
@@ -95,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isActuallyGrounded && currentJumpTime <= 0)
         {
-            currentVelocity.y = -1;
+            currentVelocity.y = -gravity * 0.5f;
         }
 
     }
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     void GroundCheck()
     {
         RaycastHit hit;
-        isActuallyGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, (controller.height / 2) + groundedThreshold, groundMask);
+        isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out hit, (controller.height / 2) + groundedThreshold, groundMask);
 
         currentCyoteTime -= Time.deltaTime;
 
@@ -195,6 +196,8 @@ public class PlayerMovement : MonoBehaviour
     float dashTimer;
     void Dash()
     {
+        if (isSliding)
+            return;
         if (readyToDash && Input.GetKeyDown(KeyCode.LeftShift))
         {
             currentlyDashing = true;
@@ -212,9 +215,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashTimer <= 0)
             {
-                currentlyDashing = false;
-                dashCooldownTimer = dashCooldown;
-                dashVelocity = Vector3.zero;
+                CancelDash();
             }
         }
 
@@ -226,49 +227,102 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void CancelDash()
+    {
+        currentlyDashing = false;
+        dashCooldownTimer = dashCooldown;
+        dashVelocity = Vector3.zero;
+    }
+
     #endregion
 
     #region Sliding
+
     [SerializeField] float extraVelRequiredToSlide;
     [SerializeField] float slideFallOff;
     [SerializeField] float minMagBeforeSlideCancel;
+    [SerializeField] float minAngleForSlide;
 
+    bool onSlope;
+    bool slidePossible;
+
+    Vector3 VelWithoutGravity;
     void Slide()
     {
-        if (!isGrounded)
+        slidePossible = false;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             isSliding = false;
             return;
         }
 
-        if (currentVelocity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !isSliding)
+
+        onSlope = GroundAngle() > minAngleForSlide;
+
+        VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
+        VelWithoutGravity.y = 0;
+
+        if (isSliding)
+        {
+            if (!onSlope)
+                currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime;
+            else
+                currentVelocity += VelWithoutGravity.normalized * gravity * Time.deltaTime;
+
+            if (VelWithoutGravity.magnitude < minMagBeforeSlideCancel)
+            {
+                currentVelocity = Vector3.zero;
+                isSliding = false;
+              
+            }
+
+            return;
+        }
+
+        if (onSlope)
+            slidePossible = true;
+
+        if (VelWithoutGravity.magnitude > maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide)
+        {
+            slidePossible = true;
+        }
+        Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
+        if (hit.point.y > transform.position.y - 0.5)
+        {
+            print("SLOPE TOO HIGH");
+            slidePossible = false;
+        }
+            
+        if (!slidePossible)
             return;
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
-
+        {
             isSliding = !isSliding;
-       
-  
-        if (!isSliding)
-            return;
+            if (!isSliding)
+                return;
 
-        currentVelocity -= currentVelocity.normalized * slideFallOff * Time.deltaTime;
-   
-        if (new Vector3(currentVelocity.x, 0, currentVelocity.y).magnitude < minMagBeforeSlideCancel)
-            isSliding = false;
+            CancelDash();
+        }
+            
+    }
 
 
+    RaycastHit hit;
 
 
-        return;
+    float GroundAngle()
+    {
 
 
+        if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
+            return 0;
 
-
-
-
+        return Vector3.Angle(hit.normal, transform.up);
 
     }
+
 
     #endregion
 
@@ -279,6 +333,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move((currentVelocity + dashVelocity) * Time.deltaTime);
         lastPlayerVelocity = currentVelocity;
     }
+
+    
 
     #endregion
 

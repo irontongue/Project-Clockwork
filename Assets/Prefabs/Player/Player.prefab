@@ -393,19 +393,21 @@ MonoBehaviour:
   baseSpeed: 8
   airMoveSpeed: 1
   gravity: 25
-  groundedThreshold: 0.1
+  groundedThreshold: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 55
   coyoteTime: 0.05
   initialJumpVel: 10
   extraJumps: 1
-  dashSpeed: 17
+  dashSpeed: 12
   dashLenght: 0.15
   dashCooldown: 1
   extraVelRequiredToSlide: 1
-  slideFallOff: 6
+  slideFallOff: 10
   minMagBeforeSlideCancel: 1
+  minAngleForSlide: 1
+  groundAngleDistanceCheck: 0
 --- !u!114 &2885463159808772724
 MonoBehaviour:
   m_ObjectHideFlags: 0
