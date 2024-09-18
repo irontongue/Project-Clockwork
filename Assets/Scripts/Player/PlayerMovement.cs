@@ -5,23 +5,28 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-   
+
 
     // Internal Variables;
 
     Vector3 currentVelocity;
     Vector3 dashVelocity;
     Vector3 lastPlayerVelocity;
+    Vector3 maxPlayerWalkSpeed;
 
     bool isGrounded;
-    bool jumping;
+    bool isSliding;
+
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        remainingJumps = extraJumps;
+        maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 0) * baseSpeed;
+
     }
 
-    
+
     void Update()
     {
         CaculateMoveVelocity();
@@ -29,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         Jump();
         Dash();
+        Slide();
         FinalMoveCaculation();
 
         DevText.DisplayInfo("pMovement", "PlayerVelocity: " + currentVelocity, "Movement");
@@ -44,14 +50,18 @@ public class PlayerMovement : MonoBehaviour
     [Header("Basic Movement")]
     [SerializeField] float baseSpeed;
     [SerializeField] float airMoveSpeed;
-    Vector3 inputVector;
+    Vector3 inputVector; // the raw input vector
+    Vector3 walkVector; // the players move vector, unaffected by anything else
     void CaculateMoveVelocity()
     {
         inputVector.x = Input.GetAxisRaw("Horizontal");
         inputVector.z = Input.GetAxisRaw("Vertical");
-       
+
         inputVector.Normalize(); // normalize the vector, so you dont move faster when moving left and foward.
+
         float preservedGravity = currentVelocity.y;
+        if (isSliding)
+            return;
 
         if (!isGrounded)
         {
@@ -63,8 +73,10 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-       // i do not want to move the y velocity depending on what way the camera is facing, so i temporarly cache the velocity to restore later
-        currentVelocity = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * baseSpeed ;
+        // i do not want to move the y velocity depending on what way the camera is facing, so i temporarly cache the velocity to restore later
+        walkVector = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * baseSpeed;
+
+        currentVelocity = walkVector;
         currentVelocity.y = preservedGravity;
     }
 
@@ -100,22 +112,23 @@ public class PlayerMovement : MonoBehaviour
     float currentCyoteTime;
     bool isActuallyGrounded;
 
-   
-  
+
+
     void GroundCheck()
     {
         RaycastHit hit;
         isActuallyGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, (controller.height / 2) + groundedThreshold, groundMask);
 
         currentCyoteTime -= Time.deltaTime;
-        
+
 
         if (isActuallyGrounded)
         {
-            
+
             isGrounded = true;
             currentCyoteTime = coyoteTime;
-            jumping = false;
+
+            remainingJumps = extraJumps;
         }
         else
         {
@@ -134,21 +147,33 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] float initialJumpVel;
+    [SerializeField] float extraJumps;
+
+    float remainingJumps;
 
     float jumpGracePeriod = 0.3f;
     float currentJumpTime;
 
     void Jump()
     {
-        if (!isGrounded || jumping)
-            return;
+
+
+
 
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
+        if (!isGrounded)
+        {
+            if (remainingJumps > 0)
+                remainingJumps--;
+            else
+                return;
+        }
+
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
-        jumping = true;
+
         currentJumpTime = jumpGracePeriod;
 
 
@@ -199,6 +224,50 @@ public class PlayerMovement : MonoBehaviour
             if (dashCooldownTimer <= 0)
                 readyToDash = true;
         }
+    }
+
+    #endregion
+
+    #region Sliding
+    [SerializeField] float extraVelRequiredToSlide;
+    [SerializeField] float slideFallOff;
+    [SerializeField] float minMagBeforeSlideCancel;
+
+    void Slide()
+    {
+        if (!isGrounded)
+        {
+            isSliding = false;
+            return;
+        }
+
+        if (currentVelocity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !isSliding)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+
+            isSliding = !isSliding;
+       
+  
+        if (!isSliding)
+            return;
+
+        currentVelocity -= currentVelocity.normalized * slideFallOff * Time.deltaTime;
+   
+        if (new Vector3(currentVelocity.x, 0, currentVelocity.y).magnitude < minMagBeforeSlideCancel)
+            isSliding = false;
+
+
+
+
+        return;
+
+
+
+
+
+
+
     }
 
     #endregion
