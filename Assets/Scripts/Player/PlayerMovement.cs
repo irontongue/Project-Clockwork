@@ -29,10 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        CaculateMoveVelocity();
         Gravity();
         GroundCheck();
         Jump();
+        CaculateMoveVelocity();
         Dash();
         Slide();
         FinalMoveCaculation();
@@ -61,9 +61,12 @@ public class PlayerMovement : MonoBehaviour
 
         float preservedGravity = currentVelocity.y;
         if (isSliding)
+        {
             return;
+        }
+            
 
-        if (!isActuallyGrounded)
+        if (!isActuallyGrounded || jumping)
         {
             currentVelocity.x = lastPlayerVelocity.x;
             currentVelocity.z = lastPlayerVelocity.z;
@@ -73,8 +76,10 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+
         // i do not want to move the y velocity depending on what way the camera is facing, so i temporarly cache the velocity to restore later
         walkVector = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * baseSpeed;
+
 
         currentVelocity = walkVector;
         currentVelocity.y = preservedGravity;
@@ -87,12 +92,14 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Gravity")]
     [SerializeField] float gravity;
-
+    bool jumping;
     void Gravity()
     {
         currentVelocity.y -= gravity * Time.deltaTime;
 
         currentJumpTime -= Time.deltaTime;
+
+        jumping = currentJumpTime > 0;
 
         if (isActuallyGrounded && currentJumpTime <= 0)
         {
@@ -157,9 +164,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-
-
-
 
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
@@ -240,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float extraVelRequiredToSlide;
     [SerializeField] float slideFallOff;
+    [SerializeField] float uphillExtraSlideFallOff;
     [SerializeField] float minMagBeforeSlideCancel;
     [SerializeField] float minAngleForSlide;
 
@@ -249,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 VelWithoutGravity;
     void Slide()
     {
-        slidePossible = false;
+        slidePossible = true;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -265,7 +270,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding)
         {
-            if (!onSlope)
+            if(FacingUp())
+                currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
+            else if (!onSlope)
                 currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime;
             else
                 currentVelocity += VelWithoutGravity.normalized * gravity * Time.deltaTime;
@@ -280,22 +287,21 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (onSlope)
-            slidePossible = true;
+      /*  if (onSlope)
+            slidePossible = false;*/
 
-        if (VelWithoutGravity.magnitude > maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide)
-        {
-            slidePossible = true;
-        }
+       
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
+
         if (hit.point.y > transform.position.y - 0.5)
-        {
-            print("SLOPE TOO HIGH");
-            slidePossible = false;
-        }
-            
+            return;
+
+        if (FacingUp())
+            return;
+
         if (!slidePossible)
             return;
+      
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -319,8 +325,18 @@ public class PlayerMovement : MonoBehaviour
         if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
             return 0;
 
+        print(Vector3.Dot(transform.forward, hit.normal) < 0);
+
         return Vector3.Angle(hit.normal, transform.up);
 
+    }
+
+    bool FacingUp()
+    {
+        if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
+            return false;
+        
+        return Vector3.Dot(transform.forward, hit.normal) < -0.2f; // mystery number is because on a flat ground, the dot retruns verrrrry slightly below zero. -0.2 seems to be a good number
     }
 
 
