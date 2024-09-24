@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
 {
-    [SerializeField] float cameraSensitivity;
+    [SerializeField] float camSenseX, camSenseY;
     [SerializeField] float minXRot, maxXRot;
 
     Vector2 cameraRotation;
@@ -18,12 +18,18 @@ public class PlayerCameraController : MonoBehaviour
     void Update()
     {
 
-        cameraRotation.y += Input.GetAxisRaw("Mouse X") * cameraSensitivity;
-        cameraRotation.x -= Input.GetAxisRaw("Mouse Y") * cameraSensitivity;
+       
+        cameraRotation.y += Input.GetAxisRaw("Mouse X") * camSenseX;
+      
+        cameraRotation.x -= Input.GetAxisRaw("Mouse Y") * camSenseY;
 
+      
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, minXRot, maxXRot);
 
-        camTransform.eulerAngles = cameraRotation;
+       
+        camTransform.localEulerAngles = new Vector3(cameraRotation.x, 0f, 0f);
+      
+        transform.eulerAngles = new Vector3(0f, cameraRotation.y, 0f);
 
         DevText.DisplayInfo("cam", "Camera Rotation " + cameraRotation, "Camera");
 

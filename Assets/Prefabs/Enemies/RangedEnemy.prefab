@@ -158,15 +158,16 @@ MonoBehaviour:
   enemyType: 0
   maxHealth: 10
   health: 10
-  speed: 5
+  speed: 12
   agent: {fileID: 2712118304913471865}
   attackRange: 10
   seccondsBetweenAttacks: 2
+  damage: 1
   attackSounds:
   - {fileID: 8300000, guid: f2004f73753c43143ac92cce305005e2, type: 3}
   walkableMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
   aiBuisy: 0
   state: 0
   afterAttackTimer: 0.5
@@ -175,6 +176,9 @@ MonoBehaviour:
   playerTooCloseRange: 5
   findNewPosRange: 3
   findNewPosTrys: 5
+  projectile: {fileID: 6170293064856852499, guid: ad992dcb8512749409890f3326a6b3e6,
+    type: 3}
+  projectileSpeed: 45
 --- !u!195 &2712118304913471865
 NavMeshAgent:
   m_ObjectHideFlags: 0

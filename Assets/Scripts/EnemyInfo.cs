@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// This script is used as an access point for all scripts enemy related
@@ -14,10 +15,10 @@ public class EnemyInfo : EnemyDamageHandler
 {
     #region Stats
     [Header("Stats")]
-    public EnemyType enemyType;
-    public float maxHealth = 10f;
-    public float health = 10f;
-    public float speed = 5f;
+    [TabGroup("Base AI")] public EnemyType enemyType;
+    [TabGroup("Base AI")] public float maxHealth = 10f;
+    [TabGroup("Base AI")] public float health = 10f;
+    [TabGroup("Base AI")] public float speed = 5f;
     #endregion
 
     #region Damage Handling

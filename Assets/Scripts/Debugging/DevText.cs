@@ -22,7 +22,7 @@ public class DevText : MonoBehaviour
     float timer;
 
     static List<GameObject> freeUI = new List<GameObject>();
-  
+
 
 
     private void Start()
@@ -48,19 +48,22 @@ public class DevText : MonoBehaviour
     }
     bool uiActive;
     [SerializeField] TextMeshProUGUI groupSelector;
+    bool wasPressedThisFrame;
     private void Update()
     {
         //fps counter
         timer -= Time.deltaTime;
-
+       
         if (timer <= 0)
         {
             timer = fpsUpdateTime;
             DisplayInfo("FPS", "FPS: " + ((int)(1.0f / Time.deltaTime)).ToString(), "Basic");
         }
 
-        if(Input.GetKeyDown(KeyCode.F1))
+        if(Input.GetKeyDown(KeyCode.F1) && !wasPressedThisFrame)
         {
+            wasPressedThisFrame = true;
+            print("a");
             if (uiActive)
                 uiActive = false;
             else
@@ -68,7 +71,7 @@ public class DevText : MonoBehaviour
             print(uiActive);
             if(uiActive)
             {
-
+                print("b");
                 groupSelector.gameObject.SetActive(true);
                 groupSelector.text = "Debug Groups \n";
                 int i = 1;
@@ -88,6 +91,10 @@ public class DevText : MonoBehaviour
        
       
     }
+    private void LateUpdate()
+    {
+        wasPressedThisFrame = false;
+    }
     void OnGUI()
     {
         if (!uiActive)
@@ -103,6 +110,7 @@ public class DevText : MonoBehaviour
                 if (e.character.ToString() == i.ToString())
                 {
                     debugGroup[group.Key] = !group.Value;
+                    print(debugGroup[group.Key] + group.Key);
                     uiActive = false;
                     groupSelector.gameObject.SetActive(false);
 
@@ -124,6 +132,7 @@ public class DevText : MonoBehaviour
         }
         if (debugGroup[group] == false) // if the group has been deactivated dont continue, remove it from the pool.
         {
+          
             if(debugUI.ContainsKey(identifyer)) // if the ui exists, empty it and return it to the free ui pool
             {
                 debugUI[identifyer].text = "";

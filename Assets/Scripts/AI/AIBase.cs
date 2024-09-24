@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 public class AIBase : EnemyInfo
 {
@@ -10,14 +11,16 @@ public class AIBase : EnemyInfo
     [SerializeField] protected NavMeshAgent agent;
     [Header("Attack Settings")]
 
-    [SerializeField] protected float attackRange;
-    [SerializeField] protected float seccondsBetweenAttacks;
+    [SerializeField, TabGroup("Base AI")] protected float attackRange;
+    [SerializeField, TabGroup("Base AI")] protected float seccondsBetweenAttacks;
+    [SerializeField, TabGroup("Base AI")] protected float damage = 1;
     [Header("Audio Settings")]
-    [SerializeField] AudioClip[] attackSounds;
+    [SerializeField, TabGroup("Base AI")] AudioClip[] attackSounds;
     [Header("Agent Settings")]
-    [SerializeField] protected LayerMask walkableMask;
+    [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
     EnemySpawner spawner;
     AudioSource source;
+    
 
     
 
@@ -83,14 +86,19 @@ public class AIBase : EnemyInfo
         return false;
     }
   
-
-    protected void DamagePlayer()
+    protected void AttackEffects()
     {
         try
         {
             source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)]);
         }
         catch { }
+    }
+    protected virtual void DamagePlayer()
+    {
+        AttackEffects();
+
+        player.GetComponent<PlayerDamageHandler>().Damage(damage);
         
     }
     protected override void DeathEvent()
