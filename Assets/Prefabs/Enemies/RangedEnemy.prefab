@@ -159,7 +159,7 @@ MonoBehaviour:
   enemyType: 0
   maxHealth: 10
   health: 10
-  speed: 5
+  speed: 12
   agent: {fileID: 2712118304913471865}
   attackRange: 10
   seccondsBetweenAttacks: 2
@@ -168,7 +168,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f2004f73753c43143ac92cce305005e2, type: 3}
   walkableMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
   aiBuisy: 0
   state: 0
   afterAttackTimer: 0.5

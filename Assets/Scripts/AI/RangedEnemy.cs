@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 public class RangedEnemy : AIBase
 {
     enum State { Idle, FindingNewPos,RuningFromPlayer, Attacking }
     [SerializeField]State state = State.Idle;
-    [Header("Ranged AI")]
-    [Header("Attack")]
-    [SerializeField] float afterAttackTimer; // how long do i wait after an attack to do somthing
-    [Header("Approach Settings")]
-    [SerializeField] float findNewPositionRangeFromPlayer; // if the player goes out of range, how close should i get to the player
-    [SerializeField] float findNewPositionRangeRandomMultiplyer; // the +- multiplyer on the range
-    [Header("Flee Settings")]
-    [SerializeField] float playerTooCloseRange; // how close does the player have to get till i run
-    [SerializeField] float findNewPosRange; // how far away should i look for a new range if the player aproaches me
-    [SerializeField] int findNewPosTrys; // how many times should i search for a new pos
 
-    [SerializeField] GameObject projectile;
-    [SerializeField] float projectileSpeed;
+  
+    [Header("Attack")]
+    [SerializeField,TabGroup("Ranged AI")] float afterAttackTimer; // how long do i wait after an attack to do somthing
+    [Header("Approach Settings")]
+    [SerializeField, TabGroup("Ranged AI")] float findNewPositionRangeFromPlayer; // if the player goes out of range, how close should i get to the player
+    [SerializeField, TabGroup("Ranged AI")] float findNewPositionRangeRandomMultiplyer; // the +- multiplyer on the range
+    [Header("Flee Settings")]
+    [SerializeField, TabGroup("Ranged AI")] float playerTooCloseRange; // how close does the player have to get till i run
+    [SerializeField, TabGroup("Ranged AI")] float findNewPosRange; // how far away should i look for a new range if the player aproaches me
+    [SerializeField, TabGroup("Ranged AI")] int findNewPosTrys; // how many times should i search for a new pos
+
+    [SerializeField, TabGroup("Ranged AI")] GameObject projectile;
+    [SerializeField, TabGroup("Ranged AI")] float projectileSpeed;
   //  [SerializeField] float cantSeePlayerTriesBeforeLeavingAttack;
 
 

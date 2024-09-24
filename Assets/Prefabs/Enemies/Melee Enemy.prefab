@@ -124,10 +124,11 @@ MonoBehaviour:
   enemyType: 0
   maxHealth: 5
   health: 5
-  speed: 5
+  speed: 10
   agent: {fileID: 5083003481326997813}
   attackRange: 1
   seccondsBetweenAttacks: 1
+  damage: 1
   attackSounds: []
   walkableMask:
     serializedVersion: 2

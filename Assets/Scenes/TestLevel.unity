@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemies:
-    - {fileID: 1988982751632319823, guid: 42fb0aaf79acdf14d922f65bdafb9742, type: 3}
+    - {fileID: 0}
     spawnPoints:
     - {fileID: 153713776}
     - {fileID: 921074280}
@@ -211,7 +211,7 @@ MonoBehaviour:
     spawnSpeed: 0.4
     enemiesToKillToEndWave: 20
   - enemies:
-    - {fileID: 1988982751632319823, guid: 42fb0aaf79acdf14d922f65bdafb9742, type: 3}
+    - {fileID: 0}
     spawnPoints:
     - {fileID: 153713776}
     - {fileID: 921074280}
@@ -223,7 +223,7 @@ MonoBehaviour:
   pathRadiusFromSpawn: 5
   walkableMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
 --- !u!4 &55573648
 Transform:
   m_ObjectHideFlags: 0

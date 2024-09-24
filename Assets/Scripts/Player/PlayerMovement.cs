@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
         currentVelocity = walkVector;
         currentVelocity.y = preservedGravity;
-        print("VELCANCED");
+   
     }
 
     #endregion
@@ -302,8 +302,15 @@ public class PlayerMovement : MonoBehaviour
         if (!slidePossible)
             return;
       
+        
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            isSliding = true;
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+            CancelDash();
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             isSliding = !isSliding;
             if (!isSliding)
@@ -311,7 +318,7 @@ public class PlayerMovement : MonoBehaviour
 
             CancelDash();
         }
-            
+
     }
 
 
@@ -325,7 +332,7 @@ public class PlayerMovement : MonoBehaviour
         if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
             return 0;
 
-        print(Vector3.Dot(transform.forward, hit.normal) < 0);
+
 
         return Vector3.Angle(hit.normal, transform.up);
 
