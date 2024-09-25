@@ -20,6 +20,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] WaveInfo[] waves;
     [SerializeField] float pathRadiusFromSpawn;
     [SerializeField] LayerMask walkableMask;
+    [SerializeField] WaveEvent[] startEvents;
+    [SerializeField] WaveEvent[] endEvents;
+
     WaveInfo currentWave;
 
     private void Start()
@@ -29,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogWarning("EnemeySpawner: Waves have not been set.");
             return;
         }
-        StartWave();
+      //  
     }
     private void Update()
     {
@@ -38,6 +41,16 @@ public class EnemySpawner : MonoBehaviour
     }
 
     int currentWaveIndex = -1;
+
+    public void StartSpawner()
+    {
+        StartWave();
+
+        foreach (WaveEvent wEvent in startEvents)
+        {
+            wEvent.WaveStart();
+        }
+    }
     void StartWave()
     {
         currentWaveIndex++;
@@ -45,6 +58,7 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemies = 0;
         if (currentWaveIndex >= waves.Length)
         {
+            AllWavesCleared();
             print("no more waves!");
             return;
         }
@@ -101,4 +115,13 @@ public class EnemySpawner : MonoBehaviour
         if (enemysKilled >= currentWave.enemiesToKillToEndWave)
             StartWave();
     }
+
+    void AllWavesCleared()
+    {
+        foreach (WaveEvent wEvent in startEvents)
+        {
+            wEvent.WaveEnd();
+        }
+    }
+ 
 }

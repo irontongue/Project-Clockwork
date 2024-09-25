@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (GameState.GamePaused)
+            return;
         Gravity();
         GroundCheck();
         Jump();
@@ -61,10 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         float preservedGravity = currentVelocity.y;
         if (isSliding)
-        {
             return;
-        }
-            
 
         if (!isActuallyGrounded || jumping)
         {
@@ -76,18 +75,15 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-
         // i do not want to move the y velocity depending on what way the camera is facing, so i temporarly cache the velocity to restore later
         walkVector = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * baseSpeed;
 
 
         currentVelocity = walkVector;
         currentVelocity.y = preservedGravity;
-   
     }
 
     #endregion
-
     #region Gravity
 
     [Header("Gravity")]
@@ -129,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
 
         currentCyoteTime -= Time.deltaTime;
 
-
         if (isActuallyGrounded)
         {
 
@@ -138,16 +133,9 @@ public class PlayerMovement : MonoBehaviour
 
             remainingJumps = extraJumps;
         }
-        else
-        {
-            if (currentCyoteTime <= 0)
-            {
+        else if(currentCyoteTime <= 0)
                 isGrounded = false;
-            }
-        }
     }
-
-
 
     #endregion
 
@@ -164,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
@@ -180,10 +167,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
 
         currentJumpTime = jumpGracePeriod;
-
-
     }
-
     #endregion
 
     #region Dash
@@ -218,11 +202,9 @@ public class PlayerMovement : MonoBehaviour
             currentVelocity.z = dashVelocity.z;
 
             if (dashTimer <= 0)
-            {
                 CancelDash();
-            }
+            
         }
-
         if (!readyToDash)
         {
             dashCooldownTimer -= Time.deltaTime;
@@ -286,10 +268,6 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-
-      /*  if (onSlope)
-            slidePossible = false;*/
-
        
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
@@ -306,7 +284,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             isSliding = true;
-
             CancelDash();
         }
 
@@ -318,21 +295,14 @@ public class PlayerMovement : MonoBehaviour
 
             CancelDash();
         }
-
     }
-
 
     RaycastHit hit;
 
-
     float GroundAngle()
     {
-
-
         if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
             return 0;
-
-
 
         return Vector3.Angle(hit.normal, transform.up);
 
@@ -346,7 +316,6 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.Dot(transform.forward, hit.normal) < -0.2f; // mystery number is because on a flat ground, the dot retruns verrrrry slightly below zero. -0.2 seems to be a good number
     }
 
-
     #endregion
 
     #region FinalMoveCaculation
@@ -356,8 +325,6 @@ public class PlayerMovement : MonoBehaviour
         controller.Move((currentVelocity + dashVelocity) * Time.deltaTime);
         lastPlayerVelocity = currentVelocity;
     }
-
-    
 
     #endregion
 

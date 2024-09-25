@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3948352683630207892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2444837087865418892}
+  - component: {fileID: 8948016730155698804}
+  m_Layer: 0
+  m_Name: GameManager 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2444837087865418892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.6964626, y: 3.1220684, z: 0.0090789795}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8948016730155698804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f930bf7c768b6554fbf2981aff04d559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponStats:
+  - weaponType: 2
+    damage: 0
+    attackSpeed: 0
+    coolDown: 0
+    range: 0
+    boxCheckWidth: 20
+    chargeUpTime: 0
+    bulletSpread: 0
+    numberOfBullets: 1
+    lockOnDistance: 0
+    bounces: 0
+    bounceRange: 0
+  - weaponType: 1
+    damage: 5
+    attackSpeed: 1
+    coolDown: 1
+    range: 0
+    boxCheckWidth: 20
+    chargeUpTime: 2
+    bulletSpread: 0
+    numberOfBullets: 1
+    lockOnDistance: 0
+    bounces: 0
+    bounceRange: 0
+  - weaponType: 0
+    damage: 3
+    attackSpeed: 1
+    coolDown: 1
+    range: 15
+    boxCheckWidth: 10
+    chargeUpTime: 1
+    bulletSpread: 5
+    numberOfBullets: 10
+    lockOnDistance: 0
+    bounces: 0
+    bounceRange: 0
+  - weaponType: 3
+    damage: 1
+    attackSpeed: 1
+    coolDown: 1
+    range: 15
+    boxCheckWidth: 20
+    chargeUpTime: 0
+    bulletSpread: 0
+    numberOfBullets: 1
+    lockOnDistance: 0
+    bounces: 5
+    bounceRange: 10
+  weaponTypeToAdd: 1
+  d_Value: 00000000010000000200000003000000
+  d_Key: 02000000010000000000000003000000
+  weaponToEdit: 0

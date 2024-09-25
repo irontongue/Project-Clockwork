@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 2246956072475239013}
   - component: {fileID: 361049292092099499}
   - component: {fileID: 9174785343985049913}
+  - component: {fileID: 598534074536633072}
   m_Layer: 5
   m_Name: DebugCanvas
   m_TagString: Untagged
@@ -277,7 +278,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
 --- !u!114 &9174785343985049913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +295,83 @@ MonoBehaviour:
     type: 3}
   canvasObject: {fileID: 3631244078706155280}
   groupSelector: {fileID: 5711069671964349131}
+--- !u!114 &598534074536633072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029370104989197525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3411aa0e6b0274086221678fe73e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePopupGameobject: {fileID: 3896059198640816699, guid: a0ead4dba7fe0fe49880735f81664d28,
+    type: 3}
+  spacingBetweenRowUpgrades: 255
+  spacingBetweenCollumUpgrades: 255
+  firstUpgradePos: {x: 100, y: 100}
+  upgradesPerRow: 3
+  canvas: {fileID: 5029370104989197525}
+  upgradePackets:
+  - upgradeTitle: upgrade 1
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: upgrade 2
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: upgrade 3
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: upgrade 4
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: upgrade 5
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: upgrade 6
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: upgrade 7
+    upgradeBody: 
+    isWeapon: 0
+    weaponToEnable: {fileID: 0}
+  autoWeapons:
+  - upgradeTitle: weapon 1
+    upgradeBody: 
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: weapon 2
+    upgradeBody: dfg
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: weapon 3
+    upgradeBody: hgfd
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: weapon 4
+    upgradeBody: vbcbdfg
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: weapon 5
+    upgradeBody: sdaswad
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: weapon 6
+    upgradeBody: 
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
+  - upgradeTitle: weapon 7
+    upgradeBody: 
+    isWeapon: 1
+    weaponToEnable: {fileID: 0}
 --- !u!1 &5648486017628475644
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,8 @@ public class PlayerCameraController : MonoBehaviour
     }
     void Update()
     {
-
+        if (GameState.GamePaused)
+            return;
        
         cameraRotation.y += Input.GetAxisRaw("Mouse X") * camSenseX;
       
