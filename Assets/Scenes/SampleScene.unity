@@ -638,6 +638,7 @@ MonoBehaviour:
   maxHealth: 1111
   health: 1111
   speed: 5
+  EXP: 1
   agent: {fileID: 100923475}
   attackRange: 1
   seccondsBetweenAttacks: 1
@@ -1183,12 +1184,12 @@ GameObject:
   - component: {fileID: 352606603}
   - component: {fileID: 352606602}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &352606602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,7 +1206,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
 --- !u!114 &352606603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,6 +2065,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661141819}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &680481610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7601688509820375549, guid: 081e6f4431cd9634a8cf676da0645f8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 285830586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &681793687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3949,6 +3962,7 @@ MonoBehaviour:
   maxHealth: 1111
   health: 1111
   speed: 5
+  EXP: 1
   agent: {fileID: 1421114043}
   attackRange: 1
   seccondsBetweenAttacks: 1
@@ -4421,6 +4435,7 @@ MonoBehaviour:
   maxHealth: 1111
   health: 1111
   speed: 5
+  EXP: 1
   agent: {fileID: 1552035969}
   attackRange: 1
   seccondsBetweenAttacks: 1
@@ -4939,6 +4954,7 @@ MonoBehaviour:
   maxHealth: 1111
   health: 1111
   speed: 5
+  EXP: 1
   agent: {fileID: 1917921911}
   attackRange: 1
   seccondsBetweenAttacks: 1
@@ -5710,7 +5726,7 @@ PrefabInstance:
         type: 3}
       propertyPath: donutImage
       value: 
-      objectReference: {fileID: 23680228}
+      objectReference: {fileID: 680481610}
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_LocalPosition.x

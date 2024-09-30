@@ -13,16 +13,18 @@ public class PlayerMovement : MonoBehaviour
     Vector3 dashVelocity;
     Vector3 lastPlayerVelocity;
     Vector3 maxPlayerWalkSpeed;
+    Vector3 lastPlayerSafePos;
 
     bool isGrounded;
     bool isSliding;
-
+    static public PlayerMovement playerRef;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         remainingJumps = extraJumps;
         maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 1) * baseSpeed;
+        playerRef = this;
 
     }
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameState.GamePaused)
             return;
+
         Gravity();
         GroundCheck();
         Jump();
@@ -44,7 +47,11 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
         DevText.DisplayInfo("cyote", "Cyote Time:" + currentCyoteTime, "Movement");
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
-
+        DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
+        if (isActuallyGrounded)
+        {
+            lastPlayerSafePos = transform.position;
+        }
     }
 
     #region CaculateMoveVelocity
@@ -113,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundMask;
 
     [SerializeField] float coyoteTime;
+    [SerializeField] float slideFriction;
     float currentCyoteTime;
     bool isActuallyGrounded;
 
@@ -135,6 +143,21 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(currentCyoteTime <= 0)
                 isGrounded = false;
+
+        //credit to https://discussions.unity.com/t/character-controller-slide-down-slope/188130/2
+        if (controllerColidingButNotGrounded)
+        {
+            currentVelocity.x += (1f - controllerHitNormal.y) * controllerHitNormal.x * (1f - slideFriction);
+            currentVelocity.z += (1f - controllerHitNormal.y) * controllerHitNormal.z * (1f - slideFriction);
+        }
+    }
+
+    bool controllerColidingButNotGrounded;
+    Vector3 controllerHitNormal;
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        controllerColidingButNotGrounded = Vector3.Angle(Vector3.up, hit.normal) <= 85;
+        controllerHitNormal = hit.normal;
     }
 
     #endregion
@@ -327,6 +350,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+    public void ResetPlayerToSafePos()
+    {
+        controller.enabled = false;
+        transform.position = lastPlayerSafePos;
+        controller.enabled = true;
+        currentVelocity = Vector3.zero;
+        lastPlayerVelocity = Vector3.zero;
+    }
+   
 
     [Header("Dependancies")]
     CharacterController controller;

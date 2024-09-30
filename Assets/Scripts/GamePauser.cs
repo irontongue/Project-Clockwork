@@ -16,17 +16,26 @@ public class GamePauser : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame(GameState.GamePaused = !GameState.GamePaused);
+            PauseGame(!GameState.GamePaused);
             OpenPauseMenu(GameState.GamePaused);
         }
     }
 
     public void PauseGame(bool open)
     {
-        if(!open)       
+        GameState.GamePaused = open;
+        if(!open)
+        {
             Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+            
         else
+        {
             Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+        }
+            
     }
     void OpenPauseMenu(bool open)
     {

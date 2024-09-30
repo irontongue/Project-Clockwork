@@ -103,6 +103,7 @@ public class AIBase : EnemyInfo
     }
     protected override void DeathEvent()
     {
+        player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
         spawner.EnemyKilled();
         base.DeathEvent();
     }
