@@ -12,7 +12,7 @@ public class EnemyDamageHandler : MonoBehaviour
     /// Damages the enemy
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body)
+    public virtual void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
     {
     }
 }

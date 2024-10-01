@@ -5,10 +5,16 @@ using UnityEditor;
 using System;
 
 public enum WeaponType{Shotgun, Sniper, Smg, TeslaCoil }
+public enum DamageType {Physical, Fire, Explosion, None}
+public enum UpgradeType{Universal, WeaponStat, Shotgun, TeslaCoil, Sniper}
+public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, LockOnDistance, Bounces, BounceRange, BoxCheckWidth}
 
 public class AllWeaponStats : MonoBehaviour
 {
     public WeaponStats[] weaponStats;
+    public Dictionary<WeaponType, AutomaticWeaponBase> weaponReferences = new();
+
+    [SerializeField] Dictionary<WeaponType, int> weaponStatsDic = new();
     private void Awake()
     {
         InitializeDictionary();
@@ -17,6 +23,68 @@ public class AllWeaponStats : MonoBehaviour
     {
         return weaponStats[weaponStatsDic[weaponType]];
     }
+    public void ChangeStat(WeaponType weaponType, WeaponStatType weaponStatType, float amountToAdd)
+    {
+        switch (weaponStatType) {
+            case WeaponStatType.Damage:
+                weaponStats[weaponStatsDic[weaponType]].damage += amountToAdd;
+                break;
+            case WeaponStatType.AttackSpeed:
+                weaponStats[weaponStatsDic[weaponType]].attackSpeed += amountToAdd;
+                break;
+            case WeaponStatType.CoolDown:
+                weaponStats[weaponStatsDic[weaponType]].coolDown += amountToAdd;
+                break;
+            case WeaponStatType.Range:
+                weaponStats[weaponStatsDic[weaponType]].range += amountToAdd;
+                break;
+            case WeaponStatType.ChargeUpTime:
+                weaponStats[weaponStatsDic[weaponType]].chargeUpTime += amountToAdd;
+                break;
+            case WeaponStatType.BulletSpread:
+                weaponStats[weaponStatsDic[weaponType]].bulletSpread += amountToAdd;
+                break;
+            case WeaponStatType.NumberOfBullets:
+                weaponStats[weaponStatsDic[weaponType]].numberOfBullets += (int)amountToAdd;
+                break;
+            case WeaponStatType.LockOnDistance:
+                weaponStats[weaponStatsDic[weaponType]].lockOnDistance += amountToAdd;
+                break;
+            case WeaponStatType.Bounces:
+                weaponStats[weaponStatsDic[weaponType]].bounces += (int)amountToAdd;
+                break;
+            case WeaponStatType.BounceRange:
+                weaponStats[weaponStatsDic[weaponType]].bounceRange += amountToAdd;
+                break;
+            case WeaponStatType.BoxCheckWidth:
+                weaponStats[weaponStatsDic[weaponType]].boxCheckWidth += amountToAdd;
+                break;
+        }
+
+
+    }
+    public void Upgrade(UpgradeInfoPacket packet)
+    {
+        switch(packet.upgradeType)
+        {
+            case UpgradeType.Universal:
+                break;
+            case UpgradeType.WeaponStat:
+                ChangeStat(packet.weaponType, packet.weaponStatType, packet.amountToAdd);
+                break;
+            case UpgradeType.Shotgun:
+                weaponReferences[WeaponType.Shotgun].Upgrade(packet.shotgunUpgrades);
+                break;
+            case UpgradeType.Sniper:
+                weaponReferences[WeaponType.Sniper].Upgrade(packet.sniperUpgrades);
+                break;
+            case UpgradeType.TeslaCoil:
+                weaponReferences[WeaponType.TeslaCoil].Upgrade(packet.teslaCoilUpgrades);
+                break;
+        }
+
+    }
+
     private void InitializeDictionary()
     {
         for (int i = 0; i < d_Value.Length; i++)
@@ -31,8 +99,9 @@ public class AllWeaponStats : MonoBehaviour
             print(string.Format("Key = {0}, Value = {1})", kvp.Key, kvp.Value));
         }
     }
+
     #region Editor Buttons and weapon stats Serialized editing
-    [SerializeField] Dictionary<WeaponType, int> weaponStatsDic = new Dictionary<WeaponType, int>();
+
     [SerializeField] WeaponType weaponTypeToAdd;
     [SerializeField] int[] d_Value = new int[0];
     [SerializeField] WeaponType[] d_Key = new WeaponType[0];

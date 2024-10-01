@@ -40,7 +40,8 @@ public class BasePrimaryWeapon : MonoBehaviour
     protected bool weaponReloading;
     float weaponReloadTimer;
 
-    // youll be happy james, im finally getting any external refrences at runtime.
+    // you'll be happy james, im finally getting any external refrences at runtime.
+    // Finally - James
     protected virtual void Start()
     {
         cam = Camera.main;

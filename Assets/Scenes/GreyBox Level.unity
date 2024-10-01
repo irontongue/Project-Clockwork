@@ -20027,36 +20027,92 @@ MonoBehaviour:
   - upgradeTitle: Upgrade 1
     upgradeBody: 
     isWeapon: 0
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 3
+    weaponStatType: 0
     weaponToEnable: {fileID: 0}
+    amountToAdd: 0
   - upgradeTitle: Upgrade 2
     upgradeBody: 
     isWeapon: 0
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 0}
+    amountToAdd: 0
   - upgradeTitle: Upgrade 3
     upgradeBody: 
     isWeapon: 0
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 0}
+    amountToAdd: 0
   - upgradeTitle: Upgrade 4
     upgradeBody: 
     isWeapon: 0
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 0}
+    amountToAdd: 0
   - upgradeTitle: Upgrade 5
     upgradeBody: 
     isWeapon: 0
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 0}
+    amountToAdd: 0
   autoWeapons:
   - upgradeTitle: Shotgun
     upgradeBody: 
     isWeapon: 1
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 442265203}
+    amountToAdd: 0
   - upgradeTitle: Sniper
     upgradeBody: 
     isWeapon: 1
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 1668882253}
+    amountToAdd: 0
   - upgradeTitle: Coil
     upgradeBody: 
     isWeapon: 1
+    upgradeType: 0
+    shotgunUpgrades: 0
+    teslaCoilUpgrades: 0
+    sniperUpgrades: 0
+    weaponType: 0
+    weaponStatType: 0
     weaponToEnable: {fileID: 1460901015}
+    amountToAdd: 0
   UpgradeSpawner: {fileID: 1576424973}
 --- !u!114 &1440079884
 MonoBehaviour:
@@ -28321,12 +28377,12 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 759591398}
+  - {fileID: 1059829889}
   - {fileID: 1076550027}
   - {fileID: 163519470}
   - {fileID: 669497368}
   - {fileID: 810686042}
   - {fileID: 446284544}
-  - {fileID: 1059829889}
   - {fileID: 2094315788}
   - {fileID: 1246337779}
   - {fileID: 960356045}

@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GenericUpgrades { }
-public enum ShotgunUpgrades { }
-public enum SniperUpgrades { }
-public enum TeslaUpgrades { }
 
 
 
@@ -14,6 +10,7 @@ public class AutomaticWeaponBase : MonoBehaviour
 {
     [SerializeField] protected WeaponType weaponType;
     protected WeaponStats stats;
+    AllWeaponStats allStats;
     protected Camera cam;
     protected Transform playerTransform;
     [SerializeField]protected LayerMask enemyLayerMask = 8;
@@ -29,7 +26,11 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         playerTransform = transform.root;
         cam = Camera.main;
-        stats = FindAnyObjectByType<AllWeaponStats>().GetWeaponStat(weaponType);
+        allStats = FindAnyObjectByType<AllWeaponStats>();
+        stats = allStats.GetWeaponStat(weaponType);
+        allStats.weaponReferences.Add(weaponType, this);
+
+
     }
     virtual protected void Update()
     {
@@ -132,13 +133,6 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         return GetFirstEnemyInDirection(-1, distance, size, layerMask);
     }
-    float s = 0; //Exposed variables for debugging
-    float d= 0;
-    private void OnDrawGizmos()
-    {
-        //if (playerTransform)
-            //Gizmos.DrawCube(Camera.main.transform.position +  1  * d*0.5f * Camera.main.transform.forward, new Vector3(s, s, d));;
-    }
     /// <summary>
     /// Gets the first enemy in the forward or backward vector (direction = 1 for forward) (direction = -1 for backward)
     /// uses sphereCast
@@ -156,8 +150,6 @@ public class AutomaticWeaponBase : MonoBehaviour
         }
         width = width * 0.5f;
         length = length * 0.5f;
-        //s = size;
-        //d = distance;
         Collider[] hit = Physics.OverlapBox(playerTransform.position + (direction * length * 0.5f * cam.transform.forward), new Vector3(width, width, length), Quaternion.identity, layerMask);
         
         if (hit.Length == 0)
@@ -254,6 +246,6 @@ public class AutomaticWeaponBase : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    public virtual void Upgrade(){ }
+    public virtual void Upgrade<T>(T upgradeEnum)where T: Enum{ }
 
 }

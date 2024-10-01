@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+public enum ShotgunUpgrades { }
 
 public class AutomaticWeaponShotgun : AutomaticWeaponBase
 {

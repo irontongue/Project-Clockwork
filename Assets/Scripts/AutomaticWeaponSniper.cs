@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum SniperUpgrades { }
 public class AutomaticWeaponSniper : AutomaticWeaponBase
 {
     [SerializeField] Image donutImage;

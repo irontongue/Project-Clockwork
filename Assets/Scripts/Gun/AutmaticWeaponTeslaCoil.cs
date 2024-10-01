@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TeslaCoilUpgrades { }
 public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
 {
     float updateTime = 0;

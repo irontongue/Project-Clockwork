@@ -22,6 +22,8 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public float speed = 5f;
     [TabGroup("Base AI")] public float EXP = 1f;
     [TabGroup("Base AI")] public Image healthBarImage;
+    [HideInInspector] public int fireStacks = 0;
+    
     #endregion
 
     #region Damage Handling
@@ -29,7 +31,7 @@ public class EnemyInfo : EnemyDamageHandler
     /// Damages the enemy
     /// </summary>
     /// <param name="damage"></param>
-    public override void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body)
+    public override void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
     {
         if (bodyPart == BodyPart.Head)
             amount *= 2;
