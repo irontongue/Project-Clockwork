@@ -59,6 +59,8 @@ public class BasePrimaryWeapon : MonoBehaviour
     //constantly tick down the shot timer.
     protected virtual void Update()
     {
+        if (GameState.GamePaused)
+            return;
         timeSinceLastShot -= Time.deltaTime;
 
         if(weaponReloading)

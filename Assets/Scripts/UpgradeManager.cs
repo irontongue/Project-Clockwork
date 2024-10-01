@@ -3,31 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+
+//this packet is used for both the upgrade and the weapon unlocks. 
+public delegate void UpgradeDelagate();
 [System.Serializable]
-public struct UpgradeInfoPacket
+public struct UpgradeInfoPacket 
 {
 
     public string upgradeTitle;
 
     public string upgradeBody;
 
-    public bool isWeapon;
+    public bool isWeapon; // if this is for a weapon, dont use the delegate, but use the gameobject. Note: this is temporary.
+    public UpgradeDelagate Upgrade;
+    // when a upgrade card is selected, this deleage will be called. 
 
-    public delegate void Upgrade();
-
-    [ShowIf("isWeapon")] public GameObject weaponToEnable;
+    [ShowIf("isWeapon")] public GameObject weaponToEnable; 
 
 }
 
 public class UpgradeManager : MonoBehaviour
 {
+    //theese hold the current avalabe pool 
     [SerializeField] List<UpgradeInfoPacket> upgradePackets = new();
     [SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
 
-    [SerializeField] UpgradeSpawnerUI UpgradeSpawner;
+    [SerializeField] UpgradeSpawnerUI UpgradeSpawner; // this is what displays the cards
 
     private void Update()
     {
+        //manual unlocks. this will be removed
         if (Input.GetKeyDown(KeyCode.F2))
         {
             StartWeaponUnlock();
@@ -46,33 +51,48 @@ public class UpgradeManager : MonoBehaviour
     {
         UpgradeSpawner.DisplayPopups(PickRandomUpgrades(true, 3));
     }
+    //this can be called with either a list or single packet
+    //any upgrades added here will go into the pool 
+    public void AddUpgrade(UpgradeInfoPacket packet)
+    {
+        upgradePackets.Add(packet);
+    }
+    public void AddUpgrade(UpgradeInfoPacket[] packets)
+    {
+        foreach(UpgradeInfoPacket packet in packets)
+        {
+            upgradePackets.Add(packet);
+        }
+    }
 
     public List<UpgradeInfoPacket> PickRandomUpgrades(bool isWeapon, int countOfUpgrades)
     {
-        List<UpgradeInfoPacket> chosenPackets = new();
-        List<UpgradeInfoPacket> packetsToChooseFrom;
-        if (isWeapon)
+        List<UpgradeInfoPacket> chosenPackets = new(); // the packets that will be displayed
+
+        List<UpgradeInfoPacket> packetsToChooseFrom; // refrence to the list to pick from
+
+        if (isWeapon) // choose what list to pick from
             packetsToChooseFrom = autoWeapons;
         else
             packetsToChooseFrom = upgradePackets;
 
-        if (countOfUpgrades > packetsToChooseFrom.Count)
+        if (countOfUpgrades > packetsToChooseFrom.Count) // if there are less upgrades then the count to display, limit the amount we display to remaining
             countOfUpgrades = packetsToChooseFrom.Count;
         int loopCap = 0;
 
-        while (chosenPackets.Count < countOfUpgrades)
+        while (chosenPackets.Count < countOfUpgrades)// this finds x random upgrades
         {
             loopCap++;
-            if (loopCap >= 100)
+            if (loopCap >= 100) // this code should not fail, but just in case stop after 100 tries
             {
                 print(loopCap);
                 print("PICK RANDOM UPGRADE INFINITE LOOP ");
                 return null;
             }
 
-            UpgradeInfoPacket packet = packetsToChooseFrom[Random.Range(0, packetsToChooseFrom.Count)];
+            UpgradeInfoPacket packet = packetsToChooseFrom[Random.Range(0, packetsToChooseFrom.Count)]; // pick a random packet
 
-            if (chosenPackets.Contains(packet))
+            if (chosenPackets.Contains(packet)) // if we picked it allready, try again
                 continue;
 
             chosenPackets.Add(packet);
@@ -80,8 +100,8 @@ public class UpgradeManager : MonoBehaviour
 
         return chosenPackets;
     }
-
-    public void UnlockWeapon(UpgradeInfoPacket packet)
+    // theese is called by the ui upgrade spawner, and just handle removing them
+    public void UnlockWeapon(UpgradeInfoPacket packet) 
     {
         packet.weaponToEnable.SetActive(true);
         autoWeapons.Remove(packet);
@@ -89,6 +109,12 @@ public class UpgradeManager : MonoBehaviour
     public void UnlockUpgrade(UpgradeInfoPacket packet)
     {
         upgradePackets.Remove(packet);
+        if (packet.Upgrade == null)
+        {
+            print(packet.upgradeTitle + " does not have a delage set!");
+            return;
+        }
+        packet.Upgrade();
     }
 
 

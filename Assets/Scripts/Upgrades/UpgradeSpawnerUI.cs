@@ -22,7 +22,6 @@ public class UpgradeSpawnerUI : MonoBehaviour
         upgradeManager = FindAnyObjectByType<UpgradeManager>();
     }
 
-
     bool upgradeIsWeapon;
     List<UpgradeButton> buttons = new();
     
@@ -30,8 +29,8 @@ public class UpgradeSpawnerUI : MonoBehaviour
     {
         GamePauser.instance.PauseGame(true);
         buttons.Clear();
-        UpgradeButton.ButtonDelegate upgradeDelegate = GainUpgrade;
-        int i = 0;
+        UpgradeButton.ButtonDelegate upgradeDelegate = GainUpgrade; // give this to the button, so it can call back
+    
         int rows = 0;
         int collums = 0;
         upgradeIsWeapon = upgradesToDisplay[0].isWeapon;
@@ -57,7 +56,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
                 rows = 0;
                 collums += 1;
             }
-            i++;
+   
             buttons.Add(upgradeButton);
         }
 
@@ -68,7 +67,6 @@ public class UpgradeSpawnerUI : MonoBehaviour
         foreach(UpgradeButton button in buttons)
         {
             Destroy(button.gameObject);
-            print("GENM");
         }
     }
      
@@ -79,7 +77,11 @@ public class UpgradeSpawnerUI : MonoBehaviour
         if (upgradeIsWeapon)
             upgradeManager.UnlockWeapon(packet);
         else
+        {
             upgradeManager.UnlockUpgrade(packet);
+       
+        }
+            
 
   
         ClearUI();

@@ -2,13 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Sirenix.OdinInspector;
 
 public class EnemySpawner : MonoBehaviour
 {
+    #region StaticEnemyInfo
+
+    [System.Serializable]
+   
+    struct EnemySpawnInfo
+    {
+        public Enemies enemy;
+        public int spawnChances;
+    }
+    public enum Enemies {Melee, Ranged}
+   
+  
+
+    #endregion
     [System.Serializable]
     struct WaveInfo
     {
-        public GameObject[] enemies;
+        public EnemySpawnInfo[] enemies;
         public GameObject[] spawnPoints;
         public float maxEnemiesToSpawn;
         public float spawnSpeed;
@@ -16,7 +31,8 @@ public class EnemySpawner : MonoBehaviour
         public float EXPShare;
 
     }
-    
+  
+
     [SerializeField] WaveInfo[] waves;
     [SerializeField] float pathRadiusFromSpawn;
     [SerializeField] LayerMask walkableMask;
@@ -34,8 +50,8 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogWarning("EnemeySpawner: Waves have not been set.");
             return;
         }
-        playerLevelUpManager = FindAnyObjectByType<PlayerLevelUpManager>(); 
-      //  
+        playerLevelUpManager = FindAnyObjectByType<PlayerLevelUpManager>();
+        StartWave();
     }
     private void Update()
     {
@@ -49,13 +65,15 @@ public class EnemySpawner : MonoBehaviour
     {
         StartWave();
 
+        
+    }
+    void StartWave()
+    {
         foreach (WaveEvent wEvent in startEvents)
         {
             wEvent.WaveStart();
         }
-    }
-    void StartWave()
-    {
+
         currentWaveIndex++;
         enemysKilled = 0;
         spawnedEnemies = 0;
@@ -70,11 +88,23 @@ public class EnemySpawner : MonoBehaviour
         waveSpawning = true;
        
         currentWave = waves[currentWaveIndex];
+        spawnPool.Clear();
+       
+        foreach (EnemySpawnInfo info in currentWave.enemies)
+        {
+            print("weeee");
+            for(int i = 0; i < info.spawnChances; i++)
+            {
+                spawnPool.Add(AIInfo.staticEnemyList[info.enemy]);
+            }    
+        }
+     
     }
 
     bool waveSpawning;
     float lastTimeSinceSpawn;
     int spawnedEnemies;
+    public List<GameObject> spawnPool = new();
 
     
 
@@ -86,8 +116,8 @@ public class EnemySpawner : MonoBehaviour
             return;
 
         lastTimeSinceSpawn = currentWave.spawnSpeed;
-
-        GameObject spawnedEnemy = Instantiate(currentWave.enemies[Random.Range(0, currentWave.enemies.Length - 1)]);
+        
+        GameObject spawnedEnemy = Instantiate(spawnPool[Random.Range(0, spawnPool.Count)]);
         AIBase ai = spawnedEnemy.GetComponent<AIBase>();
         try
         {
