@@ -127,6 +127,7 @@ MonoBehaviour:
   health: 10
   speed: 10
   EXP: 1
+  healthBarImage: {fileID: 850338302134878798}
   agent: {fileID: 5083003481326997813}
   attackRange: 2
   seccondsBetweenAttacks: 0.5
@@ -317,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 2543082977169815577, guid: 9a25100811767134097457b5498aba4e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.746
+      value: 1.038
       objectReference: {fileID: 0}
     - target: {fileID: 2543082977169815577, guid: 9a25100811767134097457b5498aba4e,
         type: 3}
@@ -344,6 +345,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a25100811767134097457b5498aba4e, type: 3}
+--- !u!114 &850338302134878798 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 831068275750583688, guid: 9a25100811767134097457b5498aba4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 19578039966711750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2526332894164649951 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2543082977169815577, guid: 9a25100811767134097457b5498aba4e,

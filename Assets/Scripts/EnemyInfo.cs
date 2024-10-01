@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script is used as an access point for all scripts enemy related
@@ -20,6 +21,7 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public float health = 10f;
     [TabGroup("Base AI")] public float speed = 5f;
     [TabGroup("Base AI")] public float EXP = 1f;
+    [TabGroup("Base AI")] public Image healthBarImage;
     #endregion
 
     #region Damage Handling
@@ -48,6 +50,10 @@ public class EnemyInfo : EnemyDamageHandler
     void ChangeHealth(float amount)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
+        if(healthBarImage != null)
+        {
+            healthBarImage.fillAmount = health / maxHealth;
+        }
         if (health == 0)
         {
             DeathEvent();
