@@ -8,6 +8,9 @@ public class Revolver : BasePrimaryWeapon
     protected override void Update()
     {
         base.Update();
+      
+        if (GameState.GamePaused)
+            return;
 
         if ((Input.GetKeyDown(KeyCode.R) || currentAmmoInMag <= 0) && CanReloadWeapon() && !weaponReloading)
         {

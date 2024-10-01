@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+/*[System.Serializable]
 public struct UpgradeTree
 {
     public BaseUpgrade[] upgrades;
@@ -14,12 +14,12 @@ public class BaseUpgrade
     public float value;
     public UpgradeInfoPacket.Upgrade upgradePointer;
 }
-
+*/
 
 [CreateAssetMenu(menuName = "ScriptableObjects/BaseUpgrades")]
 public class UpgradeInfo : ScriptableObject
 {
-    public UpgradeTree[] upgradeTrees;
+    //public UpgradeTree[] upgradeTrees;
   
 }
 

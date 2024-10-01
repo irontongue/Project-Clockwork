@@ -141,7 +141,7 @@ public class RangedEnemy : AIBase
         GameObject spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation);
         spawnedProjectile.transform.LookAt(player.transform.position);
         spawnedProjectile.GetComponent<Projectile>().damage = damage;
-        spawnedProjectile.GetComponent<Projectile>().speed = -projectileSpeed;
+        spawnedProjectile.GetComponent<Projectile>().speed = projectileSpeed;
         print(spawnedProjectile.name);
     }
     void Attacking()
