@@ -19,6 +19,7 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public float maxHealth = 10f;
     [TabGroup("Base AI")] public float health = 10f;
     [TabGroup("Base AI")] public float speed = 5f;
+    [TabGroup("Base AI")] public float EXP = 1f;
     #endregion
 
     #region Damage Handling

@@ -13,22 +13,27 @@ public class PlayerMovement : MonoBehaviour
     Vector3 dashVelocity;
     Vector3 lastPlayerVelocity;
     Vector3 maxPlayerWalkSpeed;
+    Vector3 lastPlayerSafePos;
 
     bool isGrounded;
     bool isSliding;
-
+    static public PlayerMovement playerRef;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         remainingJumps = extraJumps;
         maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 1) * baseSpeed;
+        playerRef = this;
 
     }
 
 
     void Update()
     {
+        if (GameState.GamePaused)
+            return;
+
         Gravity();
         GroundCheck();
         Jump();
@@ -42,7 +47,11 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
         DevText.DisplayInfo("cyote", "Cyote Time:" + currentCyoteTime, "Movement");
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
-
+        DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
+        if (isActuallyGrounded)
+        {
+            lastPlayerSafePos = transform.position;
+        }
     }
 
     #region CaculateMoveVelocity
@@ -61,10 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
         float preservedGravity = currentVelocity.y;
         if (isSliding)
-        {
             return;
-        }
-            
 
         if (!isActuallyGrounded || jumping)
         {
@@ -76,18 +82,15 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-
         // i do not want to move the y velocity depending on what way the camera is facing, so i temporarly cache the velocity to restore later
         walkVector = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * baseSpeed;
 
 
         currentVelocity = walkVector;
         currentVelocity.y = preservedGravity;
-   
     }
 
     #endregion
-
     #region Gravity
 
     [Header("Gravity")]
@@ -117,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundMask;
 
     [SerializeField] float coyoteTime;
+    [SerializeField] float slideFriction;
     float currentCyoteTime;
     bool isActuallyGrounded;
 
@@ -129,7 +133,6 @@ public class PlayerMovement : MonoBehaviour
 
         currentCyoteTime -= Time.deltaTime;
 
-
         if (isActuallyGrounded)
         {
 
@@ -138,16 +141,24 @@ public class PlayerMovement : MonoBehaviour
 
             remainingJumps = extraJumps;
         }
-        else
-        {
-            if (currentCyoteTime <= 0)
-            {
+        else if(currentCyoteTime <= 0)
                 isGrounded = false;
-            }
+
+        //credit to https://discussions.unity.com/t/character-controller-slide-down-slope/188130/2
+        if (controllerColidingButNotGrounded)
+        {
+            currentVelocity.x += (1f - controllerHitNormal.y) * controllerHitNormal.x * (1f - slideFriction);
+            currentVelocity.z += (1f - controllerHitNormal.y) * controllerHitNormal.z * (1f - slideFriction);
         }
     }
 
-
+    bool controllerColidingButNotGrounded;
+    Vector3 controllerHitNormal;
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        controllerColidingButNotGrounded = Vector3.Angle(Vector3.up, hit.normal) <= 85;
+        controllerHitNormal = hit.normal;
+    }
 
     #endregion
 
@@ -164,7 +175,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
@@ -180,10 +190,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
 
         currentJumpTime = jumpGracePeriod;
-
-
     }
-
     #endregion
 
     #region Dash
@@ -218,11 +225,9 @@ public class PlayerMovement : MonoBehaviour
             currentVelocity.z = dashVelocity.z;
 
             if (dashTimer <= 0)
-            {
                 CancelDash();
-            }
+            
         }
-
         if (!readyToDash)
         {
             dashCooldownTimer -= Time.deltaTime;
@@ -286,10 +291,6 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-
-      /*  if (onSlope)
-            slidePossible = false;*/
-
        
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
@@ -306,7 +307,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             isSliding = true;
-
             CancelDash();
         }
 
@@ -318,21 +318,14 @@ public class PlayerMovement : MonoBehaviour
 
             CancelDash();
         }
-
     }
-
 
     RaycastHit hit;
 
-
     float GroundAngle()
     {
-
-
         if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
             return 0;
-
-
 
         return Vector3.Angle(hit.normal, transform.up);
 
@@ -346,7 +339,6 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.Dot(transform.forward, hit.normal) < -0.2f; // mystery number is because on a flat ground, the dot retruns verrrrry slightly below zero. -0.2 seems to be a good number
     }
 
-
     #endregion
 
     #region FinalMoveCaculation
@@ -357,9 +349,16 @@ public class PlayerMovement : MonoBehaviour
         lastPlayerVelocity = currentVelocity;
     }
 
-    
-
     #endregion
+    public void ResetPlayerToSafePos()
+    {
+        controller.enabled = false;
+        transform.position = lastPlayerSafePos;
+        controller.enabled = true;
+        currentVelocity = Vector3.zero;
+        lastPlayerVelocity = Vector3.zero;
+    }
+   
 
     [Header("Dependancies")]
     CharacterController controller;

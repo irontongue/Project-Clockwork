@@ -2,21 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-[System.Serializable]
-public struct UpgradeInfoPacket
-{
 
-    public string upgradeTitle;
-    
-    public string upgradeBody;
-
-    public bool isWeapon;
-
-    public delegate void Upgrade();
-
-  [ShowIf("isWeapon")] public GameObject weaponToEnable;
-   
-}
 
 public class UpgradeSpawnerUI : MonoBehaviour
 {
@@ -29,69 +15,20 @@ public class UpgradeSpawnerUI : MonoBehaviour
     [SerializeField] GameObject canvas;
 
 
+    UpgradeManager upgradeManager;
 
-
-    [SerializeField] List<UpgradeInfoPacket> upgradePackets = new();
-    [SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
-
-
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.F2))
-        {
-            DisplayPopups(PickRandomUpgrades(true, 3));
-        }
-        if(Input.GetKeyDown(KeyCode.F3))
-        {
-            DisplayPopups(PickRandomUpgrades(false, 3));
-        }
+        upgradeManager = FindAnyObjectByType<UpgradeManager>();
     }
 
-    public void AddAutoWeapon(UpgradeInfoPacket packet)
-    {
 
-    }
-   
- 
-    public List<UpgradeInfoPacket> PickRandomUpgrades(bool isWeapon, int countOfUpgrades)
-    {
-        List<UpgradeInfoPacket> chosenPackets = new();
-        List<UpgradeInfoPacket> packetsToChooseFrom;
-        if (isWeapon)
-            packetsToChooseFrom = autoWeapons;
-        else
-            packetsToChooseFrom = upgradePackets;
-
-        if (countOfUpgrades > packetsToChooseFrom.Count)
-            countOfUpgrades = packetsToChooseFrom.Count;
-        int loopCap = 0;
-
-        while(chosenPackets.Count < countOfUpgrades)
-        {
-            loopCap++;
-            if(loopCap >= 100)
-            {
-                print(loopCap);
-                print( "PICK RANDOM UPGRADE INFINITE LOOP ");
-                return null;
-            }
-           
-            UpgradeInfoPacket packet = packetsToChooseFrom[Random.Range(0, packetsToChooseFrom.Count)];
-    
-            if (chosenPackets.Contains(packet))
-                continue;
-            
-            chosenPackets.Add(packet);
-        }
-
-        return chosenPackets;
-    }
     bool upgradeIsWeapon;
     List<UpgradeButton> buttons = new();
     
     public void DisplayPopups(List<UpgradeInfoPacket> upgradesToDisplay)
     {
-        
+        GamePauser.instance.PauseGame(true);
         buttons.Clear();
         UpgradeButton.ButtonDelegate upgradeDelegate = GainUpgrade;
         int i = 0;
@@ -124,7 +61,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
             buttons.Add(upgradeButton);
         }
 
-        TempPauseGame();
+      
     }
     public void ClearUI()
     {
@@ -134,36 +71,22 @@ public class UpgradeSpawnerUI : MonoBehaviour
             print("GENM");
         }
     }
-    public void TempPauseGame()
-    {
-        Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
-    }
-    public void TempUnpause()
-    {
-        Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
-    }    
+     
 
     public void GainUpgrade(UpgradeInfoPacket packet)
     {
+     
         if (upgradeIsWeapon)
-            UnlockWeapon(packet);
+            upgradeManager.UnlockWeapon(packet);
         else
-            UnlockUpgrade(packet);
+            upgradeManager.UnlockUpgrade(packet);
 
-        TempUnpause();
+  
         ClearUI();
+        GamePauser.instance.PauseGame(false);
     }
 
-    public void UnlockWeapon(UpgradeInfoPacket packet)
-    {
-        autoWeapons.Remove(packet); 
-    }
-    public void UnlockUpgrade(UpgradeInfoPacket packet)
-    {
-        upgradePackets.Remove(packet);
-    }
+   
 
 
 }

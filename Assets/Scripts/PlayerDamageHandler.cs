@@ -24,6 +24,7 @@ public class PlayerDamageHandler : MonoBehaviour
     {
         currentHealth -= damage;
         UpdateHealthUI();
+ 
         if (currentHealth <= 0)
             DeathEvent();
     }

@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &55573647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,12 +201,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemies:
-    - {fileID: 0}
+    - {fileID: 189324837318420978, guid: 42fb0aaf79acdf14d922f65bdafb9742, type: 3}
     spawnPoints:
     - {fileID: 153713776}
     - {fileID: 921074280}
     - {fileID: 27898093}
-    - {fileID: 0}
     maxEnemiesToSpawn: 25
     spawnSpeed: 0.4
     enemiesToKillToEndWave: 20
@@ -216,7 +215,6 @@ MonoBehaviour:
     - {fileID: 153713776}
     - {fileID: 921074280}
     - {fileID: 27898093}
-    - {fileID: 0}
     maxEnemiesToSpawn: 50
     spawnSpeed: 0.2
     enemiesToKillToEndWave: 45

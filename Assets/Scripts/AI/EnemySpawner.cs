@@ -13,13 +13,18 @@ public class EnemySpawner : MonoBehaviour
         public float maxEnemiesToSpawn;
         public float spawnSpeed;
         public float enemiesToKillToEndWave;
+        public float EXPShare;
 
-    
     }
-
+    
     [SerializeField] WaveInfo[] waves;
     [SerializeField] float pathRadiusFromSpawn;
     [SerializeField] LayerMask walkableMask;
+    [SerializeField] WaveEvent[] startEvents;
+    [SerializeField] WaveEvent[] endEvents;
+
+    PlayerLevelUpManager playerLevelUpManager;
+
     WaveInfo currentWave;
 
     private void Start()
@@ -29,7 +34,8 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogWarning("EnemeySpawner: Waves have not been set.");
             return;
         }
-        StartWave();
+        playerLevelUpManager = FindAnyObjectByType<PlayerLevelUpManager>(); 
+      //  
     }
     private void Update()
     {
@@ -38,6 +44,16 @@ public class EnemySpawner : MonoBehaviour
     }
 
     int currentWaveIndex = -1;
+
+    public void StartSpawner()
+    {
+        StartWave();
+
+        foreach (WaveEvent wEvent in startEvents)
+        {
+            wEvent.WaveStart();
+        }
+    }
     void StartWave()
     {
         currentWaveIndex++;
@@ -45,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
         spawnedEnemies = 0;
         if (currentWaveIndex >= waves.Length)
         {
+            AllWavesCleared();
             print("no more waves!");
             return;
         }
@@ -59,6 +76,8 @@ public class EnemySpawner : MonoBehaviour
     float lastTimeSinceSpawn;
     int spawnedEnemies;
 
+    
+
     void WaveLoop()
     {
         lastTimeSinceSpawn -= Time.deltaTime;
@@ -69,6 +88,7 @@ public class EnemySpawner : MonoBehaviour
         lastTimeSinceSpawn = currentWave.spawnSpeed;
 
         GameObject spawnedEnemy = Instantiate(currentWave.enemies[Random.Range(0, currentWave.enemies.Length - 1)]);
+        AIBase ai = spawnedEnemy.GetComponent<AIBase>();
         try
         {
             NavMesh.SamplePosition(currentWave.spawnPoints[Random.Range(0, currentWave.spawnPoints.Length)].transform.position, out NavMeshHit hit, 3, walkableMask);
@@ -81,8 +101,8 @@ public class EnemySpawner : MonoBehaviour
             spawnedEnemy.SetActive(false);
         }
 
-       
-      
+
+        ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
 
         spawnedEnemies += 1;
  
@@ -101,4 +121,15 @@ public class EnemySpawner : MonoBehaviour
         if (enemysKilled >= currentWave.enemiesToKillToEndWave)
             StartWave();
     }
+
+    void AllWavesCleared()
+    {
+        foreach (WaveEvent wEvent in startEvents)
+        {
+            wEvent.WaveEnd();
+        }
+        if (playerLevelUpManager.readyToLVLup)
+            playerLevelUpManager.LevelUp();
+    }
+ 
 }
