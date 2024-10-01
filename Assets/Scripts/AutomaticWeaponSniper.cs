@@ -32,8 +32,9 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
             Debug.LogError("On Sniper, DonutImage needs to be assigned");
         }
     }
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (firing) // Wait until animation has finished
             return;
         if (!UpdateCoolDown()) // wait until off cooldown

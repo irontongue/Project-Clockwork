@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,8 +27,9 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
 
     // Update is called once per frame
     float lightningTime = 0;
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if(firing)
         {
             UpdateLineRenPositons();

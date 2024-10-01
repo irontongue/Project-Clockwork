@@ -5,6 +5,13 @@ using UnityEditor.Build.Content;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
+public enum GenericUpgrades { }
+public enum ShotgunUpgrades { }
+public enum SniperUpgrades { }
+public enum TeslaUpgrades { }
+
+
+
 public class AutomaticWeaponBase : MonoBehaviour
 {
     [SerializeField] protected WeaponType weaponType;
@@ -25,6 +32,10 @@ public class AutomaticWeaponBase : MonoBehaviour
         playerTransform = transform.root;
         cam = Camera.main;
         stats = FindAnyObjectByType<AllWeaponStats>().GetWeaponStat(weaponType);
+    }
+    virtual protected void Update()
+    {
+        //Pause;
     }
     /// <summary>
     /// returns the first GameObject in front of the crosshair
@@ -242,5 +253,9 @@ public class AutomaticWeaponBase : MonoBehaviour
         }
         return false;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void Upgrade(){ }
 
 }

@@ -75,12 +75,17 @@ public class BasePrimaryWeapon : MonoBehaviour
     {
         muzzleFlashPFX.Play();
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range, enemyMask))
+
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
-            Instantiate(bloodHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
-            return hit.transform.GetComponent<EnemyDamageHandler>();
+            if (hit.transform.gameObject.layer == 3)
+            {
+                Instantiate(bloodHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
+                return hit.transform.GetComponent<EnemyDamageHandler>();
+            }
+            Instantiate(terrainHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
+
         }
-        Instantiate(terrainHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
 
         return null;
     }
