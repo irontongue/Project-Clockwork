@@ -3789,7 +3789,7 @@ Transform:
   m_GameObject: {fileID: 374593782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.75, y: -4.69, z: -0.78}
+  m_LocalPosition: {x: 32.75, y: -2.4863133, z: -0.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9306,12 +9306,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3230602620048832063, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
---- !u!1 &442265203 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3430092112341850501, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &446284543
 GameObject:
   m_ObjectHideFlags: 0
@@ -9327,7 +9321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &446284544
 Transform:
   m_ObjectHideFlags: 0
@@ -11230,7 +11224,7 @@ Transform:
   m_GameObject: {fileID: 614081902}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.15, y: -3.61, z: -90.59}
+  m_LocalPosition: {x: 40.15, y: -2.21, z: -90.59}
   m_LocalScale: {x: 4.9068, y: 4.9068, z: 4.9068}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11439,7 +11433,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.78368664
+      value: 1.4200001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
@@ -11692,17 +11686,17 @@ PrefabInstance:
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.71
+      value: 0.105
       objectReference: {fileID: 0}
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.649
+      value: 18.43
       objectReference: {fileID: 0}
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -161.24
+      value: 0.404
       objectReference: {fileID: 0}
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -11758,6 +11752,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1446632996}
   m_SourcePrefab: {fileID: 100100000, guid: 0eeea3279b4d1f742bd836973210dedb, type: 3}
+--- !u!1 &669497369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3430092112341850501, guid: 0eeea3279b4d1f742bd836973210dedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 669497368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &669497370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7241622580718292608, guid: 0eeea3279b4d1f742bd836973210dedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 669497368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &669497371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2213247927309273979, guid: 0eeea3279b4d1f742bd836973210dedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 669497368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &676806587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16316,132 +16328,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1313350622}
   m_SourcePrefab: {fileID: 100100000, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
---- !u!1001 &1055201160
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1712380431}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6.066791
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 18.113342
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 8.369075
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 61.659996
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.78368664
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 121.17
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7781525
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.62807536
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 77.817
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: fe069bd33474b6747a6766df61a3625a, type: 2}
-    - target: {fileID: 919132149155446097, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      propertyPath: m_Name
-      value: LP_ASST_Rock1 (11)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee79803f95db6694586934c4359eded1,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1055201162}
-  m_SourcePrefab: {fileID: 100100000, guid: ee79803f95db6694586934c4359eded1, type: 3}
---- !u!1 &1055201161 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ee79803f95db6694586934c4359eded1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1055201160}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1055201162
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055201161}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -792660944072588704, guid: ee79803f95db6694586934c4359eded1, type: 3}
---- !u!4 &1055201165 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1055201160}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1056342593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19076,62 +18962,62 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 13.497202
+      value: 5.8619695
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 13.497201
+      value: 2.459272
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 13.497202
+      value: 5.8619695
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 63.6
+      value: 62.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 134.81
+      value: 124.60889
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.023633566
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.002156747
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0.99558127
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.09085569
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -10.429
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 177.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
@@ -20023,96 +19909,177 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePackets:
-  - upgradeTitle: Upgrade 1
-    upgradeBody: 
-    isWeapon: 0
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 3
-    weaponStatType: 0
-    weaponToEnable: {fileID: 0}
-    amountToAdd: 0
-  - upgradeTitle: Upgrade 2
-    upgradeBody: 
-    isWeapon: 0
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 0}
-    amountToAdd: 0
-  - upgradeTitle: Upgrade 3
-    upgradeBody: 
-    isWeapon: 0
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 0}
-    amountToAdd: 0
-  - upgradeTitle: Upgrade 4
-    upgradeBody: 
-    isWeapon: 0
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 0}
-    amountToAdd: 0
-  - upgradeTitle: Upgrade 5
-    upgradeBody: 
-    isWeapon: 0
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 0}
-    amountToAdd: 0
+  weaponToEdit: 4
+  shotgunUpgrades:
+  - packetName: 
+    packet:
+    - upgradeTitle: Shotgun Damage I
+      upgradeBody: Increases Damage by 5
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 5
+    - upgradeTitle: Shotgun Damage II
+      upgradeBody: Increases Damage by 7
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 7
+    - upgradeTitle: Shotgun Damage III
+      upgradeBody: Increases Damage by 7
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 7
+    levels: 0
+  sniperUpgrades:
+  - packetName: Cooldown
+    packet:
+    - upgradeTitle: Sniper Faster Cooldown I
+      upgradeBody: Cooldown 20% faster
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Sniper Faster Cooldown II
+      upgradeBody: Cooldown an aditional 20% faster
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Sniper Faster Cooldown III
+      upgradeBody: Cooldown an aditional 30% faster
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    levels: 0
+  teslaCoilUpgrades:
+  - packetName: 
+    packet:
+    - upgradeTitle: Tesla Coil Increased Bounces I
+      upgradeBody: Increases bounces by 2
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 8
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Tesla Coil Increased Bounces II
+      upgradeBody: Increases bounces by 3
+      isWeapon: 0
+      upgradeType: 1
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 8
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
+    - upgradeTitle: Tesla Coil  Increased Bounces II
+      upgradeBody: Increases bounces by 5
+      isWeapon: 0
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 5
+    levels: 0
+  universalUpgrades:
+  - packetName: 
+    packet:
+    - upgradeTitle: UNIVERSAL UPGRADE
+      upgradeBody: 
+      isWeapon: 0
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    levels: 0
+  upgradePackets: []
   autoWeapons:
-  - upgradeTitle: Shotgun
-    upgradeBody: 
-    isWeapon: 1
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 442265203}
-    amountToAdd: 0
-  - upgradeTitle: Sniper
-    upgradeBody: 
-    isWeapon: 1
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 1668882253}
-    amountToAdd: 0
-  - upgradeTitle: Coil
-    upgradeBody: 
-    isWeapon: 1
-    upgradeType: 0
-    shotgunUpgrades: 0
-    teslaCoilUpgrades: 0
-    sniperUpgrades: 0
-    weaponType: 0
-    weaponStatType: 0
-    weaponToEnable: {fileID: 1460901015}
-    amountToAdd: 0
+  - packetName: 
+    packet:
+    - upgradeTitle: Shotgun
+      upgradeBody: 
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 669497369}
+      amountToAdd: 0
+    levels: 0
+  - packetName: 
+    packet:
+    - upgradeTitle: Coil
+      upgradeBody: 
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 669497370}
+      amountToAdd: 0
+    levels: 0
+  - packetName: 
+    packet:
+    - upgradeTitle: Sniper
+      upgradeBody: 
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 669497371}
+      amountToAdd: 0
+    levels: 0
   UpgradeSpawner: {fileID: 1576424973}
 --- !u!114 &1440079884
 MonoBehaviour:
@@ -20548,7 +20515,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.78368664
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
@@ -20643,12 +20610,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3541909255624798313, guid: 78cbea30f25e0a141930ae66c2943704, type: 3}
---- !u!1 &1460901015 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7241622580718292608, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1468625920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23119,12 +23080,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3230602620048832063, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
---- !u!1 &1668882253 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2213247927309273979, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1671068793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23666,7 +23621,6 @@ Transform:
   - {fileID: 2048467841}
   - {fileID: 2114325183}
   - {fileID: 1909779280}
-  - {fileID: 1055201165}
   - {fileID: 110347357}
   - {fileID: 1242963851}
   - {fileID: 305317186}
@@ -25610,12 +25564,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62.363
+      value: 62.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.78368664
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ee79803f95db6694586934c4359eded1,
         type: 3}
@@ -26172,7 +26126,7 @@ MonoBehaviour:
   waves:
   - enemies:
     - enemy: 0
-      spawnChances: 4
+      spawnChances: 3
     - enemy: 1
       spawnChances: 1
     spawnPoints:
@@ -28278,7 +28232,7 @@ MonoBehaviour:
     - {fileID: 374593782}
     - {fileID: 1838384222}
     maxEnemiesToSpawn: 18
-    spawnSpeed: 1
+    spawnSpeed: 1.2
     enemiesToKillToEndWave: 15
     EXPShare: 0
   pathRadiusFromSpawn: 0

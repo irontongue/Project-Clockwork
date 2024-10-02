@@ -78,10 +78,11 @@ public class BasePrimaryWeapon : MonoBehaviour
     {
         muzzleFlashPFX.Play();
         RaycastHit hit;
-
+        
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
-            if (hit.transform.gameObject.layer == 3)
+
+            if (hit.transform.GetComponent<EnemyDamageHandler>()) 
             {
                 Instantiate(bloodHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
                 return hit.transform.GetComponent<EnemyDamageHandler>();

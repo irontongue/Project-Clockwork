@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
         playerLevelUpManager = FindAnyObjectByType<PlayerLevelUpManager>();
-        StartWave();
+      //  StartWave();
     }
     private void Update()
     {

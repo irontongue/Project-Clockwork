@@ -12,10 +12,10 @@ public class UpgradeButton : MonoBehaviour
 
     public int index;
 
-    public delegate void ButtonDelegate(UpgradeInfoPacket x);
+    public delegate void ButtonDelegate(UpgradeLine x);
     public ButtonDelegate buttonDelegate;
 
-    public UpgradeInfoPacket packetRef;
+    public UpgradeLine packetRef;
 
     public void ButtonClicked()
     {

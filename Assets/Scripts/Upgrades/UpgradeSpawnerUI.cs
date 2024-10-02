@@ -25,7 +25,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
     bool upgradeIsWeapon;
     List<UpgradeButton> buttons = new();
     
-    public void DisplayPopups(List<UpgradeInfoPacket> upgradesToDisplay)
+    public void DisplayPopups(List<UpgradeLine> upgradesToDisplay)
     {
         GamePauser.instance.PauseGame(true);
         buttons.Clear();
@@ -33,13 +33,13 @@ public class UpgradeSpawnerUI : MonoBehaviour
     
         int rows = 0;
         int collums = 0;
-        upgradeIsWeapon = upgradesToDisplay[0].isWeapon;
-        foreach (UpgradeInfoPacket upgradeInfo in upgradesToDisplay)
+      //  upgradeIsWeapon = upgradesToDisplay[0].isWeapon;
+        foreach (UpgradeLine upgradeInfo in upgradesToDisplay)
         {
             UpgradeButton upgradeButton = Instantiate(upgradePopupGameobject).GetComponent<UpgradeButton>();
 
-            upgradeButton.titleText.text = upgradeInfo.upgradeTitle;
-            upgradeButton.bodyText.text = upgradeInfo.upgradeBody;
+            upgradeButton.titleText.text = upgradeInfo.packet[upgradeInfo.levels].upgradeTitle;
+            upgradeButton.bodyText.text = upgradeInfo.packet[upgradeInfo.levels].upgradeBody;
             
             upgradeButton.buttonDelegate = upgradeDelegate;
 
@@ -71,19 +71,15 @@ public class UpgradeSpawnerUI : MonoBehaviour
     }
      
 
-    public void GainUpgrade(UpgradeInfoPacket packet)
+    public void GainUpgrade(UpgradeLine packet)
     {
      
-        if (upgradeIsWeapon)
+        if (packet.packet[0].isWeapon)
             upgradeManager.UnlockWeapon(packet);
         else
-        {
             upgradeManager.UnlockUpgrade(packet);
-       
-        }
-            
-
-  
+   
+   
         ClearUI();
         GamePauser.instance.PauseGame(false);
     }

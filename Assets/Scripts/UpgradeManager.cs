@@ -35,20 +35,38 @@ public struct UpgradeInfoPacket
     [ShowIf("isWeapon")] public GameObject weaponToEnable;
 
     public float amountToAdd;
+
+}
+[System.Serializable]
+public class UpgradeLine // this is a class and not a struct, since you cannot pass structs by refrence grrrrr
+{
+    public string packetName;
+    public UpgradeInfoPacket[] packet;
+    public int levels;
 }
 
 public class UpgradeManager : MonoBehaviour
 {
 
-    //theese hold the current avalabe pool 
-    [SerializeField] List<UpgradeInfoPacket> upgradePackets = new();
-    [SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
+    [SerializeField] UpgradeType weaponToEdit;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.Shotgun)] List<UpgradeLine> shotgunUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.Sniper)] List<UpgradeLine> sniperUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.TeslaCoil)] List<UpgradeLine> teslaCoilUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.Universal)] List<UpgradeLine> universalUpgrades;
+    [SerializeField] List<UpgradeLine> upgradePackets = new();
+    [SerializeField] List<UpgradeLine> autoWeapons = new();
+    //[SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
 
     [SerializeField] UpgradeSpawnerUI UpgradeSpawner; // this is what displays the cards
     AllWeaponStats allWeaponStats;
     private void Start()
     {
         allWeaponStats = FindObjectOfType<AllWeaponStats>();
+
+        upgradePackets.AddRange(shotgunUpgrades);
+        upgradePackets.AddRange(sniperUpgrades);
+        upgradePackets.AddRange(teslaCoilUpgrades);
+        upgradePackets.AddRange(universalUpgrades);
     }
 
     private void Update()
@@ -73,25 +91,25 @@ public class UpgradeManager : MonoBehaviour
     }
     //this can be called with either a list or single packet
     //any upgrades added here will go into the pool 
-    public void AddUpgrade(UpgradeInfoPacket packet)
+    public void AddUpgrade(UpgradeLine packet)
     {
         upgradePackets.Add(packet);
     }
-    public void AddUpgrade(UpgradeInfoPacket[] packets)
+    public void AddUpgrade(UpgradeLine[] packets)
     {
-        foreach(UpgradeInfoPacket packet in packets)
+        foreach(UpgradeLine packet in packets)
         {
             upgradePackets.Add(packet);
         }
     }
 
     //*Liam I just simplified how to choose the packet type by passing the UpgradeInfoPacket rather than it being a bool.*
-    public List<UpgradeInfoPacket> PickRandomUpgrades(List<UpgradeInfoPacket> upgradePacketList, int countOfUpgrades)
+    public List<UpgradeLine> PickRandomUpgrades(List<UpgradeLine> upgradePacketList, int countOfUpgrades)
     {
-        List<UpgradeInfoPacket> chosenPackets = new(); // the packets that will be displayed
+        List<UpgradeLine> chosenPackets = new(); // the packets that will be displayed
 
-        List<UpgradeInfoPacket> packetsToChooseFrom = upgradePacketList; // refrence to the list to pick from
-
+        List<UpgradeLine> packetsToChooseFrom = upgradePacketList; // refrence to the list to pick from
+       
         //if (isWeapon) // choose what list to pick from
         //    packetsToChooseFrom = autoWeapons;
         //else
@@ -109,27 +127,37 @@ public class UpgradeManager : MonoBehaviour
                 print("PICK RANDOM UPGRADE INFINITE LOOP: " + loopCap);
                 return null;
             }
+            int ran = Random.Range(0, packetsToChooseFrom.Count);
+            UpgradeLine packet = packetsToChooseFrom[ran]; // pick a random packet
 
-            UpgradeInfoPacket packet = packetsToChooseFrom[Random.Range(0, packetsToChooseFrom.Count)]; // pick a random packet
-
-            if (chosenPackets.Contains(packet)) // if we picked it allready, try again
+            if (chosenPackets.Contains(packetsToChooseFrom[ran])) // if we picked it allready, try again
                 continue;
 
             chosenPackets.Add(packet);
+           
         }
 
         return chosenPackets;
     }
     // theese is called by the ui upgrade spawner, and just handle removing them
-    public void UnlockWeapon(UpgradeInfoPacket packet) 
+    public void UnlockWeapon(UpgradeLine packet) 
     {
-        packet.weaponToEnable.SetActive(true);
+        packet.packet[0].weaponToEnable.SetActive(true);
         autoWeapons.Remove(packet);
     }
-    public void UnlockUpgrade(UpgradeInfoPacket packet)
+    public void UnlockUpgrade(UpgradeLine upgradeLine)
     {
+        UpgradeInfoPacket packet = upgradeLine.packet[upgradeLine.levels];
         allWeaponStats.Upgrade(packet);
-        upgradePackets.Remove(packet);
+        upgradeLine.levels += 1;
+  
+       
+        if(upgradeLine.packet.Length <= upgradeLine.levels)
+        { 
+            print("was too big packetL: " + upgradeLine.packet.Length + " levels:  " + upgradeLine.levels);
+            upgradePackets.Remove(upgradeLine);
+        }
+       
         //if (packet.Upgrade == null)
         //{
         //    print(packet.upgradeTitle + " does not have a delage set!");
