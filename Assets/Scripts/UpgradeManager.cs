@@ -55,6 +55,8 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.Universal)] List<UpgradeLine> universalUpgrades;
     [SerializeField] List<UpgradeLine> upgradePackets = new();
     [SerializeField] List<UpgradeLine> autoWeapons = new();
+
+    [SerializeField] bool gainWeaponOnStart;
     //[SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
 
     [SerializeField] UpgradeSpawnerUI UpgradeSpawner; // this is what displays the cards
@@ -67,6 +69,9 @@ public class UpgradeManager : MonoBehaviour
         upgradePackets.AddRange(sniperUpgrades);
         upgradePackets.AddRange(teslaCoilUpgrades);
         upgradePackets.AddRange(universalUpgrades);
+
+        if (gainWeaponOnStart)
+            StartWeaponUnlock();
     }
 
     private void Update()

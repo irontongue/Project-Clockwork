@@ -14,7 +14,8 @@ public class PlayerCameraController : MonoBehaviour
     {
         camTransform = Camera.main.transform;
         Cursor.lockState = CursorLockMode.Locked;
-        cameraRotation = new(Camera.main.transform.rotation.x,Camera.main.transform.rotation.y);
+        cameraRotation = new(camTransform.eulerAngles.x, transform.eulerAngles.y);
+  
     }
     void Update()
     {

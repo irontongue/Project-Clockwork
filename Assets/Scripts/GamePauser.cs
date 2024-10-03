@@ -7,7 +7,7 @@ public class GamePauser : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     public static GamePauser instance;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }

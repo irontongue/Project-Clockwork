@@ -147,7 +147,7 @@ public class EnemySpawner : MonoBehaviour
     public void EnemyKilled()
     {
         enemysKilled++;
-
+        print("enemy killed");
         if (enemysKilled >= currentWave.enemiesToKillToEndWave)
             StartWave();
     }
