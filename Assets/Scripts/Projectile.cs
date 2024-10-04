@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float damage;
     public float speed;
+    public GameObject origin;
 
     private void Update()
     {
@@ -22,7 +23,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        handler.Damage(damage);
+        handler.Damage(damage, origin.transform);
         Destroy(gameObject);
 
     }

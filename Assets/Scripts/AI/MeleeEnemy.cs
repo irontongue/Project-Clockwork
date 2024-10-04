@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class MeleeEnemy : AIBase
 {
     enum State { Idle, Chasing, Attacking}
-    State state = State.Idle;
+    [ShowInInspector, ReadOnly] State state = State.Idle;
 
     [SerializeField] float afterAttackTimer;
 
@@ -38,7 +39,7 @@ public class MeleeEnemy : AIBase
     void Chasing()
     {
         
-        agent.isStopped = false;
+      //  agent.isStopped = false;
         if (PathToPlayer(attackRange))
             state = State.Attacking;
     }
@@ -47,6 +48,7 @@ public class MeleeEnemy : AIBase
     void Attacking()
     {
         agent.isStopped = true;
+        agent.destination = transform.position;
         if(!attacked)
         {
             DamagePlayer();
@@ -59,6 +61,7 @@ public class MeleeEnemy : AIBase
         if(timeSinceLastAttack < 0)
         {
             attacked = false;
+            agent.isStopped = false;
             state = State.Idle;
         }
     }

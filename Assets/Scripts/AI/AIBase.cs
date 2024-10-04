@@ -98,7 +98,7 @@ public class AIBase : EnemyInfo
     {
         AttackEffects();
 
-        player.GetComponent<PlayerDamageHandler>().Damage(damage);
+        player.GetComponent<PlayerDamageHandler>().Damage(damage,transform);
         
     }
     protected override void DeathEvent()

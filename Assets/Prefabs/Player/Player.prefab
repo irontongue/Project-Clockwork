@@ -132,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528230269873246191}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 7430242435101204861}
   - component: {fileID: 5014838923294068559}
   - component: {fileID: 7867189388780044975}
+  - component: {fileID: 6159610773282691837}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -359,7 +360,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 55
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -398,8 +399,9 @@ MonoBehaviour:
   groundedThreshold: 0.2
   groundMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 51
   coyoteTime: 0.05
+  slideFriction: 0.35
   initialJumpVel: 9
   extraJumps: 1
   dashSpeed: 15
@@ -552,12 +554,26 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6159610773282691837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955605711507786865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ea375e4fa74cc44a4d8ea7a1bf83aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expToLvlup: 1400000032000000
+  readyToLVLup: 0
 --- !u!1 &2103384624345211642
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8494198652577241130
 Transform:
   m_ObjectHideFlags: 0
@@ -873,7 +889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2132596486043616326
 Transform:
   m_ObjectHideFlags: 0
@@ -6349,7 +6365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476840261eebced40ba07e51424eaf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 4
   range: 100
   seccondsBetweenShots: 0.2
   reloadTime: 1
@@ -6357,7 +6373,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5ca1e3ca5c8bfa64fbf39b8ce5ff1b98, type: 3}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 255
   magCapacity: 6
   maxAmmoReserve: 128
   muzzleFlashPFX: {fileID: 5252207869180993436}
@@ -11473,7 +11489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3737903691708280297
 Transform:
   m_ObjectHideFlags: 0
