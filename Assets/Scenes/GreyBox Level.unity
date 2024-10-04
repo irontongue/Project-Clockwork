@@ -24345,9 +24345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 4
+  weaponToEdit: 2
   shotgunUpgrades:
   - packetName: 
+    weaponType: 0
     packet:
     - upgradeTitle: Shotgun Damage I
       upgradeBody: Increases Damage by 5
@@ -24385,6 +24386,7 @@ MonoBehaviour:
     levels: 0
   sniperUpgrades:
   - packetName: Cooldown
+    weaponType: 1
     packet:
     - upgradeTitle: Sniper Faster Cooldown I
       upgradeBody: Cooldown 20% faster
@@ -24422,6 +24424,7 @@ MonoBehaviour:
     levels: 0
   teslaCoilUpgrades:
   - packetName: 
+    weaponType: 3
     packet:
     - upgradeTitle: Tesla Coil Increased Bounces I
       upgradeBody: Increases bounces by 2
@@ -24457,24 +24460,10 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 5
     levels: 0
-  universalUpgrades:
-  - packetName: 
-    packet:
-    - upgradeTitle: UNIVERSAL UPGRADE
-      upgradeBody: 
-      isWeapon: 0
-      upgradeType: 0
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0
-    levels: 0
   upgradePackets: []
   autoWeapons:
   - packetName: 
+    weaponType: 0
     packet:
     - upgradeTitle: Shotgun
       upgradeBody: 
@@ -24489,6 +24478,7 @@ MonoBehaviour:
       amountToAdd: 0
     levels: 0
   - packetName: 
+    weaponType: 0
     packet:
     - upgradeTitle: Coil
       upgradeBody: 
@@ -24503,6 +24493,7 @@ MonoBehaviour:
       amountToAdd: 0
     levels: 0
   - packetName: 
+    weaponType: 0
     packet:
     - upgradeTitle: Sniper
       upgradeBody: 
