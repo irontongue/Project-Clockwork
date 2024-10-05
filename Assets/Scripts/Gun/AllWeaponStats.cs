@@ -408,11 +408,6 @@ public class WeapopnStatsEditor : Editor
                                        
                     // Add other properties specific to Sniper
                     break;
-
-                case WeaponType.Smg:
-                    EditorGUILayout.PropertyField(lockOnDistance);
-                    // Add other properties specific to SMG
-                    break;
                 case WeaponType.TeslaCoil:
 
                     EditorGUILayout.PropertyField(range);
