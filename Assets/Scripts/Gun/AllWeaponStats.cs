@@ -7,7 +7,7 @@ using System;
 public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives}
 public enum DamageType {Physical, Fire, Explosion, None}
 public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat}
-public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, LockOnDistance, Bounces, BounceRange, BoxCheckWidth}
+public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance}
 
 public class AllWeaponStats : MonoBehaviour
 {
@@ -59,6 +59,10 @@ public class AllWeaponStats : MonoBehaviour
             case WeaponStatType.BoxCheckWidth:
                 weaponStats[weaponStatsDic[weaponType]].boxCheckWidth += amountToAdd;
                 break;
+            case WeaponStatType.moveSpeed:
+                weaponStats[weaponStatsDic[weaponType]].moveSpeed += amountToAdd;
+
+                break;
         }
 
 
@@ -76,7 +80,7 @@ public class AllWeaponStats : MonoBehaviour
                 weaponReferences[WeaponType.Shotgun].Upgrade(packet.shotgunUpgrades);
                 break;
             case UpgradeType.Sniper:
-                weaponReferences[WeaponType.Sniper].Upgrade(packet.sniperUpgrades);
+                weaponReferences[WeaponType.Sniper].Upgrade(packet.sniperUpgrades); 
                 break;
             case UpgradeType.TeslaCoil:
                 weaponReferences[WeaponType.TeslaCoil].Upgrade(packet.teslaCoilUpgrades);
@@ -278,7 +282,12 @@ public class WeaponStats
     public float lockOnDistance;
     //
     public int bounces;
+    //
     public float bounceRange;
+    //
+    public float moveSpeed  = 1;
+    //
+    public float followDistance = 1;
 }
 #endregion
 
@@ -376,6 +385,8 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty lockOnDistance = weapon.FindPropertyRelative("lockOnDistance");
             SerializedProperty bounces = weapon.FindPropertyRelative("bounces");
             SerializedProperty bounceRange = weapon.FindPropertyRelative("bounceRange");
+            SerializedProperty moveSpeed = weapon.FindPropertyRelative("moveSpeed");
+            SerializedProperty followDistance = weapon.FindPropertyRelative("followDistance");
 
 
             if (!showAllWeapons)
@@ -420,6 +431,8 @@ public class WeapopnStatsEditor : Editor
                 case WeaponType.FlameThrower:
                     break;
                 case WeaponType.Dog:
+                    EditorGUILayout.PropertyField(moveSpeed);
+                    EditorGUILayout.PropertyField(followDistance);
                     break;
                 case WeaponType.GrenadeLaucher:
                     break;

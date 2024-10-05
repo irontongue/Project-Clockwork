@@ -24345,7 +24345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 2
+  weaponToEdit: 0
   shotgunUpgrades:
   - packetName: 
     weaponType: 0
@@ -24353,7 +24353,7 @@ MonoBehaviour:
     - upgradeTitle: Shotgun Damage I
       upgradeBody: Increases Damage by 5
       isWeapon: 0
-      upgradeType: 1
+      upgradeType: 0
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
@@ -24364,7 +24364,7 @@ MonoBehaviour:
     - upgradeTitle: Shotgun Damage II
       upgradeBody: Increases Damage by 7
       isWeapon: 0
-      upgradeType: 1
+      upgradeType: 0
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
@@ -24375,7 +24375,7 @@ MonoBehaviour:
     - upgradeTitle: Shotgun Damage III
       upgradeBody: Increases Damage by 7
       isWeapon: 0
-      upgradeType: 1
+      upgradeType: 0
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
