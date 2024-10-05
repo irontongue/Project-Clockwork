@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-public enum WeaponType{Shotgun, Sniper, Smg, TeslaCoil }
+public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives}
 public enum DamageType {Physical, Fire, Explosion, None}
-public enum UpgradeType{Universal, WeaponStat, Shotgun, TeslaCoil, Sniper}
+public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat}
 public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, LockOnDistance, Bounces, BounceRange, BoxCheckWidth}
 
 public class AllWeaponStats : MonoBehaviour
@@ -81,6 +81,23 @@ public class AllWeaponStats : MonoBehaviour
             case UpgradeType.TeslaCoil:
                 weaponReferences[WeaponType.TeslaCoil].Upgrade(packet.teslaCoilUpgrades);
                 break;
+            case UpgradeType.Rifle:
+                weaponReferences[WeaponType.Rifle].Upgrade(packet.teslaCoilUpgrades);
+                break;
+            case UpgradeType.Dog:
+                weaponReferences[WeaponType.Dog].Upgrade(packet.teslaCoilUpgrades);
+                break;
+            case UpgradeType.GrenadeLaucher:
+                weaponReferences[WeaponType.GrenadeLaucher].Upgrade(packet.teslaCoilUpgrades);
+                break;
+            case UpgradeType.FlameThrower:
+                weaponReferences[WeaponType.FlameThrower].Upgrade(packet.teslaCoilUpgrades);
+                break;
+            case UpgradeType.ThrowingKnives:
+                weaponReferences[WeaponType.ThrowingKnives].Upgrade(packet.teslaCoilUpgrades);
+                break;
+
+
         }
 
     }

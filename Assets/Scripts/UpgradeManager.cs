@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 
 
 //this packet is used for both the upgrade and the weapon unlocks. 
-public delegate void UpgradeDelagate();
 [System.Serializable]
 public struct UpgradeInfoPacket 
 {
@@ -14,33 +13,35 @@ public struct UpgradeInfoPacket
 
     public string upgradeBody;
 
-    public bool isWeapon; // if this is for a weapon, dont use the delegate, but use the gameobject. Note: this is temporary.
+    public bool isWeapon; // if this is for a weapon
 
     public UpgradeType upgradeType;
 
-    [ShowIf("upgradeType", UpgradeType.Shotgun)]
-    public ShotgunUpgrades shotgunUpgrades;
+    
+    [ShowIf("upgradeType", UpgradeType.Shotgun)]public ShotgunUpgrades shotgunUpgrades;
+    [ShowIf("upgradeType", UpgradeType.TeslaCoil)]public TeslaCoilUpgrades teslaCoilUpgrades;
+    [ShowIf("upgradeType", UpgradeType.Sniper)]public SniperUpgrades sniperUpgrades;
+    //[ShowIf("upgradeType", UpgradeType.FlameThrower)] public FlameThrowerUpgrades flameThrowerUpgrades; // UNSLASH WHEN MADE WEAPON SCRIPTS AND ENUM
+    //[ShowIf("upgradeType", UpgradeType.Rifle)] public RifleUpgrades rifleUpgrades;
+    //[ShowIf("upgradeType", UpgradeType.Dog)] public DogUpgrades dogUpgrades;
+    //[ShowIf("upgradeType", UpgradeType.GrenadeLaucher)] public GrenadeLaucherUpgrades grenadeLaucherUpgrades;
+    //[ShowIf("upgradeType", UpgradeType.ThrowingKnives)] public ThrowingKnivesUpgrades throwingKnivesUpgrades;
 
-    [ShowIf("upgradeType", UpgradeType.TeslaCoil)]
-    public TeslaCoilUpgrades teslaCoilUpgrades;
-
-    [ShowIf("upgradeType", UpgradeType.Sniper)]
-    public SniperUpgrades sniperUpgrades;
-
-    [ShowIf("upgradeType", UpgradeType.WeaponStat)]
-    public WeaponType weaponType;
-    [ShowIf("upgradeType", UpgradeType.WeaponStat)]
-    public WeaponStatType weaponStatType;
+    [ShowIf("upgradeType", UpgradeType.WeaponStat)]public WeaponType weaponType;
+    [ShowIf("upgradeType", UpgradeType.WeaponStat)]public WeaponStatType weaponStatType;
 
     [ShowIf("isWeapon")] public GameObject weaponToEnable;
 
     public float amountToAdd;
 
 }
+
+
 [System.Serializable]
 public class UpgradeLine // this is a class and not a struct, since you cannot pass structs by refrence grrrrr
 {
     public string packetName;
+    public WeaponType weaponType;
     public UpgradeInfoPacket[] packet;
     public int levels;
 }
@@ -52,7 +53,21 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.Shotgun)] List<UpgradeLine> shotgunUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.Sniper)] List<UpgradeLine> sniperUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.TeslaCoil)] List<UpgradeLine> teslaCoilUpgrades;
-    [SerializeField, ShowIf("weaponToEdit", UpgradeType.Universal)] List<UpgradeLine> universalUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.FlameThrower)] List<UpgradeLine> flameThrowerUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.Rifle)] List<UpgradeLine> rifleUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.Dog)] List<UpgradeLine> dogUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.GrenadeLaucher)] List<UpgradeLine> grenadeLaucherUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.ThrowingKnives)] List<UpgradeLine> throwingKnivesUpgrades;
+
+
+
+
+    //[SerializeField, ShowIf("weaponToEdit", UpgradeType.Universal)] List<UpgradeLine> universalUpgrades;
+
+    Dictionary<WeaponType, List<UpgradeLine>> weaponUpgradeDictionary = new(); //Holds all of the upgrade lines to then be put into the upgradePackets list when adding a weapon
+
+    [Space(20f)]
+    [Header("RunTime")]
     [SerializeField] List<UpgradeLine> upgradePackets = new();
     [SerializeField] List<UpgradeLine> autoWeapons = new();
 
@@ -65,10 +80,12 @@ public class UpgradeManager : MonoBehaviour
     {
         allWeaponStats = FindObjectOfType<AllWeaponStats>();
 
-        upgradePackets.AddRange(shotgunUpgrades);
-        upgradePackets.AddRange(sniperUpgrades);
-        upgradePackets.AddRange(teslaCoilUpgrades);
-        upgradePackets.AddRange(universalUpgrades);
+        //upgradePackets.AddRange(shotgunUpgrades);
+        //upgradePackets.AddRange(sniperUpgrades);
+        //upgradePackets.AddRange(teslaCoilUpgrades);
+        //upgradePackets.AddRange(universalUpgrades);
+
+        InitilizeWeaponUpgradeDictionary();
 
         if (gainWeaponOnStart)
             StartWeaponUnlock();
@@ -139,7 +156,6 @@ public class UpgradeManager : MonoBehaviour
                 continue;
 
             chosenPackets.Add(packet);
-           
         }
 
         return chosenPackets;
@@ -148,6 +164,10 @@ public class UpgradeManager : MonoBehaviour
     public void UnlockWeapon(UpgradeLine packet) 
     {
         packet.packet[0].weaponToEnable.SetActive(true);
+        foreach(UpgradeLine up in weaponUpgradeDictionary[packet.weaponType])
+        {
+            upgradePackets.Add(up);
+        }
         autoWeapons.Remove(packet);
     }
     public void UnlockUpgrade(UpgradeLine upgradeLine)
@@ -155,7 +175,7 @@ public class UpgradeManager : MonoBehaviour
         UpgradeInfoPacket packet = upgradeLine.packet[upgradeLine.levels];
         allWeaponStats.Upgrade(packet);
         upgradeLine.levels += 1;
-  
+        
        
         if(upgradeLine.packet.Length <= upgradeLine.levels)
         { 
@@ -170,5 +190,16 @@ public class UpgradeManager : MonoBehaviour
         //}
         //packet.Upgrade();
     }
+    void InitilizeWeaponUpgradeDictionary()
+    {
+        weaponUpgradeDictionary.Add(WeaponType.Shotgun, shotgunUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.TeslaCoil, teslaCoilUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.Sniper, sniperUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.FlameThrower, flameThrowerUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.Rifle, rifleUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.Dog, dogUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.GrenadeLaucher, grenadeLaucherUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.ThrowingKnives, throwingKnivesUpgrades);
 
+    }
 }
