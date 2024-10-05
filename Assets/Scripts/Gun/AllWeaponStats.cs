@@ -415,6 +415,16 @@ public class WeapopnStatsEditor : Editor
                     EditorGUILayout.PropertyField(bounceRange);
 
                     break;
+                case WeaponType.Rifle:
+                    break;
+                case WeaponType.FlameThrower:
+                    break;
+                case WeaponType.Dog:
+                    break;
+                case WeaponType.GrenadeLaucher:
+                    break;
+                case WeaponType.ThrowingKnives:
+                    break;
             }
 
             EditorGUILayout.Space();

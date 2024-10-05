@@ -24460,6 +24460,11 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 5
     levels: 0
+  flameThrowerUpgrades: []
+  rifleUpgrades: []
+  dogUpgrades: []
+  grenadeLaucherUpgrades: []
+  throwingKnivesUpgrades: []
   upgradePackets: []
   autoWeapons:
   - packetName: 
