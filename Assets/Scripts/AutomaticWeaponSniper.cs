@@ -88,7 +88,6 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     /// <param name="playFX"></param>
     public void ShootAtTarget(bool playFX = true)
     {
-        print("shootAtTarget");
         if (playFX)
             muzzleFlashPFX.Play();
         RaycastHit hit = RayCastForwardRayHit(everythingEnemy);

@@ -201,7 +201,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     /// <param name="iterator"></param>
     public virtual void Shoot(int iterator = 1)
     {
-        if(iterator == stats.numberOfBullets)
+        if(iterator == stats.repeateShot)
         {
             return;
         }
