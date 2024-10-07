@@ -399,19 +399,22 @@ MonoBehaviour:
   groundedThreshold: 0.2
   groundMask:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 307
   coyoteTime: 0.05
-  slideFriction: 0.35
+  slideFriction: 0.25
   initialJumpVel: 9
   extraJumps: 1
   dashSpeed: 15
   dashLenght: 0.15
   dashCooldown: 1
   extraVelRequiredToSlide: 0
-  slideFallOff: 10
+  slideFallOff: 8
   uphillExtraSlideFallOff: 45
-  minMagBeforeSlideCancel: 0.1
+  minMagBeforeSlideCancelMultiplyer: 0.7
   minAngleForSlide: 10
+  downSlopeAccelMultiplyer: 5
+  camYDrop: 0.6
+  camDropSpeed: 6
 --- !u!114 &2885463159808772724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoUIText: {fileID: 0}
   audioSource: {fileID: 7430242435101204861}
+  ammoWheel: {fileID: 0}
 --- !u!82 &7430242435101204861
 AudioSource:
   m_ObjectHideFlags: 0
@@ -537,6 +541,12 @@ MonoBehaviour:
   maxHealth: 25
   healthText: {fileID: 0}
   deathUI: {fileID: 0}
+  frontImage: {fileID: 0}
+  leftImage: {fileID: 0}
+  rightImage: {fileID: 0}
+  backImage: {fileID: 0}
+  fadeOutSpeed: 1
+  healthBar: {fileID: 0}
 --- !u!136 &7867189388780044975
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -572,8 +582,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ea375e4fa74cc44a4d8ea7a1bf83aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expToLvlup: 1400000032000000
+  expToLvlup: 140000001900000023000000
   readyToLVLup: 0
+  levelUpReadyText: {fileID: 0}
+  expBar: {fileID: 0}
+  levelUpMessage: X To Ugrade
+  textFlashSpeed: 1.5
+  minTextOppacity: 0.2
 --- !u!1 &2103384624345211642
 GameObject:
   m_ObjectHideFlags: 0
@@ -6381,6 +6396,7 @@ MonoBehaviour:
     type: 3}
   bloodHitPFX: {fileID: 3766226238398832601, guid: 401c055fb346c2b48b4813242fdd1b78,
     type: 3}
+  ammoWheelMaxFill: 0.25
 --- !u!95 &5002885285056222596
 Animator:
   serializedVersion: 5

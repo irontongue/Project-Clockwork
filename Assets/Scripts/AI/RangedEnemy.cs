@@ -138,10 +138,12 @@ public class RangedEnemy : AIBase
     protected override void DamagePlayer()
     {
         AttackEffects();
-        GameObject spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation);
+        Projectile spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
         spawnedProjectile.transform.LookAt(player.transform.position);
-        spawnedProjectile.GetComponent<Projectile>().damage = damage;
-        spawnedProjectile.GetComponent<Projectile>().speed = projectileSpeed;
+        spawnedProjectile.damage = damage;
+        spawnedProjectile.speed = projectileSpeed;
+        spawnedProjectile.origin = gameObject;
+        
         print(spawnedProjectile.name);
     }
     void Attacking()

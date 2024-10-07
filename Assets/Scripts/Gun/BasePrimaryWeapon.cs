@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class BasePrimaryWeapon : MonoBehaviour
@@ -23,6 +24,8 @@ public class BasePrimaryWeapon : MonoBehaviour
     [SerializeField] protected ParticleSystem terrainHitPFX;
     [SerializeField] protected ParticleSystem bloodHitPFX;
 
+    [SerializeField] float ammoWheelMaxFill;
+
 
 
 
@@ -34,8 +37,10 @@ public class BasePrimaryWeapon : MonoBehaviour
     float timeSinceLastShot = 0;
 
     TextMeshProUGUI ammoUIText;
+    
 
     Camera cam;
+    Image ammoWheel;
 
     protected bool weaponReloading;
     float weaponReloadTimer;
@@ -48,7 +53,7 @@ public class BasePrimaryWeapon : MonoBehaviour
         WeaponRefrenceManager wrm = GetComponentInParent<WeaponRefrenceManager>();
         ammoUIText = wrm.ammoUIText;
         source = wrm.audioSource;
-
+        ammoWheel = wrm.ammoWheel;  
         currentAmmoInMag = magCapacity;
         currentReserveAmmo = maxAmmoReserve;
         animator = GetComponent<Animator>();
@@ -67,7 +72,7 @@ public class BasePrimaryWeapon : MonoBehaviour
         if(weaponReloading)
         {
             weaponReloadTimer -= Time.deltaTime;
-            
+            ammoWheel.fillAmount = (weaponReloadTimer / reloadTime);
             if (weaponReloadTimer <= 0)
                 ReloadWeapon();
         }
@@ -115,20 +120,11 @@ public class BasePrimaryWeapon : MonoBehaviour
     protected void ReloadWeapon()
     {
         weaponReloading = false;
-        currentReserveAmmo += currentAmmoInMag;
+      //  currentReserveAmmo += currentAmmoInMag;
         currentAmmoInMag = 0;
 
-        if(currentReserveAmmo <= magCapacity)
-        {
-            currentAmmoInMag = currentReserveAmmo;
-            currentReserveAmmo = 0;
-        }    
-        else
-        {
-            currentAmmoInMag = magCapacity;
-            currentReserveAmmo -= magCapacity;
-        }
-
+        currentAmmoInMag = magCapacity;
+    //    currentReserveAmmo -= magCapacity;
         UpdateAmmoUI();
     }
 
@@ -162,12 +158,16 @@ public class BasePrimaryWeapon : MonoBehaviour
 
     protected void UpdateAmmoUI()
     {
-        if (ammoUIText == null)
+        if (ammoWheel == null)
         {
             Debug.LogWarning("ammoUIText not set in WRM");
             return;
         }
-        ammoUIText.text = currentAmmoInMag + " / " + currentReserveAmmo;
+        //  ammoUIText.text = currentAmmoInMag + " / " + magCapacity;
+
+        float ammoRemaing = ((float)currentAmmoInMag / (float)magCapacity) ; 
+        ammoWheel.fillAmount = ammoRemaing * ammoWheelMaxFill;
+  
     }
     protected void PlayFireSound()
     {

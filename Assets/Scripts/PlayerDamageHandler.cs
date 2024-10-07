@@ -116,12 +116,14 @@ public class PlayerDamageHandler : MonoBehaviour
 
         Invoke("RestartLevel", 2);
     }
-
+    [Header("HealthUI")]
+    [SerializeField] Image healthBar;
     void UpdateHealthUI()
     {
-        if (healthText == null)
+        if (healthBar == null)
             return;
-        healthText.text = "HP: " + currentHealth + " / " + maxHealth;
+        // healthText.text = "HP: " + currentHealth + " / " + maxHealth;
+        healthBar.fillAmount = currentHealth / maxHealth;
     }
 
     void RestartLevel()

@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
         maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 1) * baseSpeed;
         playerRef = this;
 
+        //slide inits
+        cam = Camera.main;
+        initialCamY = cam.transform.localPosition.y;
     }
 
 
@@ -45,9 +48,12 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("pMovement", "PlayerVelocity: " + currentVelocity, "Movement");
         DevText.DisplayInfo("dMovement", "DashVel: " + dashVelocity, "Movement");
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
+        DevText.DisplayInfo("isaccGrounded", "Actually Grounded : " + isActuallyGrounded, "Movement");
+        DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
         DevText.DisplayInfo("cyote", "Cyote Time:" + currentCyoteTime, "Movement");
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
         DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
+        DevText.DisplayInfo("maxPlayerWalk", "MaxPlayerWalkSpeed" + maxPlayerWalkSpeed, "Movement");
         if (isActuallyGrounded)
         {
             lastPlayerSafePos = transform.position;
@@ -129,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
     void GroundCheck()
     {
         RaycastHit hit;
-        isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out hit, (controller.height / 2) + groundedThreshold, groundMask);
+        isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
 
         currentCyoteTime -= Time.deltaTime;
 
@@ -149,6 +155,8 @@ public class PlayerMovement : MonoBehaviour
         {
             currentVelocity.x += (1f - controllerHitNormal.y) * controllerHitNormal.x * (1f - slideFriction);
             currentVelocity.z += (1f - controllerHitNormal.y) * controllerHitNormal.z * (1f - slideFriction);
+
+          
         }
     }
 
@@ -156,7 +164,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 controllerHitNormal;
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        controllerColidingButNotGrounded = Vector3.Angle(Vector3.up, hit.normal) <= 85;
+        controllerColidingButNotGrounded = Vector3.Angle(Vector3.up, hit.normal) <= 55;
+
         controllerHitNormal = hit.normal;
     }
 
@@ -246,21 +255,30 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Sliding
-
+    [Header("Slide Settings")]
     [SerializeField] float extraVelRequiredToSlide;
     [SerializeField] float slideFallOff;
     [SerializeField] float uphillExtraSlideFallOff;
-    [SerializeField] float minMagBeforeSlideCancel;
+    [SerializeField] float minMagBeforeSlideCancelMultiplyer;
     [SerializeField] float minAngleForSlide;
+    [SerializeField] float downSlopeAccelMultiplyer;
+    [Header("CameraSettings")]
+    [SerializeField] float camYDrop;
+    [SerializeField] float camDropSpeed;
+    Camera cam;
+    float initialCamY;
 
     bool onSlope;
-    bool slidePossible;
+    bool slidingTooSlow;
+    Vector3 newCamPos;
+    bool chainSlideCheck; // since im checking to slide on getkey, if you just keep holding controll, you stop sliding and instantly start again, so this will stop that from happening
 
     Vector3 VelWithoutGravity;
     void Slide()
     {
-        slidePossible = true;
-
+        DevText.DisplayInfo("onSlope", "OnSlope: " + onSlope, "Sliding");
+        DevText.DisplayInfo("slidingTooSlow", "SlidingTooSlow: " + slidingTooSlow, "Sliding");
+        DevText.DisplayInfo("sliding", "Sliding: " + isSliding, "Sliding");
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isSliding = false;
@@ -271,18 +289,31 @@ public class PlayerMovement : MonoBehaviour
         onSlope = GroundAngle() > minAngleForSlide;
 
         VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
-        VelWithoutGravity.y = 0;
+        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude * minMagBeforeSlideCancelMultiplyer && !onSlope;
+
+
 
         if (isSliding)
         {
+            if (cam.transform.localPosition.y > initialCamY - camYDrop)
+            {
+                newCamPos = cam.transform.localPosition;
+                newCamPos.y -= camDropSpeed * Time.deltaTime;
+                if (newCamPos.y < initialCamY - camYDrop)
+                    newCamPos.y = initialCamY - camYDrop;
+
+                cam.transform.localPosition = newCamPos;
+                
+            }
+                
             if(FacingUp())
                 currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
             else if (!onSlope)
                 currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime;
             else
-                currentVelocity += VelWithoutGravity.normalized * gravity * Time.deltaTime;
+                currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime;
 
-            if (VelWithoutGravity.magnitude < minMagBeforeSlideCancel)
+            if (slidingTooSlow)
             {
                 currentVelocity = Vector3.zero;
                 isSliding = false;
@@ -291,7 +322,17 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-       
+        else if (cam.transform.localPosition.y < initialCamY )
+        {
+            newCamPos = cam.transform.localPosition;
+            newCamPos.y += camDropSpeed * Time.deltaTime;
+            if (newCamPos.y > initialCamY)
+                newCamPos.y = initialCamY;
+
+            cam.transform.localPosition = newCamPos;
+
+        }
+ 
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
         if (hit.point.y > transform.position.y - 0.5)
@@ -300,18 +341,24 @@ public class PlayerMovement : MonoBehaviour
         if (FacingUp())
             return;
 
-        if (!slidePossible)
+        if (slidingTooSlow)
             return;
-      
-        
-        if (Input.GetKey(KeyCode.LeftControl))
+
+        if (Input.GetKey(KeyCode.LeftControl) && !chainSlideCheck)
         {
+            chainSlideCheck = true;
             isSliding = true;
             CancelDash();
         }
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
+            if (chainSlideCheck)
+            {
+                chainSlideCheck = false;
+                return; // dont want to instantly slide again
+            }
+            
             isSliding = !isSliding;
             if (!isSliding)
                 return;

@@ -9,8 +9,9 @@ public class WaveStartTrigger : MonoBehaviour
     {
         if (other.GetComponent<PlayerMovement>() != null)
         {
-            spawner.StartSpawner();
-            Destroy(this);
+            spawner.StartSpawner(gameObject);
+           
+            Destroy(this.gameObject);
         }
     }
 

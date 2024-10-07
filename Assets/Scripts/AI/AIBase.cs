@@ -18,7 +18,7 @@ public class AIBase : EnemyInfo
     [SerializeField, TabGroup("Base AI")] AudioClip[] attackSounds;
     [Header("Agent Settings")]
     [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
-    EnemySpawner spawner;
+    public EnemySpawner spawner;
     AudioSource source;
     
 
@@ -35,7 +35,6 @@ public class AIBase : EnemyInfo
         base.Start();
         player = FindAnyObjectByType<PlayerMovement>().gameObject;
         aiBuisy = false;
-        spawner = FindAnyObjectByType<EnemySpawner>();
         source = GetComponent<AudioSource>();
     }
  

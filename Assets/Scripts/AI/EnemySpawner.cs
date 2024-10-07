@@ -61,14 +61,13 @@ public class EnemySpawner : MonoBehaviour
 
     int currentWaveIndex = -1;
 
-    public void StartSpawner()
+    public void StartSpawner(GameObject refGameobject)
     {
         StartWave();
-
-        
     }
     void StartWave()
     {
+       
         foreach (WaveEvent wEvent in startEvents)
         {
             wEvent.WaveStart();
@@ -92,7 +91,6 @@ public class EnemySpawner : MonoBehaviour
        
         foreach (EnemySpawnInfo info in currentWave.enemies)
         {
-            print("weeee");
             for(int i = 0; i < info.spawnChances; i++)
             {
                 spawnPool.Add(AIInfo.staticEnemyList[info.enemy]);
@@ -116,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
             return;
 
         lastTimeSinceSpawn = currentWave.spawnSpeed;
-        
+
         GameObject spawnedEnemy = Instantiate(spawnPool[Random.Range(0, spawnPool.Count)]);
         AIBase ai = spawnedEnemy.GetComponent<AIBase>();
         try
@@ -131,7 +129,7 @@ public class EnemySpawner : MonoBehaviour
             spawnedEnemy.SetActive(false);
         }
 
-
+        ai.spawner = this;
         ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
 
         spawnedEnemies += 1;
@@ -147,7 +145,6 @@ public class EnemySpawner : MonoBehaviour
     public void EnemyKilled()
     {
         enemysKilled++;
-        print("enemy killed");
         if (enemysKilled >= currentWave.enemiesToKillToEndWave)
             StartWave();
     }
@@ -158,8 +155,8 @@ public class EnemySpawner : MonoBehaviour
         {
             wEvent.WaveEnd();
         }
-        if (playerLevelUpManager.readyToLVLup)
-            playerLevelUpManager.LevelUp();
+     //   if (playerLevelUpManager.readyToLVLup)
+      //      playerLevelUpManager.LevelUp();
     }
  
 }

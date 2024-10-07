@@ -7,4 +7,5 @@ public class WeaponRefrenceManager : MonoBehaviour
 {
     public TextMeshProUGUI ammoUIText;
     public AudioSource audioSource;
+    public UnityEngine.UI.Image ammoWheel;
 }
