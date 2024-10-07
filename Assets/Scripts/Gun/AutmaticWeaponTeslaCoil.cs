@@ -41,7 +41,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         }
         if (!UpdateCoolDown()) // wait for weapon cool down
             return;
-        if(!Timer(ref updateTime, 0.1f)) // Stop physics checks from going every frame when missing
+        if(!Timer(ref updateTime, 10f)) // Stop physics checks from going every frame when missing
             return;
         
         if(!(enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, stats.boxCheckWidth, enemyLayerMask))) // Get Enemy inside a square infron to the player
@@ -59,7 +59,6 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     List<Transform> enemyTransforms = new List<Transform>();
     void ZapEnemy()
     {
-        print("Zap Enemy");
         enemyTransforms.Clear(); // Reset Enemy List
 
         int remainingBounces = stats.bounces;
@@ -114,7 +113,6 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         lineRen.SetPosition(0, lightningMuzzlePosition.position);
         for(int i = 1; i < enemyTransforms.Count; i++)
         {
-            print("i: " + i);
             lineRen.SetPosition(i, enemyTransforms[i].position);
         }
     }
