@@ -48,6 +48,7 @@ public class EnemyInfo : EnemyDamageHandler
     {
         if (bodyPart == BodyPart.Head)
             amount *= 2;
+        FloatingTextManager.SpawnFloatingText(transform.position + new Vector3(0, 0.5f, 0), amount);
         ChangeHealth(-amount);
     }
     /// <summary>

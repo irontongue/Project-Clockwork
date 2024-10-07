@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1204614574271111860
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fog
-  m_Shader: {fileID: -6465566751694194690, guid: 0352b33d7e9db4e40a6ebf8278ebe337,
+  m_Name: CartoonWater
+  m_Shader: {fileID: -6465566751694194690, guid: 3cbe8db6759c0e746ac518eb315d1051,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,23 +51,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth: 0.2
+    - Vector1_20919596: 0.1
+    - Vector1_239E2587: 0.5
+    - Vector1_3417195C: 0.7
+    - Vector1_3B025720: 8.17
+    - Vector1_63BBCCFF: 6.34
+    - Vector1_76150DCB: 1
+    - Vector1_7D815F9A: 1.24
+    - Vector1_93545569: 0
+    - _FogDensity: 0.65
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _smooth: 0.5
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _DepthColour: {r: 1, g: 0, b: 0.107790865, a: 1}
+    - Color_40E95EF7: {r: 1, g: 1, b: 1, a: 1}
+    - Color_738C455A: {r: 1, g: 1, b: 1, a: 0}
+    - Color_92FB188E: {r: 0, g: 0.28627443, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &8785396658184392565
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
