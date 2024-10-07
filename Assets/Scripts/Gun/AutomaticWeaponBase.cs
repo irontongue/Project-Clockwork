@@ -28,7 +28,14 @@ public class AutomaticWeaponBase : MonoBehaviour
         cam = Camera.main;
         allStats = FindAnyObjectByType<AllWeaponStats>();
         stats = allStats.GetWeaponStat(weaponType);
-        allStats.weaponReferences.Add(weaponType, this);
+        try
+        {
+            allStats.weaponReferences.Add(weaponType, this);
+        }
+        catch 
+        {
+            Debug.LogWarning("Tried to add multiple of the same key to dictionary");
+        }
 
 
     }
