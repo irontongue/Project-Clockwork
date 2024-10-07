@@ -59,7 +59,6 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     List<Transform> enemyTransforms = new List<Transform>();
     void ZapEnemy()
     {
-        print("Zap Enemy");
         enemyTransforms.Clear(); // Reset Enemy List
 
         int remainingBounces = stats.bounces;
@@ -114,7 +113,6 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         lineRen.SetPosition(0, lightningMuzzlePosition.position);
         for(int i = 1; i < enemyTransforms.Count; i++)
         {
-            print("i: " + i);
             lineRen.SetPosition(i, enemyTransforms[i].position);
         }
     }

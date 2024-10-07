@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AutomaticCompanionBase : AutomaticWeaponBase
 {
@@ -9,6 +10,7 @@ public class AutomaticCompanionBase : AutomaticWeaponBase
     [SerializeField]protected Sprite spriteAttack;
     protected SpriteRenderer spriteRenderer;
     [SerializeField]LayerMask enviornmentLayerMask = 1 >> 0 | 1 >> 8;
+    Vector3 yZeroFive = new Vector3(0,0.5f,0);
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -29,31 +31,45 @@ public class AutomaticCompanionBase : AutomaticWeaponBase
     {
         base.Update();
     }
-    protected void MoveToPlayerFront(float speed, float distanceFromPlayer)
-    {
-        RaycastHit hit = RayCastDown(playerTransform.position + playerTransform.forward * distanceFromPlayer);
-        if (hit.transform != null)
-        {
-            transform.position = Vector3.MoveTowards(transform.position,hit.point, speed);
-            transform.position = new Vector3(transform.position.x, RayCastDown(transform.position).point.y, transform.position.z);
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, playerTransform.position + playerTransform.forward * distanceFromPlayer, speed);
-        }
 
-    }
-    protected bool MoveToTarget(float speed, float DistanceToPosition, Vector3 position)
+    protected bool MoveToPlayerFront(float speed, float distanceFromPlayer)
     {
-        if(Vector3.Distance(transform.position, position) < DistanceToPosition) 
+        //if (Vector3.Distance(transform.position, playerTransform.position) < distanceFromPlayer)
+        //{
+        //    return true;
+        //}
+        //RaycastHit hit = RayCastDown(playerTransform.position + playerTransform.forward * distanceFromPlayer);
+        //if (hit.transform != null)
+        //{
+        //    transform.position = Vector3.MoveTowards(transform.position,hit.point + yZeroFive, speed);
+        //    hit = RayCastDown(transform.position);
+        //    if(hit.transform != null) 
+        //    {
+        //        transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+        //    }
+        //}
+        //else
+        //{
+        //    transform.position = Vector3.MoveTowards(transform.position, playerTransform.position + playerTransform.forward * distanceFromPlayer, speed);
+        //}
+        //return false;
+        return MoveToTarget(speed, distanceFromPlayer, playerTransform.position + playerTransform.forward * distanceFromPlayer);
+    }
+    protected bool MoveToTarget(float speed, float distanceToPosition, Vector3 position)
+    {
+        if(Vector3.Distance(transform.position, position) < distanceToPosition) 
         {
             return true;
         }
         RaycastHit hit = RayCastDown(position);
         if(hit.transform != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, hit.point, speed);
-            transform.position = new Vector3(transform.position.x, RayCastDown(transform.position).point.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position + yZeroFive, hit.point, speed);
+            hit = RayCastDown(transform.position);
+            if (hit.transform != null)
+            {
+                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            }
         }
         else
         { 
