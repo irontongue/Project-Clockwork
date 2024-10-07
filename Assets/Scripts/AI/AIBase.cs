@@ -30,8 +30,9 @@ public class AIBase : EnemyInfo
     {
         return Vector3.Distance(transform.position, player.transform.position);
     }
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         player = FindAnyObjectByType<PlayerMovement>().gameObject;
         aiBuisy = false;
         spawner = FindAnyObjectByType<EnemySpawner>();

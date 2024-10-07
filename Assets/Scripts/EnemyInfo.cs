@@ -22,8 +22,21 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public float speed = 5f;
     [TabGroup("Base AI")] public float EXP = 1f;
     [TabGroup("Base AI")] public Image healthBarImage;
+    [TabGroup("Base AI")] public SpriteRenderer spriteRenderer;
+    [TabGroup("Base AI")] public float damageFlashTime = 1;
+    float flashTimer = 1;
     [HideInInspector] public int fireStacks = 0;
-    
+    Color grey = new Color(0.75f, 0.75f, 0.75f);
+
+    protected virtual void Start()
+    {
+        if(!(spriteRenderer = GetComponent<SpriteRenderer>()))
+        {
+            Debug.LogWarning(this + " Sprite Renderer is not assigned");
+        }
+        
+    }
+
     #endregion
 
     #region Damage Handling
@@ -59,7 +72,20 @@ public class EnemyInfo : EnemyDamageHandler
         if (health == 0)
         {
             DeathEvent();
+
+            spriteRenderer.color = Color.white;
+            StopAllCoroutines();
+            return;
         }
+        if (flashTimer < 1)
+        {
+            flashTimer = 0;
+        }
+        else
+        {
+            StartCoroutine(FlashSprite());
+        }
+
     }
     /// <summary>
     /// If enemy health hits 0 this is called
@@ -70,4 +96,16 @@ public class EnemyInfo : EnemyDamageHandler
         gameObject.SetActive(false);
     }
     #endregion
+
+    IEnumerator FlashSprite()
+    {
+        flashTimer = 0;
+
+        while (flashTimer < 1)
+        {
+            spriteRenderer.color = Color.Lerp(Color.white, grey, Mathf.Sin(flashTimer * 24));
+            flashTimer += Time.deltaTime;
+            yield return null;
+        }
+    }
 }

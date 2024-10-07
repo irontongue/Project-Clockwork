@@ -7,7 +7,7 @@ using System;
 public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives}
 public enum DamageType {Physical, Fire, Explosion, None}
 public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat}
-public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, LockOnDistance, Bounces, BounceRange, BoxCheckWidth}
+public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance}
 
 public class AllWeaponStats : MonoBehaviour
 {
@@ -47,6 +47,9 @@ public class AllWeaponStats : MonoBehaviour
             case WeaponStatType.NumberOfBullets:
                 weaponStats[weaponStatsDic[weaponType]].numberOfBullets += (int)amountToAdd;
                 break;
+            case WeaponStatType.TimeToRepeateShot:
+                weaponStats[weaponStatsDic[weaponType]].repeateShot += (int)amountToAdd;
+                break;
             case WeaponStatType.LockOnDistance:
                 weaponStats[weaponStatsDic[weaponType]].lockOnDistance += amountToAdd;
                 break;
@@ -58,6 +61,10 @@ public class AllWeaponStats : MonoBehaviour
                 break;
             case WeaponStatType.BoxCheckWidth:
                 weaponStats[weaponStatsDic[weaponType]].boxCheckWidth += amountToAdd;
+                break;
+            case WeaponStatType.moveSpeed:
+                weaponStats[weaponStatsDic[weaponType]].moveSpeed += amountToAdd;
+
                 break;
         }
 
@@ -76,7 +83,7 @@ public class AllWeaponStats : MonoBehaviour
                 weaponReferences[WeaponType.Shotgun].Upgrade(packet.shotgunUpgrades);
                 break;
             case UpgradeType.Sniper:
-                weaponReferences[WeaponType.Sniper].Upgrade(packet.sniperUpgrades);
+                weaponReferences[WeaponType.Sniper].Upgrade(packet.sniperUpgrades); 
                 break;
             case UpgradeType.TeslaCoil:
                 weaponReferences[WeaponType.TeslaCoil].Upgrade(packet.teslaCoilUpgrades);
@@ -275,10 +282,17 @@ public class WeaponStats
     //[HideInInspector]
     public int numberOfBullets = 1;
     //
+    public int repeateShot = 0;
+    //
     public float lockOnDistance;
     //
     public int bounces;
+    //
     public float bounceRange;
+    //
+    public float moveSpeed  = 1;
+    //
+    public float followDistance = 1;
 }
 #endregion
 
@@ -373,9 +387,13 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty chargeUpTime = weapon.FindPropertyRelative("chargeUpTime");
             SerializedProperty bulletSpread = weapon.FindPropertyRelative("bulletSpread");
             SerializedProperty numberOfBullets = weapon.FindPropertyRelative("numberOfBullets");
+            SerializedProperty repeateShot = weapon.FindPropertyRelative("repeateShot");
+
             SerializedProperty lockOnDistance = weapon.FindPropertyRelative("lockOnDistance");
             SerializedProperty bounces = weapon.FindPropertyRelative("bounces");
             SerializedProperty bounceRange = weapon.FindPropertyRelative("bounceRange");
+            SerializedProperty moveSpeed = weapon.FindPropertyRelative("moveSpeed");
+            SerializedProperty followDistance = weapon.FindPropertyRelative("followDistance");
 
 
             if (!showAllWeapons)
@@ -392,6 +410,7 @@ public class WeapopnStatsEditor : Editor
             EditorGUILayout.PropertyField(damage);
             EditorGUILayout.PropertyField(attackSpeed);
             EditorGUILayout.PropertyField(coolDown);
+            EditorGUILayout.PropertyField(repeateShot);
             // Draw properties based on the selected weapon type
             switch ((WeaponType)weaponType.enumValueIndex)
             {
@@ -414,6 +433,18 @@ public class WeapopnStatsEditor : Editor
                     EditorGUILayout.PropertyField(bounces);
                     EditorGUILayout.PropertyField(bounceRange);
 
+                    break;
+                case WeaponType.Rifle:
+                    break;
+                case WeaponType.FlameThrower:
+                    break;
+                case WeaponType.Dog:
+                    EditorGUILayout.PropertyField(moveSpeed);
+                    EditorGUILayout.PropertyField(followDistance);
+                    break;
+                case WeaponType.GrenadeLaucher:
+                    break;
+                case WeaponType.ThrowingKnives:
                     break;
             }
 
