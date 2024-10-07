@@ -22,7 +22,7 @@ public class AutomaticWeaponDog : AutomaticCompanionBase
     protected override void Update()
     {
         base.Update();
-
+        spriteRenderer.transform.LookAt(playerTransform.position);
         switch (state) 
         {
             case CompanionState.FindTarget:
@@ -41,8 +41,10 @@ public class AutomaticWeaponDog : AutomaticCompanionBase
                 }
                 break;
             case CompanionState.Return:
-                MoveToPlayerFront(stats.moveSpeed, stats.followDistance);
-
+                if (MoveToPlayerFront(stats.moveSpeed, stats.followDistance))
+                {
+                    state = CompanionState.FindTarget;
+                }
                 break;
             case CompanionState.Attack:
                 Attack();
@@ -53,10 +55,12 @@ public class AutomaticWeaponDog : AutomaticCompanionBase
     void Attack()
     {
         spriteRenderer.sprite = spriteAttack;
-        if (!Timer(ref attackTimer, 0.25f))
+        if (!Timer(ref attackTimer, 4))
             return;
         spriteRenderer.sprite = spriteBase;
-        target.DealDamage(stats.damage);
+        if(target != null || target.enabled == false)
+            target.DealDamage(stats.damage);
+        state = CompanionState.Return;
     }
 
 }

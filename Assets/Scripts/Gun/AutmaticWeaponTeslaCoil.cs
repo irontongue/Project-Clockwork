@@ -41,7 +41,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         }
         if (!UpdateCoolDown()) // wait for weapon cool down
             return;
-        if(!Timer(ref updateTime, 10f)) // Stop physics checks from going every frame when missing
+        if(!Timer(ref updateTime, 0.1f)) // Stop physics checks from going every frame when missing
             return;
         
         if(!(enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, stats.boxCheckWidth, enemyLayerMask))) // Get Enemy inside a square infron to the player
