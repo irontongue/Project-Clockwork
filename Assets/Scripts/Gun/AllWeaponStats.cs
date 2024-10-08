@@ -88,21 +88,21 @@ public class AllWeaponStats : MonoBehaviour
             case UpgradeType.TeslaCoil:
                 weaponReferences[WeaponType.TeslaCoil].Upgrade(packet.teslaCoilUpgrades);
                 break;
-            case UpgradeType.Rifle:
-                weaponReferences[WeaponType.Rifle].Upgrade(packet.teslaCoilUpgrades);
-                break;
-            case UpgradeType.Dog:
-                weaponReferences[WeaponType.Dog].Upgrade(packet.teslaCoilUpgrades);
-                break;
-            case UpgradeType.GrenadeLaucher:
-                weaponReferences[WeaponType.GrenadeLaucher].Upgrade(packet.teslaCoilUpgrades);
-                break;
-            case UpgradeType.FlameThrower:
-                weaponReferences[WeaponType.FlameThrower].Upgrade(packet.teslaCoilUpgrades);
-                break;
-            case UpgradeType.ThrowingKnives:
-                weaponReferences[WeaponType.ThrowingKnives].Upgrade(packet.teslaCoilUpgrades);
-                break;
+            //case UpgradeType.Rifle: // ADD UPGRADE ENUM FOR EACH WEAPON
+            //    weaponReferences[WeaponType.Rifle].Upgrade(packet.teslaCoilUpgrades);
+            //    break;
+            //case UpgradeType.Dog:
+            //    weaponReferences[WeaponType.Dog].Upgrade(packet.teslaCoilUpgrades);
+            //    break;
+            //case UpgradeType.GrenadeLaucher:
+            //    weaponReferences[WeaponType.GrenadeLaucher].Upgrade(packet.teslaCoilUpgrades);
+            //    break;
+            //case UpgradeType.FlameThrower:
+            //    weaponReferences[WeaponType.FlameThrower].Upgrade(packet.teslaCoilUpgrades);
+            //    break;
+            //case UpgradeType.ThrowingKnives:
+            //    weaponReferences[WeaponType.ThrowingKnives].Upgrade(packet.teslaCoilUpgrades);
+            //    break;
 
 
         }
