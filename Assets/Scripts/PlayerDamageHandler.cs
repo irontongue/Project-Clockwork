@@ -129,7 +129,7 @@ public class PlayerDamageHandler : MonoBehaviour
         try
         {
             deathUI.SetActive(true);
-            GamePauser.instance.PauseGame(true, gameObject);
+            GamePauser.instance.PauseGame(true,false, gameObject);
         }
         catch 
         {

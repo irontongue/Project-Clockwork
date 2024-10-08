@@ -12755,32 +12755,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5025728
+      value: 2.9450276
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.1922817
+      value: 3.7566772
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.5025728
+      value: 2.9450276
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 74.445656
+      value: 72.84
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3399997
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.716858
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
@@ -13878,6 +13878,142 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 365682146}
   m_SourcePrefab: {fileID: 100100000, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
+--- !u!1001 &645595281
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1712380431}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 130.22415
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 179.56935
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 157.57748
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 84.58
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2299995
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.1019897
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8615205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.42681447
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.24639577
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.12206947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -52.709
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 31.921
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b392a0a297cc2f24db4b30612a663fc0, type: 2}
+    - target: {fileID: 919132149155446097, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_Name
+      value: LP_ASST_Smoke (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 645595284}
+  m_SourcePrefab: {fileID: 100100000, guid: 51498fa1609d5c34db52e7e3b4efa8d0, type: 3}
+--- !u!4 &645595282 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 645595281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &645595283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 51498fa1609d5c34db52e7e3b4efa8d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 645595281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &645595284
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645595283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8243221981538634841, guid: 51498fa1609d5c34db52e7e3b4efa8d0, type: 3}
 --- !u!1 &648571835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
@@ -14411,6 +14547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2885463159808772724, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
+      propertyPath: revolver
+      value: 
+      objectReference: {fileID: 1119655132}
+    - target: {fileID: 2885463159808772724, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
       propertyPath: ammoWheel
       value: 
       objectReference: {fileID: 1469488828}
@@ -14486,13 +14627,23 @@ PrefabInstance:
       objectReference: {fileID: 753291155}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
+      propertyPath: levelUpMessage
+      value: X To Level UP
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: textFlashSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
       propertyPath: levelUpReadyText
       value: 
       objectReference: {fileID: 1012989245}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.size
-      value: 10
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -14543,6 +14694,41 @@ PrefabInstance:
         type: 3}
       propertyPath: expToLvlup.Array.data[9]
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[10]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[11]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[12]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[13]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[14]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[15]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[16]
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -21752,7 +21938,7 @@ PrefabInstance:
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
       propertyPath: weaponToEdit
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
@@ -21798,6 +21984,11 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponStats.Array.data[1].repeateShot
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
+      propertyPath: weaponStats.Array.data[1].chargeUpTime
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
@@ -21990,7 +22181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0cef2505dff524cbe1836ad139d190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpawnPoint: {x: 39.78, y: 18.43, z: -112.58}
+  playerSpawnPoint: {x: 35.81, y: 9, z: -110.68}
 --- !u!4 &1076550027
 Transform:
   m_ObjectHideFlags: 0
@@ -22000,7 +22191,7 @@ Transform:
   m_GameObject: {fileID: 1076550025}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.78, y: 18.43, z: -112.58}
+  m_LocalPosition: {x: 35.81, y: 9, z: -110.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22404,6 +22595,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1234221723}
   m_SourcePrefab: {fileID: 100100000, guid: 78cbea30f25e0a141930ae66c2943704, type: 3}
+--- !u!114 &1119655132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1506753682869256494, guid: 0eeea3279b4d1f742bd836973210dedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 669497368}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476840261eebced40ba07e51424eaf60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1139465751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26295,7 +26498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 3
+  weaponToEdit: 10
   shotgunUpgrades:
   - packetName: Damage
     weaponType: 0
@@ -26487,7 +26690,7 @@ MonoBehaviour:
     weaponType: 0
     packet:
     - upgradeTitle: Sniper Penetration I
-      upgradeBody: 
+      upgradeBody: Bullets hit an additional another enemy
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -26497,6 +26700,28 @@ MonoBehaviour:
       weaponStatType: 7
       weaponToEnable: {fileID: 0}
       amountToAdd: 1
+    - upgradeTitle: Sniper Penetration II
+      upgradeBody: Bullets hit an additional 2 more enemies
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 7
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Sniper Penetration III
+      upgradeBody: Bullets hit an addition 3 enemies
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 7
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
     levels: 0
   teslaCoilUpgrades:
   - packetName: Bounces
@@ -26615,6 +26840,144 @@ MonoBehaviour:
   dogUpgrades: []
   grenadeLaucherUpgrades: []
   throwingKnivesUpgrades: []
+  playerRevolverUpgrades:
+  - packetName: Damage
+    weaponType: 8
+    packet:
+    - upgradeTitle: Primary Weapon Damage I
+      upgradeBody: Increases damage by 1
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Primary Weapon Damage II
+      upgradeBody: Increases damage by 2
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Primary Weapon Damage III
+      upgradeBody: Increases damage by 3
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
+    levels: 0
+  - packetName: MagCapacity
+    weaponType: 8
+    packet:
+    - upgradeTitle: Primary Weapon Capacity I
+      upgradeBody: Increases max ammo by 3
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 15
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
+    - upgradeTitle: 'Primary Weapon Capacity II '
+      upgradeBody: Increases max ammo by 4
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 15
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 4
+    - upgradeTitle: Primary Weapon Capacity III
+      upgradeBody: Increases max ammo by 5
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 15
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 5
+    levels: 0
+  - packetName: ReloadSpeed
+    weaponType: 8
+    packet:
+    - upgradeTitle: Primary Weapon Reload Speed I
+      upgradeBody: Reloads 20% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 14
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.2
+    - upgradeTitle: Primary Weapon Reload Speed II
+      upgradeBody: Reloads 40% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 14
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.2
+    - upgradeTitle: Primary Weapon Reload Speed III
+      upgradeBody: Reloads 60% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 14
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.2
+    levels: 0
+  - packetName: FireRate
+    weaponType: 8
+    packet:
+    - upgradeTitle: Primary Weapon FireRate I
+      upgradeBody: Shoots 25% Faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 1
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.05
+    - upgradeTitle: Primary Weapon FireRate II
+      upgradeBody: Shoots 50% Faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 1
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.05
+    levels: 0
   autoWeapons:
   - packetName: Shotgun
     weaponType: 0
@@ -28155,7 +28518,7 @@ Transform:
   m_GameObject: {fileID: 1543423053}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268277, z: -0, w: 0.92387986}
-  m_LocalPosition: {x: 19.17, y: 3.0900002, z: -91.59}
+  m_LocalPosition: {x: 18.25, y: 3.0900002, z: -90.67}
   m_LocalScale: {x: 29.084179, y: 7.99897, z: 1.674092}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30907,7 +31270,6 @@ Transform:
   - {fileID: 665792601}
   - {fileID: 687247460}
   - {fileID: 808425595}
-  - {fileID: 2051320293}
   - {fileID: 534580683}
   - {fileID: 2132077184}
   - {fileID: 1313350621}
@@ -31007,6 +31369,7 @@ Transform:
   - {fileID: 1175174986}
   - {fileID: 703596084}
   - {fileID: 1680805326}
+  - {fileID: 645595282}
   - {fileID: 2028773691}
   - {fileID: 947285175}
   - {fileID: 680684949}
@@ -33428,108 +33791,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1848518374}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1855092525
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1712380431}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.5025728
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.1922817
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.5025728
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 71.23
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.79
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9940311
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -7.0474074e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.10909741
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -1.0133526e-16
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -12.527
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b392a0a297cc2f24db4b30612a663fc0, type: 2}
-    - target: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_Name
-      value: LP_ASST_Rock4 (83)
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2051320294}
-  m_SourcePrefab: {fileID: 100100000, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
 --- !u!1 &1862360798 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
@@ -35000,7 +35261,7 @@ MonoBehaviour:
     - enemy: 1
       spawnChances: 1
     maxEnemiesToSpawn: 35
-    spawnSpeed: 1
+    spawnSpeed: 1.1
     enemiesToKillToEndWave: 30
     EXPShare: 45
     EndEvent: {fileID: 0}
@@ -35010,19 +35271,29 @@ MonoBehaviour:
     - enemy: 1
       spawnChances: 1
     maxEnemiesToSpawn: 50
-    spawnSpeed: 1
+    spawnSpeed: 1.1
     enemiesToKillToEndWave: 40
     EXPShare: 55
     EndEvent: {fileID: 0}
   - enemies:
     - enemy: 1
-      spawnChances: 2
+      spawnChances: 1
     - enemy: 0
       spawnChances: 1
     maxEnemiesToSpawn: 55
-    spawnSpeed: 0.9
+    spawnSpeed: 1
     enemiesToKillToEndWave: 40
     EXPShare: 65
+    EndEvent: {fileID: 90341357}
+  - enemies:
+    - enemy: 0
+      spawnChances: 1
+    - enemy: 1
+      spawnChances: 1
+    maxEnemiesToSpawn: 65
+    spawnSpeed: 0.8
+    enemiesToKillToEndWave: 55
+    EXPShare: 85
     EndEvent: {fileID: 0}
   pathRadiusFromSpawn: 0
   walkableMask:
@@ -35058,7 +35329,7 @@ MonoBehaviour:
   - {fileID: 350997359}
   - {fileID: 2029340067}
   spawnPool: []
-  minSpawnDistanceFromPlayer: 5
+  minSpawnDistanceFromPlayer: 15
 --- !u!1001 &1969313548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36598,40 +36869,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -792660944072588704, guid: ee79803f95db6694586934c4359eded1, type: 3}
---- !u!1 &2051320292 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1855092525}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2051320293 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1855092525}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &2051320294
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2051320292}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3230602620048832063, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
 --- !u!1001 &2072063539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38245,7 +38482,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3399997
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59b3b7cae9223eb498d8a782bfb0fba1,
         type: 3}

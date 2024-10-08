@@ -16,13 +16,21 @@ public class GamePauser : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame(!GameState.GamePaused, gameObject);
-            OpenPauseMenu(GameState.GamePaused);
+            if(PauseGame(!GameState.GamePaused,true, gameObject))
+                 OpenPauseMenu(GameState.GamePaused);
         }
     }
-
-    public void PauseGame(bool pauseGame, GameObject callback) // i am forcing the callback, just in case a script pauses the game weirdly without us knowing
+    bool systemPaused;
+    public bool PauseGame(bool pauseGame,bool playerControlledPause, GameObject callback) // i am forcing the callback, just in case a script pauses the game weirdly without us knowing
     {
+        if (!playerControlledPause)
+            systemPaused = true;
+
+        if (playerControlledPause && systemPaused)
+            return false;
+
+
+
         if (Debugger.debugMode)
             print(callback.name + " " + (pauseGame == true ? "Paused" : "Unpaused") + " THE GAME!");
         GameState.GamePaused = pauseGame;
@@ -30,6 +38,7 @@ public class GamePauser : MonoBehaviour
         {
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked;
+            systemPaused = false;
         }
             
         else
@@ -37,6 +46,8 @@ public class GamePauser : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
         }
+
+        return true;
             
     }
     void OpenPauseMenu(bool open)

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives}
+public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, PlayerRevolver}
 public enum DamageType {Physical, Fire, Explosion, None}
-public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat}
-public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance}
+public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat, PlayerRevolver}
+public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance, ReloadSpeed, MagCapacity }
 
 public class AllWeaponStats : MonoBehaviour
 {
@@ -25,6 +25,9 @@ public class AllWeaponStats : MonoBehaviour
     }
     public void ChangeStat(WeaponType weaponType, WeaponStatType weaponStatType, float amountToAdd)
     {
+        if (weaponType == WeaponType.PlayerRevolver)
+            WeaponRefrenceManager.instance.RecieveUpgrade(weaponType, weaponStatType, amountToAdd);
+        else
         switch (weaponStatType) {
             case WeaponStatType.Damage:
                 weaponStats[weaponStatsDic[weaponType]].damage += amountToAdd;

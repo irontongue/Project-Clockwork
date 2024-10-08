@@ -30,6 +30,7 @@ public struct UpgradeInfoPacket
 
     [ShowIf("upgradeType", UpgradeType.WeaponStat)]public WeaponType weaponType;
     [ShowIf("upgradeType", UpgradeType.WeaponStat)]public WeaponStatType weaponStatType;
+   
 
     [ShowIf("isWeapon")] public GameObject weaponToEnable;
 
@@ -59,6 +60,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.Dog)] List<UpgradeLine> dogUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.GrenadeLaucher)] List<UpgradeLine> grenadeLaucherUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.ThrowingKnives)] List<UpgradeLine> throwingKnivesUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.PlayerRevolver)] List<UpgradeLine> playerRevolverUpgrades;
 
 
 
@@ -81,7 +83,7 @@ public class UpgradeManager : MonoBehaviour
     private void Start()
     {
         allWeaponStats = FindObjectOfType<AllWeaponStats>();
-       
+        upgradePackets.AddRange(playerRevolverUpgrades);
         //upgradePackets.AddRange(shotgunUpgrades);
         //upgradePackets.AddRange(sniperUpgrades);
         //upgradePackets.AddRange(teslaCoilUpgrades);

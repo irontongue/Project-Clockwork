@@ -7,7 +7,7 @@ public class GameOver : MonoBehaviour
 {
     public void Retry()
     {
-        GamePauser.instance.PauseGame(false,gameObject);
+        GamePauser.instance.PauseGame(false,false,gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Menu()

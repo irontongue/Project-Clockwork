@@ -17,7 +17,7 @@ public class BasePrimaryWeapon : MonoBehaviour
     [SerializeField] protected LayerMask enemyMask;
     
 
-    [SerializeField] protected int magCapacity;
+    [SerializeField] public int magCapacity;
     [SerializeField] protected int maxAmmoReserve;
 
     [SerializeField] protected ParticleSystem muzzleFlashPFX;
