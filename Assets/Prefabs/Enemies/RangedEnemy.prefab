@@ -119,17 +119,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  maxHealth: 15
-  health: 15
-  speed: 9
+  maxHealth: 10
+  health: 10
+  speed: 8
   EXP: 1
   healthBarImage: {fileID: 3652361723569603343}
   spriteRenderer: {fileID: 0}
   damageFlashTime: 1
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
-  attackRange: 25
-  seccondsBetweenAttacks: 2
+  attackRange: 35
+  seccondsBetweenAttacks: 3
   damage: 1
   attackSounds:
   - {fileID: 8300000, guid: f2004f73753c43143ac92cce305005e2, type: 3}

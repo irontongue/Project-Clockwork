@@ -12,8 +12,10 @@ public class PlayerDamageHandler : MonoBehaviour
     [Header("UI")]
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] GameObject deathUI;
+    [SerializeField] float healthRegenSpeed = 0.5f;
+    [SerializeField] float seccondsSinceLastHitToHeal = 2f;
 
-    
+    float timeSinceLastHit;
 
     float currentHealth;
 
@@ -31,11 +33,28 @@ public class PlayerDamageHandler : MonoBehaviour
         if (currentHealth <= 0)
             DeathEvent();
 
+        timeSinceLastHit = 0;
+
+        
+
         
     }
     private void Update()
     {
+        if (GameState.GamePaused)
+            return;
         UIDamageFade();
+        timeSinceLastHit += Time.deltaTime;
+
+        if (timeSinceLastHit < seccondsSinceLastHitToHeal)
+            return;
+
+        currentHealth += healthRegenSpeed * Time.deltaTime;
+
+        if (currentHealth >= maxHealth)
+            currentHealth = maxHealth;
+
+        UpdateHealthUI();
     }
 
     void DamageFlash(Transform damageLocation)
@@ -106,15 +125,19 @@ public class PlayerDamageHandler : MonoBehaviour
 
     void DeathEvent()
     {
-        Time.timeScale = 0;
+        
         try
         {
             deathUI.SetActive(true);
+            GamePauser.instance.PauseGame(true, gameObject);
         }
-        catch { }
+        catch 
+        {
+            print("DEATH UI NOT SET!");
+        }
      
 
-        Invoke("RestartLevel", 2);
+      //  Invoke("RestartLevel", 2);
     }
     [Header("HealthUI")]
     [SerializeField] Image healthBar;

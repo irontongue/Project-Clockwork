@@ -123,11 +123,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  maxHealth: 10
-  health: 10
-  speed: 10
+  maxHealth: 8
+  health: 8
+  speed: 15
   EXP: 1
   healthBarImage: {fileID: 850338302134878798}
+  spriteRenderer: {fileID: 0}
+  damageFlashTime: 1
   fireStacks: 0
   agent: {fileID: 5083003481326997813}
   attackRange: 4
@@ -137,6 +139,7 @@ MonoBehaviour:
   walkableMask:
     serializedVersion: 2
     m_Bits: 1
+  spawner: {fileID: 0}
   aiBuisy: 0
   afterAttackTimer: 1
 --- !u!195 &5083003481326997813
@@ -149,7 +152,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.38
-  m_Speed: 10
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 90000
