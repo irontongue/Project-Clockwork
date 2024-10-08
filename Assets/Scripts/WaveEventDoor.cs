@@ -11,6 +11,7 @@ public class WaveEventDoor : WaveEvent
     public override void WaveStart()
     {
         door.SetActive(true);
+        door.GetComponent<Renderer>().enabled = true;
     }
     public override void WaveEnd()
     {

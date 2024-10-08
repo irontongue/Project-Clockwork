@@ -20,6 +20,8 @@ public class PlayerLevelUpManager : MonoBehaviour
     [SerializeField] float minTextOppacity;
     Color textColor;
 
+    static public PlayerLevelUpManager instance;
+
     private void Start()
     {
         print("yya");
@@ -30,6 +32,8 @@ public class PlayerLevelUpManager : MonoBehaviour
         levelUpReadyText.text = "";
 
         expBar.fillAmount = 0;
+
+        instance = this;
     }
 
     public void ReciveEXP(float amount)
@@ -61,11 +65,16 @@ public class PlayerLevelUpManager : MonoBehaviour
     }
     public void LevelUp()
     {
-        GamePauser.instance.PauseGame(true);
+        GamePauser.instance.PauseGame(true,gameObject);
         readyToLVLup = false;
         currentEXP -= expToLvlup[currentLevel];
         currentLevel++;
         upgradeManager.StartUpgrade();
         levelUpReadyText.color = textColor;
+    }
+
+    public void LevelUpFinished()
+    {
+        levelUpReadyText.text = "";
     }
 }

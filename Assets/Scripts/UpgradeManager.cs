@@ -21,6 +21,7 @@ public struct UpgradeInfoPacket
     [ShowIf("upgradeType", UpgradeType.Shotgun)]public ShotgunUpgrades shotgunUpgrades;
     [ShowIf("upgradeType", UpgradeType.TeslaCoil)]public TeslaCoilUpgrades teslaCoilUpgrades;
     [ShowIf("upgradeType", UpgradeType.Sniper)]public SniperUpgrades sniperUpgrades;
+
     //[ShowIf("upgradeType", UpgradeType.FlameThrower)] public FlameThrowerUpgrades flameThrowerUpgrades; // UNSLASH WHEN MADE WEAPON SCRIPTS AND ENUM
     //[ShowIf("upgradeType", UpgradeType.Rifle)] public RifleUpgrades rifleUpgrades;
     //[ShowIf("upgradeType", UpgradeType.Dog)] public DogUpgrades dogUpgrades;
@@ -40,10 +41,10 @@ public struct UpgradeInfoPacket
 [System.Serializable]
 public class UpgradeLine // this is a class and not a struct, since you cannot pass structs by refrence grrrrr
 {
-    public string packetName;
-    public WeaponType weaponType;
-    public UpgradeInfoPacket[] packet;
-    public int levels;
+    [FoldoutGroup("$packetName")] public string packetName;
+    [FoldoutGroup("$packetName")] public WeaponType weaponType;
+    [FoldoutGroup("$packetName")] public UpgradeInfoPacket[] packet;
+    [FoldoutGroup("$packetName")] public int levels;
 }
 
 public class UpgradeManager : MonoBehaviour
@@ -67,9 +68,10 @@ public class UpgradeManager : MonoBehaviour
     Dictionary<WeaponType, List<UpgradeLine>> weaponUpgradeDictionary = new(); //Holds all of the upgrade lines to then be put into the upgradePackets list when adding a weapon
 
     [Space(20f)]
+
     [Header("RunTime")]
-    [SerializeField] List<UpgradeLine> upgradePackets = new();
-    [SerializeField] List<UpgradeLine> autoWeapons = new();
+    [ShowInInspector] List<UpgradeLine> upgradePackets = new(); // use show in inspector to see values, but not seralize them,
+    [SerializeField] List<UpgradeLine> autoWeapons = new();//oops i did it here as well, rip 20 mins
 
     [SerializeField] bool gainWeaponOnStart;
     //[SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
@@ -79,7 +81,7 @@ public class UpgradeManager : MonoBehaviour
     private void Start()
     {
         allWeaponStats = FindObjectOfType<AllWeaponStats>();
-
+       
         //upgradePackets.AddRange(shotgunUpgrades);
         //upgradePackets.AddRange(sniperUpgrades);
         //upgradePackets.AddRange(teslaCoilUpgrades);
@@ -109,6 +111,7 @@ public class UpgradeManager : MonoBehaviour
     }
     public void StartWeaponUnlock()
     {
+     
         UpgradeSpawner.DisplayPopups(PickRandomUpgrades(autoWeapons, 3));
     }
     //this can be called with either a list or single packet
@@ -176,10 +179,10 @@ public class UpgradeManager : MonoBehaviour
         allWeaponStats.Upgrade(packet);
         upgradeLine.levels += 1;
         
-       
+        
         if(upgradeLine.packet.Length <= upgradeLine.levels)
-        { 
-            print("was too big packetL: " + upgradeLine.packet.Length + " levels:  " + upgradeLine.levels);
+        {
+            print("packet" + upgradeLine.packetName +  "finished");
             upgradePackets.Remove(upgradeLine);
         }
        

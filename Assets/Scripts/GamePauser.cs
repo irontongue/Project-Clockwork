@@ -16,15 +16,17 @@ public class GamePauser : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame(!GameState.GamePaused);
+            PauseGame(!GameState.GamePaused, gameObject);
             OpenPauseMenu(GameState.GamePaused);
         }
     }
 
-    public void PauseGame(bool open)
+    public void PauseGame(bool pauseGame, GameObject callback) // i am forcing the callback, just in case a script pauses the game weirdly without us knowing
     {
-        GameState.GamePaused = open;
-        if(!open)
+        if (Debugger.debugMode)
+            print(callback.name + " " + (pauseGame == true ? "Paused" : "Unpaused") + " THE GAME!");
+        GameState.GamePaused = pauseGame;
+        if(!pauseGame)
         {
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked;

@@ -104,8 +104,25 @@ public class EnemySpawner : MonoBehaviour
     int spawnedEnemies;
     public List<GameObject> spawnPool = new();
 
-    
+    Vector3 foundPos;
+    [SerializeField] float minSpawnDistanceFromPlayer;
+    Vector3 FindSpawnPos()
+    {
+        int i = 0;
+        while (i < 100)
+        {
+            i++;
+            foundPos = currentWave.spawnPoints[Random.Range(0, currentWave.spawnPoints.Length)].transform.position;
+            if (Vector3.Distance(foundPos, playerLevelUpManager.transform.position) < minSpawnDistanceFromPlayer)
+                continue;
 
+            return foundPos;
+
+        }
+
+        print("FAILED TO FIND POSITION FOR ENEMY");
+       return Vector3.zero;
+    }
     void WaveLoop()
     {
         lastTimeSinceSpawn -= Time.deltaTime;
@@ -119,14 +136,16 @@ public class EnemySpawner : MonoBehaviour
         AIBase ai = spawnedEnemy.GetComponent<AIBase>();
         try
         {
-            NavMesh.SamplePosition(currentWave.spawnPoints[Random.Range(0, currentWave.spawnPoints.Length)].transform.position, out NavMeshHit hit, 3, walkableMask);
+            NavMesh.SamplePosition(FindSpawnPos(), out NavMeshHit hit, 3, walkableMask);
             spawnedEnemy.transform.position = hit.position;
             spawnedEnemy.GetComponent<NavMeshAgent>().enabled = true;
         }
         catch
         {
+           
             print("Agent:" + name + "Failed to find position");
             spawnedEnemy.SetActive(false);
+            return; // give up and try again, this isnt the final solution. 
         }
 
         ai.spawner = this;
