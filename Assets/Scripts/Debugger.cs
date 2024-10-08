@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Debugger : MonoBehaviour
 {
-    public static bool debugMode = true;
+    public static bool debugMode = false;
 }

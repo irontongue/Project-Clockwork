@@ -14538,7 +14538,7 @@ PrefabInstance:
     - target: {fileID: 1506753682869256494, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: damage
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955605711507786865, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -26498,7 +26498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 10
+  weaponToEdit: 0
   shotgunUpgrades:
   - packetName: Damage
     weaponType: 0
@@ -35237,8 +35237,6 @@ MonoBehaviour:
     EndEvent: {fileID: 0}
   - enemies:
     - enemy: 0
-      spawnChances: 3
-    - enemy: 1
       spawnChances: 1
     maxEnemiesToSpawn: 30
     spawnSpeed: 1
@@ -35247,7 +35245,7 @@ MonoBehaviour:
     EndEvent: {fileID: 0}
   - enemies:
     - enemy: 0
-      spawnChances: 2
+      spawnChances: 5
     - enemy: 1
       spawnChances: 1
     maxEnemiesToSpawn: 30
@@ -35257,7 +35255,7 @@ MonoBehaviour:
     EndEvent: {fileID: 90341357}
   - enemies:
     - enemy: 0
-      spawnChances: 2
+      spawnChances: 4
     - enemy: 1
       spawnChances: 1
     maxEnemiesToSpawn: 35
@@ -35287,13 +35285,23 @@ MonoBehaviour:
     EndEvent: {fileID: 90341357}
   - enemies:
     - enemy: 0
-      spawnChances: 1
+      spawnChances: 2
     - enemy: 1
       spawnChances: 1
     maxEnemiesToSpawn: 65
     spawnSpeed: 0.8
     enemiesToKillToEndWave: 55
     EXPShare: 85
+    EndEvent: {fileID: 0}
+  - enemies:
+    - enemy: 0
+      spawnChances: 2
+    - enemy: 1
+      spawnChances: 1
+    maxEnemiesToSpawn: 75
+    spawnSpeed: 0
+    enemiesToKillToEndWave: 0
+    EXPShare: 0
     EndEvent: {fileID: 0}
   pathRadiusFromSpawn: 0
   walkableMask:

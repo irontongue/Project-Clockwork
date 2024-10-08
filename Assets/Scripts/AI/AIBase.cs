@@ -14,12 +14,16 @@ public class AIBase : EnemyInfo
     [SerializeField, TabGroup("Base AI")] protected float attackRange;
     [SerializeField, TabGroup("Base AI")] protected float seccondsBetweenAttacks;
     [SerializeField, TabGroup("Base AI")] protected float damage = 1;
+    [SerializeField, TabGroup("Base AI")] protected float attackDelay = 0.1f;
     [Header("Audio Settings")]
     [SerializeField, TabGroup("Base AI")] AudioClip[] attackSounds;
     [Header("Agent Settings")]
     [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
+    [Header("AttackAnim")]
+    [SerializeField, TabGroup("Base AI")] protected Sprite baseSprite, attackSprite;
     public EnemySpawner spawner;
     AudioSource source;
+ 
     
 
     
@@ -29,6 +33,10 @@ public class AIBase : EnemyInfo
     protected float DistanceToPlayer()
     {
         return Vector3.Distance(transform.position, player.transform.position);
+    }
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     protected override void Start()
     {
@@ -94,12 +102,21 @@ public class AIBase : EnemyInfo
         }
         catch { }
     }
+   
     protected virtual void DamagePlayer()
     {
-        AttackEffects();
-
-        player.GetComponent<PlayerDamageHandler>().Damage(damage,transform);
+        spriteRenderer.sprite = attackSprite;
+        Invoke("FinalizeDamage", attackDelay);
+        print("damaginPlayer " + attackDelay);
         
+    }
+
+    protected virtual void FinalizeDamage()
+    {
+        AttackEffects();
+        spriteRenderer.sprite = baseSprite;
+        player.GetComponent<PlayerDamageHandler>().Damage(damage, transform);
+        print("base");
     }
     protected override void DeathEvent()
     {

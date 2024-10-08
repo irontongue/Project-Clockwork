@@ -32,7 +32,7 @@ public class GamePauser : MonoBehaviour
 
 
         if (Debugger.debugMode)
-            print(callback.name + " " + (pauseGame == true ? "Paused" : "Unpaused") + " THE GAME!");
+            print(callback.name + " " + (pauseGame == true ? "Paused" : "Unpaused") + " The Game");
         GameState.GamePaused = pauseGame;
         if(!pauseGame)
         {
