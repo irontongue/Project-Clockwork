@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 4845874537293164701}
   - component: {fileID: 6622705205575744555}
   - component: {fileID: 6544577775112266796}
+  - component: {fileID: -2559622701137352638}
   m_Layer: 3
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -119,13 +120,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  maxHealth: 10
-  health: 10
+  maxHealth: 30
+  health: 30
   speed: 8
-  EXP: 1
+  EXP: 2
   healthBarImage: {fileID: 3652361723569603343}
   spriteRenderer: {fileID: 0}
   damageFlashTime: 1
+  healthPotionDropChance: 0.1
+  deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
+    type: 3}
+  healthPotionPrefab: {fileID: 445344903588590110, guid: 3cff64084d5df4843b65f08c362c7534,
+    type: 3}
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
   attackRange: 35
@@ -162,7 +168,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 7
-  m_Acceleration: 8
+  m_Acceleration: 999
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -289,7 +295,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0d247ed3680f90a4bb065cbbc9c10f63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -354,6 +360,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.85, y: 1.99, z: 0.2}
   m_Center: {x: 0, y: -0.47, z: 0}
+--- !u!114 &-2559622701137352638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693677959915782852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a3a8eb01e789047b2a01233d8b6cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maskPercentage: 1
 --- !u!1001 &4118339082628382343
 PrefabInstance:
   m_ObjectHideFlags: 0

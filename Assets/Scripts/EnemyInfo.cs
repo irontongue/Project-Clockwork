@@ -24,6 +24,15 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public Image healthBarImage;
     [TabGroup("Base AI")] public SpriteRenderer spriteRenderer;
     [TabGroup("Base AI")] public float damageFlashTime = 1;
+    [TabGroup("Base AI")] public float healthPotionDropChance = 0.1f;
+
+    [Header("Prefabs")]
+    [TabGroup("Base AI")] public GameObject deathPFX;
+    [TabGroup("Base AI")] public GameObject healthPotionPrefab;
+
+
+
+    SpriteMaskUpdate spriteMaskUpdate;
     float flashTimer = 1;
     [HideInInspector] public int fireStacks = 0;
     Color grey = new Color(0.75f, 0.75f, 0.75f);
@@ -34,7 +43,11 @@ public class EnemyInfo : EnemyDamageHandler
         {
             Debug.LogWarning(this + " Sprite Renderer is not assigned");
         }
-        
+        if(!(spriteMaskUpdate = GetComponent<SpriteMaskUpdate>()))
+        {
+            Debug.LogWarning(this + " SpriteMaskUpdate is not Present on: " + gameObject.name);
+        }
+
     }
 
     #endregion
@@ -66,17 +79,29 @@ public class EnemyInfo : EnemyDamageHandler
     void ChangeHealth(float amount)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
+        float percent = health / maxHealth;
         if(healthBarImage != null)
         {
-            healthBarImage.fillAmount = health / maxHealth;
+            healthBarImage.fillAmount = percent;
         }
         if (health == 0)
         {
             DeathEvent();
-
+            if (deathPFX != null)
+                Instantiate(deathPFX, transform.position,deathPFX.transform.rotation);
+            if(healthPotionPrefab != null)
+            {
+                float r = Random.Range(0f, 1f);
+                if (r < healthPotionDropChance)
+                    Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
+            }
             spriteRenderer.color = Color.white;
             StopAllCoroutines();
             return;
+        }
+        if(spriteMaskUpdate  != null) 
+        {
+            spriteMaskUpdate.SetMaskPercentage(percent);
         }
         if (flashTimer < 1)
         {

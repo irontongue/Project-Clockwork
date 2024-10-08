@@ -14545,6 +14545,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2132596486043616326, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.255
+      objectReference: {fileID: 0}
     - target: {fileID: 2885463159808772724, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: revolver
@@ -14610,6 +14615,16 @@ PrefabInstance:
       propertyPath: seccondsSinceLastHitToHeal
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5176885612826155573, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176885612826155573, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5763983037393724092, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: donutImage
@@ -14648,22 +14663,22 @@ PrefabInstance:
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[0]
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[1]
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[2]
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[3]
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -14678,27 +14693,27 @@ PrefabInstance:
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[6]
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
-        type: 3}
-      propertyPath: expToLvlup.Array.data[7]
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
-      propertyPath: expToLvlup.Array.data[8]
+      propertyPath: expToLvlup.Array.data[7]
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: expToLvlup.Array.data[8]
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[9]
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[10]
-      value: 60
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -14708,17 +14723,17 @@ PrefabInstance:
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[12]
-      value: 60
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[13]
-      value: 60
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expToLvlup.Array.data[14]
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -14778,6 +14793,17 @@ PrefabInstance:
     - target: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645725708352849043, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: bulletTrailRendererPrefab
+      value: 
+      objectReference: {fileID: 9021606884958356682, guid: ece0f761fa5f60d41b7fcf7b953eaf93,
+        type: 3}
+    - target: {fileID: 7867189388780044975, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -21938,7 +21964,7 @@ PrefabInstance:
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
       propertyPath: weaponToEdit
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
@@ -21972,6 +21998,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
+      propertyPath: weaponStats.Array.data[2].damage
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
       propertyPath: weaponStats.Array.data[4].moveSpeed
       value: 0.1
       objectReference: {fileID: 0}
@@ -21989,6 +22020,11 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponStats.Array.data[1].chargeUpTime
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
+      propertyPath: weaponStats.Array.data[2].bulletSpread
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
@@ -22021,6 +22057,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1440079885}
+    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1440079888}
+    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1440079889}
   m_SourcePrefab: {fileID: 100100000, guid: 4cf5941a52388724587fd318a05bcd46, type: 3}
 --- !u!1 &1059885441 stripped
 GameObject:
@@ -26498,7 +26542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 0
+  weaponToEdit: 10
   shotgunUpgrades:
   - packetName: Damage
     weaponType: 0
@@ -26840,144 +26884,7 @@ MonoBehaviour:
   dogUpgrades: []
   grenadeLaucherUpgrades: []
   throwingKnivesUpgrades: []
-  playerRevolverUpgrades:
-  - packetName: Damage
-    weaponType: 8
-    packet:
-    - upgradeTitle: Primary Weapon Damage I
-      upgradeBody: Increases damage by 1
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Primary Weapon Damage II
-      upgradeBody: Increases damage by 2
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Primary Weapon Damage III
-      upgradeBody: Increases damage by 3
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    levels: 0
-  - packetName: MagCapacity
-    weaponType: 8
-    packet:
-    - upgradeTitle: Primary Weapon Capacity I
-      upgradeBody: Increases max ammo by 3
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 15
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    - upgradeTitle: 'Primary Weapon Capacity II '
-      upgradeBody: Increases max ammo by 4
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 15
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 4
-    - upgradeTitle: Primary Weapon Capacity III
-      upgradeBody: Increases max ammo by 5
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 15
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 5
-    levels: 0
-  - packetName: ReloadSpeed
-    weaponType: 8
-    packet:
-    - upgradeTitle: Primary Weapon Reload Speed I
-      upgradeBody: Reloads 20% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 14
-      weaponToEnable: {fileID: 0}
-      amountToAdd: -0.2
-    - upgradeTitle: Primary Weapon Reload Speed II
-      upgradeBody: Reloads 40% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 14
-      weaponToEnable: {fileID: 0}
-      amountToAdd: -0.2
-    - upgradeTitle: Primary Weapon Reload Speed III
-      upgradeBody: Reloads 60% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 14
-      weaponToEnable: {fileID: 0}
-      amountToAdd: -0.2
-    levels: 0
-  - packetName: FireRate
-    weaponType: 8
-    packet:
-    - upgradeTitle: Primary Weapon FireRate I
-      upgradeBody: Shoots 25% Faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 1
-      weaponToEnable: {fileID: 0}
-      amountToAdd: -0.05
-    - upgradeTitle: Primary Weapon FireRate II
-      upgradeBody: Shoots 50% Faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 8
-      weaponStatType: 1
-      weaponToEnable: {fileID: 0}
-      amountToAdd: -0.05
-    levels: 0
+  playerRevolverUpgrades: []
   autoWeapons:
   - packetName: Shotgun
     weaponType: 0
@@ -27113,6 +27020,114 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 8489862797783062732, guid: 6666fe5ec2ba89d4b986000baead11f5,
     type: 3}
+--- !u!82 &1440079888
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440079878}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dc6b9482e6881a9498e9317c40e30879, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1440079889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440079878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39656da3d2da7b41866bb8349ef4fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1440839559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37293,6 +37308,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 59828854660822844, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 59828854660822844, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 59828854660822844, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 59828854660822844, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 59828854660822844, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 361049292092099499, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
       propertyPath: m_BlockingMask.m_Bits
@@ -37316,6 +37356,102 @@ PrefabInstance:
     - target: {fileID: 598534074536633072, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
       propertyPath: spacingBetweenCollumUpgrades
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 764290754788406605, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 764290754788406605, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 764290754788406605, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 764290754788406605, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 764290754788406605, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 957141172016824651, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6aa223882c56a3441912568cd93b5a99,
+        type: 3}
+    - target: {fileID: 957141172016824651, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242400203295855506, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242400203295855506, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242400203295855506, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242400203295855506, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242400203295855506, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242400203295855506, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266291416740826133, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266291416740826133, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266291416740826133, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266291416740826133, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266291416740826133, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266291416740826133, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3124086577222534255, guid: 081e6f4431cd9634a8cf676da0645f8c,
@@ -37448,10 +37584,32 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -325
       objectReference: {fileID: 0}
+    - target: {fileID: 4557598530621628480, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6aa223882c56a3441912568cd93b5a99,
+        type: 3}
+    - target: {fileID: 4557598530621628480, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5029370104989197525, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
       propertyPath: m_Name
       value: DebugCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375174971888706256, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6aa223882c56a3441912568cd93b5a99,
+        type: 3}
+    - target: {fileID: 5375174971888706256, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6180143022209707149, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
@@ -37461,6 +37619,22 @@ PrefabInstance:
     - target: {fileID: 6462304630723538410, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013083986025753345, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013083986025753345, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6aa223882c56a3441912568cd93b5a99,
+        type: 3}
+    - target: {fileID: 7013083986025753345, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7067520451555941402, guid: 081e6f4431cd9634a8cf676da0645f8c,

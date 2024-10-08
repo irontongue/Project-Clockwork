@@ -34,10 +34,11 @@ public class PlayerDamageHandler : MonoBehaviour
             DeathEvent();
 
         timeSinceLastHit = 0;
-
-        
-
-        
+    }
+    public void Heal(float amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        UpdateHealthUI();
     }
     private void Update()
     {

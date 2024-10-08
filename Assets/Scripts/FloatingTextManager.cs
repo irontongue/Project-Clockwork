@@ -14,14 +14,18 @@ public class FloatingTextManager : MonoBehaviour
         playerTransform = FindAnyObjectByType<PlayerMovement>().transform;
         AddOneHundredFloatingTextGameObjects();
     }
-    public static void SpawnFloatingText(Vector3 position, float damageValue)
+    public static void SpawnFloatingText(Vector3 position, float damageValue, bool offset = true, float offesetAmount = 0.25f)
     {
         if(iterator == floatingTextPool.Length)
             iterator = 0;
-
+        if (offset)
+        {
+            float randFloat = Random.Range(-offesetAmount, offesetAmount);
+            position = position + new Vector3(randFloat, randFloat, 0);
+        }
         floatingTextPool[iterator].transform.position = position;
         floatingTextPool[iterator].gameObject.SetActive(true);
-        floatingTextPool[iterator].ResetText(damageValue.ToString());
+        floatingTextPool[iterator].ResetText((damageValue * 10).ToString());
         
         iterator++;
     }

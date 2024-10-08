@@ -15,6 +15,8 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     [SerializeField]ParticleSystem bloodHitPFX;
     LayerMask enemyLayer = 1 << 3;
     LayerMask enemyBodyLayer = 1 << 7;
+    List<TrailRenderer> trailRendererPool = new();
+    [SerializeField]GameObject bulletTrailRendererPrefab;
     protected override void Start()
     {
         base.Start();
@@ -45,7 +47,7 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         if (firing)
         {
             if(resetRotation == false)resetRotation = true;
-            //transform.LookAt(enemyInfo.transform); // TO DO: Need to add Min/Max rotation here
+            transform.LookAt(enemyInfo.transform); // TO DO: Need to add Min/Max rotation here
             return;
         }
         if (!UpdateCoolDown())
@@ -79,13 +81,21 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         if(playFX)
             muzzleFlashPFX.Play(true);
         Vector3 dir = (enemyInfo.transform.position - playerTransform.position).normalized;
+        if(stats.numberOfBullets > trailRendererPool.Count)
+        {
+            for(int i = stats.numberOfBullets - trailRendererPool.Count; i > 0; i--) 
+            {
+                trailRendererPool.Add(Instantiate(bulletTrailRendererPrefab).GetComponent<TrailRenderer>());
+            }
+        }
         for(int i = 0; i < stats.numberOfBullets; i++)
         {
-            Quaternion randomRot = Quaternion.Euler(Random.Range(0, stats.bulletSpread), Random.Range(0, stats.bulletSpread), 0);
+            Quaternion randomRot = Quaternion.Euler(Random.Range(0, stats.bulletSpread * 0.5f), Random.Range(0, stats.bulletSpread * 0.5f), 0);
             Vector3 randDir = randomRot * dir;
             Physics.Raycast(playerTransform.position, randDir, out hit);
             if(hit.transform != null)
             {
+                StartCoroutine(MoveTrail(trailRendererPool[i], hit.point));
                 EnemyDamageHandler dh;
                 if(dh = hit.transform.GetComponent<EnemyDamageHandler>())
                 {
@@ -98,12 +108,29 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
                     Instantiate(terrainHitPFX, hit.point, Quaternion.identity).transform.LookAt(transform);
                 }
             }
+            else
+            {
+                StartCoroutine(MoveTrail(trailRendererPool[i], transform.position + 100 * transform.forward));
+
+            }
+
         }
+
     }
 
     public void FinishAnimation()
     {
         firing = false;
+    }
+    IEnumerator MoveTrail(TrailRenderer trailRenderer, Vector3 destination)
+    {
+        trailRenderer.transform.position = transform.position;
+        trailRenderer.gameObject.SetActive(true);
+        yield return null;
+        trailRenderer.transform.position = destination;
+        yield return new WaitForSeconds(trailRenderer.time);
+        trailRenderer.gameObject.SetActive(false);
+
     }
 
 }

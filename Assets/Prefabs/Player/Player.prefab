@@ -430,6 +430,7 @@ MonoBehaviour:
   ammoUIText: {fileID: 0}
   audioSource: {fileID: 7430242435101204861}
   ammoWheel: {fileID: 0}
+  revolver: {fileID: 0}
 --- !u!82 &7430242435101204861
 AudioSource:
   m_ObjectHideFlags: 0
@@ -541,6 +542,8 @@ MonoBehaviour:
   maxHealth: 25
   healthText: {fileID: 0}
   deathUI: {fileID: 0}
+  healthRegenSpeed: 0.5
+  seccondsSinceLastHitToHeal: 2
   frontImage: {fileID: 0}
   leftImage: {fileID: 0}
   rightImage: {fileID: 0}
@@ -904,7 +907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2132596486043616326
 Transform:
   m_ObjectHideFlags: 0
@@ -945,6 +948,7 @@ MonoBehaviour:
     type: 3}
   bloodHitPFX: {fileID: 3766226238398832601, guid: 401c055fb346c2b48b4813242fdd1b78,
     type: 3}
+  bulletTrailRendererPrefab: {fileID: 0}
 --- !u!95 &9057406722771929792
 Animator:
   serializedVersion: 5

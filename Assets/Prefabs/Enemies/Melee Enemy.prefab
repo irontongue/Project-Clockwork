@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 891083900259894004}
   - component: {fileID: 8329881495238460558}
   - component: {fileID: 5083003481326997813}
+  - component: {fileID: -5181549349747691245}
   m_Layer: 3
   m_Name: Melee Enemy
   m_TagString: Untagged
@@ -57,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f89a0ffb150a435449fc71b20eea1cc5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,6 +131,11 @@ MonoBehaviour:
   healthBarImage: {fileID: 850338302134878798}
   spriteRenderer: {fileID: 0}
   damageFlashTime: 1
+  healthPotionDropChance: 0.1
+  deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
+    type: 3}
+  healthPotionPrefab: {fileID: 445344903588590110, guid: 3cff64084d5df4843b65f08c362c7534,
+    type: 3}
   fireStacks: 0
   agent: {fileID: 5083003481326997813}
   attackRange: 4
@@ -142,7 +148,6 @@ MonoBehaviour:
     m_Bits: 1
   baseSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
   attackSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
-  seccondsForAttackFrame: 0
   spawner: {fileID: 0}
   aiBuisy: 0
   afterAttackTimer: 1
@@ -156,11 +161,11 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.38
-  m_Speed: 15
-  m_Acceleration: 8
+  m_Speed: 13
+  m_Acceleration: 999
   avoidancePriority: 50
   m_AngularSpeed: 90000
-  m_StoppingDistance: 2
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -168,6 +173,19 @@ NavMeshAgent:
   m_BaseOffset: 0.98
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
+--- !u!114 &-5181549349747691245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189324837318420978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a3a8eb01e789047b2a01233d8b6cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maskPercentage: 1
 --- !u!1 &9176862886537498591
 GameObject:
   m_ObjectHideFlags: 0

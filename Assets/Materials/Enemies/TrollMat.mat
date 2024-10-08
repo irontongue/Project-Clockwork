@@ -75,7 +75,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _GorePercent: 0.5
-    - _MaskPercentage: 0.01
+    - _MaskPercentage: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors: []
