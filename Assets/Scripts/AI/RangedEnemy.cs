@@ -135,7 +135,9 @@ public class RangedEnemy : AIBase
     float timeSinceLastAttack;
     //float noVisionTries;
 
-    protected override void DamagePlayer()
+  
+
+    protected override void FinalizeDamage()
     {
         AttackEffects();
         Projectile spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
@@ -143,8 +145,9 @@ public class RangedEnemy : AIBase
         spawnedProjectile.damage = damage;
         spawnedProjectile.speed = projectileSpeed;
         spawnedProjectile.origin = gameObject;
-        
+
         print(spawnedProjectile.name);
+        spriteRenderer.sprite = baseSprite;
     }
     void Attacking()
     {
@@ -157,7 +160,6 @@ public class RangedEnemy : AIBase
         agent.isStopped = true;
         if (!attacked)
         {
-            print("tryattack");
             if (!Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackRange))
             {
                 print("Failed to find player");

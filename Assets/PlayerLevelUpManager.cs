@@ -24,7 +24,6 @@ public class PlayerLevelUpManager : MonoBehaviour
 
     private void Start()
     {
-        print("yya");
         maxLevel = expToLvlup.Length;
         upgradeManager = FindAnyObjectByType<UpgradeManager>();
         textColor = levelUpReadyText.color;
@@ -65,7 +64,7 @@ public class PlayerLevelUpManager : MonoBehaviour
     }
     public void LevelUp()
     {
-        GamePauser.instance.PauseGame(true,gameObject);
+        GamePauser.instance.PauseGame(true,false,gameObject);
         readyToLVLup = false;
         currentEXP -= expToLvlup[currentLevel];
         currentLevel++;

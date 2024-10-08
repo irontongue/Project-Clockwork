@@ -9,16 +9,22 @@ public class WeaponRefrenceManager : MonoBehaviour
     public AudioSource audioSource;
     public UnityEngine.UI.Image ammoWheel;
     public Revolver revolver;
+    public static WeaponRefrenceManager instance;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
 
     public void RecieveUpgrade(WeaponType weaponType, WeaponStatType weaponStatType, float amountToAdd)
     {
-       
+        UpdateStats(revolver, weaponStatType, amountToAdd);// temp for now, will be switch for each primary weapon
     }
 
     void UpdateStats(BasePrimaryWeapon weapon, WeaponStatType weaponStatType, float amountToAdd)
     {
+        print("HERE");
         switch(weaponStatType)
         {
             case WeaponStatType.Damage:
@@ -27,9 +33,12 @@ public class WeaponRefrenceManager : MonoBehaviour
             case WeaponStatType.AttackSpeed:
                 weapon.seccondsBetweenShots += amountToAdd;
                 break;
-            /*case WeaponStatType.reloadTime:
+            case WeaponStatType.ReloadSpeed:
                 weapon.reloadTime += amountToAdd;
-                break;*/
+                break;
+            case WeaponStatType.MagCapacity:
+                weapon.magCapacity += (int)amountToAdd;
+                break;
         
         }
     }

@@ -23,12 +23,12 @@ public class EnemySpawner : MonoBehaviour
     [System.Serializable]
     struct WaveInfo
     {
-        public EnemySpawnInfo[] enemies;
-        public GameObject[] spawnPoints;
-        public float maxEnemiesToSpawn;
-        public float spawnSpeed;
-        public float enemiesToKillToEndWave;
-        public float EXPShare;
+        [FoldoutGroup("Wave")] public EnemySpawnInfo[] enemies;
+        [FoldoutGroup("Wave")] public float maxEnemiesToSpawn;
+        [FoldoutGroup("Wave")] public float spawnSpeed;
+        [FoldoutGroup("Wave")] public float enemiesToKillToEndWave;
+        [FoldoutGroup("Wave")] public float EXPShare;
+        [FoldoutGroup("Wave")] public WaveEvent EndEvent;
 
     }
   
@@ -36,8 +36,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] WaveInfo[] waves;
     [SerializeField] float pathRadiusFromSpawn;
     [SerializeField] LayerMask walkableMask;
-    [SerializeField] WaveEvent[] startEvents;
-    [SerializeField] WaveEvent[] endEvents;
+    [SerializeField] WaveEvent[] spawnerStartEvents;
+    [SerializeField] WaveEvent[] spawnerEndEvents;
+    [SerializeField] GameObject[] spawnPoints;
 
     PlayerLevelUpManager playerLevelUpManager;
 
@@ -68,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
     void StartWave()
     {
        
-        foreach (WaveEvent wEvent in startEvents)
+        foreach (WaveEvent wEvent in spawnerStartEvents)
         {
             wEvent.WaveStart();
         }
@@ -112,7 +113,7 @@ public class EnemySpawner : MonoBehaviour
         while (i < 100)
         {
             i++;
-            foundPos = currentWave.spawnPoints[Random.Range(0, currentWave.spawnPoints.Length)].transform.position;
+            foundPos = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
             if (Vector3.Distance(foundPos, playerLevelUpManager.transform.position) < minSpawnDistanceFromPlayer)
                 continue;
 
@@ -156,6 +157,7 @@ public class EnemySpawner : MonoBehaviour
         if(spawnedEnemies >= currentWave.maxEnemiesToSpawn)
         {
             waveSpawning = false;
+           
         }
 
         
@@ -165,12 +167,17 @@ public class EnemySpawner : MonoBehaviour
     {
         enemysKilled++;
         if (enemysKilled >= currentWave.enemiesToKillToEndWave)
+        {
+            if (currentWave.EndEvent != null)
+                currentWave.EndEvent.WaveEnd();
             StartWave();
+        }
+            
     }
 
     void AllWavesCleared()
     {
-        foreach (WaveEvent wEvent in startEvents)
+        foreach (WaveEvent wEvent in spawnerEndEvents)
         {
             wEvent.WaveEnd();
         }
