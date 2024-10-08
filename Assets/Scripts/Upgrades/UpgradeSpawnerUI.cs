@@ -27,7 +27,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
     
     public void DisplayPopups(List<UpgradeLine> upgradesToDisplay)
     {
-        GamePauser.instance.PauseGame(true);
+        GamePauser.instance.PauseGame(true, gameObject);
         buttons.Clear();
         UpgradeButton.ButtonDelegate upgradeDelegate = GainUpgrade; // give this to the button, so it can call back
     
@@ -78,10 +78,12 @@ public class UpgradeSpawnerUI : MonoBehaviour
             upgradeManager.UnlockWeapon(packet);
         else
             upgradeManager.UnlockUpgrade(packet);
+
+        PlayerLevelUpManager.instance.LevelUpFinished();
    
    
         ClearUI();
-        GamePauser.instance.PauseGame(false);
+        GamePauser.instance.PauseGame(false, gameObject);
     }
 
    

@@ -8,10 +8,10 @@ using UnityEngine.UI;
 public class BasePrimaryWeapon : MonoBehaviour
 {
     [Header("Base Settings")]
-    [SerializeField] protected float damage;
-    [SerializeField] protected float range;
-    [SerializeField] protected float seccondsBetweenShots;
-    [SerializeField] protected float reloadTime;// i may switch this out to anim controlled in the future.
+    [SerializeField] public float damage;
+    [SerializeField] public float range;
+    [SerializeField] public float seccondsBetweenShots;
+    [SerializeField] public float reloadTime;// i may switch this out to anim controlled in the future.
 
     [SerializeField] protected AudioClip[] fireSounds;
     [SerializeField] protected LayerMask enemyMask;
