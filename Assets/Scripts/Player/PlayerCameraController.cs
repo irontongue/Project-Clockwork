@@ -13,7 +13,7 @@ public class PlayerCameraController : MonoBehaviour
     private void Start()
     {
         camTransform = Camera.main.transform;
-        Cursor.lockState = CursorLockMode.Locked;
+     
         cameraRotation = new(camTransform.eulerAngles.x, transform.eulerAngles.y);
   
     }
@@ -22,9 +22,9 @@ public class PlayerCameraController : MonoBehaviour
         if (GameState.GamePaused)
             return;
        
-        cameraRotation.y += Input.GetAxisRaw("Mouse X") * camSenseX;
+        cameraRotation.y += Input.GetAxisRaw("Mouse X") * camSenseX * GlobalSettings.mouseSensitivty;
       
-        cameraRotation.x -= Input.GetAxisRaw("Mouse Y") * camSenseY;
+        cameraRotation.x -= Input.GetAxisRaw("Mouse Y") * camSenseY * GlobalSettings.mouseSensitivty;
 
       
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, minXRot, maxXRot);

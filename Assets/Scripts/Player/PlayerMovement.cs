@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
         DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
         DevText.DisplayInfo("maxPlayerWalk", "MaxPlayerWalkSpeed" + maxPlayerWalkSpeed, "Movement");
+        DevText.DisplayInfo("sprintTimer", "TimeToNextDash: " + dashCooldownTimer, "Movement");
         if (isActuallyGrounded)
         {
             lastPlayerSafePos = transform.position;
@@ -224,6 +225,8 @@ public class PlayerMovement : MonoBehaviour
             dashTimer = dashLenght;
             Vector3 dashDirection = (Camera.main.transform.right * Input.GetAxisRaw("Horizontal") + Camera.main.transform.forward * Input.GetAxisRaw("Vertical")).normalized;
             dashVelocity = dashDirection * dashSpeed;
+            dashCooldownTimer = dashCooldown;
+            readyToDash = false;
         }
 
         if (currentlyDashing)
@@ -235,7 +238,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (dashTimer <= 0)
                 CancelDash();
-            
+
+            return;
         }
         if (!readyToDash)
         {

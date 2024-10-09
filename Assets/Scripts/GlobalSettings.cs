@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class GlobalSettings : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    static public float audioVolume = 0.5f;
+    static public float mouseSensitivty = 1f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

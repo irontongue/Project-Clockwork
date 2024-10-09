@@ -16,7 +16,7 @@ public class GamePauser : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(PauseGame(!GameState.GamePaused,true, gameObject))
+            if(PauseGame(!GameState.GamePaused, true, gameObject))
                  OpenPauseMenu(GameState.GamePaused);
         }
     }

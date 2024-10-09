@@ -176,7 +176,7 @@ public class BasePrimaryWeapon : MonoBehaviour
             Debug.LogWarning("AudioSource not set in WRM");
             return;
         }
-        source.PlayOneShot(fireSounds[Random.Range(0, fireSounds.Length - 1)]);
+        source.PlayOneShot(fireSounds[Random.Range(0, fireSounds.Length - 1)], GlobalSettings.audioVolume);
     }
     protected void PlayFireAnimation()
     {

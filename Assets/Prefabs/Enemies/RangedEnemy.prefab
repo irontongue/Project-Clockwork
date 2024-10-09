@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  maxHealth: 30
-  health: 30
+  maxHealth: 25
+  health: 25
   speed: 8
   EXP: 2
   healthBarImage: {fileID: 3652361723569603343}
@@ -134,7 +134,7 @@ MonoBehaviour:
     type: 3}
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
-  attackRange: 35
+  attackRange: 40
   seccondsBetweenAttacks: 3
   damage: 1
   attackDelay: 0.2
@@ -149,9 +149,9 @@ MonoBehaviour:
   aiBuisy: 0
   state: 0
   afterAttackTimer: 1.5
-  findNewPositionRangeFromPlayer: 15
+  findNewPositionRangeFromPlayer: 10
   findNewPositionRangeRandomMultiplyer: 0.2
-  playerTooCloseRange: 4
+  playerTooCloseRange: 6
   findNewPosRange: 5
   findNewPosTrys: 5
   projectile: {fileID: 6170293064856852499, guid: ad992dcb8512749409890f3326a6b3e6,
@@ -167,7 +167,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 7
+  m_Speed: 9
   m_Acceleration: 999
   avoidancePriority: 50
   m_AngularSpeed: 120

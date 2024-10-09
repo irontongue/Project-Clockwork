@@ -24,7 +24,7 @@ public class Revolver : BasePrimaryWeapon
      
        
 
-        if (!Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButton(0))
             return;
 
         DamageFowardEnemy();
