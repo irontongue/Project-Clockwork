@@ -15730,7 +15730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &672372520
 Transform:
   m_ObjectHideFlags: 0
@@ -23083,12 +23083,12 @@ PrefabInstance:
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
       propertyPath: weaponToEdit
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
       propertyPath: weaponTypeToAdd
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
@@ -23119,6 +23119,11 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponStats.Array.data[2].damage
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
+      propertyPath: weaponStats.Array.data[4].damage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
@@ -27915,24 +27920,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 3
+  weaponToEdit: 1
   shotgunUpgrades:
   - packetName: Damage
     weaponType: 0
     packet:
     - upgradeTitle: Shotgun Damage I
-      upgradeBody: Increases Damage by 0.1
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.1
-    - upgradeTitle: Shotgun Damage II
-      upgradeBody: Increases Damage by 0.2
+      upgradeBody: Increases Damage by 20% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -27942,8 +27936,19 @@ MonoBehaviour:
       weaponStatType: 0
       weaponToEnable: {fileID: 0}
       amountToAdd: 0.2
+    - upgradeTitle: Shotgun Damage II
+      upgradeBody: Increases Damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
     - upgradeTitle: Shotgun Damage III
-      upgradeBody: Increases Damage by 0.5
+      upgradeBody: Increases Damage by 50% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -27954,7 +27959,7 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 0.5
     - upgradeTitle: Shotgun Damage IV
-      upgradeBody: Increases Damage by 0.5
+      upgradeBody: Increases Damage by 120% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -27963,13 +27968,13 @@ MonoBehaviour:
       weaponType: 0
       weaponStatType: 0
       weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
+      amountToAdd: 1.2
     levels: 0
   - packetName: Range
     weaponType: 0
     packet:
     - upgradeTitle: 'Shotgun Range I '
-      upgradeBody: Increases activation range by 25%
+      upgradeBody: Increases activation range by 50% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 1
@@ -27980,7 +27985,7 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 3.75
     - upgradeTitle: 'Shotgun Range II '
-      upgradeBody: Increases activation range by 50%
+      upgradeBody: Increases activation range by 50%  of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 1
@@ -27991,7 +27996,7 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 3.75
     - upgradeTitle: Shotgun Range III
-      upgradeBody: Increases activation range by 100%
+      upgradeBody: Increases activation range by 50%  of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -28000,44 +28005,66 @@ MonoBehaviour:
       weaponType: 0
       weaponStatType: 8
       weaponToEnable: {fileID: 0}
-      amountToAdd: 7.5
-    levels: 0
-  - packetName: Shotgun Spread
-    weaponType: 0
-    packet:
-    - upgradeTitle: Shotgun Pellet Spread I
-      upgradeBody: Tightens the spread of pellets by 20%
+      amountToAdd: 3.75
+    - upgradeTitle: Shotgun Range IV
+      upgradeBody: Increases activation range by 100%  of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 0
-      weaponStatType: 5
+      weaponStatType: 3
       weaponToEnable: {fileID: 0}
-      amountToAdd: 4
-    - upgradeTitle: Shotgun Pellet Spread II
-      upgradeBody: Tightness increase now 40%
+      amountToAdd: 7
+    levels: 0
+  - packetName: Cooldown
+    weaponType: 0
+    packet:
+    - upgradeTitle: Shotgun Cooldown I
+      upgradeBody: Decreses cooldown by 50% of base
       isWeapon: 0
-      upgradeType: 0
+      upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 0
-      weaponStatType: 0
+      weaponStatType: 2
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    - upgradeTitle: Shotgun Pellet Spread III
-      upgradeBody: Tightness increase now 60%
+      amountToAdd: 0.5
+    - upgradeTitle: Shotgun Cooldown II
+      upgradeBody: Decreses cooldown by 50% of base
       isWeapon: 0
-      upgradeType: 0
+      upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 0
-      weaponStatType: 0
+      weaponStatType: 2
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3
+      amountToAdd: 0.5
+    - upgradeTitle: Shotgun Cooldown III
+      upgradeBody: Decreses cooldown by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    - upgradeTitle: Shotgun Cooldown IV
+      upgradeBody: Decreses cooldown by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
     levels: 0
   sniperUpgrades:
   - packetName: Cooldown
@@ -28147,29 +28174,40 @@ MonoBehaviour:
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 1
-      weaponStatType: 7
+      weaponStatType: 16
       weaponToEnable: {fileID: 0}
       amountToAdd: 1
     - upgradeTitle: Sniper Penetration II
-      upgradeBody: Bullets hit an additional 2 more enemies
+      upgradeBody: Bullets hit an additional 1 more enemies
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 1
-      weaponStatType: 7
+      weaponStatType: 16
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Sniper Penetration III
+      upgradeBody: Bullets hit an addition 2 enemies
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 16
       weaponToEnable: {fileID: 0}
       amountToAdd: 2
-    - upgradeTitle: Sniper Penetration III
+    - upgradeTitle: Sniper Penetration IV
       upgradeBody: Bullets hit an addition 3 enemies
       isWeapon: 0
-      upgradeType: 9
+      upgradeType: 0
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 7
+      weaponType: 0
+      weaponStatType: 0
       weaponToEnable: {fileID: 0}
       amountToAdd: 3
     levels: 0
@@ -28248,7 +28286,7 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 2
     - upgradeTitle: Tesla Coil  Increased Bounces IV
-      upgradeBody: Increases bounces by 2
+      upgradeBody: Increases bounces by 5
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -28257,13 +28295,13 @@ MonoBehaviour:
       weaponType: 3
       weaponStatType: 9
       weaponToEnable: {fileID: 0}
-      amountToAdd: 2
+      amountToAdd: 5
     levels: 0
   - packetName: Damage
     weaponType: 3
     packet:
     - upgradeTitle: Tesla Coil Damage I
-      upgradeBody: Increases damage by 10%
+      upgradeBody: Increases damage by 50% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -28272,9 +28310,9 @@ MonoBehaviour:
       weaponType: 3
       weaponStatType: 0
       weaponToEnable: {fileID: 0}
-      amountToAdd: 0.1
+      amountToAdd: 0.5
     - upgradeTitle: Tesla Coil Damage II
-      upgradeBody: Increases Damage by 20%
+      upgradeBody: Increases Damage by 50% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -28283,9 +28321,9 @@ MonoBehaviour:
       weaponType: 3
       weaponStatType: 0
       weaponToEnable: {fileID: 0}
-      amountToAdd: 0.1
+      amountToAdd: 0.5
     - upgradeTitle: Tesla Coil Damage III
-      upgradeBody: Increases Damage by 40%
+      upgradeBody: Increases Damage by 100% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -28294,9 +28332,9 @@ MonoBehaviour:
       weaponType: 3
       weaponStatType: 0
       weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
+      amountToAdd: 1
     - upgradeTitle: Tesla Coil Damage IV
-      upgradeBody: Increases Damage by 60%
+      upgradeBody: Increases Damage by 100% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
@@ -28305,48 +28343,107 @@ MonoBehaviour:
       weaponType: 3
       weaponStatType: 0
       weaponToEnable: {fileID: 0}
-      amountToAdd: 0.1
+      amountToAdd: 1
     levels: 0
-  - packetName: Bounce Distance
+  - packetName: Cooldown
     weaponType: 3
     packet:
-    - upgradeTitle: Tesla Coil Bounce Distance I
-      upgradeBody: Increases bounce distance by 30%
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 50% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 3
-      weaponStatType: 10
+      weaponStatType: 2
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    - upgradeTitle: Tesla Coil Bounce Distance II
-      upgradeBody: Increases bounce distance by 60%
+      amountToAdd: 0.5
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 50% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 3
-      weaponStatType: 10
+      weaponStatType: 2
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    - upgradeTitle: Tesla Coil Bounce Distance III
-      upgradeBody: Increases bounce distance by 100%
+      amountToAdd: 0.5
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 100% of base
       isWeapon: 0
       upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 3
-      weaponStatType: 10
+      weaponStatType: 2
       weaponToEnable: {fileID: 0}
-      amountToAdd: 4
+      amountToAdd: 1
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
     levels: 0
   flameThrowerUpgrades: []
   rifleUpgrades: []
-  dogUpgrades: []
+  dogUpgrades:
+  - packetName: Damage
+    weaponType: 5
+    packet:
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 5
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 5
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 5
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 150% of base
+      isWeapon: 0
+      upgradeType: 5
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
+    levels: 0
   grenadeLaucherUpgrades: []
   throwingKnivesUpgrades: []
   playerRevolverUpgrades: []

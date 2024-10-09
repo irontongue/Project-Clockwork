@@ -72,6 +72,11 @@ public class AutomaticWeaponBase : MonoBehaviour
         Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distance, layerMask);
         return hit;
     }
+    protected RaycastHit[] RayCastForwardRayHitEverything(LayerMask layerMask, float distance = float.MaxValue)
+    {
+        RaycastHit[] hit = Physics.RaycastAll(cam.transform.position, cam.transform.forward,distance, layerMask);
+        return hit;
+    }
     /// <summary>
     /// Returns all enemies  within a radius
     /// Useful for explosions

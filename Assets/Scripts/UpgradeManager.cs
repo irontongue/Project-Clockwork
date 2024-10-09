@@ -88,6 +88,7 @@ public class UpgradeManager : MonoBehaviour
         //upgradePackets.AddRange(sniperUpgrades);
         //upgradePackets.AddRange(teslaCoilUpgrades);
         //upgradePackets.AddRange(universalUpgrades);
+        upgradePackets.AddRange(dogUpgrades);
 
         InitilizeWeaponUpgradeDictionary();
 

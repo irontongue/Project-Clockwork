@@ -7,7 +7,7 @@ using System;
 public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, PlayerRevolver}
 public enum DamageType {Physical, Fire, Explosion, None}
 public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat, PlayerRevolver}
-public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance, ReloadSpeed, MagCapacity }
+public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance, ReloadSpeed, MagCapacity, NumberToPierce}
 
 public class AllWeaponStats : MonoBehaviour
 {
@@ -50,7 +50,10 @@ public class AllWeaponStats : MonoBehaviour
             case WeaponStatType.NumberOfBullets:
                 weaponStats[weaponStatsDic[weaponType]].numberOfBullets += (int)amountToAdd;
                 break;
-            case WeaponStatType.TimeToRepeateShot:
+            case WeaponStatType.NumberToPierce:
+                weaponStats[weaponStatsDic[weaponType]].numberToPierce += (int)amountToAdd;
+                break;
+                case WeaponStatType.TimeToRepeateShot:
                 weaponStats[weaponStatsDic[weaponType]].repeateShot += (int)amountToAdd;
                 break;
             case WeaponStatType.LockOnDistance:
@@ -285,6 +288,8 @@ public class WeaponStats
     //[HideInInspector]
     public int numberOfBullets = 1;
     //
+    public int numberToPierce = 0;
+    //
     public int repeateShot = 0;
     //
     public float lockOnDistance;
@@ -390,8 +395,8 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty chargeUpTime = weapon.FindPropertyRelative("chargeUpTime");
             SerializedProperty bulletSpread = weapon.FindPropertyRelative("bulletSpread");
             SerializedProperty numberOfBullets = weapon.FindPropertyRelative("numberOfBullets");
+            SerializedProperty numberToPierce = weapon.FindPropertyRelative("numberToPierce");
             SerializedProperty repeateShot = weapon.FindPropertyRelative("repeateShot");
-
             SerializedProperty lockOnDistance = weapon.FindPropertyRelative("lockOnDistance");
             SerializedProperty bounces = weapon.FindPropertyRelative("bounces");
             SerializedProperty bounceRange = weapon.FindPropertyRelative("bounceRange");
@@ -427,6 +432,7 @@ public class WeapopnStatsEditor : Editor
 
                 case WeaponType.Sniper:
                     EditorGUILayout.PropertyField(chargeUpTime);
+                    EditorGUILayout.PropertyField(numberToPierce);
                                        
                     // Add other properties specific to Sniper
                     break;

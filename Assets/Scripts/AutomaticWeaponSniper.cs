@@ -90,11 +90,26 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     {
         if (playFX)
             muzzleFlashPFX.Play();
-        RaycastHit hit = RayCastForwardRayHit(everythingEnemy);
-        if(hit.transform != null)
+        if(stats.numberToPierce > 0)
+        {
+            RaycastHit[] hits = RayCastForwardRayHitEverything(everythingEnemy);
+            for(int i = 0; i < stats.numberToPierce + 1; i++)
+            {
+                HitCheck(hits[i]);
+            }
+        }
+        else
+        {
+            RaycastHit hit = RayCastForwardRayHit(everythingEnemy);
+            HitCheck(hit);
+        }
+    }
+    void HitCheck(RaycastHit hit)
+    {
+        if (hit.transform != null)
         {
             hit.transform.GetComponent<EnemyDamageHandler>().DealDamage(stats.damage);
-            if(bloodHitPFX)
+            if (bloodHitPFX)
                 Instantiate(bloodHitPFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
         }
     }
