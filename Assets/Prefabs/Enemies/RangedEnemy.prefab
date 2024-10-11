@@ -124,14 +124,15 @@ MonoBehaviour:
   health: 25
   speed: 8
   EXP: 2
-  healthBarImage: {fileID: 3652361723569603343}
-  spriteRenderer: {fileID: 0}
   damageFlashTime: 1
   healthPotionDropChance: 0.1
   deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
     type: 3}
   healthPotionPrefab: {fileID: 445344903588590110, guid: 3cff64084d5df4843b65f08c362c7534,
     type: 3}
+  healthBarImage: {fileID: 3652361723569603343}
+  spriteRenderer: {fileID: 0}
+  floatingTextSpawnOffset: {x: 0, y: 1.89, z: 0}
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
   attackRange: 40

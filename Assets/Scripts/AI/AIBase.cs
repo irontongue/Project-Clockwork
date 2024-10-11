@@ -50,6 +50,7 @@ public class AIBase : EnemyInfo
     protected virtual void Update()
     {
         //transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
+        base.Update();
         transform.LookAt(player.transform.position);
 
         if (pathingToPoint)

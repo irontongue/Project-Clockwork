@@ -8,7 +8,7 @@ public class FloatingText : MonoBehaviour
 {
     public float timer = 1;
     public float speed = 1;
-    TextMeshProUGUI textMeshPro;
+    public TextMeshProUGUI textMeshPro;
     void Start()
     {
     }

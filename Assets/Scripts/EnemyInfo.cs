@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using UnityEditor;
 
 /// <summary>
 /// This script is used as an access point for all scripts enemy related
@@ -21,21 +22,24 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public float health = 10f;
     [TabGroup("Base AI")] public float speed = 5f;
     [TabGroup("Base AI")] public float EXP = 1f;
-    [TabGroup("Base AI")] public Image healthBarImage;
-    [TabGroup("Base AI")] public SpriteRenderer spriteRenderer;
     [TabGroup("Base AI")] public float damageFlashTime = 1;
     [TabGroup("Base AI")] public float healthPotionDropChance = 0.1f;
+     #endregion
 
     [Header("Prefabs")]
     [TabGroup("Base AI")] public GameObject deathPFX;
     [TabGroup("Base AI")] public GameObject healthPotionPrefab;
-
-
-
+    [Header("References")]
+    [TabGroup("Base AI")] public Image healthBarImage;
+    [TabGroup("Base AI")] public SpriteRenderer spriteRenderer;
+    [TabGroup("Base AI"), SerializeField] Vector3 floatingTextSpawnOffset;
     SpriteMaskUpdate spriteMaskUpdate;
+    //Logic
     float flashTimer = 1;
-    [HideInInspector] public int fireStacks = 0;
     Color grey = new Color(0.75f, 0.75f, 0.75f);
+    [HideInInspector] public int fireStacks = 0;
+
+
 
     protected virtual void Start()
     {
@@ -49,8 +53,22 @@ public class EnemyInfo : EnemyDamageHandler
         }
 
     }
-
-    #endregion
+    protected virtual void Update()
+    {
+        FlashSprite(); // Set FlashTimer to be 0 to restart;
+    }
+    /// <summary>
+    /// Lerps the sprite renderer colour based on flashTimer
+    /// </summary>
+    void FlashSprite()
+    {
+        if(flashTimer < 1)
+        {
+            spriteRenderer.color = Color.Lerp(Color.white, grey, Mathf.Sin(flashTimer * 24));
+            flashTimer += Time.deltaTime;
+        }
+    }
+   
 
     #region Damage Handling
     /// <summary>
@@ -59,9 +77,13 @@ public class EnemyInfo : EnemyDamageHandler
     /// <param name="damage"></param>
     public override void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
     {
+        Color color = Color.white;
         if (bodyPart == BodyPart.Head)
+        {
             amount *= 2;
-        FloatingTextManager.SpawnFloatingText(transform.position + new Vector3(0, 0.5f, 0), amount);
+            color = GlobalStaticReference.critColour;
+        }
+        FloatingTextManager.SpawnFloatingText(transform.position + floatingTextSpawnOffset, amount, color);
         ChangeHealth(-amount);
     }
     /// <summary>
@@ -103,14 +125,7 @@ public class EnemyInfo : EnemyDamageHandler
         {
             spriteMaskUpdate.SetMaskPercentage(percent);
         }
-        if (flashTimer < 1)
-        {
-            flashTimer = 0;
-        }
-        else
-        {
-            StartCoroutine(FlashSprite());
-        }
+        flashTimer = 0;
 
     }
     /// <summary>
@@ -122,16 +137,13 @@ public class EnemyInfo : EnemyDamageHandler
         gameObject.SetActive(false);
     }
     #endregion
-
-    IEnumerator FlashSprite()
+    private void OnDrawGizmosSelected()
     {
-        flashTimer = 0;
-
-        while (flashTimer < 1)
-        {
-            spriteRenderer.color = Color.Lerp(Color.white, grey, Mathf.Sin(flashTimer * 24));
-            flashTimer += Time.deltaTime;
-            yield return null;
-        }
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.white; // Set the text color
+        style.alignment = TextAnchor.MiddleCenter; // Center the text
+        style.fontSize = 12;
+        Handles.Label(transform.position + floatingTextSpawnOffset, "F_TXT", style);
     }
+
 }
