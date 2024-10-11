@@ -27,7 +27,7 @@ public class RangedEnemy : AIBase
 
     protected override void Update()
     {
-        transform.LookAt(player.transform); // dont want this to be here, but for some reason the batch sprite looker doesnt work on the AI
+       // transform.LookAt(player.transform); // dont want this to be here, but for some reason the batch sprite looker doesnt work on the AI
         base.Update();
         if (aiBuisy || !agent.enabled)
             return;
@@ -112,6 +112,7 @@ public class RangedEnemy : AIBase
     }
     bool startedMovingToPlayer;
     float chosenRange;
+    
     void GetInRangeOfPlayer()
     {
         if(!startedMovingToPlayer)
@@ -120,7 +121,7 @@ public class RangedEnemy : AIBase
             chosenRange = findNewPositionRangeFromPlayer * Random.Range(1 - findNewPositionRangeRandomMultiplyer, 1 + findNewPositionRangeRandomMultiplyer);
             agent.isStopped = false;
         }
-        agent.SetDestination(player.transform.position);
+        PathToPlayer(chosenRange);
         if(agent.remainingDistance < chosenRange)
         {
             agent.isStopped = true;
@@ -159,7 +160,6 @@ public class RangedEnemy : AIBase
         {
             if (!Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackRange))
             {
-                print("Failed to find player");
                 state = State.Idle;
                 agent.isStopped = false;
                 attacked = false;

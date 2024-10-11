@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b417e7d205c99f44b0bb60b1b3e61d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identifyer: 
   enemyType: 0
   maxHealth: 8
   health: 8
@@ -149,6 +150,8 @@ MonoBehaviour:
     m_Bits: 1
   baseSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
   attackSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
+  seccondsBetweenMovementUpdates: 0.05
+  randonVarianceForMovementUpdate: 0.005
   spawner: {fileID: 0}
   aiBuisy: 0
   afterAttackTimer: 1
@@ -253,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6203ac4178ce8a43a3d97f08966b309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identifyer: 
   bodyPart: 0
 --- !u!1001 &19578039966711750
 PrefabInstance:

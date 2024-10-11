@@ -21,6 +21,9 @@ public class AIBase : EnemyInfo
     [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
     [Header("AttackAnim")]
     [SerializeField, TabGroup("Base AI")] protected Sprite baseSprite, attackSprite;
+    [SerializeField, TabGroup("Base AI")] float seccondsBetweenMovementUpdates = 0.25f, randonVarianceForMovementUpdate = 0.02f;
+    protected float trueSeccondsBetweenMovementUpdates;
+    protected float lastTimeSinceMovementUpdate;
     public EnemySpawner spawner;
     AudioSource source;
  
@@ -41,6 +44,7 @@ public class AIBase : EnemyInfo
     protected override void Start()
     {
         base.Start();
+        trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenAttacks * (1 - randonVarianceForMovementUpdate), seccondsBetweenAttacks * (1 + randonVarianceForMovementUpdate));
         player = FindAnyObjectByType<PlayerMovement>().gameObject;
         aiBuisy = false;
         source = GetComponent<AudioSource>();
@@ -61,19 +65,34 @@ public class AIBase : EnemyInfo
 
             aiBuisy = false;
         }
+
+        lastTimeSinceMovementUpdate -= Time.deltaTime;
        
     }
     bool pathingToPoint;
     public void PathToPoint(Vector3 point)
     {
+        if(!ReadyToMove())
+            return;
+
         aiBuisy = true;
         agent.SetDestination(point);
         
     }
+    bool ReadyToMove()
+    {
+        if(lastTimeSinceMovementUpdate <= 0)
+        {
+            lastTimeSinceMovementUpdate = trueSeccondsBetweenMovementUpdates;
+            return true;
+        }
+        return false;
+    }
     protected bool PathToPlayer(float minDistance)
     {
-        if(DistanceToPlayer() > minDistance)
+        if(DistanceToPlayer() > minDistance  && ReadyToMove() )
         {
+        
             agent.SetDestination(player.transform.position);
             return false;
            
@@ -84,6 +103,8 @@ public class AIBase : EnemyInfo
 
     protected void PathAwayFromPlayer(float runDistance)
     {
+        if(!ReadyToMove())
+            return;
         NavMesh.SamplePosition(transform.position + (Vector3.back * runDistance), out NavMeshHit hit, runDistance, walkableMask);
         agent.SetDestination(hit.position);
         

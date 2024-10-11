@@ -10,6 +10,7 @@ public class Projectile : PoolObject
     public float speed;
     public GameObject origin;
     public bool active;
+    public Vector3 fireVector;
 
     private void Start()
     {

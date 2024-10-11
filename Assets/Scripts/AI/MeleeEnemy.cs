@@ -40,7 +40,8 @@ public class MeleeEnemy : AIBase
     {
         
       //  agent.isStopped = false;
-        if (PathToPlayer(attackRange))
+        PathToPlayer(attackRange);
+        if (DistanceToPlayer() < attackRange)
             state = State.Attacking;
     }
     bool attacked;

@@ -5,12 +5,7 @@ using UnityEngine;
 public class BatchSpriteLooker : MonoBehaviour
 {
     static public List<Transform> lookers = new();
-    static Transform playerTransform;
-    static private void Start()
-    {
-        playerTransform = FindAnyObjectByType<PlayerCameraController>().transform;
-    }
-
+ 
     static public void AddLooker(Transform me)
     {
         lookers.Add(me);
@@ -26,7 +21,7 @@ public class BatchSpriteLooker : MonoBehaviour
         
         foreach(Transform looker in lookers)
         {
-            looker.LookAt(playerTransform);
+            looker.LookAt(PlayerMovement.playerPosition);
         }
     }
 }

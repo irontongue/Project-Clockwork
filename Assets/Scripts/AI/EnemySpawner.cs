@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] spawnPoints;
 
     PlayerLevelUpManager playerLevelUpManager;
-
+    [SerializeField] float minSpawnDistanceFromPlayer;
     WaveInfo currentWave;
 
     private void Start()
@@ -107,7 +107,7 @@ public class EnemySpawner : MonoBehaviour
     public List<Enemies> spawnPool = new();
 
     Vector3 foundPos;
-    [SerializeField] float minSpawnDistanceFromPlayer;
+  
     Vector3 FindSpawnPos()
     {
         int i = 0;

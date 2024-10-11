@@ -32,7 +32,7 @@ public class BatchProjectileManager : MonoBehaviour
         foreach (Projectile projectile in projectiles)
         {
             if (projectile.active)
-                projectile.transform.position += (projectile.transform.forward * projectile.speed * Time.deltaTime);
+                projectile.transform.position += projectile.speed * Time.deltaTime * projectile.transform.forward;
         }
     }
 }
