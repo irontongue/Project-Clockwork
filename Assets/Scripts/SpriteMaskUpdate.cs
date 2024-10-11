@@ -22,10 +22,6 @@ public class SpriteMaskUpdate : MonoBehaviour
     {
         print(amount);
         maskPercentage = Mathf.Clamp(amount, 0.01f, 1);
-    }
-    private void Update()
-    {
         material.SetFloat("_MaskPercentage", maskPercentage);
-        
     }
 }
