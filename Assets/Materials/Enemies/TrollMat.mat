@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TrollMat
-  m_Shader: {fileID: -6465566751694194690, guid: 92fb075e7ffac5e448555943ba19da5e,
+  m_Shader: {fileID: -6465566751694194690, guid: 809751c3a2928a0418e3459da8ad7ffb,
     type: 3}
   m_Parent: {fileID: 2100000, guid: d7988a6f84af4464a89d4c12c435c7be, type: 2}
   m_ModifiedSerializedProperties: 2
@@ -38,7 +38,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DissolvePercentage: 0
     - _MaskPercentage: 1
+    - _OnFire: 0
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &910190998801002945
