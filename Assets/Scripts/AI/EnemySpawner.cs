@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+    
         if (waves.Length == 0)
         {
             Debug.LogWarning("EnemeySpawner: Waves have not been set.");
@@ -59,8 +60,8 @@ public class EnemySpawner : MonoBehaviour
         if(waveSpawning)
             WaveLoop();
     }
-
-    int currentWaveIndex = -1;
+    [Header("DEBUG ONLY")]
+    [SerializeField] int currentWaveIndex = -1;
 
     public void StartSpawner(GameObject refGameobject)
     {
@@ -94,7 +95,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for(int i = 0; i < info.spawnChances; i++)
             {
-                spawnPool.Add(AIInfo.staticEnemyList[info.enemy]);
+                spawnPool.Add(info.enemy);
             }    
         }
      
@@ -103,7 +104,7 @@ public class EnemySpawner : MonoBehaviour
     bool waveSpawning;
     float lastTimeSinceSpawn;
     int spawnedEnemies;
-    public List<GameObject> spawnPool = new();
+    public List<Enemies> spawnPool = new();
 
     Vector3 foundPos;
     [SerializeField] float minSpawnDistanceFromPlayer;
@@ -133,24 +134,28 @@ public class EnemySpawner : MonoBehaviour
 
         lastTimeSinceSpawn = currentWave.spawnSpeed;
 
-        GameObject spawnedEnemy = Instantiate(spawnPool[Random.Range(0, spawnPool.Count)]);
-        AIBase ai = spawnedEnemy.GetComponent<AIBase>();
+      //  GameObject spawnedEnemy = Instantiate(spawnPool[Random.Range(0, spawnPool.Count)]);
+        PoolObject poolObj = ObjectPooler.RetreiveObject(spawnPool[Random.Range(0, spawnPool.Count)].ToString());
+        poolObj.ReuseObject();
+        AIBase ai = poolObj.GetComponent<AIBase>();
         try
         {
             NavMesh.SamplePosition(FindSpawnPos(), out NavMeshHit hit, 3, walkableMask);
-            spawnedEnemy.transform.position = hit.position;
-            spawnedEnemy.GetComponent<NavMeshAgent>().enabled = true;
+            poolObj.transform.position = hit.position;
+         
         }
         catch
         {
            
             print("Agent:" + name + "Failed to find position");
-            spawnedEnemy.SetActive(false);
+            poolObj.gameObject.SetActive(false);
             return; // give up and try again, this isnt the final solution. 
         }
 
+        ai.agent.enabled = true;
         ai.spawner = this;
         ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
+        ai.gameObject.SetActive(true);
 
         spawnedEnemies += 1;
  

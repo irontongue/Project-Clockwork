@@ -5,11 +5,16 @@ using Sirenix.OdinInspector;
 
 public class AIInfo : SerializedMonoBehaviour
 {
-    [SerializeField]  Dictionary<EnemySpawner.Enemies, GameObject> enemyList = new();
+    [SerializeField] Dictionary<EnemySpawner.Enemies, GameObject> enemyList = new();
     public static Dictionary<EnemySpawner.Enemies, GameObject> staticEnemyList;
 
-    private void Start()
+    private void Awake()
     {
         staticEnemyList = enemyList;
+
+        foreach (KeyValuePair<EnemySpawner.Enemies, GameObject> entry in enemyList)
+        {
+            ObjectPooler.InitilizeObjectPool(entry.Key.ToString(), entry.Value.GetComponent<PoolObject>());
+        }
     }
 }

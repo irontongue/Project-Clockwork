@@ -68,7 +68,6 @@ public class EnemyInfo : EnemyDamageHandler
             flashTimer += Time.deltaTime;
         }
     }
-   
 
     #region Damage Handling
     /// <summary>
@@ -134,9 +133,12 @@ public class EnemyInfo : EnemyDamageHandler
     /// </summary>
     virtual protected void DeathEvent()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        DecomissionObject();
     }
     #endregion
+
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         GUIStyle style = new GUIStyle();
@@ -145,5 +147,6 @@ public class EnemyInfo : EnemyDamageHandler
         style.fontSize = 12;
         Handles.Label(transform.position + floatingTextSpawnOffset, "F_TXT", style);
     }
+#endif
 
 }

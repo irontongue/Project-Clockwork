@@ -8,7 +8,7 @@ public class AIBase : EnemyInfo
 {
 
     protected GameObject player;
-    [SerializeField] protected NavMeshAgent agent;
+    [SerializeField] public NavMeshAgent agent;
     [Header("Attack Settings")]
 
     [SerializeField, TabGroup("Base AI")] protected float attackRange;
@@ -44,14 +44,15 @@ public class AIBase : EnemyInfo
         player = FindAnyObjectByType<PlayerMovement>().gameObject;
         aiBuisy = false;
         source = GetComponent<AudioSource>();
+        BatchSpriteLooker.AddLooker(transform);
     }
  
 
-    protected virtual void Update()
+    protected override void Update()
     {
-        //transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
+       // transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
         base.Update();
-        transform.LookAt(player.transform.position);
+       // transform.LookAt(player.transform.position);
 
         if (pathingToPoint)
         {
@@ -108,7 +109,6 @@ public class AIBase : EnemyInfo
     {
         spriteRenderer.sprite = attackSprite;
         Invoke("FinalizeDamage", attackDelay);
-        print("damaginPlayer " + attackDelay);
         
     }
 
@@ -117,13 +117,30 @@ public class AIBase : EnemyInfo
         AttackEffects();
         spriteRenderer.sprite = baseSprite;
         player.GetComponent<PlayerDamageHandler>().Damage(damage, transform);
-        print("base");
     }
     protected override void DeathEvent()
     {
+        BatchSpriteLooker.AddLooker(transform);
         player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
         spawner.EnemyKilled();
         base.DeathEvent();
     }
+    readonly Vector3 zeroPosition = new Vector3(-100,-100,-100);
+    public override void DecomissionObject()
+    {
+        base.DecomissionObject();
+        // agent.enabled = false;
+        // aiBuisy = true;
+        // spriteRenderer.enabled = false;
+       
+        gameObject.SetActive(false);
+    }
+    public override void ReuseObject()
+    {
+        HealHealth(maxHealth);
+        damageFlashTime = 1;
+
+    }
+
 
 }

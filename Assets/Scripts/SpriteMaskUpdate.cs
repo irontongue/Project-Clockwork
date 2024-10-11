@@ -20,7 +20,6 @@ public class SpriteMaskUpdate : MonoBehaviour
     }
     public void SetMaskPercentage(float amount)
     {
-        print(amount);
         maskPercentage = Mathf.Clamp(amount, 0.01f, 1);
     }
     private void Update()

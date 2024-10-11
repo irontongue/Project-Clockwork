@@ -69,6 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   speed: 0
+  origin: {fileID: 0}
+  active: 1
 --- !u!1 &7758144646449334439
 GameObject:
   m_ObjectHideFlags: 0

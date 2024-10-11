@@ -27,6 +27,7 @@ public class RangedEnemy : AIBase
 
     protected override void Update()
     {
+        transform.LookAt(player.transform); // dont want this to be here, but for some reason the batch sprite looker doesnt work on the AI
         base.Update();
         if (aiBuisy || !agent.enabled)
             return;
@@ -73,7 +74,6 @@ public class RangedEnemy : AIBase
 
     void RunFromPlayer(Transform transform)
     {
-     
         if (!findingNewPos)
         {
             findingNewPos = true;
@@ -93,12 +93,10 @@ public class RangedEnemy : AIBase
                     agent.SetDestination(newPos);
                     print(newPos);
                    
-                    break;
-                    
+                    break;                 
                 }
                 i++;
             }
-
             if (!findingNewPos)
             {
                 state = State.Attacking;
@@ -111,8 +109,6 @@ public class RangedEnemy : AIBase
 
         agent.isStopped = true;
         state = State.Attacking;
-
-
     }
     bool startedMovingToPlayer;
     float chosenRange;
@@ -136,22 +132,23 @@ public class RangedEnemy : AIBase
     //float noVisionTries;
 
   
-
+    Projectile spawnedProjectile;
     protected override void FinalizeDamage()
     {
         AttackEffects();
-        Projectile spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
+        spawnedProjectile = ObjectPooler.RetreiveObject("Projectile").GetComponent<Projectile>(); //Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
+        spawnedProjectile.gameObject.SetActive(true);
+        spawnedProjectile.transform.position = transform.position;
         spawnedProjectile.transform.LookAt(player.transform.position);
         spawnedProjectile.damage = damage;
         spawnedProjectile.speed = projectileSpeed;
         spawnedProjectile.origin = gameObject;
 
-        print(spawnedProjectile.name);
+ 
         spriteRenderer.sprite = baseSprite;
     }
     void Attacking()
     {
-        print("Attacking");
         if(DistanceToPlayer() > attackRange)
         {
             state = State.Idle;

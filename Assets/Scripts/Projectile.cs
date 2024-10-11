@@ -1,30 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using System.Net;
 
-public class Projectile : MonoBehaviour
+public class Projectile : PoolObject
 {
     public float damage;
     public float speed;
     public GameObject origin;
+    public bool active;
 
-    private void Update()
+    private void Start()
     {
-        transform.position += (transform.forward * speed * Time.deltaTime);
+        BatchSpriteLooker.AddLooker(transform);
+        BatchProjectileManager.AddProjectile(this);
     }
-
+    public override void ReuseObject()
+    {
+        base.ReuseObject();
+        gameObject.SetActive(true);
+    }
+    public override void DecomissionObject()
+    {
+        base.DecomissionObject();
+        gameObject.SetActive(false);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        print("HIT");
         PlayerDamageHandler handler = other.GetComponent<PlayerDamageHandler>();
         if (handler == null)
-        {
-         
             return;
-        }
 
         handler.Damage(damage, origin.transform);
-        Destroy(gameObject);
+        //BatchSpriteLooker.RemoveLooker(transform);
+        //BatchProjectileManager.RemoveProjectile(this);
+        DecomissionObject();
+        //Destroy(gameObject);
 
     }
 }
