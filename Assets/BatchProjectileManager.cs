@@ -11,6 +11,7 @@ public class BatchProjectileManager : MonoBehaviour
     void Awake()
     {
         ObjectPooler.InitilizeObjectPool("Projectile", projectileObject.GetComponent<PoolObject>());
+        projectiles = new();
     }
     static public void AddProjectile(Projectile projectile)
     {

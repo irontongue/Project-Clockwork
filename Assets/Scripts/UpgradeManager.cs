@@ -80,6 +80,7 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] UpgradeSpawnerUI UpgradeSpawner; // this is what displays the cards
     AllWeaponStats allWeaponStats;
+    public bool instantlyGainAllUpgrades;
     private void Start()
     {
         allWeaponStats = FindObjectOfType<AllWeaponStats>();
@@ -91,9 +92,21 @@ public class UpgradeManager : MonoBehaviour
         upgradePackets.AddRange(dogUpgrades);
 
         InitilizeWeaponUpgradeDictionary();
-
+        if(instantlyGainAllUpgrades)
+        {
+            while(autoWeapons.Count > 0)
+            {
+                UnlockWeapon(autoWeapons[0]);
+            }
+            while(upgradePackets.Count > 0)
+            {
+                UnlockUpgrade(upgradePackets[0]);
+            }
+        }
+        else
         if (gainWeaponOnStart)
             StartWeaponUnlock();
+       
     }
 
     private void Update()

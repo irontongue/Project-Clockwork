@@ -8,13 +8,14 @@ public class AIInfo : SerializedMonoBehaviour
     [SerializeField] Dictionary<EnemySpawner.Enemies, GameObject> enemyList = new();
     public static Dictionary<EnemySpawner.Enemies, GameObject> staticEnemyList;
 
-    private void Awake()
+    private void Start()
     {
-        staticEnemyList = enemyList;
-
+        
+        print("I EXIST!");
         foreach (KeyValuePair<EnemySpawner.Enemies, GameObject> entry in enemyList)
         {
             ObjectPooler.InitilizeObjectPool(entry.Key.ToString(), entry.Value.GetComponent<PoolObject>());
+            print(entry.Key.ToString());
         }
     }
 }

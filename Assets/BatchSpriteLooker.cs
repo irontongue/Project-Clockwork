@@ -5,7 +5,11 @@ using UnityEngine;
 public class BatchSpriteLooker : MonoBehaviour
 {
     static public List<Transform> lookers = new();
- 
+    private void Awake()
+    {
+        lookers = new();
+    }
+
     static public void AddLooker(Transform me)
     {
         lookers.Add(me);

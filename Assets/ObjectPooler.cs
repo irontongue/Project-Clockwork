@@ -8,9 +8,10 @@ public class ObjectPooler : MonoBehaviour
 {
     static public Dictionary<string, List<PoolObject>> objectPool = new();
     static public Dictionary<string, PoolObject> objectRefrences = new();
-    static void Update()
+    private void Awake()
     {
-        
+        objectPool = new();
+        objectRefrences = new();
     }
 
     static public void InitilizeObjectPool(string identifyer, PoolObject refrenceObject, float amountToPreSpawn = 0)

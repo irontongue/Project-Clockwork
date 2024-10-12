@@ -35,7 +35,7 @@ public class AIBase : EnemyInfo
  
     protected float DistanceToPlayer()
     {
-        return Vector3.Distance(transform.position, player.transform.position);
+        return Vector3.Distance(transform.position, PlayerMovement.playerPosition);
     }
     private void Awake()
     {
