@@ -15696,6 +15696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899767946863441959, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 899767946863441959, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
       propertyPath: dashLenght
       value: 0.2
       objectReference: {fileID: 0}
@@ -38976,9 +38981,9 @@ MonoBehaviour:
   - enemies:
     - enemy: 1
       spawnChances: 1
-    maxEnemiesToSpawn: 25
+    maxEnemiesToSpawn: 1000
     spawnSpeed: 0
-    enemiesToKillToEndWave: 25
+    enemiesToKillToEndWave: 1000
     EXPShare: 0
     EndEvent: {fileID: 0}
   - enemies: []
