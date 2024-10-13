@@ -30,12 +30,12 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("Base AI")] public GameObject deathPFX;
     [TabGroup("Base AI")] public GameObject healthPotionPrefab;
     [Header("References")]
-    [TabGroup("Base AI")] public Image healthBarImage;
+    [TabGroup("Base AI")] public GameObject healthBarPivot;
     [TabGroup("Base AI")] public SpriteRenderer spriteRenderer;
     [TabGroup("Base AI"), SerializeField] Vector3 floatingTextSpawnOffset;
     SpriteMaskUpdate spriteMaskUpdate;
     //Logic
-    float flashTimer = 1;
+    protected float flashTimer = 1;
     Color grey = new Color(0.75f, 0.75f, 0.75f);
     [HideInInspector] public int fireStacks = 0;
     bool zapped = false;
@@ -114,13 +114,15 @@ public class EnemyInfo : EnemyDamageHandler
     /// Directly Changes the health on enemy info
     /// </summary>
     /// <param name="amount"></param>
+    Vector3 scale = new(1, 1, 1);
     void ChangeHealth(float amount)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
         float percent = health / maxHealth;
-        if(healthBarImage != null)
+        if(healthBarPivot != null)
         {
-            healthBarImage.fillAmount = percent;
+            scale.x = percent;
+            healthBarPivot.transform.localScale = scale;
         }
         if (health == 0)
         {

@@ -159,7 +159,7 @@ public class AIBase : EnemyInfo
     public override void ReuseObject()
     {
         HealHealth(maxHealth);
-        damageFlashTime = 1;
+        flashTimer = 1;
 
     }
 

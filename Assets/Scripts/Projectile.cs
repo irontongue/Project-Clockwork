@@ -11,10 +11,11 @@ public class Projectile : PoolObject
     public GameObject origin;
     public bool active;
     public Vector3 fireVector;
+    [SerializeField] GameObject spriteOBJ;
 
     private void Start()
     {
-        BatchSpriteLooker.AddLooker(transform);
+        BatchSpriteLooker.AddLooker(spriteOBJ.transform);
         BatchProjectileManager.AddProjectile(this);
     }
     public override void ReuseObject()

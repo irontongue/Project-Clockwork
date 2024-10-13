@@ -67,10 +67,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2124d3b6c09b2b845b559a51e5149e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identifyer: 
   damage: 0
   speed: 0
   origin: {fileID: 0}
   active: 1
+  fireVector: {x: 0, y: 0, z: 0}
+  spriteOBJ: {fileID: 7758144646449334439}
 --- !u!1 &7758144646449334439
 GameObject:
   m_ObjectHideFlags: 0
