@@ -37,6 +37,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 6cefc7b6f9d97504da9eef0c3b9ab288, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_4b7bb5a4e4d34ce380773e87e93522e9_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 6cefc7b6f9d97504da9eef0c3b9ab288, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,15 +59,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LightningAmount: 0.222
-    - _NoiseScale: 7.2
+    - _LightningAmount: 0.243
+    - _NoiseScale: 4.85
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ScrollSpeed: 15
     m_Colors:
-    - _Color: {r: 0.123401634, g: 1.9999999, b: 0, a: 1}
-    - _LightningEdgeWidth: {r: 15, g: 0.005, b: 0, a: 0}
-    - _LightningSpeed: {r: 2.98, g: 0.5, b: 0, a: 0}
-    - _LightningWidth: {r: 102.03, g: 0.01, b: 0, a: 0}
-    - _edgeColor: {r: 0.9433962, g: 0.6144703, b: 0.13794944, a: 1}
+    - _Color: {r: 3.4976077, g: 3.4976077, b: 3.4976077, a: 1}
+    - _GlowColor: {r: 0.5849056, g: 0, b: 0.3819793, a: 0.2627451}
+    - _GlowScale: {r: 1, g: 0.28, b: 0, a: 0}
+    - _LightningEdgeWidth: {r: 30.1, g: 0.1, b: 0, a: 0}
+    - _LightningSpeed: {r: 12.5, g: 0.5, b: 0, a: 0}
+    - _LightningWidth: {r: 103.15, g: 0.09, b: 0, a: 0}
+    - _ScrollDir: {r: 1, g: 0, b: 0, a: 0}
+    - _edgeColor: {r: 0.35025084, g: 0, b: 1.9196955, a: 1}
   m_BuildTextureStacks: []

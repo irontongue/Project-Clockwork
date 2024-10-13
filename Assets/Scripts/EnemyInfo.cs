@@ -38,11 +38,14 @@ public class EnemyInfo : EnemyDamageHandler
     float flashTimer = 1;
     Color grey = new Color(0.75f, 0.75f, 0.75f);
     [HideInInspector] public int fireStacks = 0;
+    bool zapped = false;
+    Material material;
 
 
 
     protected virtual void Start()
     {
+        mainBodyInfo = this; //This is to give the weapons the correct reference (to check things like onFire etc), for when they headshot the AI. 
         if(!(spriteRenderer = GetComponent<SpriteRenderer>()))
         {
             Debug.LogWarning(this + " Sprite Renderer is not assigned");
@@ -51,6 +54,7 @@ public class EnemyInfo : EnemyDamageHandler
         {
             Debug.LogWarning(this + " SpriteMaskUpdate is not Present on: " + gameObject.name);
         }
+        material = spriteRenderer.material;
 
     }
     protected virtual void Update()
@@ -66,6 +70,15 @@ public class EnemyInfo : EnemyDamageHandler
         {
             spriteRenderer.color = Color.Lerp(Color.white, grey, Mathf.Sin(flashTimer * 24));
             flashTimer += Time.deltaTime;
+            if(zapped && flashTimer < 0.25f)
+            {
+                material.SetInt("_Zapped", Mathf.Abs(Mathf.RoundToInt(Mathf.Sin(flashTimer * 24))));
+            }
+            else if(zapped)
+            {
+                zapped = false;
+                material.SetInt("_Zapped", 0);
+            }
         }
     }
    
@@ -73,9 +86,10 @@ public class EnemyInfo : EnemyDamageHandler
     #region Damage Handling
     /// <summary>
     /// Damages the enemy
+    /// returns true if is Headshot
     /// </summary>
     /// <param name="damage"></param>
-    public override void DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
+    public override bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
     {
         Color color = Color.white;
         if (bodyPart == BodyPart.Head)
@@ -85,6 +99,8 @@ public class EnemyInfo : EnemyDamageHandler
         }
         FloatingTextManager.SpawnFloatingText(transform.position + floatingTextSpawnOffset, amount, color);
         ChangeHealth(-amount);
+        zapped = true;
+        return false;
     }
     /// <summary>
     /// Heals the enemy
@@ -118,7 +134,7 @@ public class EnemyInfo : EnemyDamageHandler
                     Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);
             }
             spriteRenderer.color = Color.white;
-            StopAllCoroutines();
+            //StopAllCoroutines();
             return;
         }
         if(spriteMaskUpdate  != null) 

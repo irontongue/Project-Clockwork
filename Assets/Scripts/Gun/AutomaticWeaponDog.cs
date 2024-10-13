@@ -21,7 +21,8 @@ public class AutomaticWeaponDog : AutomaticCompanionBase
     //repete
     protected override void Update()
     {
-        base.Update();
+        if(GameState.GamePaused)
+            return;
         spriteRenderer.transform.LookAt(playerTransform.position);
         switch (state) 
         {

@@ -35,7 +35,8 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     }
     protected override void Update()
     {
-        base.Update();
+        if(GameState.GamePaused)
+            return;
         if (firing) // Wait until animation has finished
             return;
         if (!UpdateCoolDown()) // wait until off cooldown

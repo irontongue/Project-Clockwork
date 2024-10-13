@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerCameraController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerCameraController : MonoBehaviour
 
     Vector2 cameraRotation;
     Transform camTransform;
-
+    
     private void Start()
     {
         camTransform = Camera.main.transform;
@@ -36,6 +37,6 @@ public class PlayerCameraController : MonoBehaviour
 
         DevText.DisplayInfo("cam", "Camera Rotation " + cameraRotation, "Camera");
 
-
+        
     }
 }

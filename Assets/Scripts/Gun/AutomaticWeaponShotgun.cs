@@ -43,7 +43,8 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     bool resetRotation = false;
     protected override void Update()
     {
-        base.Update();
+        if(GameState.GamePaused)
+            return;
         if (firing)
         {
             if(resetRotation == false)resetRotation = true;
@@ -75,7 +76,8 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     {
         ShootAtTarget(iterator == 0);
     }
-            RaycastHit hit;
+
+    RaycastHit hit;
     public void ShootAtTarget(bool playFX = true)
     {
         if(playFX)
@@ -90,10 +92,16 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         }
         for(int i = 0; i < stats.numberOfBullets; i++)
         {
-            Quaternion randomRot = Quaternion.Euler(Random.Range(0, stats.bulletSpread * 0.5f), Random.Range(0, stats.bulletSpread * 0.5f), 0);
-            Vector3 randDir = randomRot * dir;
-            Physics.Raycast(playerTransform.position, randDir, out hit);
-            if(hit.transform != null)
+            /// Random Spread Shot
+            //Quaternion randomRot = Quaternion.Euler(Random.Range(0, stats.bulletSpread * 0.5f), Random.Range(0, stats.bulletSpread * 0.5f), 0);
+            //Vector3 randDir = randomRot * dir;
+            //Physics.Raycast(playerTransform.position, randDir, out hit);
+            ///Horizontal Spread Shot
+            Quaternion rot = Quaternion.Euler(0,-(stats.bulletSpread * stats.numberOfBullets * 0.5f) + stats.bulletSpread * i, 0);
+            Vector3 direction = rot * dir;
+            Physics.Raycast(playerTransform.position, direction, out hit, excludePlayerLayerMask);
+
+            if (hit.transform != null)
             {
                 StartCoroutine(MoveTrail(trailRendererPool[i], hit.point));
                 EnemyDamageHandler dh;
@@ -110,8 +118,7 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
             }
             else
             {
-                StartCoroutine(MoveTrail(trailRendererPool[i], transform.position + 100 * transform.forward));
-
+                StartCoroutine(MoveTrail(trailRendererPool[i], transform.position + 100 * direction));
             }
 
         }

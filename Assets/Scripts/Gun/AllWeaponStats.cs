@@ -5,7 +5,7 @@ using UnityEditor;
 using System;
 
 public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, PlayerRevolver}
-public enum DamageType {Physical, Fire, Explosion, None}
+public enum DamageType {Physical, Fire, Explosion, Lightning, None}
 public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat, PlayerRevolver}
 public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance, ReloadSpeed, MagCapacity, NumberToPierce}
 

@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-
 
 
 
@@ -41,7 +41,8 @@ public class AutomaticWeaponBase : MonoBehaviour
     }
     virtual protected void Update()
     {
-        //Pause;
+        if(GameState.GamePaused)
+            return;
     }
     /// <summary>
     /// returns the first GameObject in front of the crosshair
