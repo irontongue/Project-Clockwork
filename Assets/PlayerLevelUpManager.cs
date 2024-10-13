@@ -18,6 +18,7 @@ public class PlayerLevelUpManager : MonoBehaviour
     [SerializeField] string levelUpMessage;
     [SerializeField] float textFlashSpeed;
     [SerializeField] float minTextOppacity;
+    [SerializeField] bool promptForLevelUp;
     Color textColor;
 
     static public PlayerLevelUpManager instance;
@@ -43,7 +44,8 @@ public class PlayerLevelUpManager : MonoBehaviour
         if (currentEXP >= expToLvlup[currentLevel])
         {
             readyToLVLup = true;
-            levelUpReadyText.text = levelUpMessage;
+            if(promptForLevelUp)
+                levelUpReadyText.text = levelUpMessage;
         }
     
         expBar.fillAmount = (float)currentEXP / (float)expToLvlup[currentLevel];
@@ -56,7 +58,7 @@ public class PlayerLevelUpManager : MonoBehaviour
         if (!readyToLVLup || GameState.GamePaused)
             return;
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) || !promptForLevelUp)
             LevelUp();
         //ping pong goes between 0, and x. i dont want the text to go completly away, so i decrease the minimum by y, and add it on to the result. so the new min is y.
        newTextColor.a =  Mathf.PingPong(Time.time * textFlashSpeed, 1 - minTextOppacity) + minTextOppacity;

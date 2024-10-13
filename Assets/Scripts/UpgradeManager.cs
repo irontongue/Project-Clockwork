@@ -68,6 +68,7 @@ public class UpgradeManager : MonoBehaviour
     //[SerializeField, ShowIf("weaponToEdit", UpgradeType.Universal)] List<UpgradeLine> universalUpgrades;
 
     Dictionary<WeaponType, List<UpgradeLine>> weaponUpgradeDictionary = new(); //Holds all of the upgrade lines to then be put into the upgradePackets list when adding a weapon
+    [Header("Presentation Settings")]
 
     [Space(20f)]
 
@@ -79,6 +80,7 @@ public class UpgradeManager : MonoBehaviour
     //[SerializeField] List<UpgradeInfoPacket> autoWeapons = new();
 
     [SerializeField] UpgradeSpawnerUI UpgradeSpawner; // this is what displays the cards
+   
     AllWeaponStats allWeaponStats;
     public bool instantlyGainAllUpgrades;
     private void Start()
@@ -121,24 +123,29 @@ public class UpgradeManager : MonoBehaviour
             StartUpgrade();
         }
     }
+    float timeUpgradeStarted;
     public void StartUpgrade()
     {
         UpgradeSpawner.DisplayPopups(PickRandomUpgrades(upgradePackets, 3));
+        timeUpgradeStarted = Time.time;
     }
     public void StartWeaponUnlock()
     {
-     
         UpgradeSpawner.DisplayPopups(PickRandomUpgrades(autoWeapons, 3));
+        timeUpgradeStarted = Time.time;
     }
     //this can be called with either a list or single packet
     //any upgrades added here will go into the pool 
     public void AddUpgrade(UpgradeLine packet)
     {
+     
         upgradePackets.Add(packet);
     }
     public void AddUpgrade(UpgradeLine[] packets)
     {
-        foreach(UpgradeLine packet in packets)
+    
+
+        foreach (UpgradeLine packet in packets)
         {
             upgradePackets.Add(packet);
         }

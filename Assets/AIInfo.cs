@@ -13,7 +13,6 @@ public class AIInfo : SerializedMonoBehaviour
         foreach (KeyValuePair<EnemySpawner.Enemies, GameObject> entry in enemyList)
         {
             ObjectPooler.InitilizeObjectPool(entry.Key.ToString(), entry.Value);
-            print(entry.Key.ToString());
         }
     }
 }

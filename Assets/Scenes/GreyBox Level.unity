@@ -16088,6 +16088,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: particlePreInitCount
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7645725708352849043, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: bulletTrailRendererPrefab
@@ -29689,6 +29694,7 @@ MonoBehaviour:
     levels: 0
   gainWeaponOnStart: 1
   UpgradeSpawner: {fileID: 1576424973}
+  instantlyGainAllUpgrades: 0
 --- !u!114 &1440079884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39686,9 +39692,9 @@ MonoBehaviour:
   - {fileID: 137170793}
   - {fileID: 350997359}
   - {fileID: 2029340067}
+  minSpawnDistanceFromPlayer: 15
   currentWaveIndex: -1
   spawnPool: 
-  minSpawnDistanceFromPlayer: 15
 --- !u!1001 &1969313548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41693,6 +41699,11 @@ PrefabInstance:
         type: 3}
       propertyPath: spacingBetweenCollumUpgrades
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 598534074536633072, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: waitTimeUntillCardsInteractable
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 764290754788406605, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
@@ -43851,9 +43862,9 @@ MonoBehaviour:
   spawnerStartEvents: []
   spawnerEndEvents: []
   spawnPoints: []
+  minSpawnDistanceFromPlayer: 0
   currentWaveIndex: -1
   spawnPool: 
-  minSpawnDistanceFromPlayer: 0
 --- !u!1 &4274664779201714728
 GameObject:
   m_ObjectHideFlags: 0

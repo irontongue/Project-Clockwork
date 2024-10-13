@@ -23,6 +23,25 @@ public class ObjectPooler : MonoBehaviour
         objectRefrences = new();
         loopingPool = new();
     }
+    static bool alldathings = true;
+    void Update()
+    {
+       
+        if (!alldathings || GameState.GamePaused)
+            return;
+
+        foreach(var pool in objectPoolCollection)
+        {
+            try
+            {
+                DevText.DisplayInfo((pool.Value.objectPool[0].gameObject.name), (pool.Value.objectPool[0].gameObject.name), "Pool");
+                DevText.DisplayInfo((pool.Value.objectPool[0].gameObject.name) + " SIZE: ", pool.Value.objectPool.Count.ToString(), "Pool");
+                DevText.DisplayInfo((pool.Value.objectPool[0].gameObject.name) + " ISLOOPING: ", pool.Value.loopingList.ToString(), "Pool");
+            }
+            catch { continue; }
+
+        }
+    }
 
     //use this whenever you want to start a new object pool. this pool has a dynamic size, and will create a new object if there are none currently in the pool
     // specify the object that you want to be instaniated to fill the pool. can also prespawn objects if wanted.
@@ -65,7 +84,6 @@ public class ObjectPooler : MonoBehaviour
 
                 returnedObject = currentPool.objectPool[currentPool.currentIndex];
                 currentPool.currentIndex++;
-                print(currentPool.currentIndex);
                 if (currentPool.currentIndex >= currentPool.listSize)
                     currentPool.currentIndex = 0;
             }
