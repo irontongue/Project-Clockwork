@@ -135,8 +135,8 @@ public class EnemySpawner : MonoBehaviour
         lastTimeSinceSpawn = currentWave.spawnSpeed;
 
       //  GameObject spawnedEnemy = Instantiate(spawnPool[Random.Range(0, spawnPool.Count)]);
-        PoolObject poolObj = ObjectPooler.RetreiveObject(spawnPool[Random.Range(0, spawnPool.Count)].ToString());
-        poolObj.ReuseObject();
+        GameObject poolObj = ObjectPooler.RetreiveObject(spawnPool[Random.Range(0, spawnPool.Count)].ToString());
+        poolObj.GetComponent<PoolObject>().ReuseObject();
         AIBase ai = poolObj.GetComponent<AIBase>();
         try
         {

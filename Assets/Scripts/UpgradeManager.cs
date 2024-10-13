@@ -198,7 +198,6 @@ public class UpgradeManager : MonoBehaviour
         
         if(upgradeLine.packet.Length <= upgradeLine.levels)
         {
-            print("packet" + upgradeLine.packetName +  "finished");
             upgradePackets.Remove(upgradeLine);
         }
        

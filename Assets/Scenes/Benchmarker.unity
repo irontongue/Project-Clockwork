@@ -15989,6 +15989,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: particlePreInitCount
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7645725708352849043, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: bulletTrailRendererPrefab
@@ -15998,7 +16003,7 @@ PrefabInstance:
     - target: {fileID: 7666499712044672523, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7867189388780044975, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
@@ -38971,9 +38976,9 @@ MonoBehaviour:
   - enemies:
     - enemy: 1
       spawnChances: 1
-    maxEnemiesToSpawn: 1000
+    maxEnemiesToSpawn: 25
     spawnSpeed: 0
-    enemiesToKillToEndWave: 1000
+    enemiesToKillToEndWave: 25
     EXPShare: 0
     EndEvent: {fileID: 0}
   - enemies: []

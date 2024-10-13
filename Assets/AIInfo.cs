@@ -10,11 +10,9 @@ public class AIInfo : SerializedMonoBehaviour
 
     private void Start()
     {
-        
-        print("I EXIST!");
         foreach (KeyValuePair<EnemySpawner.Enemies, GameObject> entry in enemyList)
         {
-            ObjectPooler.InitilizeObjectPool(entry.Key.ToString(), entry.Value.GetComponent<PoolObject>());
+            ObjectPooler.InitilizeObjectPool(entry.Key.ToString(), entry.Value);
             print(entry.Key.ToString());
         }
     }
