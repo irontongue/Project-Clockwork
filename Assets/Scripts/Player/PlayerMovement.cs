@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -19,6 +20,16 @@ public class PlayerMovement : MonoBehaviour
     bool isSliding;
     static public PlayerMovement playerRef;
 
+    public static Vector3 playerPosition;
+    public static quaternion playerRotation;
+    public static Transform playerTransform;
+
+
+    
+    void Awake()
+    {
+        playerTransform = this.transform;
+    }
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -34,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        playerPosition = transform.position;
+        playerRotation = transform.rotation;
+        
         if (GameState.GamePaused)
             return;
 

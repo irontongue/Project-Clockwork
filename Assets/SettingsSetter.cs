@@ -15,6 +15,8 @@ public class SettingsSetter : MonoBehaviour
         audioSlider.value = GlobalSettings.audioVolume;
         mouseSlider.value = GlobalSettings.mouseSensitivty;
         music.volume = audioSlider.value;
+        Application.targetFrameRate = 9999;
+        QualitySettings.maxQueuedFrames = 2;
     }
 
     public void AudioSlider()

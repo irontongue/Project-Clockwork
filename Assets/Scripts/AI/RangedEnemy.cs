@@ -27,6 +27,7 @@ public class RangedEnemy : AIBase
 
     protected override void Update()
     {
+       // transform.LookAt(player.transform); // dont want this to be here, but for some reason the batch sprite looker doesnt work on the AI
         base.Update();
         if (aiBuisy || !agent.enabled)
             return;
@@ -70,10 +71,9 @@ public class RangedEnemy : AIBase
     {
         RunFromPlayer(transform);
     }
-
+    NavMeshHit hit;
     void RunFromPlayer(Transform transform)
     {
-     
         if (!findingNewPos)
         {
             findingNewPos = true;
@@ -83,7 +83,7 @@ public class RangedEnemy : AIBase
             {
                 Vector2 randomPos = Random.insideUnitCircle * findNewPosRange;
                 Vector3 testPos = new Vector3((transform.position.x ) + (transform.forward.x * -findNewPosRange), transform.position.y, (transform.position.z) + (transform.forward.z * -findNewPosRange));
-                NavMesh.SamplePosition(testPos, out NavMeshHit hit, findNewPosRange, walkableMask);
+                NavMesh.SamplePosition(testPos, out hit, findNewPosRange, walkableMask);
                
                 if (DistanceToPlayer() < Vector3.Distance(transform.position, hit.position))
                 {
@@ -91,14 +91,12 @@ public class RangedEnemy : AIBase
                     
                     agent.isStopped = false;
                     agent.SetDestination(newPos);
-                    print(newPos);
+                 
                    
-                    break;
-                    
+                    break;                 
                 }
                 i++;
             }
-
             if (!findingNewPos)
             {
                 state = State.Attacking;
@@ -111,11 +109,10 @@ public class RangedEnemy : AIBase
 
         agent.isStopped = true;
         state = State.Attacking;
-
-
     }
     bool startedMovingToPlayer;
     float chosenRange;
+    
     void GetInRangeOfPlayer()
     {
         if(!startedMovingToPlayer)
@@ -124,7 +121,7 @@ public class RangedEnemy : AIBase
             chosenRange = findNewPositionRangeFromPlayer * Random.Range(1 - findNewPositionRangeRandomMultiplyer, 1 + findNewPositionRangeRandomMultiplyer);
             agent.isStopped = false;
         }
-        agent.SetDestination(player.transform.position);
+        PathToPlayer(chosenRange);
         if(agent.remainingDistance < chosenRange)
         {
             agent.isStopped = true;
@@ -136,22 +133,23 @@ public class RangedEnemy : AIBase
     //float noVisionTries;
 
   
-
+    Projectile spawnedProjectile;
     protected override void FinalizeDamage()
     {
         AttackEffects();
-        Projectile spawnedProjectile = Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
+        spawnedProjectile = ObjectPooler.RetreiveObject("Projectile").GetComponent<Projectile>(); //Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
+        spawnedProjectile.gameObject.SetActive(true);
+        spawnedProjectile.transform.position = transform.position;
         spawnedProjectile.transform.LookAt(player.transform.position);
         spawnedProjectile.damage = damage;
         spawnedProjectile.speed = projectileSpeed;
         spawnedProjectile.origin = gameObject;
 
-        print(spawnedProjectile.name);
+ 
         spriteRenderer.sprite = baseSprite;
     }
     void Attacking()
     {
-        print("Attacking");
         if(DistanceToPlayer() > attackRange)
         {
             state = State.Idle;
@@ -162,7 +160,6 @@ public class RangedEnemy : AIBase
         {
             if (!Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackRange))
             {
-                print("Failed to find player");
                 state = State.Idle;
                 agent.isStopped = false;
                 attacked = false;
@@ -171,7 +168,7 @@ public class RangedEnemy : AIBase
             }
 
      
-            if (!hit.transform.GetComponentInParent<PlayerMovement>())
+            if (hit.transform.CompareTag("Player"))
                 return;
             
 

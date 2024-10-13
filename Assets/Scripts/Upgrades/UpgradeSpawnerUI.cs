@@ -14,19 +14,21 @@ public class UpgradeSpawnerUI : MonoBehaviour
     [SerializeField] float upgradesPerRow;
     [SerializeField] GameObject canvas;
 
-
+    [SerializeField] float waitTimeUntillCardsInteractable = 0.25f;
     UpgradeManager upgradeManager;
 
     private void Start()
     {
         upgradeManager = FindAnyObjectByType<UpgradeManager>();
+        
     }
 
     bool upgradeIsWeapon;
     List<UpgradeButton> buttons = new();
-    
+    float timeSinceUpgradeStarted;
     public void DisplayPopups(List<UpgradeLine> upgradesToDisplay)
     {
+        timeSinceUpgradeStarted = Time.realtimeSinceStartup;
         GamePauser.instance.PauseGame(true,false, gameObject);
         buttons.Clear();
         UpgradeButton.ButtonDelegate upgradeDelegate = GainUpgrade; // give this to the button, so it can call back
@@ -73,7 +75,10 @@ public class UpgradeSpawnerUI : MonoBehaviour
 
     public void GainUpgrade(UpgradeLine packet)
     {
-     
+    
+        if (Time.realtimeSinceStartup < timeSinceUpgradeStarted + waitTimeUntillCardsInteractable)
+            return;
+        
         if (packet.packet[0].isWeapon)
             upgradeManager.UnlockWeapon(packet);
         else

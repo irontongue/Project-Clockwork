@@ -16,7 +16,7 @@ public class DevText : MonoBehaviour
     static GameObject debugUIGO;
 
     static GameObject canvas;
-    static int positionOffset = 380;
+    static int positionOffset = 280;
 
     float fpsUpdateTime = 0.2f;
     float timer;
@@ -37,7 +37,7 @@ public class DevText : MonoBehaviour
         {
             GameObject uiOBJ = Instantiate(debugUIGO);
             uiOBJ.name = i.ToString();
-            uiOBJ.GetComponent<TextMeshProUGUI>().rectTransform.localPosition = new Vector3(-630, positionOffset, 0);
+            uiOBJ.GetComponent<TextMeshProUGUI>().rectTransform.localPosition = new Vector3(-858, positionOffset, 0);
             uiOBJ.GetComponent<TextMeshProUGUI>().text = "";
             uiOBJ.transform.SetParent(canvas.transform,false);
             freeUI.Add(uiOBJ);
@@ -110,7 +110,6 @@ public class DevText : MonoBehaviour
                 if (e.character.ToString() == i.ToString())
                 {
                     debugGroup[group.Key] = !group.Value;
-                    print(debugGroup[group.Key] + group.Key);
                     uiActive = false;
                     groupSelector.gameObject.SetActive(false);
 

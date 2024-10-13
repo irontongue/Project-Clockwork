@@ -8,7 +8,7 @@ public class AIBase : EnemyInfo
 {
 
     protected GameObject player;
-    [SerializeField] protected NavMeshAgent agent;
+    [SerializeField] public NavMeshAgent agent;
     [Header("Attack Settings")]
 
     [SerializeField, TabGroup("Base AI")] protected float attackRange;
@@ -21,6 +21,9 @@ public class AIBase : EnemyInfo
     [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
     [Header("AttackAnim")]
     [SerializeField, TabGroup("Base AI")] protected Sprite baseSprite, attackSprite;
+    [SerializeField, TabGroup("Base AI")] float seccondsBetweenMovementUpdates = 0.25f, randonVarianceForMovementUpdate = 0.02f;
+    protected float trueSeccondsBetweenMovementUpdates;
+    protected float lastTimeSinceMovementUpdate;
     public EnemySpawner spawner;
     AudioSource source;
  
@@ -32,7 +35,7 @@ public class AIBase : EnemyInfo
  
     protected float DistanceToPlayer()
     {
-        return Vector3.Distance(transform.position, player.transform.position);
+        return Vector3.Distance(transform.position, PlayerMovement.playerPosition);
     }
     private void Awake()
     {
@@ -41,17 +44,19 @@ public class AIBase : EnemyInfo
     protected override void Start()
     {
         base.Start();
+        trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenAttacks * (1 - randonVarianceForMovementUpdate), seccondsBetweenAttacks * (1 + randonVarianceForMovementUpdate));
         player = FindAnyObjectByType<PlayerMovement>().gameObject;
         aiBuisy = false;
         source = GetComponent<AudioSource>();
+        BatchSpriteLooker.AddLooker(transform);
     }
  
 
-    protected virtual void Update()
+    protected override void Update()
     {
-        //transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
+       // transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
         base.Update();
-        transform.LookAt(player.transform.position);
+       // transform.LookAt(player.transform.position);
 
         if (pathingToPoint)
         {
@@ -60,19 +65,34 @@ public class AIBase : EnemyInfo
 
             aiBuisy = false;
         }
+
+        lastTimeSinceMovementUpdate -= Time.deltaTime;
        
     }
     bool pathingToPoint;
     public void PathToPoint(Vector3 point)
     {
+        if(!ReadyToMove())
+            return;
+
         aiBuisy = true;
         agent.SetDestination(point);
         
     }
+    bool ReadyToMove()
+    {
+        if(lastTimeSinceMovementUpdate <= 0)
+        {
+            lastTimeSinceMovementUpdate = trueSeccondsBetweenMovementUpdates;
+            return true;
+        }
+        return false;
+    }
     protected bool PathToPlayer(float minDistance)
     {
-        if(DistanceToPlayer() > minDistance)
+        if(DistanceToPlayer() > minDistance  && ReadyToMove() )
         {
+        
             agent.SetDestination(player.transform.position);
             return false;
            
@@ -83,6 +103,8 @@ public class AIBase : EnemyInfo
 
     protected void PathAwayFromPlayer(float runDistance)
     {
+        if(!ReadyToMove())
+            return;
         NavMesh.SamplePosition(transform.position + (Vector3.back * runDistance), out NavMeshHit hit, runDistance, walkableMask);
         agent.SetDestination(hit.position);
         
@@ -108,7 +130,6 @@ public class AIBase : EnemyInfo
     {
         spriteRenderer.sprite = attackSprite;
         Invoke("FinalizeDamage", attackDelay);
-        print("damaginPlayer " + attackDelay);
         
     }
 
@@ -117,13 +138,30 @@ public class AIBase : EnemyInfo
         AttackEffects();
         spriteRenderer.sprite = baseSprite;
         player.GetComponent<PlayerDamageHandler>().Damage(damage, transform);
-        print("base");
     }
     protected override void DeathEvent()
     {
+        BatchSpriteLooker.AddLooker(transform);
         player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
         spawner.EnemyKilled();
         base.DeathEvent();
     }
+    readonly Vector3 zeroPosition = new Vector3(-100,-100,-100);
+    public override void DecomissionObject()
+    {
+        base.DecomissionObject();
+        // agent.enabled = false;
+        // aiBuisy = true;
+        // spriteRenderer.enabled = false;
+       
+        gameObject.SetActive(false);
+    }
+    public override void ReuseObject()
+    {
+        HealHealth(maxHealth);
+        damageFlashTime = 1;
+
+    }
+
 
 }

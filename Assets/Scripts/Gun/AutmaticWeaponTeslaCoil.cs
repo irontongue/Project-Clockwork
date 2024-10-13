@@ -11,6 +11,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     [SerializeField] Transform lightningMuzzlePosition;
     [SerializeField] float lightningActiveTime = 5f;
     [SerializeField] ParticleSystem smokePFX;
+    [SerializeField] int particlePreInitCount = 10;
     EnemyInfo enemyInfo;
     protected override void Start()
     {
@@ -24,6 +25,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
             Debug.LogWarning("On Tesla Coil: Transform - Lightning Muzzle Position has not been assigned, using this transform instead");
             lightningMuzzlePosition = transform;
         }
+        ObjectPooler.InitilizeObjectPool("teslacoilSmokePFX", smokePFX.gameObject, true, particlePreInitCount);
     }
 
     // Update is called once per frame
@@ -57,6 +59,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
     //Line ren positions need to be set every frame
     //line ren positions are for some reason
     List<Transform> enemyTransforms = new List<Transform>();
+    ParticleSystem pSystem;
     void ZapEnemy()
     {
         enemyTransforms.Clear(); // Reset Enemy List
@@ -81,7 +84,12 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
                 break;
             enemyTransforms.Add(info.transform);
             info.DealDamage(stats.damage);
-            Instantiate(smokePFX, info.transform.position, Quaternion.identity);
+
+            pSystem = ObjectPooler.RetreiveObject("teslacoilSmokePFX").GetComponent<ParticleSystem>();
+            pSystem.transform.position = info.transform.position;
+            pSystem.transform.rotation = Quaternion.identity;
+            pSystem.Play();
+           // Instantiate(smokePFX, info.transform.position, Quaternion.identity);
             //lineRen.SetPosition(i, info.transform.position);
         }
         if(enemyTransforms.Count < lineRen.positionCount - 1) 

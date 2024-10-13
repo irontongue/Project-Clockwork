@@ -5,7 +5,7 @@ using UnityEngine;
     /// <summary>
     /// Depricated
     /// </summary>
-public class EnemyDamageHandler : MonoBehaviour
+public class EnemyDamageHandler : PoolObject
 {
 
     [HideInInspector] public EnemyInfo mainBodyInfo;

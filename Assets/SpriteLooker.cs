@@ -8,12 +8,13 @@ public class SpriteLooker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = FindAnyObjectByType<PlayerMovement>().transform.gameObject;    
+        // player = FindAnyObjectByType<PlayerMovement>().transform.gameObject;    
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player.transform);
+       // transform.LookAt(player.transform);
     }
 }
