@@ -71,7 +71,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
         lineRen.SetPosition(0, lightningMuzzlePosition.position);
         lineRen.SetPosition(1, enemyInfo.transform.position);
 
-        enemyInfo.DealDamage(stats.damage);
+        enemyInfo.DealDamage(stats.damage, damageType);
         enemyTransforms.Add(info.transform);
 
         //lineRen.SetPosition(0, lightningMuzzlePosition.position);
@@ -83,7 +83,7 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
             if (info == null)
                 break;
             enemyTransforms.Add(info.transform);
-            info.DealDamage(stats.damage);
+            info.DealDamage(stats.damage, damageType);
 
             pSystem = ObjectPooler.RetreiveObject("teslacoilSmokePFX").GetComponent<ParticleSystem>();
             pSystem.transform.position = info.transform.position;

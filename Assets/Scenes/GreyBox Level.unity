@@ -16115,6 +16115,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
+      propertyPath: smokePFX
+      value: 
+      objectReference: {fileID: 8893928772720182320, guid: 7e15163c68ae3d84ab91ce0a0a188d2b,
+        type: 3}
+    - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: damageType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
       propertyPath: particlePreInitCount
       value: 15
       objectReference: {fileID: 0}
@@ -16446,6 +16457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 5
+  damageType: 0
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -31975,7 +31987,7 @@ PrefabInstance:
     - target: {fileID: 4038589982543350752, guid: 5304584dd88417e42b9fb930060dcd25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.24
+      value: -3.66
       objectReference: {fileID: 0}
     - target: {fileID: 4038589982543350752, guid: 5304584dd88417e42b9fb930060dcd25,
         type: 3}
@@ -37786,6 +37798,55 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1848518374}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1852169031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852169033}
+  - component: {fileID: 1852169032}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1852169032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852169031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!4 &1852169033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852169031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.9157438, y: 15.125427, z: -151.90576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852261358
 GameObject:
   m_ObjectHideFlags: 0
@@ -39723,7 +39784,7 @@ MonoBehaviour:
   - {fileID: 350997359}
   - {fileID: 2029340067}
   minSpawnDistanceFromPlayer: 15
-  currentWaveIndex: -1
+  currentWaveIndex: 4
   spawnPool: 
 --- !u!1001 &1969313548
 PrefabInstance:
@@ -44067,3 +44128,4 @@ SceneRoots:
   - {fileID: 1944930773}
   - {fileID: 484341857}
   - {fileID: 411643951}
+  - {fileID: 1852169033}
