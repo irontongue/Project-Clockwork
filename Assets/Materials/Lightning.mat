@@ -70,7 +70,7 @@ Material:
     - _GlowColor: {r: 0.5849056, g: 0, b: 0.3819793, a: 0.2627451}
     - _GlowScale: {r: 1, g: 0.28, b: 0, a: 0}
     - _LightningEdgeWidth: {r: 30.1, g: 0.1, b: 0, a: 0}
-    - _LightningSpeed: {r: 12.5, g: 0.5, b: 0, a: 0}
+    - _LightningSpeed: {r: -12.5, g: -0.5, b: 0, a: 0}
     - _LightningWidth: {r: 103.15, g: 0.09, b: 0, a: 0}
     - _ScrollDir: {r: 1, g: 0, b: 0, a: 0}
     - _edgeColor: {r: 0.35025084, g: 0, b: 1.9196955, a: 1}

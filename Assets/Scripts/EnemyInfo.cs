@@ -89,7 +89,17 @@ public class EnemyInfo : EnemyDamageHandler
     /// returns true if is Headshot
     /// </summary>
     /// <param name="damage"></param>
-    public override bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
+    public override bool DealDamage(float amount, DamageType damageType = DamageType.None)
+    {
+        DealDamage(amount, BodyPart.Body, damageType);
+        return false;
+    }
+    public override bool DealDamage(float amount)
+    {
+        DealDamage(amount, BodyPart.Body, DamageType.None);
+        return false;
+    }
+    public override bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damageType = DamageType.None)
     {
         Color color = Color.white;
         if (bodyPart == BodyPart.Head)
@@ -99,7 +109,10 @@ public class EnemyInfo : EnemyDamageHandler
         }
         FloatingTextManager.SpawnFloatingText(transform.position + floatingTextSpawnOffset, amount, color);
         ChangeHealth(-amount);
-        zapped = true;
+        if(damageType == DamageType.Lightning)
+        {
+            zapped = true;
+        }
         return false;
     }
     /// <summary>

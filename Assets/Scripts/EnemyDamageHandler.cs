@@ -14,7 +14,15 @@ public class EnemyDamageHandler : PoolObject
     /// Damages the enemy
     /// </summary>
     /// <param name="damage"></param>
-    public virtual bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damage = DamageType.None)
+    public virtual bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damageType = DamageType.None)
+    {
+        return false;
+    }
+    public virtual bool DealDamage(float amount, DamageType damageType = DamageType.None)
+    {
+        return false;
+    }
+    public virtual bool DealDamage(float amount)
     {
         return false;
     }

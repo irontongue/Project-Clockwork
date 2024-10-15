@@ -9,6 +9,7 @@ using UnityEngine;
 public class AutomaticWeaponBase : MonoBehaviour
 {
     [SerializeField] protected WeaponType weaponType;
+    [SerializeField] protected DamageType damageType;
     protected WeaponStats stats;
     AllWeaponStats allStats;
     protected Camera cam;
@@ -192,7 +193,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     /// <param name="amount"></param>
     protected void DamageEnemy(EnemyInfo enemyInfo, float amount)
     {
-        enemyInfo.DealDamage(amount);
+        enemyInfo.DealDamage(amount, damageType);
     }
     /// <summary>
     /// Deal damage to multple enemies
@@ -204,7 +205,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         foreach(EnemyInfo info in enemyInfos)
         {
-            info.DealDamage(amount);
+            info.DealDamage(amount, damageType);
         }
     }
     /// <summary>
