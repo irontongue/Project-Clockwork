@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
     bool isSliding;
-    static public PlayerMovement playerRef;
+    static public GameObject playerRef;
 
     public static Vector3 playerPosition;
     public static quaternion playerRotation;
@@ -29,13 +29,14 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         playerTransform = this.transform;
+        playerRef = this.gameObject;
     }
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         remainingJumps = extraJumps;
         maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 1) * baseSpeed;
-        playerRef = this;
+        playerRef = gameObject;
 
         //slide inits
         cam = Camera.main;

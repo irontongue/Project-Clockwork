@@ -29,10 +29,8 @@ public class EnemySpawner : MonoBehaviour
         [FoldoutGroup("Wave")] public float enemiesToKillToEndWave;
         [FoldoutGroup("Wave")] public float EXPShare;
         [FoldoutGroup("Wave")] public WaveEvent EndEvent;
-
     }
-  
-
+ 
     [SerializeField] WaveInfo[] waves;
     [SerializeField] float pathRadiusFromSpawn;
     [SerializeField] LayerMask walkableMask;
@@ -46,14 +44,12 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-    
         if (waves.Length == 0)
         {
             Debug.LogWarning("EnemeySpawner: Waves have not been set.");
             return;
         }
         playerLevelUpManager = FindAnyObjectByType<PlayerLevelUpManager>();
-      //  StartWave();
     }
     private void Update()
     {
@@ -69,7 +65,6 @@ public class EnemySpawner : MonoBehaviour
     }
     void StartWave()
     {
-       
         foreach (WaveEvent wEvent in spawnerStartEvents)
         {
             wEvent.WaveStart();
@@ -84,8 +79,7 @@ public class EnemySpawner : MonoBehaviour
             print("no more waves!");
             return;
         }
-          
-
+         
         waveSpawning = true;
        
         currentWave = waves[currentWaveIndex];
@@ -98,7 +92,6 @@ public class EnemySpawner : MonoBehaviour
                 spawnPool.Add(info.enemy);
             }    
         }
-     
     }
 
     bool waveSpawning;
@@ -107,7 +100,7 @@ public class EnemySpawner : MonoBehaviour
     public List<Enemies> spawnPool = new();
 
     Vector3 foundPos;
-  
+ 
     Vector3 FindSpawnPos()
     {
         int i = 0;
@@ -119,10 +112,8 @@ public class EnemySpawner : MonoBehaviour
                 continue;
 
             return foundPos;
-
         }
-
-        print("FAILED TO FIND POSITION FOR ENEMY");
+       print("FAILED TO FIND POSITION FOR ENEMY");
        return Vector3.zero;
     }
     void WaveLoop()
@@ -142,11 +133,9 @@ public class EnemySpawner : MonoBehaviour
         {
             NavMesh.SamplePosition(FindSpawnPos(), out NavMeshHit hit, 3, walkableMask);
             poolObj.transform.position = hit.position;
-         
         }
         catch
         {
-           
             print("Agent:" + name + "Failed to find position");
             poolObj.gameObject.SetActive(false);
             return; // give up and try again, this isnt the final solution. 
@@ -157,15 +146,14 @@ public class EnemySpawner : MonoBehaviour
         ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
         ai.gameObject.SetActive(true);
 
+        ai.RandomisePolarOffset();
+
         spawnedEnemies += 1;
  
         if(spawnedEnemies >= currentWave.maxEnemiesToSpawn)
         {
-            waveSpawning = false;
-           
+            waveSpawning = false; 
         }
-
-        
     }
     int enemysKilled;
     public void EnemyKilled()
@@ -179,7 +167,6 @@ public class EnemySpawner : MonoBehaviour
         }
             
     }
-
     void AllWavesCleared()
     {
         foreach (WaveEvent wEvent in spawnerEndEvents)

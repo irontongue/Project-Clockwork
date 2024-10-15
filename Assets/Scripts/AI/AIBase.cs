@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 
 public class AIBase : EnemyInfo
 {
+    public enum Pole {Null, North, South, East, West}
 
     protected GameObject player;
     [SerializeField] public NavMeshAgent agent;
@@ -21,17 +22,20 @@ public class AIBase : EnemyInfo
     [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
     [Header("AttackAnim")]
     [SerializeField, TabGroup("Base AI")] protected Sprite baseSprite, attackSprite;
-    [SerializeField, TabGroup("Base AI")] float seccondsBetweenMovementUpdates = 0.25f, randonVarianceForMovementUpdate = 0.02f;
-    protected float trueSeccondsBetweenMovementUpdates;
+    [SerializeField, TabGroup("Base AI")] float seccondsBetweenMovementUpdates = 0.25f, randonVarianceForMovementUpdate = 0.02f; // how often does the ai repath to the player. 
+    [Header("RandomMovement")]
+    [SerializeField, TabGroup("Base AI")] bool usePolarOffset;
+    [SerializeField, TabGroup("Base AI")] float distanceBeforeConvergingOnPlayer;// if using the pole offsets, how close to the player untill you stop moving towards the offset position
+    [SerializeField, TabGroup("Base AI")] Vector2 poleOffsets;// decides how far the enemy moves to the N W S E of the player, if using pole offsets
+    protected float trueSeccondsBetweenMovementUpdates; // this is the seccondsbetweenmovementupdates, but with the random offset added, so its not recaculated constantly
     protected float lastTimeSinceMovementUpdate;
+   
     public EnemySpawner spawner;
     AudioSource source;
- 
     
+   [ReadOnly] public Pole pole;
 
-    
-
-     public bool aiBuisy = false;
+    public bool aiBuisy = false;
  
     protected float DistanceToPlayer()
     {
@@ -45,18 +49,15 @@ public class AIBase : EnemyInfo
     {
         base.Start();
         trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenAttacks * (1 - randonVarianceForMovementUpdate), seccondsBetweenAttacks * (1 + randonVarianceForMovementUpdate));
-        player = FindAnyObjectByType<PlayerMovement>().gameObject;
+        player = PlayerMovement.playerRef.gameObject;
         aiBuisy = false;
         source = GetComponent<AudioSource>();
         BatchSpriteLooker.AddLooker(transform);
     }
- 
 
     protected override void Update()
     {
-       // transform.LookAt(new Vector3(player.transform.position.x,0f, player.transform.position.z));
         base.Update();
-       // transform.LookAt(player.transform.position);
 
         if (pathingToPoint)
         {
@@ -70,6 +71,7 @@ public class AIBase : EnemyInfo
        
     }
     bool pathingToPoint;
+    // this allows you to path to a custom set point
     public void PathToPoint(Vector3 point)
     {
         if(!ReadyToMove())
@@ -79,6 +81,7 @@ public class AIBase : EnemyInfo
         agent.SetDestination(point);
         
     }
+    //see if the ai is ready to move or not
     bool ReadyToMove()
     {
         if(lastTimeSinceMovementUpdate <= 0)
@@ -88,17 +91,66 @@ public class AIBase : EnemyInfo
         }
         return false;
     }
-    protected bool PathToPlayer(float minDistance)
+    Vector3 targetPos;
+    float distanceToPlayer;
+    //paths to the player, returns true if not pathing to player, false if so.... why did i do it like this
+    protected bool PathToPlayer(float minDistance, float randomVariance = 0)
     {
-        if(DistanceToPlayer() > minDistance  && ReadyToMove() )
+        distanceToPlayer = DistanceToPlayer();
+
+        if (distanceToPlayer > minDistance && ReadyToMove())
         {
-        
-            agent.SetDestination(player.transform.position);
+            if (distanceToPlayer < distanceBeforeConvergingOnPlayer) 
+                targetPos = PlayerMovement.playerPosition;
+            else
+                targetPos = GetPlayerOffset();
+
+            if (randomVariance == 0)
+            {
+                agent.SetDestination(targetPos);
+                return false;
+            }
+
+   
+            targetPos.x += Random.Range(-randomVariance, randomVariance);
+            targetPos.z += Random.Range(-randomVariance, randomVariance);
+            agent.SetDestination(targetPos);
             return false;
-           
         }  
      
         return true;
+    }
+    Vector3 modifyedPlayerVector;
+ 
+    Vector3 GetPlayerOffset() // if using the pole offset, this adds the offset, if not it just returns the player position
+    {
+        modifyedPlayerVector = PlayerMovement.playerPosition;
+        switch (pole)
+        {
+            case Pole.North:
+                modifyedPlayerVector.x += poleOffsets.y;
+                return modifyedPlayerVector;
+            case Pole.South:
+                modifyedPlayerVector.x -= poleOffsets.y;
+                return modifyedPlayerVector;
+            case Pole.East:
+                modifyedPlayerVector.x += poleOffsets.x;
+                return modifyedPlayerVector;
+            case Pole.West:
+                modifyedPlayerVector.x -= poleOffsets.x;
+                return modifyedPlayerVector;
+            case Pole.Null:
+                return PlayerMovement.playerPosition;
+
+        }
+        return PlayerMovement.playerPosition;
+    }
+    public void RandomisePolarOffset()
+    {
+        if (!usePolarOffset)
+            return;
+
+        pole = (Pole)Random.Range(1, 4);
     }
 
     protected void PathAwayFromPlayer(float runDistance)
@@ -128,6 +180,7 @@ public class AIBase : EnemyInfo
    
     protected virtual void DamagePlayer()
     {
+        RandomisePolarOffset();
         spriteRenderer.sprite = attackSprite;
         Invoke("FinalizeDamage", attackDelay);
         
@@ -143,7 +196,12 @@ public class AIBase : EnemyInfo
     {
         BatchSpriteLooker.AddLooker(transform);
         player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
-        spawner.EnemyKilled();
+        try
+        {
+            spawner.EnemyKilled();
+        }
+        catch { }
+        
         base.DeathEvent();
     }
     readonly Vector3 zeroPosition = new Vector3(-100,-100,-100);

@@ -7,6 +7,6 @@ public class VoidOutTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerMovement>())
-            PlayerMovement.playerRef.ResetPlayerToSafePos();
+            PlayerMovement.playerRef.GetComponent<PlayerMovement>().ResetPlayerToSafePos();
     }
 }

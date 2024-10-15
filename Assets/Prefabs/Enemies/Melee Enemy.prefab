@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifyer: 
+  mainBodyInfo: {fileID: 0}
   enemyType: 0
   maxHealth: 8
   health: 8
@@ -153,7 +154,11 @@ MonoBehaviour:
   attackSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
   seccondsBetweenMovementUpdates: 0.05
   randonVarianceForMovementUpdate: 0.005
+  usePolarOffset: 1
+  distanceBeforeConvergingOnPlayer: 6
+  poleOffsets: {x: 5, y: 5}
   spawner: {fileID: 0}
+  pole: 0
   aiBuisy: 0
   afterAttackTimer: 1
 --- !u!195 &5083003481326997813
@@ -258,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifyer: 
+  mainBodyInfo: {fileID: 0}
   bodyPart: 0
 --- !u!1001 &19578039966711750
 PrefabInstance:

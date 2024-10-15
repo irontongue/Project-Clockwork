@@ -6,15 +6,17 @@ using Sirenix.OdinInspector;
 public class MeleeEnemy : AIBase
 {
     enum State { Idle, Chasing, Attacking}
+
     [ShowInInspector, ReadOnly] State state = State.Idle;
 
     [SerializeField] float afterAttackTimer;
-
+   
     protected override void Update()
     {
         base.Update();
         if (aiBuisy || !agent.enabled)
             return;
+
         switch(state)
         {
             case State.Idle:
