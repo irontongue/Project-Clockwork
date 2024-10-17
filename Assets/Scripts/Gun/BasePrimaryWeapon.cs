@@ -89,12 +89,14 @@ public class BasePrimaryWeapon : MonoBehaviour
 
             if (hit.transform.GetComponent<EnemyDamageHandler>()) 
             {
+        
                 Instantiate(bloodHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
                 return hit.transform.GetComponent<EnemyDamageHandler>();
             }
             Instantiate(terrainHitPFX, hit.point, Quaternion.identity).gameObject.transform.LookAt(cam.transform.position);
-
+        
         }
+
 
         return null;
     }
@@ -138,7 +140,7 @@ public class BasePrimaryWeapon : MonoBehaviour
     protected void DamageFowardEnemy()
     {
         EnemyDamageHandler enemy = RayCastForward();
-
+    
         if (enemy == null)
             return;
 

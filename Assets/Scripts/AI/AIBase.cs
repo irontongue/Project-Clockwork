@@ -12,30 +12,30 @@ public class AIBase : EnemyInfo
     [SerializeField] public NavMeshAgent agent;
     [Header("Attack Settings")]
 
-    [SerializeField, TabGroup("Base AI")] protected float attackRange;
-    [SerializeField, TabGroup("Base AI")] protected float seccondsBetweenAttacks;
-    [SerializeField, TabGroup("Base AI")] protected float damage = 1;
-    [SerializeField, TabGroup("Base AI")] protected float attackDelay = 0.1f;
-    [Header("Audio Settings")]
-    [SerializeField, TabGroup("Base AI")] AudioClip[] attackSounds;
-    [Header("Agent Settings")]
-    [SerializeField, TabGroup("Base AI")] protected LayerMask walkableMask;
-    [Header("AttackAnim")]
-    [SerializeField, TabGroup("Base AI")] protected Sprite baseSprite, attackSprite;
-    [SerializeField, TabGroup("Base AI")] float seccondsBetweenMovementUpdates = 0.25f, randonVarianceForMovementUpdate = 0.02f; // how often does the ai repath to the player. 
-    [Header("RandomMovement")]
-    [SerializeField, TabGroup("Base AI")] bool usePolarOffset;
-    [SerializeField, TabGroup("Base AI")] float distanceBeforeConvergingOnPlayer;// if using the pole offsets, how close to the player untill you stop moving towards the offset position
-    [SerializeField, TabGroup("Base AI")] Vector2 poleOffsets;// decides how far the enemy moves to the N W S E of the player, if using pole offsets
+    [SerializeField, TabGroup("Attack")] protected float attackRange;
+    [SerializeField, TabGroup("Attack")] protected float seccondsBetweenAttacks;
+    [SerializeField, TabGroup("Attack")] protected float damage = 1;
+    [SerializeField, TabGroup("Attack")] protected float attackDelay = 0.1f;
+    //[Header("Audio Settings")]
+    [SerializeField, TabGroup("Effects")] AudioClip[] attackSounds;
+   // [Header("Agent Settings")]
+    [SerializeField, TabGroup("Settings")] protected LayerMask walkableMask;
+  //  [Header("AttackAnim")]
+    [SerializeField, TabGroup("Effects")] protected Sprite baseSprite, attackSprite;
+    [SerializeField, TabGroup("Movement")] float seccondsBetweenMovementUpdates = 0.25f, randonVarianceForMovementUpdate = 0.02f; // how often does the ai repath to the player. 
+   // [Header("RandomMovement")]
+    [SerializeField, TabGroup("Movement")] bool usePolarOffset;
+    [SerializeField, TabGroup("Movement")] float distanceBeforeConvergingOnPlayer;// if using the pole offsets, how close to the player untill you stop moving towards the offset position
+    [SerializeField, TabGroup("Movement")] Vector2 poleOffsets;// decides how far the enemy moves to the N W S E of the player, if using pole offsets
     protected float trueSeccondsBetweenMovementUpdates; // this is the seccondsbetweenmovementupdates, but with the random offset added, so its not recaculated constantly
     protected float lastTimeSinceMovementUpdate;
    
-    public EnemySpawner spawner;
+    [TabGroup("RunTimeOnly")]public EnemySpawner spawner;
     AudioSource source;
     
-   [ReadOnly] public Pole pole;
+   [ReadOnly, TabGroup("RunTimeOnly")] public Pole pole;
 
-    public bool aiBuisy = false;
+    [TabGroup("RunTimeOnly")]public bool aiBuisy = false;
  
     protected float DistanceToPlayer()
     {

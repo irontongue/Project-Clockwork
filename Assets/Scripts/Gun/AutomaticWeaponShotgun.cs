@@ -64,7 +64,6 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
         enemyInfo = GetFirstEnemyInfrontOfPlayer(stats.range, stats.boxCheckWidth, enemyLayerMask);
         if(enemyInfo == null)
         {
-            print("enemyInfoWasNull");
             return;
         }
         

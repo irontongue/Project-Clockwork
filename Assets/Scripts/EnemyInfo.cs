@@ -16,23 +16,23 @@ public enum EnemyType { a, b, c }
 public class EnemyInfo : EnemyDamageHandler
 {
     #region Stats
-    [Header("Stats")]
-    [TabGroup("Base AI")] public EnemyType enemyType;
-    [TabGroup("Base AI")] public float maxHealth = 10f;
-    [TabGroup("Base AI")] public float health = 10f;
-    [TabGroup("Base AI")] public float speed = 5f;
-    [TabGroup("Base AI")] public float EXP = 1f;
-    [TabGroup("Base AI")] public float damageFlashTime = 1;
-    [TabGroup("Base AI")] public float healthPotionDropChance = 0.1f;
+   // [Header("Stats")]
+    //[TabGroup("Base AI")] public EnemyType enemyType;
+    [TabGroup("DamageHandler")] public float maxHealth = 10f;
+    [TabGroup("DamageHandler")] public float health = 10f;
+    [TabGroup("Movement")] public float speed = 5f;
+    [HideInInspector] public float EXP = 1f;
+    [TabGroup("DamageHandler")] public float damageFlashTime = 1;
+    [TabGroup("Loot")] public float healthPotionDropChance = 0.1f;
      #endregion
 
-    [Header("Prefabs")]
-    [TabGroup("Base AI")] public GameObject deathPFX;
-    [TabGroup("Base AI")] public GameObject healthPotionPrefab;
-    [Header("References")]
-    [TabGroup("Base AI")] public GameObject healthBarPivot;
-    [TabGroup("Base AI")] public SpriteRenderer spriteRenderer;
-    [TabGroup("Base AI"), SerializeField] Vector3 floatingTextSpawnOffset;
+   // [Header("Prefabs")]
+    [TabGroup("Effects")] public GameObject deathPFX;
+    [TabGroup("Loot")] public GameObject healthPotionPrefab;
+   // [Header("References")]
+    [TabGroup("DamageHandler")] public GameObject healthBarPivot;
+    [TabGroup("DamageHandler")] public SpriteRenderer spriteRenderer;
+    [TabGroup("DamageHandler"), SerializeField] Vector3 floatingTextSpawnOffset;
     SpriteMaskUpdate spriteMaskUpdate;
     //Logic
     protected float flashTimer = 1;
@@ -92,15 +92,18 @@ public class EnemyInfo : EnemyDamageHandler
     public override bool DealDamage(float amount, DamageType damageType = DamageType.None)
     {
         DealDamage(amount, BodyPart.Body, damageType);
+        print("a");
         return false;
     }
     public override bool DealDamage(float amount)
     {
         DealDamage(amount, BodyPart.Body, DamageType.None);
+        print("b");
         return false;
     }
     public override bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damageType = DamageType.None)
     {
+        print("c");
         Color color = Color.white;
         if (bodyPart == BodyPart.Head)
         {

@@ -10,6 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2444837087865418892}
   - component: {fileID: 8948016730155698804}
+  - component: {fileID: 2420568501883286108}
+  - component: {fileID: 2795575053555467804}
+  - component: {fileID: 514928934740026825}
+  - component: {fileID: 3929490684742763742}
+  - component: {fileID: 8101129147567164512}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -54,33 +59,45 @@ MonoBehaviour:
     chargeUpTime: 0
     bulletSpread: 0
     numberOfBullets: 1
+    numberToPierce: 0
+    repeateShot: 0
     lockOnDistance: 0
     bounces: 0
     bounceRange: 0
+    moveSpeed: 1
+    followDistance: 1
   - weaponType: 1
     damage: 5
     attackSpeed: 1
-    coolDown: 1
+    coolDown: 1.2
     range: 0
     boxCheckWidth: 20
-    chargeUpTime: 2
+    chargeUpTime: 1.6
     bulletSpread: 0
     numberOfBullets: 1
+    numberToPierce: 0
+    repeateShot: 1
     lockOnDistance: 0
     bounces: 0
     bounceRange: 0
+    moveSpeed: 1
+    followDistance: 1
   - weaponType: 0
-    damage: 3
+    damage: 0.5
     attackSpeed: 1
     coolDown: 1
     range: 15
     boxCheckWidth: 10
     chargeUpTime: 1
-    bulletSpread: 5
-    numberOfBullets: 10
+    bulletSpread: 2
+    numberOfBullets: 20
+    numberToPierce: 0
+    repeateShot: 0
     lockOnDistance: 0
     bounces: 0
     bounceRange: 0
+    moveSpeed: 1
+    followDistance: 1
   - weaponType: 3
     damage: 1
     attackSpeed: 1
@@ -90,10 +107,814 @@ MonoBehaviour:
     chargeUpTime: 0
     bulletSpread: 0
     numberOfBullets: 1
+    numberToPierce: 0
+    repeateShot: 0
     lockOnDistance: 0
     bounces: 5
     bounceRange: 10
-  weaponTypeToAdd: 1
-  d_Value: 00000000010000000200000003000000
-  d_Key: 02000000010000000000000003000000
+    moveSpeed: 1
+    followDistance: 1
+  - weaponType: 5
+    damage: 2
+    attackSpeed: 0
+    coolDown: 0
+    range: 0
+    boxCheckWidth: 20
+    chargeUpTime: 0
+    bulletSpread: 0
+    numberOfBullets: 1
+    numberToPierce: 0
+    repeateShot: 0
+    lockOnDistance: 0
+    bounces: 0
+    bounceRange: 0
+    moveSpeed: 0.1
+    followDistance: 2
+  weaponTypeToAdd: 0
+  d_Value: 0000000001000000020000000300000004000000
+  d_Key: 0200000001000000000000000300000005000000
   weaponToEdit: 0
+--- !u!114 &2420568501883286108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponToEdit: 1
+  shotgunUpgrades:
+  - packetName: Damage
+    weaponType: 0
+    packet:
+    - upgradeTitle: Shotgun Damage I
+      upgradeBody: Increases Damage by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Shotgun Damage II
+      upgradeBody: Increases Damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Shotgun Damage III
+      upgradeBody: Increases Damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Shotgun Damage IV
+      upgradeBody: Increases Damage by 120% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1.2
+    levels: 0
+  - packetName: Range
+    weaponType: 0
+    packet:
+    - upgradeTitle: 'Shotgun Range I '
+      upgradeBody: Increases activation range by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 1
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 8
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3.75
+    - upgradeTitle: 'Shotgun Range II '
+      upgradeBody: Increases activation range by 50%  of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 1
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 8
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3.75
+    - upgradeTitle: Shotgun Range III
+      upgradeBody: Increases activation range by 50%  of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 8
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3.75
+    - upgradeTitle: Shotgun Range IV
+      upgradeBody: Increases activation range by 100%  of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 3
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 7
+    levels: 0
+  - packetName: Cooldown
+    weaponType: 0
+    packet:
+    - upgradeTitle: Shotgun Cooldown I
+      upgradeBody: Decreses cooldown by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Shotgun Cooldown II
+      upgradeBody: Decreses cooldown by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Shotgun Cooldown III
+      upgradeBody: Decreses cooldown by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    - upgradeTitle: Shotgun Cooldown IV
+      upgradeBody: Decreses cooldown by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    levels: 0
+  sniperUpgrades:
+  - packetName: Cooldown
+    weaponType: 1
+    packet:
+    - upgradeTitle: Sniper Faster Cooldown I
+      upgradeBody: Cooldown 20% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Sniper Faster Cooldown II
+      upgradeBody: Cooldown 30% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.1
+    - upgradeTitle: Sniper Faster Cooldown III
+      upgradeBody: Cooldown 50% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.3
+    - upgradeTitle: Sniper Faster Cooldown III
+      upgradeBody: Coolsdown 70% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    levels: 0
+  - packetName: Wind Up Speed
+    weaponType: 1
+    packet:
+    - upgradeTitle: 'Sniper Wind Up Speed I '
+      upgradeBody: Fires 10% faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 4
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Sniper Wind Up Speed II
+      upgradeBody: Fires 20 % faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 4
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Sniper Wind Up Speed III
+      upgradeBody: Fires 40% Faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 4
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: Sniper Wind Up Speed IV
+      upgradeBody: Fires 50% Faster
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 4
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.4
+    levels: 0
+  - packetName: Penetration
+    weaponType: 1
+    packet:
+    - upgradeTitle: Sniper Penetration I
+      upgradeBody: Bullets hit an additional another enemy
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 16
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Sniper Penetration II
+      upgradeBody: Bullets hit an additional 1 more enemies
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 16
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Sniper Penetration III
+      upgradeBody: Bullets hit an addition 2 enemies
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 16
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Sniper Penetration IV
+      upgradeBody: Bullets hit an addition 3 enemies
+      isWeapon: 0
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
+    levels: 0
+  - packetName: Damage
+    weaponType: 1
+    packet:
+    - upgradeTitle: Sniper Damage I
+      upgradeBody: Increases damage by 2
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Sniper Damage II
+      upgradeBody: Increases damage by 2
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Sniper Damage III
+      upgradeBody: Increases damage by 2
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 1
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    levels: 0
+  teslaCoilUpgrades:
+  - packetName: Bounces
+    weaponType: 3
+    packet:
+    - upgradeTitle: Tesla Coil Increased Bounces I
+      upgradeBody: Increases bounces by 1
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 9
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Tesla Coil Increased Bounces II
+      upgradeBody: Increases bounces by 1
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 9
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Tesla Coil  Increased Bounces III
+      upgradeBody: Increases bounces by 2
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 9
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Tesla Coil  Increased Bounces IV
+      upgradeBody: Increases bounces by 5
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 9
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 5
+    levels: 0
+  - packetName: Damage
+    weaponType: 3
+    packet:
+    - upgradeTitle: Tesla Coil Damage I
+      upgradeBody: Increases damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Tesla Coil Damage II
+      upgradeBody: Increases Damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Tesla Coil Damage III
+      upgradeBody: Increases Damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Tesla Coil Damage IV
+      upgradeBody: Increases Damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    levels: 0
+  - packetName: Cooldown
+    weaponType: 3
+    packet:
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    - upgradeTitle: Tesla Coil Cooldown
+      upgradeBody: Decreses cooldown by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 3
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1
+    levels: 0
+  flameThrowerUpgrades: []
+  rifleUpgrades: []
+  dogUpgrades:
+  - packetName: Damage
+    weaponType: 5
+    packet:
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 5
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 5
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 100% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 5
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Dog Damage
+      upgradeBody: Increases Dog's damage by 150% of base
+      isWeapon: 0
+      upgradeType: 5
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 3
+    levels: 0
+  grenadeLaucherUpgrades: []
+  throwingKnivesUpgrades: []
+  playerRevolverUpgrades: []
+  autoWeapons:
+  - packetName: Shotgun
+    weaponType: 0
+    packet:
+    - upgradeTitle: Shotgun
+      upgradeBody: Fires at close enemys infront of you
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    levels: 0
+  - packetName: Tesla Coil
+    weaponType: 3
+    packet:
+    - upgradeTitle: Tesla Coil
+      upgradeBody: Shoots lighting at enemies which arcs to hit more enemies
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    levels: 0
+  - packetName: Sniper
+    weaponType: 1
+    packet:
+    - upgradeTitle: Sniper
+      upgradeBody: Fires a penetrating shot at targeted enemies.
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    levels: 0
+  gainWeaponOnStart: 1
+  UpgradeSpawner: {fileID: 0}
+  instantlyGainAllUpgrades: 0
+--- !u!114 &2795575053555467804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ac65185e7231944a05d2a1f3cc383b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 189324837318420978, guid: 42fb0aaf79acdf14d922f65bdafb9742, type: 3}
+    - {fileID: 5693677959915782852, guid: 2885155d87ebe71408d9352be1fcc8c6, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: enemyList
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[EnemySpawner+Enemies, Assembly-CSharp],[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[EnemySpawner+Enemies,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &514928934740026825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfea1d287579d4a46973984c3c827a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 8489862797783062732, guid: 6666fe5ec2ba89d4b986000baead11f5,
+    type: 3}
+--- !u!82 &3929490684742763742
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dc6b9482e6881a9498e9317c40e30879, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8101129147567164512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39656da3d2da7b41866bb8349ef4fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCritColor: {r: 1, g: 0.94675124, b: 0, a: 1}

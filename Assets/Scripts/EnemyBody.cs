@@ -9,10 +9,12 @@ public class EnemyBody : EnemyDamageHandler
 
     void Start()
     {
-        mainBodyInfo = GetComponentInParent<EnemyInfo>();    
+        mainBodyInfo = GetComponentInParent<EnemyInfo>();
+        print(mainBodyInfo.maxHealth);
     }
     public override bool DealDamage(float damage, BodyPart bodyPart = BodyPart.Body, DamageType damageType = DamageType.None)
     {
+        print("washit");
         mainBodyInfo.DealDamage(damage, this.bodyPart, damageType);
         return true;
     }

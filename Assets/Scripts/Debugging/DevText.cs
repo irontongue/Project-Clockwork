@@ -103,7 +103,6 @@ public class DevText : MonoBehaviour
         Event e = Event.current;
         if (e.isKey)
         {
-            print(e.character.ToString());
             int i = 1;
             foreach (KeyValuePair<string, bool> group in debugGroup)
             {

@@ -21,9 +21,6 @@ public class Revolver : BasePrimaryWeapon
         if (!CanFire())
             return;
 
-     
-       
-
         if (!Input.GetMouseButton(0))
             return;
 

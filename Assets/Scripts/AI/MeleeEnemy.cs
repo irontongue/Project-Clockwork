@@ -5,11 +5,12 @@ using Sirenix.OdinInspector;
 
 public class MeleeEnemy : AIBase
 {
-    enum State { Idle, Chasing, Attacking}
+    protected enum State { Idle, Chasing, Attacking}
 
-    [ShowInInspector, ReadOnly] State state = State.Idle;
+    [ShowInInspector, ReadOnly, TabGroup("RunTimeOnly")] protected State state = State.Idle;
 
-    [SerializeField] float afterAttackTimer;
+    [SerializeField, TabGroup("Attack")] float afterAttackTimer;
+ 
    
     protected override void Update()
     {
@@ -30,25 +31,22 @@ public class MeleeEnemy : AIBase
                 break;
         }
     }
-
-    void Idle()
+    protected void Idle()
     {
         if (DistanceToPlayer() > attackRange)
             state = State.Chasing;
         else
             state = State.Attacking;
     }
-    void Chasing()
+    protected void Chasing()
     {
-        
-      //  agent.isStopped = false;
         PathToPlayer(attackRange);
         if (DistanceToPlayer() < attackRange)
             state = State.Attacking;
     }
     bool attacked;
     float timeSinceLastAttack;
-    void Attacking()
+    protected void Attacking()
     {
         agent.isStopped = true;
         agent.destination = transform.position;

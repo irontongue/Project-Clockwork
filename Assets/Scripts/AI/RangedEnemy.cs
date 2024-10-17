@@ -219,12 +219,10 @@ public class RangedEnemy : AIBase
                 if (NavMesh.SamplePosition(randomPos, out navMeshHit, repositionDistance, walkableMask))
                 {
                     repositioning = true;
-                    print("Here");
                     agent.SetDestination(navMeshHit.position);
                     timeSinceLastReposition = timeInRepositionState;
                     return;
                 }
-                print("FAILURE");
                 i++;
             }
         }

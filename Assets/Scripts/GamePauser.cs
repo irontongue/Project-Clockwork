@@ -11,7 +11,11 @@ public class GamePauser : MonoBehaviour
     {
         instance = this;
     }
- 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))

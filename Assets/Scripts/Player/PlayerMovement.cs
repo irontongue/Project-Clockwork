@@ -53,23 +53,29 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         Gravity();
-        GroundCheck();
+      
         Jump();
         CaculateMoveVelocity();
         Dash();
         Slide();
+
+        GroundCheck();
         FinalMoveCaculation();
 
         DevText.DisplayInfo("pMovement", "PlayerVelocity: " + currentVelocity, "Movement");
         DevText.DisplayInfo("dMovement", "DashVel: " + dashVelocity, "Movement");
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
         DevText.DisplayInfo("isaccGrounded", "Actually Grounded : " + isActuallyGrounded, "Movement");
-        DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
+      //  DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
         DevText.DisplayInfo("cyote", "Cyote Time:" + currentCyoteTime, "Movement");
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
         DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
         DevText.DisplayInfo("maxPlayerWalk", "MaxPlayerWalkSpeed" + maxPlayerWalkSpeed, "Movement");
         DevText.DisplayInfo("sprintTimer", "TimeToNextDash: " + dashCooldownTimer, "Movement");
+
+        DevText.DisplayInfo("neutralJump", "NeutralJump:" + hadNoInitialVelocity, "Movement");
+        DevText.DisplayInfo("currentSeccondsSinceMove:", "LastMove: " + currentSecondsSinceMove, "Movement");
+        DevText.DisplayInfo("useReducedjump:", "RedusedJump: " + useReducedJump, "Movement");
         if (isActuallyGrounded)
         {
             lastPlayerSafePos = transform.position;
@@ -81,14 +87,38 @@ public class PlayerMovement : MonoBehaviour
     [Header("Basic Movement")]
     [SerializeField] float baseSpeed;
     [SerializeField] float airMoveSpeed;
+
+    [Header("Initial Air Velocity")]
+    [SerializeField] float seccondsSinceMovingBeforeMaxJump;
+    [SerializeField] float neutralJumpAirMoveSpeed;
+    float currentSecondsSinceMove;
+    bool hadNoInitialVelocity;
+
     Vector3 inputVector; // the raw input vector
     Vector3 walkVector; // the players move vector, unaffected by anything else
+
+    float airJumpMultiplyer;
+    bool useReducedJump; // dont know what to name this, this bool stores if we got rid of velocty from a jump if the player jumped before seccondSinceMovingBefor... was surpaced.
+    Vector3 currentVelocityWithoutY;
     void CaculateMoveVelocity()
     {
         inputVector.x = Input.GetAxisRaw("Horizontal");
         inputVector.z = Input.GetAxisRaw("Vertical");
 
+        currentVelocityWithoutY.x = currentVelocity.x;
+        currentVelocityWithoutY.z = currentVelocity.z;
+     
         inputVector.Normalize(); // normalize the vector, so you dont move faster when moving left and foward.
+        if (inputVector == Vector3.zero && currentVelocityWithoutY.magnitude < 0.1)//0.1 since weird floating point precision errors.
+        {
+            hadNoInitialVelocity = true;
+            currentSecondsSinceMove = 0;
+        }
+        else
+        {
+            currentSecondsSinceMove += Time.deltaTime;
+            hadNoInitialVelocity = false;
+        }
 
         float preservedGravity = currentVelocity.y;
         if (isSliding)
@@ -96,10 +126,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isActuallyGrounded || jumping)
         {
-            currentVelocity.x = lastPlayerVelocity.x;
-            currentVelocity.z = lastPlayerVelocity.z;
+            if (hadNoInitialVelocity) 
+                airJumpMultiplyer = neutralJumpAirMoveSpeed;
 
-            currentVelocity += ((Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * airMoveSpeed) * Time.deltaTime;
+            if(currentSecondsSinceMove < seccondsSinceMovingBeforeMaxJump && !useReducedJump)
+            {
+                currentVelocity.x *= currentSecondsSinceMove / seccondsSinceMovingBeforeMaxJump;
+                currentVelocity.z *= currentSecondsSinceMove / seccondsSinceMovingBeforeMaxJump;
+                useReducedJump = true;
+            }
+            else
+            {
+                currentVelocity.x = lastPlayerVelocity.x;
+                currentVelocity.z = lastPlayerVelocity.z;
+            }
+            
+
+            currentVelocity += ((Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * airMoveSpeed) * airJumpMultiplyer * Time.deltaTime;
             currentVelocity.y = preservedGravity;
             return;
         }
@@ -125,11 +168,15 @@ public class PlayerMovement : MonoBehaviour
         currentJumpTime -= Time.deltaTime;
 
         jumping = currentJumpTime > 0;
-
-        if (isActuallyGrounded && currentJumpTime <= 0)
+        if (isActuallyGrounded && currentJumpTime <= 0 && !isSliding)
         {
-            currentVelocity.y = -gravity * 0.5f;
+            currentVelocity += gravity * Time.deltaTime * -groundNormal;
         }
+        else
+        {
+            currentVelocity.y += -gravity * Time.deltaTime;
+        }
+     
 
     }
 
@@ -147,42 +194,37 @@ public class PlayerMovement : MonoBehaviour
     bool isActuallyGrounded;
 
 
-
+    Vector3 groundNormal;
     void GroundCheck()
     {
-        RaycastHit hit;
-        isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
-
+  
+        isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out RaycastHit hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
+    
         currentCyoteTime -= Time.deltaTime;
 
         if (isActuallyGrounded)
         {
-
+            groundNormal = hit.normal;
             isGrounded = true;
             currentCyoteTime = coyoteTime;
+            useReducedJump = false;
 
             remainingJumps = extraJumps;
         }
         else if(currentCyoteTime <= 0)
-                isGrounded = false;
+            isGrounded = false;
+                
 
-        //credit to https://discussions.unity.com/t/character-controller-slide-down-slope/188130/2
-        if (controllerColidingButNotGrounded)
-        {
-            currentVelocity.x += (1f - controllerHitNormal.y) * controllerHitNormal.x * (1f - slideFriction);
-            currentVelocity.z += (1f - controllerHitNormal.y) * controllerHitNormal.z * (1f - slideFriction);
-
-          
-        }
     }
 
-    bool controllerColidingButNotGrounded;
-    Vector3 controllerHitNormal;
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        controllerColidingButNotGrounded = Vector3.Angle(Vector3.up, hit.normal) <= 55;
-
-        controllerHitNormal = hit.normal;
+        if (!isSliding && Vector3.Angle(hit.normal, Vector3.up) > controller.slopeLimit)
+        {
+            currentVelocity = Vector3.ProjectOnPlane(new Vector3(0, -gravity, 0), hit.normal);
+        }
+       
     }
 
     #endregion
@@ -232,8 +274,7 @@ public class PlayerMovement : MonoBehaviour
     float dashTimer;
     void Dash()
     {
-        if (isSliding)
-            return;
+
         if (readyToDash && Input.GetKeyDown(KeyCode.LeftShift))
         {
             currentlyDashing = true;
@@ -242,6 +283,9 @@ public class PlayerMovement : MonoBehaviour
             dashVelocity = dashDirection * dashSpeed;
             dashCooldownTimer = dashCooldown;
             readyToDash = false;
+
+            if (isSliding)
+                isSliding = false;
         }
 
         if (currentlyDashing)
