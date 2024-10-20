@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         initialCamY = cam.transform.localPosition.y;
         initialCamFov += cam.fieldOfView;
+        initialColliderSize = controller.height;
     }
 
 
@@ -70,7 +71,8 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("dMovement", "DashVel: " + dashVelocity, "Movement");
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
         DevText.DisplayInfo("isaccGrounded", "Actually Grounded : " + isActuallyGrounded, "Movement");
-      //  DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
+        DevText.DisplayInfo("jumo", "currently Jumping : " + currentlyJumping, "Movement");
+        //  DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
         DevText.DisplayInfo("cyote", "Cyote Time:" + currentCyoteTime, "Movement");
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
         DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
@@ -131,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         if (isSliding)
             return;
 
-        if (!isActuallyGrounded || jumping)
+        if (!isActuallyGrounded || justJumpedGracePeriod)
         {
             if (hadNoInitialVelocity) 
                 airJumpMultiplyer = neutralJumpAirMoveSpeed;
@@ -167,17 +169,20 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Gravity")]
     [SerializeField] float gravity;
-    bool jumping;
+    bool justJumpedGracePeriod;
     void Gravity()
     {
         currentVelocity.y -= gravity * Time.deltaTime;
 
         currentJumpTime -= Time.deltaTime;
 
-        jumping = currentJumpTime > 0;
+        justJumpedGracePeriod = currentJumpTime > 0;
         if (isActuallyGrounded && currentJumpTime <= 0 && !isSliding)
         {
-            currentVelocity += gravity * Time.deltaTime * -groundNormal;
+            if(currentlyJumping)
+                currentVelocity += gravity * Time.deltaTime * -groundNormal;
+            else
+                currentVelocity.y -= gravity * Time.deltaTime;
         }
         else
         {
@@ -203,9 +208,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 groundNormal;
     void GroundCheck()
     {
-  
+
         isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out RaycastHit hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
-    
+
         currentCyoteTime -= Time.deltaTime;
 
         if (isActuallyGrounded)
@@ -214,19 +219,20 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             currentCyoteTime = coyoteTime;
             useReducedJump = false;
-
+           
             remainingJumps = extraJumps;
         }
         else if(currentCyoteTime <= 0)
             isGrounded = false;
                 
-
+        if(currentJumpTime < 0)
+            currentlyJumping = false;
     }
 
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!isSliding && Vector3.Angle(hit.normal, Vector3.up) > controller.slopeLimit)
+        if (!isSliding && Vector3.Angle(hit.normal, Vector3.up) > controller.slopeLimit && !currentlyJumping)
         {
             currentVelocity = Vector3.ProjectOnPlane(new Vector3(0, -gravity, 0), hit.normal);
         }
@@ -242,11 +248,14 @@ public class PlayerMovement : MonoBehaviour
 
     float remainingJumps;
 
-    float jumpGracePeriod = 0.3f;
+    float jumpGracePeriod = 0.45f;
     float currentJumpTime;
+
+    bool currentlyJumping;
 
     void Jump()
     {
+      
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
@@ -260,6 +269,7 @@ public class PlayerMovement : MonoBehaviour
 
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
+        currentlyJumping = true;
 
         currentJumpTime = jumpGracePeriod;
     }
@@ -331,8 +341,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("CameraSettings")]
     [SerializeField] float camYDrop;
     [SerializeField] float camDropSpeed;
+    [Header("ColliderSettings")]
+    [SerializeField] float minColliderSize;
+    [SerializeField] float colliderDropSpeed;
     Camera cam;
     float initialCamY;
+    float initialColliderSize;
 
     bool onSlope;
     bool slidingTooSlow;
@@ -371,6 +385,14 @@ public class PlayerMovement : MonoBehaviour
                 cam.transform.localPosition = newCamPos;
                 
             }
+
+            if(controller.height > initialColliderSize)
+            {
+                controller.height -= Time.deltaTime * colliderDropSpeed;
+
+                if(controller.height < initialColliderSize)
+                    controller.height = initialColliderSize;
+            }
                 
             if(FacingUp())
                 currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
@@ -388,14 +410,26 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-        else if (cam.transform.localPosition.y < initialCamY )
+        else
         {
-            newCamPos = cam.transform.localPosition;
-            newCamPos.y += camDropSpeed * Time.deltaTime;
-            if (newCamPos.y > initialCamY)
-                newCamPos.y = initialCamY;
+            if (cam.transform.localPosition.y < initialCamY)
+            {
+                newCamPos = cam.transform.localPosition;
+                newCamPos.y += camDropSpeed * Time.deltaTime;
+                if (newCamPos.y > initialCamY)
+                    newCamPos.y = initialCamY;
 
-            cam.transform.localPosition = newCamPos;
+                cam.transform.localPosition = newCamPos;
+
+            }
+            if (controller.height < initialColliderSize)
+            {
+                controller.height += Time.deltaTime * colliderDropSpeed;
+
+                if (controller.height > initialColliderSize)
+                    controller.height = initialColliderSize;
+            }
+
 
         }
  
