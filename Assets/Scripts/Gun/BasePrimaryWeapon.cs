@@ -103,7 +103,7 @@ public class BasePrimaryWeapon : MonoBehaviour
     //damage the given enemy, has room for a modifier if any abilitys should want to add to it in the future
     protected void DamageEnemy(EnemyDamageHandler enemy, float modifier = 1)
     {
-        enemy.DealDamage(damage * modifier);
+        enemy.DealDamage(damage * modifier, DamageType.None);
     }    
     //returns false if there is no ammo, returns true if reload sucseeded 
     protected bool CanReloadWeapon()
@@ -140,7 +140,7 @@ public class BasePrimaryWeapon : MonoBehaviour
     protected void DamageFowardEnemy()
     {
         EnemyDamageHandler enemy = RayCastForward();
-    
+      
         if (enemy == null)
             return;
 

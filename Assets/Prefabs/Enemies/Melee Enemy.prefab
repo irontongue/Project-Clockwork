@@ -126,7 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifyer: 
   mainBodyInfo: {fileID: 0}
-  enemyType: 0
   maxHealth: 8
   health: 8
   speed: 15

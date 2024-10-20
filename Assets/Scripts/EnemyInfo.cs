@@ -92,18 +92,18 @@ public class EnemyInfo : EnemyDamageHandler
     public override bool DealDamage(float amount, DamageType damageType = DamageType.None)
     {
         DealDamage(amount, BodyPart.Body, damageType);
-        print("a");
+
         return false;
     }
     public override bool DealDamage(float amount)
     {
         DealDamage(amount, BodyPart.Body, DamageType.None);
-        print("b");
+
         return false;
     }
     public override bool DealDamage(float amount, BodyPart bodyPart = BodyPart.Body, DamageType damageType = DamageType.None)
     {
-        print("c");
+     
         Color color = Color.white;
         if (bodyPart == BodyPart.Head)
         {

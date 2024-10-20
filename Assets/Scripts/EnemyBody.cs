@@ -18,5 +18,10 @@ public class EnemyBody : EnemyDamageHandler
         mainBodyInfo.DealDamage(damage, this.bodyPart, damageType);
         return true;
     }
+    public override bool DealDamage(float damage, DamageType damageType = DamageType.None)
+    {
+        mainBodyInfo.DealDamage(damage, this.bodyPart, damageType);
+        return true;
+    }
 
 }

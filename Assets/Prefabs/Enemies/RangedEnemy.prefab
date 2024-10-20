@@ -123,9 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifyer: 
   mainBodyInfo: {fileID: 0}
-  enemyType: 0
-  maxHealth: 25
-  health: 25
+  maxHealth: 20
+  health: 20
   speed: 8
   EXP: 2
   damageFlashTime: 1

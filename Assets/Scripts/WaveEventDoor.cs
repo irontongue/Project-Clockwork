@@ -7,7 +7,10 @@ public class WaveEventDoor : WaveEvent
     [SerializeField] GameObject door;
 
 
-
+    void Start()
+    {
+        door.SetActive(false);
+    }
     public override void WaveStart()
     {
         door.SetActive(true);

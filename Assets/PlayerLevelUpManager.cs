@@ -22,7 +22,10 @@ public class PlayerLevelUpManager : MonoBehaviour
     Color textColor;
 
     static public PlayerLevelUpManager instance;
-
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         maxLevel = expToLvlup.Length;
@@ -33,7 +36,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 
         expBar.fillAmount = 0;
 
-        instance = this;
+      
     }
 
     public void ReciveEXP(float amount)

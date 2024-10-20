@@ -24,8 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public static quaternion playerRotation;
     public static Transform playerTransform;
 
+    [Header("Dependancies")]
+    CharacterController controller;
 
-    
     void Awake()
     {
         playerTransform = this.transform;
@@ -35,12 +36,13 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         remainingJumps = extraJumps;
-        maxPlayerWalkSpeed = (Camera.main.transform.right * 1 + Camera.main.transform.forward * 1) * baseSpeed;
+        maxPlayerWalkSpeed = (Camera.main.transform.right * 0.71f + Camera.main.transform.forward * 0.71f) * baseSpeed;
         playerRef = gameObject;
 
         //slide inits
         cam = Camera.main;
         initialCamY = cam.transform.localPosition.y;
+        initialCamFov += cam.fieldOfView;
     }
 
 
@@ -61,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
         GroundCheck();
         FinalMoveCaculation();
+        CameraFov();
+     
 
         DevText.DisplayInfo("pMovement", "PlayerVelocity: " + currentVelocity, "Movement");
         DevText.DisplayInfo("dMovement", "DashVel: " + dashVelocity, "Movement");
@@ -76,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("neutralJump", "NeutralJump:" + hadNoInitialVelocity, "Movement");
         DevText.DisplayInfo("currentSeccondsSinceMove:", "LastMove: " + currentSecondsSinceMove, "Movement");
         DevText.DisplayInfo("useReducedjump:", "RedusedJump: " + useReducedJump, "Movement");
+        DevText.DisplayInfo("magwihy", "MagWithoutY: " + currentVelocityWithoutY.magnitude, "Movement");
+        DevText.DisplayInfo("magwihya", "MaxWalkWithoutY: " + maxPlayerWalkSpeed.magnitude, "Movement");
         if (isActuallyGrounded)
         {
             lastPlayerSafePos = transform.position;
@@ -104,11 +110,12 @@ public class PlayerMovement : MonoBehaviour
     {
         inputVector.x = Input.GetAxisRaw("Horizontal");
         inputVector.z = Input.GetAxisRaw("Vertical");
-
+      
         currentVelocityWithoutY.x = currentVelocity.x;
         currentVelocityWithoutY.z = currentVelocity.z;
      
         inputVector.Normalize(); // normalize the vector, so you dont move faster when moving left and foward.
+
         if (inputVector == Vector3.zero && currentVelocityWithoutY.magnitude < 0.1)//0.1 since weird floating point precision errors.
         {
             hadNoInitialVelocity = true;
@@ -181,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
-
     #region GroundCheck
 
     [Header("Ground Check")]
@@ -228,7 +234,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
-
     #region Jumping
 
     [Header("Jumping")]
@@ -259,7 +264,6 @@ public class PlayerMovement : MonoBehaviour
         currentJumpTime = jumpGracePeriod;
     }
     #endregion
-
     #region Dash
 
     [Header("Dash")]
@@ -316,7 +320,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
-
     #region Sliding
     [Header("Slide Settings")]
     [SerializeField] float extraVelRequiredToSlide;
@@ -450,7 +453,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
-
     #region FinalMoveCaculation
 
     void FinalMoveCaculation()
@@ -460,6 +462,48 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+    #region Camera
+
+    [SerializeField] float magnitueRequiredMaxFov;
+    [SerializeField] float minExtraMagnitureForFovIncrease;
+    [SerializeField] float maxSprintFov;
+    [SerializeField] float fovIncreaseSpeed;
+    [SerializeField] float fovReturnSpeed;
+    float initialCamFov;
+    float newFov;
+
+    bool increaseFov;
+    void CameraFov()
+    {
+        increaseFov = currentVelocityWithoutY.magnitude > maxPlayerWalkSpeed.magnitude + minExtraMagnitureForFovIncrease;
+ 
+        newFov = Mathf.Lerp(initialCamFov, maxSprintFov, currentVelocityWithoutY.magnitude / magnitueRequiredMaxFov);
+        
+        if (increaseFov)
+        {
+            if (cam.fieldOfView >= newFov)
+            {
+                cam.fieldOfView = newFov;
+                return;
+            }
+
+            cam.fieldOfView +=  fovIncreaseSpeed * Time.deltaTime;
+        }
+        else
+        {
+            if (cam.fieldOfView <= initialCamFov)
+            {
+                cam.fieldOfView = initialCamFov;
+                return;
+            }
+
+            
+            cam.fieldOfView -= fovReturnSpeed * Time.deltaTime;
+        }
+    }
+
+    #endregion
+    #region Misc
     public void ResetPlayerToSafePos()
     {
         controller.enabled = false;
@@ -468,8 +512,9 @@ public class PlayerMovement : MonoBehaviour
         currentVelocity = Vector3.zero;
         lastPlayerVelocity = Vector3.zero;
     }
-   
 
-    [Header("Dependancies")]
-    CharacterController controller;
+    #endregion
+
+
+
 }
