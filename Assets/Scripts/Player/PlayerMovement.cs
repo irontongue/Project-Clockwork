@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("useReducedjump:", "RedusedJump: " + useReducedJump, "Movement");
         DevText.DisplayInfo("magwihy", "MagWithoutY: " + currentVelocityWithoutY.magnitude, "Movement");
         DevText.DisplayInfo("magwihya", "MaxWalkWithoutY: " + maxPlayerWalkSpeed.magnitude, "Movement");
+        DevText.DisplayInfo("Heigt,", "Height: " + controller.height, "Movement");
         if (isActuallyGrounded)
         {
             lastPlayerSafePos = transform.position;
@@ -386,12 +387,12 @@ public class PlayerMovement : MonoBehaviour
                 
             }
 
-            if(controller.height > initialColliderSize)
+            if(controller.height > minColliderSize)
             {
                 controller.height -= Time.deltaTime * colliderDropSpeed;
-
-                if(controller.height < initialColliderSize)
-                    controller.height = initialColliderSize;
+                print(controller.height);
+                if(controller.height < minColliderSize)
+                    controller.height = minColliderSize;
             }
                 
             if(FacingUp())

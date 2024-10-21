@@ -53,6 +53,7 @@ public class AIBase : EnemyInfo
         aiBuisy = false;
         source = GetComponent<AudioSource>();
         BatchSpriteLooker.AddLooker(transform);
+        agent.speed = speed;
     }
 
     protected override void Update()

@@ -128,7 +128,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 8
   health: 8
-  speed: 15
+  speed: 14
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Bits: 1
   baseSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
   attackSprite: {fileID: 21300000, guid: 8f94c3e1683475149bf735a7f33ccd5c, type: 3}
-  seccondsBetweenMovementUpdates: 0.05
+  seccondsBetweenMovementUpdates: 0.1
   randonVarianceForMovementUpdate: 0.005
   usePolarOffset: 1
   distanceBeforeConvergingOnPlayer: 6

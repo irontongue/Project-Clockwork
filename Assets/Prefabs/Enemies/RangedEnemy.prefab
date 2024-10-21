@@ -158,9 +158,9 @@ MonoBehaviour:
   pole: 0
   aiBuisy: 0
   state: 0
-  afterAttackTimer: 1.5
-  findNewPositionRangeFromPlayer: 25
-  findNewPositionRangeRandomMultiplyer: 0.2
+  afterAttackTimer: 0.5
+  findNewPositionRangeFromPlayer: 35
+  findNewPositionRangeRandomMultiplyer: 0.05
   seekPlayerRandomError: 3
   playerTooCloseRange: 10
   findNewPosRange: 5
@@ -168,7 +168,7 @@ MonoBehaviour:
   projectile: {fileID: 6170293064856852499, guid: ad992dcb8512749409890f3326a6b3e6,
     type: 3}
   projectileSpeed: 45
-  repositionDistance: 9
+  repositionDistance: 5
   timeInRepositionState: 1
   findPositionTries: 3
 --- !u!195 &2712118304913471865
