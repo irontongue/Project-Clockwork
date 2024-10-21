@@ -14,7 +14,7 @@ TagManager:
   - Player
   - EnemyBody
   - NoNavMesh
-  - 
+  - IgnorePlayer
   - 
   - 
   - 

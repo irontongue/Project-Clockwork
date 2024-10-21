@@ -33,7 +33,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
             Debug.LogError("On Sniper, DonutImage needs to be assigned");
         }
     }
-    protected override void Update()
+    void Update()
     {
         if(GameState.GamePaused)
             return;

@@ -40,11 +40,7 @@ public class AutomaticWeaponBase : MonoBehaviour
 
 
     }
-    virtual protected void Update()
-    {
-        if(GameState.GamePaused)
-            return;
-    }
+
     /// <summary>
     /// returns the first GameObject in front of the crosshair
     /// returns null if no objects present
@@ -257,9 +253,6 @@ public class AutomaticWeaponBase : MonoBehaviour
         }
         return false;
     }
-    /// <summary>
-    /// 
-    /// </summary>
     public virtual void Upgrade<T>(T upgradeEnum)where T: Enum{ }
 
 }

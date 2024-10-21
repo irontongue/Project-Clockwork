@@ -41,7 +41,7 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     //    }
     //}
     bool resetRotation = false;
-    protected override void Update()
+    void Update()
     {
         if(GameState.GamePaused)
             return;
