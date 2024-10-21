@@ -30,9 +30,8 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
 
     // Update is called once per frame
     float lightningTime = 0;
-    protected override void Update()
+    void Update()
     {
-        base.Update();
         if(firing)
         {
             UpdateLineRenPositons();

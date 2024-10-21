@@ -19,7 +19,7 @@ public class AutomaticWeaponDog : AutomaticCompanionBase
     //Attack the target
     //Return to the player
     //repete
-    protected override void Update()
+    void Update()
     {
         if(GameState.GamePaused)
             return;

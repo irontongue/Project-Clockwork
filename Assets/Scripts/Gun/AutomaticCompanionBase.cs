@@ -27,10 +27,6 @@ public class AutomaticCompanionBase : AutomaticWeaponBase
     }
 
     // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
 
     protected bool MoveToPlayerFront(float speed, float distanceFromPlayer)
     {

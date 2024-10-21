@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, PlayerRevolver}
+public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, PlayerRevolver, MissleLaucher}
 public enum DamageType {Physical, Fire, Explosion, Lightning, None}
-public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat, PlayerRevolver}
+public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat, PlayerRevolver, MissleLaucher}
 public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance, ReloadSpeed, MagCapacity, NumberToPierce}
 
 public class AllWeaponStats : MonoBehaviour
 {
     public WeaponStats[] weaponStats;
     public Dictionary<WeaponType, AutomaticWeaponBase> weaponReferences = new();
+    public static AllWeaponStats allWeaponStatsInstance;
 
     [SerializeField] Dictionary<WeaponType, int> weaponStatsDic = new();
     private void Awake()
     {
+        allWeaponStatsInstance = this;
         InitializeDictionary();
     }
     public WeaponStats GetWeaponStat(WeaponType weaponType)
@@ -108,6 +110,9 @@ public class AllWeaponStats : MonoBehaviour
             //    break;
             //case UpgradeType.ThrowingKnives:
             //    weaponReferences[WeaponType.ThrowingKnives].Upgrade(packet.teslaCoilUpgrades);
+            //    break;
+            //case UpgradeType.MissleLauncher:
+            //    weaponReferences[WeaponType.MissleLauncher].Upgrade(packet.missleLauncherUpgrades);
             //    break;
 
 
