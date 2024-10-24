@@ -15170,6 +15170,61 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &579944792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579944793}
+  - component: {fileID: 579944794}
+  m_Layer: 5
+  m_Name: WeaponCooldownUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &579944793
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579944792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2094315790}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &579944794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579944792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403ef1adbdc692d40a1bde0c56a8d552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiPrefab: {fileID: 4076408076780762772, guid: d1b8e1840e112f44f99361b3736f054d,
+    type: 3}
+  backgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
+  initialOffset: {x: -200, y: 0}
+  yOffset: 52.5
+  xOffeset: 400
+  imagesPerRow: 3
 --- !u!1001 &580360593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17067,11 +17122,22 @@ PrefabInstance:
       propertyPath: donutImage
       value: 
       objectReference: {fileID: 872921745}
+    - target: {fileID: 5763983037393724092, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: uiCDSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e496e1e847295e40a42e70541d94f18,
+        type: 3}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expBar
       value: 
       objectReference: {fileID: 753291155}
+    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: levelUpReadyText
@@ -17127,6 +17193,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: uiCDSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f0e2ff3685d3bc46ad34a1febd70635,
+        type: 3}
+    - target: {fileID: 7645725708352849043, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: uiCDSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e8b363164b2434542b6d2a298f64e68b,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -17451,6 +17529,7 @@ MonoBehaviour:
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 447
+  uiCDSprite: {fileID: 0}
   spriteBase: {fileID: 21300000, guid: 17f60d67dd6c2954e91b7627ad40a8b9, type: 3}
   spriteAttack: {fileID: 21300000, guid: c816639ef1a24804fb2f6c934fdce1a1, type: 3}
   enviornmentLayerMask:
@@ -46407,7 +46486,11 @@ PrefabInstance:
       objectReference: {fileID: 1440079888}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3124086577222534255, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 579944793}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 081e6f4431cd9634a8cf676da0645f8c, type: 3}
 --- !u!114 &2094315789 stripped
@@ -46422,6 +46505,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2094315790 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3124086577222534255, guid: 081e6f4431cd9634a8cf676da0645f8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2094315788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2101698560 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5375174971888706256, guid: 081e6f4431cd9634a8cf676da0645f8c,
@@ -48121,6 +48210,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1258420410}
     m_Modifications:
+    - target: {fileID: 1207136997612263309, guid: 32e94e7b1f1018e498f4d0c77324794f,
+        type: 3}
+      propertyPath: uiCDSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e246a8994609033458b89d7a55eadf99,
+        type: 3}
     - target: {fileID: 4051008084599665522, guid: 32e94e7b1f1018e498f4d0c77324794f,
         type: 3}
       propertyPath: m_Name
