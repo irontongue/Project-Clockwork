@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
         public Enemies enemy;
         public int spawnChances;
     }
-    public enum Enemies {Melee, Ranged}
+    public enum Enemies {Melee, Ranged, Slob}
    
   
 

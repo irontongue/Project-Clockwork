@@ -362,7 +362,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 49
   m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -395,8 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970e296142cd8142ab69b17b49f035b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 15
-  airMoveSpeed: 3
+  baseSpeed: 12
+  airMoveSpeed: 1
   seccondsSinceMovingBeforeMaxJump: 0.15
   neutralJumpAirMoveSpeed: 4
   gravity: 14
@@ -406,17 +406,17 @@ MonoBehaviour:
     m_Bits: 307
   coyoteTime: 0.05
   slideFriction: 0.25
-  initialJumpVel: 10
+  initialJumpVel: 12
   extraJumps: 1
   dashSpeed: 25
   dashLenght: 0.3
   dashCooldown: 1
-  extraVelRequiredToSlide: 0.9
-  slideFallOff: 30
+  extraVelRequiredToSlide: 25
+  slideFallOff: 25
   uphillExtraSlideFallOff: 75
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
-  downSlopeAccelMultiplyer: 25
+  downSlopeAccelMultiplyer: 50
   camYDrop: 0.7
   camDropSpeed: 6
   minColliderSize: 1
@@ -591,12 +591,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955605711507786865}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30ea375e4fa74cc44a4d8ea7a1bf83aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expToLvlup: 050000000a0000000f00000014000000190000001e00000023000000280000002d00000032000000370000003c000000410000004b000000500000003c0000003c000000
+  expToLvlup: 14000000140000001400000019000000190000001e00000023000000280000002d00000032000000370000003c000000410000004b000000500000003c0000003c000000
   readyToLVLup: 0
   levelUpReadyText: {fileID: 0}
   expBar: {fileID: 0}

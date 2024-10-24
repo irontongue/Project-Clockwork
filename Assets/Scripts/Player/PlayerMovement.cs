@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         currentVelocityWithoutY.z = currentVelocity.z;
      
         inputVector.Normalize(); // normalize the vector, so you dont move faster when moving left and foward.
-
+        //check if was standing still
         if (inputVector == Vector3.zero && currentVelocityWithoutY.magnitude < 0.1)//0.1 since weird floating point precision errors.
         {
             hadNoInitialVelocity = true;
@@ -131,21 +131,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float preservedGravity = currentVelocity.y;
+
         if (isSliding)
             return;
 
         if (!isActuallyGrounded || justJumpedGracePeriod)
         {
-            if (hadNoInitialVelocity) 
+            if (hadNoInitialVelocity) // add a huge boost to air move if player was standing still- a  neutral jump
                 airJumpMultiplyer = neutralJumpAirMoveSpeed;
 
-            if(currentSecondsSinceMove < seccondsSinceMovingBeforeMaxJump && !useReducedJump)
+            if(currentSecondsSinceMove < seccondsSinceMovingBeforeMaxJump && !useReducedJump)// if just started moving, add a tiny space for accleration for short jumps.
             {
                 currentVelocity.x *= currentSecondsSinceMove / seccondsSinceMovingBeforeMaxJump;
                 currentVelocity.z *= currentSecondsSinceMove / seccondsSinceMovingBeforeMaxJump;
                 useReducedJump = true;
             }
-            else
+            else// keep preserving the last velocity.
             {
                 currentVelocity.x = lastPlayerVelocity.x;
                 currentVelocity.z = lastPlayerVelocity.z;
@@ -189,8 +190,6 @@ public class PlayerMovement : MonoBehaviour
         {
             currentVelocity.y += -gravity * Time.deltaTime;
         }
-     
-
     }
 
     #endregion
@@ -237,7 +236,6 @@ public class PlayerMovement : MonoBehaviour
         {
             currentVelocity = Vector3.ProjectOnPlane(new Vector3(0, -gravity, 0), hit.normal);
         }
-       
     }
 
     #endregion
@@ -246,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] float initialJumpVel;
     [SerializeField] float extraJumps;
+ 
 
     float remainingJumps;
 
@@ -255,8 +254,7 @@ public class PlayerMovement : MonoBehaviour
     bool currentlyJumping;
 
     void Jump()
-    {
-      
+    {     
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
@@ -268,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
                 return;
         }
 
+    
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
         currentlyJumping = true;
@@ -376,7 +375,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding)
         {
-            if (cam.transform.localPosition.y > initialCamY - camYDrop)
+
+            float tempY = currentVelocity.y;
+            currentVelocity.y = 0;
+            currentVelocity = currentVelocity.magnitude * transform.forward;
+            currentVelocity.y = tempY;
+
+
+            if (cam.transform.localPosition.y > initialCamY - camYDrop) //Camera height
             {
                 newCamPos = cam.transform.localPosition;
                 newCamPos.y -= camDropSpeed * Time.deltaTime;
@@ -387,7 +393,7 @@ public class PlayerMovement : MonoBehaviour
                 
             }
 
-            if(controller.height > minColliderSize)
+            if(controller.height > minColliderSize) // collideer height
             {
                 controller.height -= Time.deltaTime * colliderDropSpeed;
                 print(controller.height);
@@ -395,12 +401,12 @@ public class PlayerMovement : MonoBehaviour
                     controller.height = minColliderSize;
             }
                 
-            if(FacingUp())
+            if(FacingUp()) // if going up a steep slope
                 currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
             else if (!onSlope)
-                currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime;
+                currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
             else
-                currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime;
+                currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
 
             if (slidingTooSlow)
             {
