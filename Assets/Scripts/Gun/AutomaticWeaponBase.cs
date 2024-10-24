@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 public class AutomaticWeaponBase : MonoBehaviour
@@ -22,9 +21,14 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected float coolDownTime = 0;
 
     protected bool firing = false;
+    Image uiCDImage;
+    [SerializeField] protected Sprite uiCDSprite;
+    protected float uiCDTimeOffset = 0f;
+    float totalCooldownTimer = 0;
 
     virtual protected void Start()
     {
+        uiCDImage = AutomaticWeaponCooldownUI.selfRef.AddWeapon(uiCDSprite);
         playerTransform = transform.root;
         cam = Camera.main;
         allStats = FindAnyObjectByType<AllWeaponStats>();
@@ -231,10 +235,16 @@ public class AutomaticWeaponBase : MonoBehaviour
     {
         if (onCooldown)
         {
+            UpdateCoolDownUI();
             if (Timer(ref coolDownTime, stats.coolDown))
                 onCooldown = false;
         }
         return !onCooldown;
+    }
+    void UpdateCoolDownUI()
+    {
+        //Timer(ref totalCooldownTimer, )
+        uiCDImage.fillAmount = coolDownTime / 1 + uiCDTimeOffset;
     }
     /// <summary>
     /// Helper function
@@ -246,13 +256,14 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected bool Timer(ref float _time, float speed)
     {
         _time += Time.deltaTime * speed;
-        if(_time >= 1)
+        if(_time >= 1f)
         {
             _time = 0;
             return true;
         }
         return false;
     }
+
     public virtual void Upgrade<T>(T upgradeEnum)where T: Enum{ }
 
 }
