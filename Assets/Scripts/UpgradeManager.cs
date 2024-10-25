@@ -46,6 +46,10 @@ public class UpgradeLine // this is a class and not a struct, since you cannot p
     [FoldoutGroup("$packetName")] public WeaponType weaponType;
     [FoldoutGroup("$packetName")] public UpgradeInfoPacket[] packet;
     [FoldoutGroup("$packetName")] public int levels;
+
+    [Header("Display Settings")]
+
+    [FoldoutGroup("$packetName")] public WeaponStatType[] statsToDisplay;
 }
 
 public class UpgradeManager : MonoBehaviour

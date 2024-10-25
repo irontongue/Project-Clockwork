@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public static quaternion playerRotation;
     public static Transform playerTransform;
 
+    public static AudioSource playerAudioSource;
+
     [Header("Dependancies")]
     CharacterController controller;
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerTransform = this.transform;
         playerRef = this.gameObject;
+        playerAudioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -43,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         initialCamY = cam.transform.localPosition.y;
         initialCamFov += cam.fieldOfView;
+        initialColliderSize = controller.height;
+        
     }
 
 
@@ -63,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
         GroundCheck();
         FinalMoveCaculation();
+        Footstep();
         CameraFov();
      
 
@@ -70,7 +76,8 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("dMovement", "DashVel: " + dashVelocity, "Movement");
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
         DevText.DisplayInfo("isaccGrounded", "Actually Grounded : " + isActuallyGrounded, "Movement");
-      //  DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
+        DevText.DisplayInfo("jumo", "currently Jumping : " + currentlyJumping, "Movement");
+        //  DevText.DisplayInfo("onlycontrollergrounded", "Only Controller Grounded : " + controllerColidingButNotGrounded, "Movement");
         DevText.DisplayInfo("cyote", "Cyote Time:" + currentCyoteTime, "Movement");
         DevText.DisplayInfo("isActuallyGrounded", "isActuallyGrounded " + isActuallyGrounded, "Movement");
         DevText.DisplayInfo("lastPlayerSafePos", "lastPlayerSafePos " + lastPlayerSafePos, "Movement");
@@ -82,10 +89,13 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("useReducedjump:", "RedusedJump: " + useReducedJump, "Movement");
         DevText.DisplayInfo("magwihy", "MagWithoutY: " + currentVelocityWithoutY.magnitude, "Movement");
         DevText.DisplayInfo("magwihya", "MaxWalkWithoutY: " + maxPlayerWalkSpeed.magnitude, "Movement");
+        DevText.DisplayInfo("Heigt,", "Height: " + controller.height, "Movement");
         if (isActuallyGrounded)
         {
             lastPlayerSafePos = transform.position;
         }
+
+     
     }
 
     #region CaculateMoveVelocity
@@ -115,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         currentVelocityWithoutY.z = currentVelocity.z;
      
         inputVector.Normalize(); // normalize the vector, so you dont move faster when moving left and foward.
-
+        //check if was standing still
         if (inputVector == Vector3.zero && currentVelocityWithoutY.magnitude < 0.1)//0.1 since weird floating point precision errors.
         {
             hadNoInitialVelocity = true;
@@ -128,21 +138,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float preservedGravity = currentVelocity.y;
+
         if (isSliding)
             return;
 
-        if (!isActuallyGrounded || jumping)
+        if (!isActuallyGrounded || justJumpedGracePeriod)
         {
-            if (hadNoInitialVelocity) 
+            if (hadNoInitialVelocity) // add a huge boost to air move if player was standing still- a  neutral jump
                 airJumpMultiplyer = neutralJumpAirMoveSpeed;
 
-            if(currentSecondsSinceMove < seccondsSinceMovingBeforeMaxJump && !useReducedJump)
+            if(currentSecondsSinceMove < seccondsSinceMovingBeforeMaxJump && !useReducedJump)// if just started moving, add a tiny space for accleration for short jumps.
             {
                 currentVelocity.x *= currentSecondsSinceMove / seccondsSinceMovingBeforeMaxJump;
                 currentVelocity.z *= currentSecondsSinceMove / seccondsSinceMovingBeforeMaxJump;
                 useReducedJump = true;
             }
-            else
+            else// keep preserving the last velocity.
             {
                 currentVelocity.x = lastPlayerVelocity.x;
                 currentVelocity.z = lastPlayerVelocity.z;
@@ -167,24 +178,25 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Gravity")]
     [SerializeField] float gravity;
-    bool jumping;
+    bool justJumpedGracePeriod;
     void Gravity()
     {
         currentVelocity.y -= gravity * Time.deltaTime;
 
         currentJumpTime -= Time.deltaTime;
 
-        jumping = currentJumpTime > 0;
+        justJumpedGracePeriod = currentJumpTime > 0;
         if (isActuallyGrounded && currentJumpTime <= 0 && !isSliding)
         {
-            currentVelocity += gravity * Time.deltaTime * -groundNormal;
+            if(currentlyJumping)
+                currentVelocity += gravity * Time.deltaTime * -groundNormal;
+            else
+                currentVelocity.y -= gravity * Time.deltaTime;
         }
         else
         {
             currentVelocity.y += -gravity * Time.deltaTime;
         }
-     
-
     }
 
     #endregion
@@ -203,9 +215,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 groundNormal;
     void GroundCheck()
     {
-  
+
         isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out RaycastHit hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
-    
+
         currentCyoteTime -= Time.deltaTime;
 
         if (isActuallyGrounded)
@@ -214,23 +226,23 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             currentCyoteTime = coyoteTime;
             useReducedJump = false;
-
+           
             remainingJumps = extraJumps;
         }
         else if(currentCyoteTime <= 0)
             isGrounded = false;
                 
-
+        if(currentJumpTime < 0)
+            currentlyJumping = false;
     }
 
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!isSliding && Vector3.Angle(hit.normal, Vector3.up) > controller.slopeLimit)
+        if (!isSliding && Vector3.Angle(hit.normal, Vector3.up) > controller.slopeLimit && !currentlyJumping)
         {
             currentVelocity = Vector3.ProjectOnPlane(new Vector3(0, -gravity, 0), hit.normal);
         }
-       
     }
 
     #endregion
@@ -239,14 +251,17 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     [SerializeField] float initialJumpVel;
     [SerializeField] float extraJumps;
+ 
 
     float remainingJumps;
 
-    float jumpGracePeriod = 0.3f;
+    float jumpGracePeriod = 0.45f;
     float currentJumpTime;
 
+    bool currentlyJumping;
+
     void Jump()
-    {
+    {     
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
@@ -258,8 +273,10 @@ public class PlayerMovement : MonoBehaviour
                 return;
         }
 
+    
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
+        currentlyJumping = true;
 
         currentJumpTime = jumpGracePeriod;
     }
@@ -331,8 +348,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("CameraSettings")]
     [SerializeField] float camYDrop;
     [SerializeField] float camDropSpeed;
+    [Header("ColliderSettings")]
+    [SerializeField] float minColliderSize;
+    [SerializeField] float colliderDropSpeed;
     Camera cam;
     float initialCamY;
+    float initialColliderSize;
 
     bool onSlope;
     bool slidingTooSlow;
@@ -355,13 +376,21 @@ public class PlayerMovement : MonoBehaviour
         onSlope = GroundAngle() > minAngleForSlide;
 
         VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
-        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude * minMagBeforeSlideCancelMultiplyer && !onSlope;
+      
 
-
+      
+       
 
         if (isSliding)
         {
-            if (cam.transform.localPosition.y > initialCamY - camYDrop)
+            
+            float tempY = currentVelocity.y;
+            currentVelocity.y = 0;
+            currentVelocity = currentVelocity.magnitude * transform.forward;
+            currentVelocity.y = tempY;
+
+
+            if (cam.transform.localPosition.y > initialCamY - camYDrop) //Camera height
             {
                 newCamPos = cam.transform.localPosition;
                 newCamPos.y -= camDropSpeed * Time.deltaTime;
@@ -371,13 +400,20 @@ public class PlayerMovement : MonoBehaviour
                 cam.transform.localPosition = newCamPos;
                 
             }
+
+            if(controller.height > minColliderSize) // collideer height
+            {
+                controller.height -= Time.deltaTime * colliderDropSpeed;
+                if(controller.height < minColliderSize)
+                    controller.height = minColliderSize;
+            }
                 
-            if(FacingUp())
+            if(FacingUp()) // if going up a steep slope
                 currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
             else if (!onSlope)
-                currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime;
+                currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
             else
-                currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime;
+                currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
 
             if (slidingTooSlow)
             {
@@ -388,17 +424,30 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
-        else if (cam.transform.localPosition.y < initialCamY )
+        else
         {
-            newCamPos = cam.transform.localPosition;
-            newCamPos.y += camDropSpeed * Time.deltaTime;
-            if (newCamPos.y > initialCamY)
-                newCamPos.y = initialCamY;
+            if (cam.transform.localPosition.y < initialCamY)
+            {
+                newCamPos = cam.transform.localPosition;
+                newCamPos.y += camDropSpeed * Time.deltaTime;
+                if (newCamPos.y > initialCamY)
+                    newCamPos.y = initialCamY;
 
-            cam.transform.localPosition = newCamPos;
+                cam.transform.localPosition = newCamPos;
+
+            }
+            if (controller.height < initialColliderSize)
+            {
+                controller.height += Time.deltaTime * colliderDropSpeed;
+
+                if (controller.height > initialColliderSize)
+                    controller.height = initialColliderSize;
+            }
+
 
         }
- 
+        VelWithoutGravity.y = 0;
+        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope;
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
         if (hit.point.y > transform.position.y - 0.5)
@@ -500,6 +549,32 @@ public class PlayerMovement : MonoBehaviour
             
             cam.fieldOfView -= fovReturnSpeed * Time.deltaTime;
         }
+    }
+
+    #endregion
+
+    #region Footsteps
+    [Header("Footsteps")]
+    [SerializeField] float distanceBetweenSteps;
+    [SerializeField] AudioClip[] footsteps;
+
+    float currentDistance;
+    void Footstep()
+    {
+        if (!isActuallyGrounded || isSliding || currentlyDashing)
+            return;
+
+        if (inputVector == Vector3.zero)
+            currentDistance -= Time.deltaTime; // this prevents hearing footsteps when doing repeated small movements
+
+        currentDistance += Vector3.Distance(transform.position, lastPlayerSafePos);
+
+        if (currentDistance < distanceBetweenSteps)
+            return;
+
+        currentDistance = 0;
+
+        playerAudioSource.PlayOneShot(footsteps[UnityEngine.Random.Range(0, footsteps.Length)], GlobalSettings.audioVolume) ;
     }
 
     #endregion

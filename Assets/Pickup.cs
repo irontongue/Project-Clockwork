@@ -24,6 +24,7 @@ public class Pickup : MonoBehaviour
                 GlobalStaticReference.playerDamageHandler.Heal(amount);
                 break;
         }
+
         Destroy(gameObject);
     }
 

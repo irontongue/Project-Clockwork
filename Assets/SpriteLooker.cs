@@ -9,12 +9,17 @@ public class SpriteLooker : MonoBehaviour
     void Start()
     {
         // player = FindAnyObjectByType<PlayerMovement>().transform.gameObject;    
-     
+        BatchSpriteLooker.AddLooker(this.transform);
     }
 
     // Update is called once per frame
     void Update()
     {
        // transform.LookAt(player.transform);
+    }
+
+    private void OnDestroy()
+    {
+        BatchSpriteLooker.RemoveLooker(this.transform);
     }
 }

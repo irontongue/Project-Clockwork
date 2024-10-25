@@ -72,7 +72,9 @@ public class PlayerLevelUpManager : MonoBehaviour
         GamePauser.instance.PauseGame(true,false,gameObject);
         readyToLVLup = false;
         currentEXP -= expToLvlup[currentLevel];
-        currentLevel++;
+        if(currentLevel !>= maxLevel)
+            currentLevel++;
+
         upgradeManager.StartUpgrade();
         levelUpReadyText.color = textColor;
     }
