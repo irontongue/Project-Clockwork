@@ -17,6 +17,8 @@ public class UpgradeSpawnerUI : MonoBehaviour
     [SerializeField] float waitTimeUntillCardsInteractable = 0.25f;
     UpgradeManager upgradeManager;
 
+    
+
     private void Start()
     {
         upgradeManager = FindAnyObjectByType<UpgradeManager>();
@@ -26,6 +28,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
     bool upgradeIsWeapon;
     List<UpgradeButton> buttons = new();
     float timeSinceUpgradeStarted;
+    int countStatsToDisplay;
     public void DisplayPopups(List<UpgradeLine> upgradesToDisplay)
     {
         timeSinceUpgradeStarted = Time.realtimeSinceStartup;
@@ -44,6 +47,17 @@ public class UpgradeSpawnerUI : MonoBehaviour
             upgradeButton.bodyText.text = upgradeInfo.packet[upgradeInfo.levels].upgradeBody;
             
             upgradeButton.buttonDelegate = upgradeDelegate;
+            countStatsToDisplay = upgradeInfo.statsToDisplay.Length;
+            for (int i = 0; i < upgradeButton.statTexts.Length; i++)
+            {
+                if (i + 1 > countStatsToDisplay)
+                {
+                    upgradeButton.statTexts[i].text = "";
+                    continue;
+                }
+
+                upgradeButton.statTexts[i].text = ConvertUpgradeInfoToString(upgradeInfo, i, upgradeInfo.packet[0].isWeapon);
+            }
 
             upgradeButton.packetRef = upgradeInfo;
             RectTransform button = upgradeButton.GetComponent<RectTransform>();
@@ -64,6 +78,55 @@ public class UpgradeSpawnerUI : MonoBehaviour
 
       
     }
+
+    string ConvertUpgradeInfoToString(UpgradeLine upgradeInfo, int index, bool newWeapon)
+    {
+        string message = "";
+        string unit = "";
+        bool subtract = false;
+        float value = 0;
+        switch (upgradeInfo.statsToDisplay[index])
+        {
+            case WeaponStatType.Damage:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).damage;
+                message += "Damage: ";
+                break;
+            case WeaponStatType.AttackSpeed:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).attackSpeed;
+                message += "Attack Speed: ";
+                subtract = true;
+                unit = "s";
+                break;
+            case WeaponStatType.Range:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).range;
+                message += "Attack Range: ";
+                unit = "m";
+                break;
+            case WeaponStatType.CoolDown:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).coolDown;
+                message += "Cooldown: ";
+                subtract = true;
+                unit = "s";
+                break;
+            case WeaponStatType.Bounces:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).bounces;
+                message += "Bounces: ";
+                break;
+            case WeaponStatType.NumberOfBullets:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).numberOfBullets;
+                message += "Pellets: ";
+                break;
+
+        }
+      
+        if(newWeapon)
+         message += value.ToString();
+        else
+            message += value + " -> " + (value + upgradeInfo.packet[upgradeInfo.levels].amountToAdd) + (subtract ? -value : value) + " ( " + upgradeInfo.packet[upgradeInfo.levels].amountToAdd +unit + " )";
+        return message;
+    }
+
+   
     public void ClearUI()
     {
         foreach(UpgradeButton button in buttons)

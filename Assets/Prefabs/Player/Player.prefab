@@ -411,7 +411,7 @@ MonoBehaviour:
   dashSpeed: 25
   dashLenght: 0.3
   dashCooldown: 1
-  extraVelRequiredToSlide: 25
+  extraVelRequiredToSlide: 2
   slideFallOff: 25
   uphillExtraSlideFallOff: 75
   minMagBeforeSlideCancelMultiplyer: 0.5
@@ -426,6 +426,14 @@ MonoBehaviour:
   maxSprintFov: 100
   fovIncreaseSpeed: 2
   fovReturnSpeed: 2
+  distanceBetweenSteps: 5
+  footsteps:
+  - {fileID: 8300000, guid: dc448fc1e1d28534081dd40ebfc6f41e, type: 3}
+  - {fileID: 8300000, guid: f786069c3da91b645936a697c3111307, type: 3}
+  - {fileID: 8300000, guid: dfbb68280616ea84f8645d5ea7b4f4c9, type: 3}
+  - {fileID: 8300000, guid: 1d266507d6095ba4fa942cf4753b2fe0, type: 3}
+  - {fileID: 8300000, guid: c6ae64b16741f0841a3e3cf6861da4b6, type: 3}
+  - {fileID: 8300000, guid: ac445d389024cca49b3b69091bbfaece, type: 3}
 --- !u!114 &2885463159808772724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,6 +907,7 @@ MonoBehaviour:
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 191
+  uiCDSprite: {fileID: 0}
   donutImage: {fileID: 0}
   muzzleFlashPFX: {fileID: 4929545749913747673}
   bloodHitPFX: {fileID: 3766226238398832601, guid: 401c055fb346c2b48b4813242fdd1b78,
@@ -957,6 +966,7 @@ MonoBehaviour:
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 63
+  uiCDSprite: {fileID: 0}
   muzzleFlashPFX: {fileID: 5176885612826155573}
   terrainHitPFX: {fileID: 246225042234028414, guid: bbbf888f55aec3e468f612fb4f7bb8f3,
     type: 3}
@@ -11561,6 +11571,7 @@ MonoBehaviour:
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 191
+  uiCDSprite: {fileID: 0}
   lineRen: {fileID: 4737691673808959488}
   lightningMuzzlePosition: {fileID: 3216912175817541036}
   lightningActiveTime: 5

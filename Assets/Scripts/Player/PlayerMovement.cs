@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public static quaternion playerRotation;
     public static Transform playerTransform;
 
+    public static AudioSource playerAudioSource;
+
     [Header("Dependancies")]
     CharacterController controller;
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerTransform = this.transform;
         playerRef = this.gameObject;
+        playerAudioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         initialCamY = cam.transform.localPosition.y;
         initialCamFov += cam.fieldOfView;
         initialColliderSize = controller.height;
+        
     }
 
 
@@ -64,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
         GroundCheck();
         FinalMoveCaculation();
+        Footstep();
         CameraFov();
      
 
@@ -89,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
         {
             lastPlayerSafePos = transform.position;
         }
+
+     
     }
 
     #region CaculateMoveVelocity
@@ -369,13 +376,14 @@ public class PlayerMovement : MonoBehaviour
         onSlope = GroundAngle() > minAngleForSlide;
 
         VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
-        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude * minMagBeforeSlideCancelMultiplyer && !onSlope;
+      
 
-
+      
+       
 
         if (isSliding)
         {
-
+            
             float tempY = currentVelocity.y;
             currentVelocity.y = 0;
             currentVelocity = currentVelocity.magnitude * transform.forward;
@@ -396,7 +404,6 @@ public class PlayerMovement : MonoBehaviour
             if(controller.height > minColliderSize) // collideer height
             {
                 controller.height -= Time.deltaTime * colliderDropSpeed;
-                print(controller.height);
                 if(controller.height < minColliderSize)
                     controller.height = minColliderSize;
             }
@@ -439,7 +446,8 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
- 
+        VelWithoutGravity.y = 0;
+        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope;
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
         if (hit.point.y > transform.position.y - 0.5)
@@ -541,6 +549,32 @@ public class PlayerMovement : MonoBehaviour
             
             cam.fieldOfView -= fovReturnSpeed * Time.deltaTime;
         }
+    }
+
+    #endregion
+
+    #region Footsteps
+    [Header("Footsteps")]
+    [SerializeField] float distanceBetweenSteps;
+    [SerializeField] AudioClip[] footsteps;
+
+    float currentDistance;
+    void Footstep()
+    {
+        if (!isActuallyGrounded || isSliding || currentlyDashing)
+            return;
+
+        if (inputVector == Vector3.zero)
+            currentDistance -= Time.deltaTime; // this prevents hearing footsteps when doing repeated small movements
+
+        currentDistance += Vector3.Distance(transform.position, lastPlayerSafePos);
+
+        if (currentDistance < distanceBetweenSteps)
+            return;
+
+        currentDistance = 0;
+
+        playerAudioSource.PlayOneShot(footsteps[UnityEngine.Random.Range(0, footsteps.Length)], GlobalSettings.audioVolume) ;
     }
 
     #endregion
