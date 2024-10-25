@@ -345,12 +345,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float minMagBeforeSlideCancelMultiplyer;
     [SerializeField] float minAngleForSlide;
     [SerializeField] float downSlopeAccelMultiplyer;
+    [SerializeField] float slideGracePeriodSinceLoosingVelocity;
     [Header("CameraSettings")]
     [SerializeField] float camYDrop;
     [SerializeField] float camDropSpeed;
     [Header("ColliderSettings")]
     [SerializeField] float minColliderSize;
     [SerializeField] float colliderDropSpeed;
+    Vector3 velocityBeforeLoosingIt;
     Camera cam;
     float initialCamY;
     float initialColliderSize;
@@ -359,8 +361,9 @@ public class PlayerMovement : MonoBehaviour
     bool slidingTooSlow;
     Vector3 newCamPos;
     bool chainSlideCheck; // since im checking to slide on getkey, if you just keep holding controll, you stop sliding and instantly start again, so this will stop that from happening
-
+    float timeSinceMinVelocity;
     Vector3 VelWithoutGravity;
+    bool slideGracePeriodActive;
     void Slide()
     {
         DevText.DisplayInfo("onSlope", "OnSlope: " + onSlope, "Sliding");
@@ -372,18 +375,13 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-
         onSlope = GroundAngle() > minAngleForSlide;
 
         VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
-      
-
-      
-       
 
         if (isSliding)
         {
-            
+           
             float tempY = currentVelocity.y;
             currentVelocity.y = 0;
             currentVelocity = currentVelocity.magnitude * transform.forward;
@@ -444,25 +442,50 @@ public class PlayerMovement : MonoBehaviour
                     controller.height = initialColliderSize;
             }
 
-
         }
         VelWithoutGravity.y = 0;
         slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope;
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
-        if (hit.point.y > transform.position.y - 0.5)
+       if (hit.point.y > transform.position.y - 0.5)
+        {
+            print("fail 2 elejtric bogalo");
             return;
+        }
 
         if (FacingUp())
+        {
             return;
+        }
 
         if (slidingTooSlow)
-            return;
+        {
+            timeSinceMinVelocity -= Time.deltaTime;
+            if (timeSinceMinVelocity <= 0)
+            {
+                slideGracePeriodActive = false;
+                print("returning here");
+                return;
+            }
+
+            print("graceperiod");
+            slideGracePeriodActive = true;
+        }
+        else
+        {
+            timeSinceMinVelocity = slideGracePeriodSinceLoosingVelocity;
+            velocityBeforeLoosingIt = currentVelocity;
+            slideGracePeriodActive = true;
+        }
+            
 
         if (Input.GetKey(KeyCode.LeftControl) && !chainSlideCheck)
         {
+            
             chainSlideCheck = true;
             isSliding = true;
+            if (slideGracePeriodActive)
+                currentVelocity = velocityBeforeLoosingIt;
             CancelDash();
         }
 

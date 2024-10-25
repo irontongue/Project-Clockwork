@@ -132,9 +132,19 @@ public class UpgradeManager : MonoBehaviour
     {
         UpgradeSpawner.DisplayPopups(PickRandomUpgrades(upgradePackets, 3));
         timeUpgradeStarted = Time.time;
+        if (autoWeapons.Count <= 0)
+        {
+            print("OUT OF UPGRADES!");
+            return;
+        }
     }
     public void StartWeaponUnlock()
     {
+        if(autoWeapons.Count <=0)
+        {
+            print("OUT OF WEAPONS!");
+            return;
+        }
         UpgradeSpawner.DisplayPopups(PickRandomUpgrades(autoWeapons, 3));
         timeUpgradeStarted = Time.time;
     }

@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
+using TMPro;
 
 
 public class UpgradeSpawnerUI : MonoBehaviour
@@ -13,6 +12,9 @@ public class UpgradeSpawnerUI : MonoBehaviour
     [SerializeField] Vector2 firstUpgradePos;
     [SerializeField] float upgradesPerRow;
     [SerializeField] GameObject canvas;
+    [SerializeField] TextMeshProUGUI upgradeHeader;
+    [SerializeField] string newWeaponHeaderText, weaponUpgradeHeaderText;
+    
 
     [SerializeField] float waitTimeUntillCardsInteractable = 0.25f;
     UpgradeManager upgradeManager;
@@ -22,7 +24,8 @@ public class UpgradeSpawnerUI : MonoBehaviour
     private void Start()
     {
         upgradeManager = FindAnyObjectByType<UpgradeManager>();
-        
+        upgradeHeader.text = "";
+
     }
 
     bool upgradeIsWeapon;
@@ -74,6 +77,10 @@ public class UpgradeSpawnerUI : MonoBehaviour
             }
    
             buttons.Add(upgradeButton);
+            if (upgradeInfo.packet[0].isWeapon)
+                upgradeHeader.text = newWeaponHeaderText;
+            else
+                upgradeHeader.text = weaponUpgradeHeaderText;
         }
 
       
@@ -122,7 +129,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
         if(newWeapon)
          message += value.ToString();
         else
-            message += value + " -> " + (value + upgradeInfo.packet[upgradeInfo.levels].amountToAdd) + (subtract ? -value : value) + " ( " + upgradeInfo.packet[upgradeInfo.levels].amountToAdd +unit + " )";
+            message += value + " -> " + ( value + (subtract ? -upgradeInfo.packet[upgradeInfo.levels].amountToAdd : upgradeInfo.packet[upgradeInfo.levels].amountToAdd)).ToString() + " ( " + upgradeInfo.packet[upgradeInfo.levels].amountToAdd +unit + " )";
         return message;
     }
 
@@ -133,6 +140,8 @@ public class UpgradeSpawnerUI : MonoBehaviour
         {
             Destroy(button.gameObject);
         }
+
+        upgradeHeader.text = "";
     }
      
 

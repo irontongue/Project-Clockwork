@@ -412,12 +412,13 @@ MonoBehaviour:
   dashSpeed: 25
   dashLenght: 0.3
   dashCooldown: 1
-  extraVelRequiredToSlide: 2
+  extraVelRequiredToSlide: 5
   slideFallOff: 25
   uphillExtraSlideFallOff: 75
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
   downSlopeAccelMultiplyer: 50
+  slideGracePeriodSinceLoosingVelocity: 0.3
   camYDrop: 0.7
   camDropSpeed: 6
   minColliderSize: 1
@@ -16969,6 +16970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AutomaticWeaponMissleLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051008084599665522, guid: 32e94e7b1f1018e498f4d0c77324794f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
         type: 3}
