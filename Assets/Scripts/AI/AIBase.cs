@@ -9,7 +9,7 @@ public class AIBase : EnemyInfo
     public enum Pole {Null, North, South, East, West}
 
     protected GameObject player;
-    [SerializeField] public NavMeshAgent agent;
+    public NavMeshAgent agent;
     [Header("Attack Settings")]
 
     [SerializeField, TabGroup("Attack")] protected float attackRange;
@@ -31,11 +31,13 @@ public class AIBase : EnemyInfo
     protected float lastTimeSinceMovementUpdate;
    
     [TabGroup("RunTimeOnly")]public EnemySpawner spawner;
-    AudioSource source;
+    [SerializeField]AudioSource source;
     
    [ReadOnly, TabGroup("RunTimeOnly")] public Pole pole;
 
     [TabGroup("RunTimeOnly")]public bool aiBuisy = false;
+
+    [TabGroup(("Audio"))] [SerializeField] AudioClip[] spawnSounds, deathSounds;
  
     protected float DistanceToPlayer()
     {
@@ -47,17 +49,20 @@ public class AIBase : EnemyInfo
     }
     protected override void Start()
     {
+      
         base.Start();
         trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenAttacks * (1 - randonVarianceForMovementUpdate), seccondsBetweenAttacks * (1 + randonVarianceForMovementUpdate));
-        player = PlayerMovement.playerRef.gameObject;
+        player = PlayerMovement.playerRef;
         aiBuisy = false;
         source = GetComponent<AudioSource>();
         BatchSpriteLooker.AddLooker(transform);
         agent.speed = speed;
+        
     }
 
     protected override void Update()
     {
+        
         base.Update();
 
         if (pathingToPoint)
@@ -178,6 +183,26 @@ public class AIBase : EnemyInfo
         }
         catch { }
     }
+
+    protected void PlayDeathSound()
+    {
+      
+        if (source == null)
+            return;
+        if (EnemySoundManager.NoiseReady(enemyType, true))
+            AudioSource.PlayClipAtPoint(deathSounds[Random.Range(0, deathSounds.Length - 1)],transform.position, GlobalSettings.audioVolume * 2);
+
+
+
+    }
+    public void PlaySpawnSound()
+    {
+        if (source == null)
+            return;
+        if (EnemySoundManager.NoiseReady(enemyType, false))
+            source.PlayOneShot(spawnSounds[Random.Range(0, spawnSounds.Length - 1)], GlobalSettings.audioVolume);
+    }
+    
    
     protected virtual void DamagePlayer()
     {
@@ -197,6 +222,7 @@ public class AIBase : EnemyInfo
     {
         BatchSpriteLooker.AddLooker(transform);
         player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
+        PlayDeathSound();
         try
         {
             spawner.EnemyKilled();
@@ -206,6 +232,7 @@ public class AIBase : EnemyInfo
         base.DeathEvent();
     }
     readonly Vector3 zeroPosition = new Vector3(-100,-100,-100);
+   
     public override void DecomissionObject()
     {
         base.DecomissionObject();

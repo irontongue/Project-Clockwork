@@ -24,9 +24,11 @@ public class EnemyInfo : EnemyDamageHandler
     [HideInInspector] public float EXP = 1f;
     [TabGroup("DamageHandler")] public float damageFlashTime = 1;
     [TabGroup("Loot")] public float healthPotionDropChance = 0.1f;
-     #endregion
+    #endregion
 
-   // [Header("Prefabs")]
+    // [Header("Prefabs")]
+    [TabGroup("General")]
+   [SerializeField] protected EnemySpawner.Enemies enemyType;
     [TabGroup("Effects")] public GameObject deathPFX;
     [TabGroup("Loot")] public GameObject healthPotionPrefab;
    // [Header("References")]

@@ -122,6 +122,7 @@ public class EnemySpawner : MonoBehaviour
        return Vector3.zero;
     }
     bool finalWaveFinished;
+    // ReSharper disable Unity.PerformanceAnalysis
     IEnumerator WaveLoop()
     {
         WaveInfo wave = currentWave;
@@ -149,6 +150,7 @@ public class EnemySpawner : MonoBehaviour
             ai.spawner = this;
             ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
             ai.gameObject.SetActive(true);
+            ai.PlaySpawnSound();
 
             ai.RandomisePolarOffset();
 

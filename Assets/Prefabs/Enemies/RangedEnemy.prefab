@@ -129,6 +129,7 @@ MonoBehaviour:
   EXP: 2
   damageFlashTime: 1
   healthPotionDropChance: 0.1
+  enemyType: 1
   deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
     type: 3}
   healthPotionPrefab: {fileID: 445344903588590110, guid: 3cff64084d5df4843b65f08c362c7534,
@@ -155,8 +156,15 @@ MonoBehaviour:
   distanceBeforeConvergingOnPlayer: 0
   poleOffsets: {x: 0, y: 0}
   spawner: {fileID: 0}
+  source: {fileID: 8769343934924522170}
   pole: 0
   aiBuisy: 0
+  spawnSounds:
+  - {fileID: 8300000, guid: 64f69094517f29b4ab2d27abe6577dfe, type: 3}
+  - {fileID: 8300000, guid: e7c30aa934c96984ca24c459b5e2f4a3, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: de62b95947b25e34e80f1139ced1c5be, type: 3}
+  - {fileID: 8300000, guid: 6f2372ba77c16874594ba568d728f23a, type: 3}
   state: 0
   afterAttackTimer: 0.5
   findNewPositionRangeFromPlayer: 35
