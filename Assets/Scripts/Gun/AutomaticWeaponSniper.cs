@@ -1,21 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+
 using UnityEngine;
-using UnityEngine.UI;
+
+
 
 public enum SniperUpgrades { }
 public class AutomaticWeaponSniper : AutomaticWeaponBase
 {
-    [SerializeField] Image donutImage;
     [SerializeField] ParticleSystem muzzleFlashPFX;
     [SerializeField] ParticleSystem bloodHitPFX;
     Animator anim;
     GameObject enemyObj;
     float aimTimer = 0;
+    bool lineActive = false;
+    [SerializeField] LineRenderer lineRenderer;
+    Material lineRendererMat;
     protected override void Start()
     {
         base.Start();
+        lineRendererMat = lineRenderer.material;
         anim = GetComponent<Animator>();
         if(muzzleFlashPFX == null)
         {
@@ -28,47 +30,22 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
         {
             Debug.LogWarning("On Sniper, Hit PFX needs to be assigned");
         }
-        if(donutImage == null)
-        {
-            Debug.LogError("On Sniper, DonutImage needs to be assigned");
-        }
     }
     void Update()
     {
         if(GameState.GamePaused)
             return;
+        if(lineActive)
+        {
+            lineRendererMat.SetFloat("_Dissolve", 1f);
+        }
         if (firing) // Wait until animation has finished
             return;
         if (!UpdateCoolDown()) // wait until off cooldown
             return;
-
-        enemyObj = RayCastForwardGameObject(everythingEnemy); // Check if were looking at an enemy and store it as enemy Info
-
-        if (enemyObj != null)
-        {
-            aimTimer = Mathf.Clamp01(aimTimer += Time.deltaTime * stats.chargeUpTime); // ++ time
-            UpdateRing();//Updates the ring UI to match the aimTimer
-            if (anim.GetBool("Armed") == false) //Trigger the animation ONCE
-            {
-                anim.SetBool("Armed", true);
-            }
-        }
-        else if (aimTimer > 0) // If we are not looking at an enemy -- time
-        {
-            aimTimer = Mathf.Clamp01(aimTimer -= Time.deltaTime * stats.chargeUpTime);
-            UpdateRing();
-        }
-        else if (anim.GetBool("Armed") == true) // If time == 0, Trigger the holster animation ONCE
-        {
-            anim.SetBool("Armed", false);
-        }
-        if (aimTimer != 1) // 1 means we are ready to shoot
-            return;
-        aimTimer = 0; // 0 to reset the ring and get ready for next shot
-        UpdateRing(); // setting the ring to 0
         onCooldown = true;
         firing = true;
-        anim.SetBool("Armed", false);
+        //anim.SetBool("Armed", false);
         anim.SetTrigger("Shoot");
         //ShootAtTarget();
     }
@@ -81,7 +58,6 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     public override void Shoot(int iterator = 0)
     {
         ShootAtTarget(iterator == 0);
-        base.Shoot(iterator);
     }
     /// <summary>
     /// Handles damaging enemy and playing / Spawning PFX
@@ -94,9 +70,14 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
         if(stats.numberToPierce > 0)
         {
             RaycastHit[] hits = RayCastForwardRayHitEverything(everythingEnemy);
-            for(int i = 0; i < stats.numberToPierce + 1; i++)
-            {
-                HitCheck(hits[i]);
+            
+            print(hits.Length);
+            for(int i = 0; i < hits.Length; i++)
+            {   
+                print(hits[i].transform.name);
+                // if(stats.numberToPierce == i)
+                //    break;
+                //HitCheck(hits[i]);
             }
         }
         else
@@ -109,6 +90,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     {
         if (hit.transform != null)
         {
+            print(hit.transform.name);
             hit.transform.GetComponent<EnemyDamageHandler>().DealDamage(stats.damage);
             if (bloodHitPFX)
                 Instantiate(bloodHitPFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
@@ -117,9 +99,5 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     public void FinishAnimation()
     {
         firing = false;
-    }
-    void UpdateRing()
-    {
-        donutImage.fillAmount = aimTimer;
     }
 }

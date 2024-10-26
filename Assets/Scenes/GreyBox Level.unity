@@ -17141,11 +17141,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 899767946863441959, guid: 0eeea3279b4d1f742bd836973210dedb,
-        type: 3}
-      propertyPath: baseSpeed
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 1955605711507786865, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_Name
@@ -17201,22 +17196,11 @@ PrefabInstance:
       propertyPath: donutImage
       value: 
       objectReference: {fileID: 872921745}
-    - target: {fileID: 5763983037393724092, guid: 0eeea3279b4d1f742bd836973210dedb,
-        type: 3}
-      propertyPath: uiCDSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 5e496e1e847295e40a42e70541d94f18,
-        type: 3}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: expBar
       value: 
       objectReference: {fileID: 753291155}
-    - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6159610773282691837, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: levelUpReadyText
@@ -17272,25 +17256,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7045544469638871028, guid: 0eeea3279b4d1f742bd836973210dedb,
+    - target: {fileID: 8192808407956971693, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
-      propertyPath: uiCDSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6f0e2ff3685d3bc46ad34a1febd70635,
-        type: 3}
-    - target: {fileID: 7645725708352849043, guid: 0eeea3279b4d1f742bd836973210dedb,
-        type: 3}
-      propertyPath: uiCDSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e8b363164b2434542b6d2a298f64e68b,
-        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2088563096170257026, guid: 0eeea3279b4d1f742bd836973210dedb,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1971247451}
+    m_RemovedGameObjects:
+    - {fileID: 1673552545638347258, guid: 0eeea3279b4d1f742bd836973210dedb, type: 3}
+    - {fileID: 5150350859835523351, guid: 0eeea3279b4d1f742bd836973210dedb, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0eeea3279b4d1f742bd836973210dedb, type: 3}
 --- !u!1 &669497369 stripped
@@ -23643,7 +23618,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 25
     spawnSpeed: 2
-    enemiesToKillToEndWave: 25
+    enemiesToKillToEndWave: 0
     EXPShare: 20
     EndEvent: {fileID: 0}
   pathRadiusFromSpawn: 2
@@ -29574,12 +29549,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3230602620048832063, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
---- !u!4 &1258420410 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2088563096170257026, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1266011095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1547398292367192093, guid: 2df6beff5cf02eb4a8f72b926f579e1e,
@@ -43675,7 +43644,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 25
     spawnSpeed: 0
-    enemiesToKillToEndWave: 20
+    enemiesToKillToEndWave: 0
     EXPShare: 30
     EndEvent: {fileID: 0}
   - enemies:
@@ -43683,7 +43652,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 30
     spawnSpeed: 1
-    enemiesToKillToEndWave: 25
+    enemiesToKillToEndWave: 0
     EXPShare: 40
     EndEvent: {fileID: 0}
   - enemies:
@@ -43693,7 +43662,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 30
     spawnSpeed: 1
-    enemiesToKillToEndWave: 25
+    enemiesToKillToEndWave: 0
     EXPShare: 35
     EndEvent: {fileID: 90341357}
   - enemies:
@@ -43703,7 +43672,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 35
     spawnSpeed: 1.1
-    enemiesToKillToEndWave: 30
+    enemiesToKillToEndWave: 0
     EXPShare: 45
     EndEvent: {fileID: 0}
   - enemies:
@@ -43713,7 +43682,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 50
     spawnSpeed: 1
-    enemiesToKillToEndWave: 40
+    enemiesToKillToEndWave: 0
     EXPShare: 55
     EndEvent: {fileID: 0}
   - enemies:
@@ -43723,7 +43692,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 55
     spawnSpeed: 0.9
-    enemiesToKillToEndWave: 40
+    enemiesToKillToEndWave: 0
     EXPShare: 60
     EndEvent: {fileID: 90341357}
   - enemies:
@@ -43733,7 +43702,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 75
     spawnSpeed: 0.7
-    enemiesToKillToEndWave: 55
+    enemiesToKillToEndWave: 0
     EXPShare: 85
     EndEvent: {fileID: 0}
   - enemies:
@@ -43743,7 +43712,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 500
     spawnSpeed: 0.3
-    enemiesToKillToEndWave: 500
+    enemiesToKillToEndWave: 0
     EXPShare: 650
     EndEvent: {fileID: 0}
   pathRadiusFromSpawn: 0
@@ -43867,12 +43836,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1295621622624935854, guid: 59f5305a7dd06034a83ac03b7dd7ff7b,
     type: 3}
   m_PrefabInstance: {fileID: 1969313548}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1971247451 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1039843403539304805}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1973936392
 PrefabInstance:
@@ -48271,80 +48234,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
---- !u!1001 &1039843403539304805
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1258420410}
-    m_Modifications:
-    - target: {fileID: 1207136997612263309, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: uiCDSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e246a8994609033458b89d7a55eadf99,
-        type: 3}
-    - target: {fileID: 4051008084599665522, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_Name
-      value: AutomaticWeaponMissleLauncher
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 32e94e7b1f1018e498f4d0c77324794f, type: 3}
 --- !u!1 &1493726727068427697
 GameObject:
   m_ObjectHideFlags: 0
@@ -48534,7 +48423,7 @@ MonoBehaviour:
       spawnChances: 1
     maxEnemiesToSpawn: 15
     spawnSpeed: 1.2
-    enemiesToKillToEndWave: 15
+    enemiesToKillToEndWave: 0
     EXPShare: 20
     EndEvent: {fileID: 0}
   pathRadiusFromSpawn: 0
