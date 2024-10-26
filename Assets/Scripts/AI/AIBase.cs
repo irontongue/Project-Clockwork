@@ -10,6 +10,7 @@ public class AIBase : EnemyInfo
 
     protected GameObject player;
     public NavMeshAgent agent;
+    public bool agentless;
     [Header("Attack Settings")]
 
     [SerializeField, TabGroup("Attack")] protected float attackRange;
@@ -56,7 +57,8 @@ public class AIBase : EnemyInfo
         aiBuisy = false;
         source = GetComponent<AudioSource>();
         BatchSpriteLooker.AddLooker(transform);
-        agent.speed = speed;
+        if(!agentless)
+            agent.speed = speed;
         
     }
 
@@ -187,7 +189,7 @@ public class AIBase : EnemyInfo
     protected void PlayDeathSound()
     {
       
-        if (source == null)
+        if (source == null || deathSounds != null)
             return;
         if (EnemySoundManager.NoiseReady(enemyType, true))
             AudioSource.PlayClipAtPoint(deathSounds[Random.Range(0, deathSounds.Length - 1)],transform.position, GlobalSettings.audioVolume * 2);

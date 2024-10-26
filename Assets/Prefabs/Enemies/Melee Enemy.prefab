@@ -129,7 +129,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 8
   health: 8
-  speed: 17
+  speed: 20
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1

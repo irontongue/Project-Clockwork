@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
         public Enemies enemy;
         public int spawnChances;
     }
-    public enum Enemies {Melee, Ranged, Slob}
+    public enum Enemies {Melee, Ranged, Slob, LesserFly}
    
   
 
@@ -145,8 +145,8 @@ public class EnemySpawner : MonoBehaviour
                 poolObj.gameObject.SetActive(false);
                 continue; // give up and try again, this isnt the final solution. /// or is it
             }
-
-            ai.agent.enabled = true;
+            if(!ai.agentless)
+                ai.agent.enabled = true;
             ai.spawner = this;
             ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
             ai.gameObject.SetActive(true);
