@@ -129,7 +129,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 8
   health: 8
-  speed: 14
+  speed: 17
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -143,7 +143,7 @@ MonoBehaviour:
   floatingTextSpawnOffset: {x: 0, y: 1.21, z: 0}
   fireStacks: 0
   agent: {fileID: 5083003481326997813}
-  attackRange: 4
+  attackRange: 1
   seccondsBetweenAttacks: 0.5
   damage: 1
   attackDelay: 0.1
@@ -156,7 +156,7 @@ MonoBehaviour:
   seccondsBetweenMovementUpdates: 0.1
   randonVarianceForMovementUpdate: 0.005
   usePolarOffset: 1
-  distanceBeforeConvergingOnPlayer: 6
+  distanceBeforeConvergingOnPlayer: 9
   poleOffsets: {x: 5, y: 5}
   spawner: {fileID: 0}
   source: {fileID: 8368403614439602895}

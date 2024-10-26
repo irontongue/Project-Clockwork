@@ -173,6 +173,8 @@ public class EnemyInfo : EnemyDamageHandler
         gameObject.SetActive(false);
     }
     #endregion
+
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         GUIStyle style = new GUIStyle();
@@ -181,5 +183,6 @@ public class EnemyInfo : EnemyDamageHandler
         style.fontSize = 12;
         Handles.Label(transform.position + floatingTextSpawnOffset, "F_TXT", style);
     }
+#endif
 
 }

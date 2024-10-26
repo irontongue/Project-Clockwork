@@ -464,7 +464,6 @@ public class PlayerMovement : MonoBehaviour
             if (timeSinceMinVelocity <= 0)
             {
                 slideGracePeriodActive = false;
-                print("returning here");
                 return;
             }
 
