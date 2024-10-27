@@ -306,7 +306,10 @@ public class PlayerMovement : MonoBehaviour
             readyToDash = false;
 
             if (isSliding)
+            {
                 isSliding = false;
+                slidelock = false;
+            }
         }
 
         if (currentlyDashing)
@@ -315,6 +318,8 @@ public class PlayerMovement : MonoBehaviour
 
             currentVelocity.x = dashVelocity.x;
             currentVelocity.z = dashVelocity.z;
+
+            slideGracePeriodActive = true;
 
             if (dashTimer <= 0)
                 CancelDash();
@@ -346,6 +351,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float minAngleForSlide;
     [SerializeField] float downSlopeAccelMultiplyer;
     [SerializeField] float slideGracePeriodSinceLoosingVelocity;
+    [SerializeField] float magnitudeToStopSlide;
     [Header("CameraSettings")]
     [SerializeField] float camYDrop;
     [SerializeField] float camDropSpeed;
@@ -364,21 +370,34 @@ public class PlayerMovement : MonoBehaviour
     float timeSinceMinVelocity;
     Vector3 VelWithoutGravity;
     bool slideGracePeriodActive;
+    bool slidelock;
     void Slide()
     {
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+            slidelock = false;
+
         DevText.DisplayInfo("onSlope", "OnSlope: " + onSlope, "Sliding");
         DevText.DisplayInfo("slidingTooSlow", "SlidingTooSlow: " + slidingTooSlow, "Sliding");
         DevText.DisplayInfo("sliding", "Sliding: " + isSliding, "Sliding");
+        DevText.DisplayInfo("slideGracePeriodActive", "slideGracePeriodActive: " + slideGracePeriodActive, "Sliding");
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isSliding = false;
+            slidelock = false;
             return;
         }
 
         onSlope = GroundAngle() > minAngleForSlide;
 
-        VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
-
+        VelWithoutGravity = currentVelocity + dashVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
+        VelWithoutGravity.y = 0;
+        if (!currentlyDashing)
+            slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope;
+        else
+            slidingTooSlow = false; 
+        
+     
         if (isSliding)
         {
            
@@ -413,11 +432,11 @@ public class PlayerMovement : MonoBehaviour
             else
                 currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
 
-            if (slidingTooSlow)
+            if (magnitudeToStopSlide > currentVelocityWithoutY.magnitude)
             {
                 currentVelocity = Vector3.zero;
-                isSliding = false;
-              
+                isSliding = false;   
+                
             }
 
             return;
@@ -443,9 +462,10 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        VelWithoutGravity.y = 0;
-        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope;
+       
+      
         Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
+
 
        if (hit.point.y > transform.position.y - 0.5)
         {
@@ -471,17 +491,21 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+          //  if (slideGracePeriodActive)
+           //     return;
+
             timeSinceMinVelocity = slideGracePeriodSinceLoosingVelocity;
             velocityBeforeLoosingIt = currentVelocity;
-            slideGracePeriodActive = true;
+            
         }
-            
 
-        if (Input.GetKey(KeyCode.LeftControl) && !chainSlideCheck)
+       
+        if (Input.GetKey(KeyCode.LeftControl) && !slidelock)
         {
-            
+            print("slideSucsesfull");
             chainSlideCheck = true;
             isSliding = true;
+            slidelock = true;
             if (slideGracePeriodActive)
                 currentVelocity = velocityBeforeLoosingIt;
             CancelDash();
@@ -489,6 +513,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
+            slidelock = false;
             if (chainSlideCheck)
             {
                 chainSlideCheck = false;
@@ -511,7 +536,6 @@ public class PlayerMovement : MonoBehaviour
             return 0;
 
         return Vector3.Angle(hit.normal, transform.up);
-
     }
 
     bool FacingUp()
@@ -566,8 +590,7 @@ public class PlayerMovement : MonoBehaviour
                 cam.fieldOfView = initialCamFov;
                 return;
             }
-
-            
+         
             cam.fieldOfView -= fovReturnSpeed * Time.deltaTime;
         }
     }
@@ -614,11 +637,7 @@ public class PlayerMovement : MonoBehaviour
         }
            
         else
-            respawnPos = pos;
-
-      
-     
-       
+            respawnPos = pos; 
     }
 
     IEnumerator Respawn()
@@ -650,7 +669,4 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
-
-
-
 }

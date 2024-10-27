@@ -63,16 +63,17 @@ public class EnemySpawner : MonoBehaviour
 
         if (waveSpawning)
             WaveLoop();
+
         if (!autoStartNewWave)
             return;
 
-        timeSinceWaveEnded+= Time.deltaTime;
-        if (timeSinceWaveEnded >= timeToWaitToAutoStartNextWave)
-        {
-            if (waveToStart < currentWaveIndex)
-                return;
-            StartWave();
-        }
+      //  timeSinceWaveEnded+= Time.deltaTime;
+      //  if (timeSinceWaveEnded >= timeToWaitToAutoStartNextWave)
+      //  {
+      //      if (waveToStart < currentWaveIndex)
+      ///          return;
+     //       StartWave();
+      //  }
           
         
     }
@@ -198,10 +199,10 @@ public class EnemySpawner : MonoBehaviour
                     waveSpawning = false;
                     if (index < currentWaveIndex)
                         yield return null;
-                    autoStartNewWave = true;
-                    waveToStart = currentWaveIndex++;
-                    timeSinceWaveEnded = 0;
-                    timeToWaitToAutoStartNextWave = wave.timeAfterEndingToStartNewWave;
+                 //   autoStartNewWave = true;
+                 //   waveToStart = currentWaveIndex++;
+                 //   timeSinceWaveEnded = 0;
+                  //  timeToWaitToAutoStartNextWave = wave.timeAfterEndingToStartNewWave;
 
                 }
             }

@@ -412,13 +412,14 @@ MonoBehaviour:
   dashSpeed: 25
   dashLenght: 0.3
   dashCooldown: 1
-  extraVelRequiredToSlide: 5
-  slideFallOff: 25
+  extraVelRequiredToSlide: 4
+  slideFallOff: 20
   uphillExtraSlideFallOff: 75
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
   downSlopeAccelMultiplyer: 50
-  slideGracePeriodSinceLoosingVelocity: 0.3
+  slideGracePeriodSinceLoosingVelocity: 1
+  magnitudeToStopSlide: 5
   camYDrop: 0.7
   camDropSpeed: 6
   minColliderSize: 1
@@ -905,17 +906,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 1
   damageType: 0
+  uiCDSprite: {fileID: 21300000, guid: 5e496e1e847295e40a42e70541d94f18, type: 3}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 191
-  uiCDSprite: {fileID: 21300000, guid: 5e496e1e847295e40a42e70541d94f18, type: 3}
+  everythingEnemy:
+    serializedVersion: 2
+    m_Bits: 136
+  fireAudioClips:
+  - {fileID: 8300000, guid: 3878bf0014656df4aa4354bf3e4b2e50, type: 3}
   muzzleFlashPFX: {fileID: 4929545749913747673}
   bloodHitPFX: {fileID: 3766226238398832601, guid: 401c055fb346c2b48b4813242fdd1b78,
     type: 3}
+  terrainFX: {fileID: 0}
   lineRenderer: {fileID: 0}
+  vaporTrailDissolveSpeed: 1
 --- !u!1 &3430092112341850501
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,13 +972,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 0
   damageType: 0
+  uiCDSprite: {fileID: 21300000, guid: e8b363164b2434542b6d2a298f64e68b, type: 3}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 63
-  uiCDSprite: {fileID: 21300000, guid: e8b363164b2434542b6d2a298f64e68b, type: 3}
+  everythingEnemy:
+    serializedVersion: 2
+    m_Bits: 136
+  fireAudioClips:
+  - {fileID: 8300000, guid: 84ce6f498a402d14390f8d707731db4f, type: 3}
+  - {fileID: 8300000, guid: e1b4c6d7305cb364d9712b1a070cf511, type: 3}
+  - {fileID: 8300000, guid: 4f376d57a820fa846a4264c533bf5dcb, type: 3}
+  - {fileID: 8300000, guid: 0cb007d6298ec5548b640036ed665247, type: 3}
   muzzleFlashPFX: {fileID: 5176885612826155573}
   terrainHitPFX: {fileID: 246225042234028414, guid: bbbf888f55aec3e468f612fb4f7bb8f3,
     type: 3}
@@ -11575,13 +11591,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 3
   damageType: 3
+  uiCDSprite: {fileID: 21300000, guid: 6f0e2ff3685d3bc46ad34a1febd70635, type: 3}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 191
-  uiCDSprite: {fileID: 21300000, guid: 6f0e2ff3685d3bc46ad34a1febd70635, type: 3}
+  everythingEnemy:
+    serializedVersion: 2
+    m_Bits: 136
+  fireAudioClips:
+  - {fileID: 8300000, guid: d5b74b4844e182e4dbad9d4e7b0b4d35, type: 3}
   lineRen: {fileID: 4737691673808959488}
   lightningMuzzlePosition: {fileID: 3216912175817541036}
   lightningActiveTime: 5

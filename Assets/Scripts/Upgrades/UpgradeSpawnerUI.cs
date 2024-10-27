@@ -19,7 +19,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
     [SerializeField] float waitTimeUntillCardsInteractable = 0.25f;
     UpgradeManager upgradeManager;
 
-    
+    [SerializeField] Sprite shotgunSprite, teslaSprite, sniperSprite, rocketLauncherSprite;
 
     private void Start()
     {
@@ -48,8 +48,21 @@ public class UpgradeSpawnerUI : MonoBehaviour
 
             upgradeButton.titleText.text = upgradeInfo.packet[upgradeInfo.levels].upgradeTitle;
             upgradeButton.bodyText.text = upgradeInfo.packet[upgradeInfo.levels].upgradeBody;
-            
+            upgradeButton.backGround.color = upgradeInfo.upgradeColor;
             upgradeButton.buttonDelegate = upgradeDelegate;
+
+            switch(upgradeInfo.weaponType)
+            {
+                case WeaponType.Shotgun:
+                    upgradeButton.weaponSprite.sprite = shotgunSprite;
+                    break;
+                case WeaponType.Sniper:
+                    upgradeButton.weaponSprite.sprite = sniperSprite;
+                    break;
+                case WeaponType.TeslaCoil:
+                    upgradeButton.weaponSprite.sprite = teslaSprite;
+                    break;
+            }
             countStatsToDisplay = upgradeInfo.statsToDisplay.Length;
             for (int i = 0; i < upgradeButton.statTexts.Length; i++)
             {

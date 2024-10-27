@@ -46,6 +46,7 @@ public class UpgradeLine // this is a class and not a struct, since you cannot p
     [FoldoutGroup("$packetName")] public WeaponType weaponType;
     [FoldoutGroup("$packetName")] public UpgradeInfoPacket[] packet;
     [FoldoutGroup("$packetName")] public int levels;
+    [FoldoutGroup("$packetName")] public Color upgradeColor = Color.black;
 
     [Header("Display Settings")]
 
@@ -65,6 +66,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.GrenadeLaucher)] List<UpgradeLine> grenadeLaucherUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.ThrowingKnives)] List<UpgradeLine> throwingKnivesUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.PlayerRevolver)] List<UpgradeLine> playerRevolverUpgrades;
+
 
 
 
