@@ -11,6 +11,8 @@ public class UpgradeButton : MonoBehaviour, IPointerEnterHandler
     public TextMeshProUGUI bodyText;
     public Button button;
     public TextMeshProUGUI[] statTexts;
+    public Image backGround;
+    public Image weaponSprite;
 
     public int index;
 
