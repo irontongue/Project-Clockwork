@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProjectileMissle : ProjectileBase
 {
-    [SerializeField] float radius;
     void Update()
     {
         Move();
@@ -13,7 +12,7 @@ public class ProjectileMissle : ProjectileBase
     }
     
     private void OnCollisionEnter(Collision other) {
-        Explode(radius, stats.damage, enemiesLM);
+        Explode(stats.explosionRadius, stats.damage, enemiesLM);
         Instantiate(PFXPrefab, transform.position, Quaternion.identity);
         ObjectPooler.ReturnObject(gameObject, "AWML_Missle");
         gameObject.SetActive(false);

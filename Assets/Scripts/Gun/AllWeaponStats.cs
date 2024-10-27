@@ -7,7 +7,9 @@ using System;
 public enum WeaponType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, PlayerRevolver, MissleLaucher}
 public enum DamageType {Physical, Fire, Explosion, Lightning, None}
 public enum UpgradeType{Shotgun, Sniper, Rifle, TeslaCoil, FlameThrower, Dog, GrenadeLaucher, ThrowingKnives, Universal, WeaponStat, PlayerRevolver, MissleLaucher}
-public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot, LockOnDistance, Bounces, BounceRange, BoxCheckWidth, moveSpeed, followDistance, ReloadSpeed, MagCapacity, NumberToPierce}
+public enum WeaponStatType { Damage, AttackSpeed, CoolDown, Range, ChargeUpTime, BulletSpread, NumberOfBullets, TimeToRepeateShot,
+                             LockOnDistance, Bounces, BounceRange, BoxCheckWidth, MoveSpeed, followDistance, ReloadSpeed, MagCapacity, NumberToPierce,
+                             ExplosionRadius}
 
 public class AllWeaponStats : MonoBehaviour
 {
@@ -70,9 +72,11 @@ public class AllWeaponStats : MonoBehaviour
             case WeaponStatType.BoxCheckWidth:
                 weaponStats[weaponStatsDic[weaponType]].boxCheckWidth += amountToAdd;
                 break;
-            case WeaponStatType.moveSpeed:
+            case WeaponStatType.MoveSpeed:
                 weaponStats[weaponStatsDic[weaponType]].moveSpeed += amountToAdd;
-
+                break;
+                case WeaponStatType.ExplosionRadius:
+                weaponStats[weaponStatsDic[weaponType]].explosionRadius += amountToAdd;
                 break;
         }
 
@@ -285,7 +289,7 @@ public class WeaponStats
     //[HideInInspector]
     public float range;
     //[HideInInspector]
-    public float boxCheckWidth = 20;
+    public float boxCheckWidth = 20f;
     //[HideInInspector]
     public float chargeUpTime;
     //[HideInInspector]
@@ -303,9 +307,11 @@ public class WeaponStats
     //
     public float bounceRange;
     //
-    public float moveSpeed  = 1;
+    public float moveSpeed  = 1f;
     //
-    public float followDistance = 1;
+    public float followDistance = 1f;
+    //
+    public float explosionRadius = 5f;
 }
 #endregion
 
@@ -407,6 +413,7 @@ public class WeapopnStatsEditor : Editor
             SerializedProperty bounceRange = weapon.FindPropertyRelative("bounceRange");
             SerializedProperty moveSpeed = weapon.FindPropertyRelative("moveSpeed");
             SerializedProperty followDistance = weapon.FindPropertyRelative("followDistance");
+            SerializedProperty explosionRadius = weapon.FindPropertyRelative("explosionRadius");
 
 
             if (!showAllWeapons)
@@ -459,6 +466,9 @@ public class WeapopnStatsEditor : Editor
                 case WeaponType.GrenadeLaucher:
                     break;
                 case WeaponType.ThrowingKnives:
+                    break;
+                case WeaponType.MissleLaucher:
+                    EditorGUILayout.PropertyField(explosionRadius);
                     break;
             }
 
