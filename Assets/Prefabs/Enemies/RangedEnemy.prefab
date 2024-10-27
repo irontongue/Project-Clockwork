@@ -125,7 +125,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 20
   health: 20
-  speed: 8
+  speed: 12
   EXP: 2
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -168,7 +168,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f2372ba77c16874594ba568d728f23a, type: 3}
   timeBetweenPolarOffsets: 0
   state: 0
-  afterAttackTimer: 0.2
+  afterAttackTimer: 1.5
   findNewPositionRangeFromPlayer: 35
   findNewPositionRangeRandomMultiplyer: 0.05
   seekPlayerRandomError: 3
