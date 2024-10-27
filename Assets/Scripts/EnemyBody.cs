@@ -19,7 +19,14 @@ public class EnemyBody : EnemyDamageHandler
     }
     public override bool DealDamage(float damage, DamageType damageType = DamageType.None)
     {
-        mainBodyInfo.DealDamage(damage, this.bodyPart, damageType);
+        print("?");
+        mainBodyInfo.DealDamage(damage, bodyPart, damageType);
+        return true;
+    }
+    public override bool DealDamage(float damage)
+    {
+        print("?");
+        mainBodyInfo.DealDamage(damage);
         return true;
     }
 
