@@ -319,6 +319,8 @@ public class PlayerMovement : MonoBehaviour
             currentVelocity.x = dashVelocity.x;
             currentVelocity.z = dashVelocity.z;
 
+            slideGracePeriodActive = true;
+
             if (dashTimer <= 0)
                 CancelDash();
 
@@ -371,6 +373,10 @@ public class PlayerMovement : MonoBehaviour
     bool slidelock;
     void Slide()
     {
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+            slidelock = false;
+
         DevText.DisplayInfo("onSlope", "OnSlope: " + onSlope, "Sliding");
         DevText.DisplayInfo("slidingTooSlow", "SlidingTooSlow: " + slidingTooSlow, "Sliding");
         DevText.DisplayInfo("sliding", "Sliding: " + isSliding, "Sliding");
@@ -384,9 +390,13 @@ public class PlayerMovement : MonoBehaviour
 
         onSlope = GroundAngle() > minAngleForSlide;
 
-        VelWithoutGravity = currentVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
+        VelWithoutGravity = currentVelocity + dashVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
         VelWithoutGravity.y = 0;
-        slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope ;
+        if (!currentlyDashing)
+            slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide && !onSlope;
+        else
+            slidingTooSlow = false; 
+        
      
         if (isSliding)
         {
@@ -425,7 +435,8 @@ public class PlayerMovement : MonoBehaviour
             if (magnitudeToStopSlide > currentVelocityWithoutY.magnitude)
             {
                 currentVelocity = Vector3.zero;
-                isSliding = false;      
+                isSliding = false;   
+                
             }
 
             return;
@@ -509,9 +520,9 @@ public class PlayerMovement : MonoBehaviour
                 return; // dont want to instantly slide again
             }
             
-         //   isSliding = !isSliding;
-          //  if (!isSliding)
-             //   return;
+            isSliding = !isSliding;
+            if (!isSliding)
+                return;
 
             CancelDash();
         }
