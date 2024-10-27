@@ -220,7 +220,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1497413712644986038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,3 +252,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 1
   speed: 1
+  textMeshPro: {fileID: 0}
