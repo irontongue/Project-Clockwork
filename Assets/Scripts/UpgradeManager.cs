@@ -66,6 +66,8 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.GrenadeLaucher)] List<UpgradeLine> grenadeLaucherUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.ThrowingKnives)] List<UpgradeLine> throwingKnivesUpgrades;
     [SerializeField, ShowIf("weaponToEdit", UpgradeType.PlayerRevolver)] List<UpgradeLine> playerRevolverUpgrades;
+    [SerializeField, ShowIf("weaponToEdit", UpgradeType.MissleLaucher)] List<UpgradeLine> missleLauncherUpgrades;
+
 
 
 
