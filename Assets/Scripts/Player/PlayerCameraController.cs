@@ -15,7 +15,7 @@ public class PlayerCameraController : MonoBehaviour
     {
         camTransform = Camera.main.transform;
      
-        cameraRotation = new(camTransform.eulerAngles.x, transform.eulerAngles.y);
+        cameraRotation = new(0, transform.eulerAngles.y);
   
     }
     void Update()

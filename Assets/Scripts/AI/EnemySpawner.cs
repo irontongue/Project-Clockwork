@@ -10,9 +10,11 @@ public class EnemySpawner : MonoBehaviour
 
     [System.Serializable]
    
-    struct EnemySpawnInfo
+    public struct EnemySpawnInfo
     {
         public Enemies enemy;
+        public bool spawnInGroup;
+        public int minSpawnCount, maxSpawnCount;
         public int spawnChances;
     }
     public enum Enemies {Melee, Ranged, Slob, LesserFly}
@@ -29,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
         [FoldoutGroup("Wave")] public int enemiesToKillToEndWave;
         [FoldoutGroup("Wave")] public float EXPShare;
         [FoldoutGroup("Wave")] public WaveEvent EndEvent;
+        [FoldoutGroup("Wave")] public float timeAfterEndingToStartNewWave;
     }
  
     [SerializeField] WaveInfo[] waves;
@@ -55,8 +58,23 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Update()
     {
-        if(waveSpawning)
+        if (GameState.GamePaused)
+            return;
+
+        if (waveSpawning)
             WaveLoop();
+        if (!autoStartNewWave)
+            return;
+
+        timeSinceWaveEnded+= Time.deltaTime;
+        if (timeSinceWaveEnded >= timeToWaitToAutoStartNextWave)
+        {
+            if (waveToStart < currentWaveIndex)
+                return;
+            StartWave();
+        }
+          
+        
     }
     [Header("DEBUG ONLY")]
     [SerializeField] int currentWaveIndex = -1;
@@ -76,6 +94,7 @@ public class EnemySpawner : MonoBehaviour
         currentWaveIndex++;
         enemysKilled = 0;
         spawnedEnemies = 0 - (currentWave.enemiesToKillToEndWave - spawnedEnemies); // since there could be multiple waves going on, reduce spawned enemys by how many enemies are left in the last wave.
+        autoStartNewWave = false;
         if (currentWaveIndex >= waves.Length)
         {
             AllWavesCleared();
@@ -92,7 +111,7 @@ public class EnemySpawner : MonoBehaviour
         {
             for(int i = 0; i < info.spawnChances; i++)
             {
-                spawnPool.Add(info.enemy);
+                spawnPool.Add(info);
             }    
         }
 
@@ -102,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
     bool waveSpawning;
     float lastTimeSinceSpawn;
     int spawnedEnemies;
-    public List<Enemies> spawnPool = new();
+    public List<EnemySpawnInfo> spawnPool = new();
 
     Vector3 foundPos;
  
@@ -122,45 +141,71 @@ public class EnemySpawner : MonoBehaviour
        return Vector3.zero;
     }
     bool finalWaveFinished;
-    // ReSharper disable Unity.PerformanceAnalysis
+   
+    EnemySpawnInfo chosenEnemy;
+    int groupSpawnCount;
+    bool autoStartNewWave;
+    float timeSinceWaveEnded;
+    float timeToWaitToAutoStartNextWave;
+    int waveToStart;
     IEnumerator WaveLoop()
     {
+        int index = currentWaveIndex;
         WaveInfo wave = currentWave;
         while(spawnedEnemies < wave.maxEnemiesToSpawn)
         {
+            chosenEnemy = spawnPool[Random.Range(0, spawnPool.Count)];
             lastTimeSinceSpawn = currentWave.spawnSpeed;
-
+            if (chosenEnemy.spawnInGroup)
+            {
+                groupSpawnCount = Random.Range(chosenEnemy.minSpawnCount, chosenEnemy.maxSpawnCount);
+                wave.enemiesToKillToEndWave -= (groupSpawnCount - 1);
+            }
+                
+            else
+                groupSpawnCount = 1;
             //  GameObject spawnedEnemy = Instantiate(spawnPool[Random.Range(0, spawnPool.Count)]);
-            GameObject poolObj = ObjectPooler.RetreiveObject(spawnPool[Random.Range(0, spawnPool.Count)].ToString());
-            poolObj.GetComponent<PoolObject>().ReuseObject();
-            AIBase ai = poolObj.GetComponent<AIBase>();
-            try
+
+            for(int i = 0; i < groupSpawnCount; i++)
             {
-                NavMesh.SamplePosition(FindSpawnPos(), out NavMeshHit hit, 3, walkableMask);
-                poolObj.transform.position = hit.position;
+                GameObject poolObj = ObjectPooler.RetreiveObject(chosenEnemy.enemy.ToString());
+                poolObj.GetComponent<PoolObject>().ReuseObject();
+                AIBase ai = poolObj.GetComponent<AIBase>();
+                try
+                {
+                    NavMesh.SamplePosition(FindSpawnPos(), out NavMeshHit hit, 3, walkableMask);
+                    poolObj.transform.position = hit.position;
+                }
+                catch
+                {
+                    print("Agent:" + name + "Failed to find position");
+                    poolObj.gameObject.SetActive(false);
+                    continue; // give up and try again, this isnt the final solution. /// or is it
+                }
+                if (!ai.agentless)
+                    ai.agent.enabled = true;
+                ai.spawner = this;
+                ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
+                ai.gameObject.SetActive(true);
+                ai.PlaySpawnSound();
+
+                ai.RandomisePolarOffset();
+
+                spawnedEnemies += 1;
+
+                if (spawnedEnemies >= currentWave.maxEnemiesToSpawn)
+                {
+                    waveSpawning = false;
+                    if (index < currentWaveIndex)
+                        yield return null;
+                    autoStartNewWave = true;
+                    waveToStart = currentWaveIndex++;
+                    timeSinceWaveEnded = 0;
+                    timeToWaitToAutoStartNextWave = wave.timeAfterEndingToStartNewWave;
+
+                }
             }
-            catch
-            {
-                print("Agent:" + name + "Failed to find position");
-                poolObj.gameObject.SetActive(false);
-                continue; // give up and try again, this isnt the final solution. /// or is it
-            }
-            if(!ai.agentless)
-                ai.agent.enabled = true;
-            ai.spawner = this;
-            ai.EXP = currentWave.EXPShare / currentWave.maxEnemiesToSpawn;
-            ai.gameObject.SetActive(true);
-            ai.PlaySpawnSound();
-
-            ai.RandomisePolarOffset();
-
-            spawnedEnemies += 1;
-
-            if (spawnedEnemies >= currentWave.maxEnemiesToSpawn)
-            {
-                waveSpawning = false;
-            }
-
+ 
             yield return new WaitForSeconds(wave.spawnSpeed);
         }
 
@@ -168,6 +213,7 @@ public class EnemySpawner : MonoBehaviour
 
     }
     int enemysKilled;
+   
     public void EnemyKilled()
     {
         enemysKilled++;

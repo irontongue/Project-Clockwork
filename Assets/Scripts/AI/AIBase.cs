@@ -76,6 +76,7 @@ public class AIBase : EnemyInfo
         }
 
         lastTimeSinceMovementUpdate -= Time.deltaTime;
+        lastTimeSincePolarOffset += Time.deltaTime;
        
     }
     bool pathingToPoint;
@@ -129,9 +130,14 @@ public class AIBase : EnemyInfo
         return true;
     }
     Vector3 modifyedPlayerVector;
+
+    [SerializeField, TabGroup("Movement")] float timeBetweenPolarOffsets;
+    float lastTimeSincePolarOffset;
  
     Vector3 GetPlayerOffset() // if using the pole offset, this adds the offset, if not it just returns the player position
     {
+        if (lastTimeSincePolarOffset < timeBetweenPolarOffsets || !usePolarOffset)
+            return player.transform.position;
         modifyedPlayerVector = PlayerMovement.playerPosition;
         switch (pole)
         {

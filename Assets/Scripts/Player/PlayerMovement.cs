@@ -467,7 +467,6 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            print("graceperiod");
             slideGracePeriodActive = true;
         }
         else

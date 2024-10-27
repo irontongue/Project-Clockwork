@@ -9,9 +9,12 @@ public class FlyEnemy : AIBase
     [SerializeField, TabGroup("FLY")] float distanceFromGroundVariance;
     [SerializeField, TabGroup("FLY")] float randomMoveSpeedVariance;
     [SerializeField, TabGroup("FLY")] float verticalSpeed = 0.25f;
+    [SerializeField, TabGroup("FLY")] float movingUpSpeedMultiplyer = 0.5f;
+    [SerializeField, TabGroup("FLY")] ParticleSystem attackParticleSystem;
 
     PlayerDamageHandler playerDamageHandler;
     float currentAttackTimer;
+    float currentAfterAttackTimer;
 
     protected override void Start()
     {
@@ -24,6 +27,9 @@ public class FlyEnemy : AIBase
     protected override void Update()
     {
         currentAttackTimer -= Time.deltaTime;
+        currentAfterAttackTimer -= Time.deltaTime;
+        if (currentAfterAttackTimer > 0)
+            return;
         if (Vector3.Distance(transform.position, playerDamageHandler.transform.position) < attackRange)
         {
             if (currentAttackTimer > 0)
@@ -33,29 +39,42 @@ public class FlyEnemy : AIBase
         else
             FlyToPlayer();
 
+
             
     }
     float distFromGround;
     Vector3 velocity;
+    float speedMultiplyer;
     void FlyToPlayer()
     {
         velocity = Vector3.zero;
-        Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 25);
+        Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 25,walkableMask);
         distFromGround = transform.position.y - hit.point.y;
         velocity += transform.forward;
 
         if (distFromGround < flightHeight - distanceFromGroundVariance)
+        {
             velocity.y = verticalSpeed;
-        else if (distFromGround > flightHeight + distanceFromGroundVariance)
+            speedMultiplyer = movingUpSpeedMultiplyer;
+        }
+        else
+            speedMultiplyer = 1;
+          
+        if (distFromGround > flightHeight + distanceFromGroundVariance)
+        {
             velocity.y = -verticalSpeed;
+        }
+         
 
-        transform.position += velocity * speed * Time.deltaTime;
+        transform.position += velocity * speed * speedMultiplyer * Time.deltaTime;
     }
     
     void AttackPlayer()
     {
         currentAttackTimer = seccondsBetweenAttacks;
        // playerDamageHandler.Damage(damage, transform);
-       DamagePlayer();
+        DamagePlayer();
+        attackParticleSystem.Play();
+        currentAfterAttackTimer = attackDelay;
     }
 }
