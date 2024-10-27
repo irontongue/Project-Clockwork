@@ -139,8 +139,9 @@ MonoBehaviour:
   floatingTextSpawnOffset: {x: 0, y: 1.89, z: 0}
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
-  attackRange: 40
-  seccondsBetweenAttacks: 3
+  agentless: 0
+  attackRange: 50
+  seccondsBetweenAttacks: 2
   damage: 1
   attackDelay: 0.2
   attackSounds:
@@ -165,8 +166,9 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: de62b95947b25e34e80f1139ced1c5be, type: 3}
   - {fileID: 8300000, guid: 6f2372ba77c16874594ba568d728f23a, type: 3}
+  timeBetweenPolarOffsets: 0
   state: 0
-  afterAttackTimer: 0.5
+  afterAttackTimer: 0.2
   findNewPositionRangeFromPlayer: 35
   findNewPositionRangeRandomMultiplyer: 0.05
   seekPlayerRandomError: 3
@@ -176,8 +178,8 @@ MonoBehaviour:
   projectile: {fileID: 6170293064856852499, guid: ad992dcb8512749409890f3326a6b3e6,
     type: 3}
   projectileSpeed: 45
-  repositionDistance: 5
-  timeInRepositionState: 1
+  repositionDistance: 2
+  timeInRepositionState: 0.25
   findPositionTries: 3
 --- !u!195 &2712118304913471865
 NavMeshAgent:

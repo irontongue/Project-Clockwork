@@ -129,7 +129,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 7
   health: 7
-  speed: 21
+  speed: 18
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -158,7 +158,7 @@ MonoBehaviour:
   randonVarianceForMovementUpdate: 0.005
   usePolarOffset: 1
   distanceBeforeConvergingOnPlayer: 8
-  poleOffsets: {x: 8, y: 8}
+  poleOffsets: {x: 3, y: 3}
   spawner: {fileID: 0}
   source: {fileID: 8368403614439602895}
   pole: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 865b573aa7a95a749b85a2a8925147ee, type: 3}
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
-  timeBetweenPolarOffsets: 3
+  timeBetweenPolarOffsets: 5
   afterAttackTimer: 1
 --- !u!195 &5083003481326997813
 NavMeshAgent:

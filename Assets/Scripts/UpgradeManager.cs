@@ -69,6 +69,7 @@ public class UpgradeManager : MonoBehaviour
 
 
 
+
     //[SerializeField, ShowIf("weaponToEdit", UpgradeType.Universal)] List<UpgradeLine> universalUpgrades;
 
     Dictionary<WeaponType, List<UpgradeLine>> weaponUpgradeDictionary = new(); //Holds all of the upgrade lines to then be put into the upgradePackets list when adding a weapon
