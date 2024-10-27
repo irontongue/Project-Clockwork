@@ -81,6 +81,8 @@ public class AutomaticWeaponShotgun : AutomaticWeaponBase
     {
         if(playFX)
             muzzleFlashPFX.Play(true);
+        if(audioSource)
+            PlayRandomAudioClip(fireAudioClips);
         Vector3 dir = (enemyInfo.transform.position - playerTransform.position).normalized;
         if(stats.numberOfBullets > trailRendererPool.Count)
         {

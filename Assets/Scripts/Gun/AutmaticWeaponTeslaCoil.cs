@@ -50,6 +50,8 @@ public class AutmaticWeaponTeslaCoil : AutomaticWeaponBase
 
         onCooldown = true;
         firing = true;
+        if(audioSource)
+            PlayRandomAudioClip(fireAudioClips);
         ZapEnemy();
 
     }

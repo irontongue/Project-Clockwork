@@ -1,4 +1,5 @@
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 
@@ -6,14 +7,17 @@ using UnityEngine;
 public enum SniperUpgrades { }
 public class AutomaticWeaponSniper : AutomaticWeaponBase
 {
-    [SerializeField] ParticleSystem muzzleFlashPFX;
-    [SerializeField] ParticleSystem bloodHitPFX;
+    [TabGroup("SetUp"), SerializeField] ParticleSystem muzzleFlashPFX;
+    [TabGroup("SetUp"), SerializeField] ParticleSystem bloodHitPFX;
+    [TabGroup("SetUp"), SerializeField] ParticleSystem terrainFX;
+    [TabGroup("SetUp"), SerializeField] LineRenderer lineRenderer;
+    [TabGroup("Effects"),SerializeField] float vaporTrailDissolveSpeed = 1;
     Animator anim;
     GameObject enemyObj;
     float aimTimer = 0;
     bool lineActive = false;
-    [SerializeField] LineRenderer lineRenderer;
     Material lineRendererMat;
+    float lineRendererDissolveTimer = 1;
     protected override void Start()
     {
         base.Start();
@@ -35,9 +39,11 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     {
         if(GameState.GamePaused)
             return;
-        if(lineActive)
+        if(lineRendererDissolveTimer != 1)
         {
-            lineRendererMat.SetFloat("_Dissolve", 1f);
+            lineRendererMat.SetFloat("_Dissolve", Mathf.Clamp(lineRendererDissolveTimer += Time.deltaTime * vaporTrailDissolveSpeed,0,1));
+            if(lineRendererDissolveTimer >= 1)
+                lineRenderer.gameObject.SetActive(false);
         }
         if (firing) // Wait until animation has finished
             return;
@@ -67,33 +73,58 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     {
         if (playFX)
             muzzleFlashPFX.Play();
+        if(audioSource)
+            PlayRandomAudioClip(fireAudioClips);
+
+        lineRenderer.SetPosition(0, muzzleFlashPFX.transform.position);
+
         if(stats.numberToPierce > 0)
         {
-            RaycastHit[] hits = RayCastForwardRayHitEverything(everythingEnemy);
-            
-            print(hits.Length);
+            RaycastHit[] hits = RayCastForwardRayHitEverything(excludePlayerLayerMask);
+
             for(int i = 0; i < hits.Length; i++)
             {   
-                print(hits[i].transform.name);
-                // if(stats.numberToPierce == i)
-                //    break;
-                //HitCheck(hits[i]);
+                if(stats.numberToPierce == i)
+                   break;
+                HitCheck(hits[i]);
             }
+            
+            if(hits.Length <= stats.numberToPierce)
+                lineRenderer.SetPosition(1, hits[hits.Length -1].point);
+            else
+                lineRenderer.SetPosition(1,transform.position + transform.forward * 100);
+            
         }
         else
         {
-            RaycastHit hit = RayCastForwardRayHit(everythingEnemy);
+            RaycastHit hit = RayCastForwardRayHit(excludePlayerLayerMask);
             HitCheck(hit);
+            
+            if(stats.numberToPierce > 0)
+                lineRenderer.SetPosition(1,transform.position + transform.forward * 100);
+            else
+                lineRenderer.SetPosition(1,hit.point);
         }
+
+        lineRenderer.gameObject.SetActive(true);
+        lineRendererMat.SetFloat("_Dissolve", 1);
+        lineRendererDissolveTimer = 0;
     }
     void HitCheck(RaycastHit hit)
     {
-        if (hit.transform != null)
+        if (hit.transform == null)
+            return;
+        EnemyDamageHandler dH;
+        if(dH = hit.transform.GetComponent<EnemyDamageHandler>())
         {
-            print(hit.transform.name);
-            hit.transform.GetComponent<EnemyDamageHandler>().DealDamage(stats.damage);
+            dH.DealDamage(stats.damage);
             if (bloodHitPFX)
                 Instantiate(bloodHitPFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
+        }
+        else
+        {
+            if(terrainFX)
+                Instantiate(terrainFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
         }
     }
     public void FinishAnimation()

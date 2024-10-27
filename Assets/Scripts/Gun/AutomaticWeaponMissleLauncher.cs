@@ -7,12 +7,10 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
 {
     [SerializeField] GameObject misslePrefab;
     [SerializeField] Transform missleLaunchPoint;
-    AudioSource audioSource;
     GameObject missle;
     protected  override void Start()
     {
         base.Start();
-        audioSource = GetComponent<AudioSource>();
         ObjectPooler.InitilizeObjectPool("AWML_Missle", misslePrefab, false);
     }
 
@@ -25,8 +23,6 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
             return;
         if(firing)
         {
-            if(audioSource.isPlaying)
-                return;
             missle = ObjectPooler.RetreiveObject("AWML_Missle");
             missle.transform.position = cam.transform.position;
             missle.transform.forward = cam.transform.forward;
@@ -35,8 +31,9 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
             onCooldown = true;
         }
         else
-        {
-            audioSource.Play();
+        {   
+            if(audioSource)
+                PlayRandomAudioClip(fireAudioClips);
             firing = true;
         }
 

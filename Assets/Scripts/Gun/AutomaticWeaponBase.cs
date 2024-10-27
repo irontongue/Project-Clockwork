@@ -1,33 +1,38 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class AutomaticWeaponBase : MonoBehaviour
 {
-    [SerializeField] protected WeaponType weaponType;
-    [SerializeField] protected DamageType damageType;
-    protected WeaponStats stats;
+    [TabGroup("SetUp"), SerializeField] protected WeaponType weaponType;
+    [TabGroup("SetUp"),SerializeField] protected DamageType damageType;
+    [TabGroup("SetUp"),SerializeField] protected Sprite uiCDSprite;
+    Image uiCDImage;
+    [TabGroup("LayerMasks"), SerializeField] protected LayerMask enemyLayerMask = 8;
+    [TabGroup("LayerMasks"), SerializeField] protected LayerMask excludePlayerLayerMask = ~(1<<6);
+    [TabGroup("LayerMasks"), SerializeField] protected LayerMask everythingEnemy = 1 << 3 | 1 << 7;
+
+    [TabGroup("Audio"), SerializeField] protected AudioClip[] fireAudioClips;
+    //**REFERENCES**\\
     AllWeaponStats allStats;
+    protected WeaponStats stats;
     protected Camera cam;
     protected Transform playerTransform;
-    [SerializeField]protected LayerMask enemyLayerMask = 8;
-    [SerializeField] protected LayerMask excludePlayerLayerMask = ~(1<<6);
-    protected LayerMask everythingEnemy = 1 << 3 | 1 << 7;
+    protected AudioSource audioSource;
 
+    //**LOGIC**\\
     protected bool onCooldown = false;
     protected float coolDownTime = 0;
-
     protected bool firing = false;
-    Image uiCDImage;
-    [SerializeField] protected Sprite uiCDSprite;
     protected float uiCDTimeOffset = 0f;
-    float totalCooldownTimer = 0;
 
     virtual protected void Start()
     {
+        try{ audioSource = GetComponent<AudioSource>(); }
+        catch{ Debug.LogWarning(weaponType + " Does not have an audioSource");}
         uiCDImage = AutomaticWeaponCooldownUI.selfRef.AddWeapon(uiCDSprite);
         playerTransform = transform.root;
         cam = Camera.main;
@@ -262,6 +267,12 @@ public class AutomaticWeaponBase : MonoBehaviour
             return true;
         }
         return false;
+    }
+    protected void PlayRandomAudioClip(AudioClip[] audioClips)
+    {
+        int index = UnityEngine.Random.Range(0, audioClips.Length);
+        audioSource.PlayOneShot(audioClips[index]);
+
     }
 
     public virtual void Upgrade<T>(T upgradeEnum)where T: Enum{ }
