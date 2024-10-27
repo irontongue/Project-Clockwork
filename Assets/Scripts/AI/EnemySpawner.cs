@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
         public int minSpawnCount, maxSpawnCount;
         public int spawnChances;
     }
-    public enum Enemies {Melee, Ranged, Slob, LesserFly}
+    public enum Enemies {Melee, Ranged, Slob, LesserFly, Gremlin}
    
   
 

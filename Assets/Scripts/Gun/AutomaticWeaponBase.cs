@@ -31,7 +31,7 @@ public class AutomaticWeaponBase : MonoBehaviour
 
     virtual protected void Start()
     {
-        try{ audioSource = GetComponent<AudioSource>(); }
+        try{ audioSource = GetComponentInParent<AudioSource>(); }
         catch{ Debug.LogWarning(weaponType + " Does not have an audioSource");}
         uiCDImage = AutomaticWeaponCooldownUI.selfRef.AddWeapon(uiCDSprite);
         playerTransform = transform.root;
@@ -271,7 +271,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected void PlayRandomAudioClip(AudioClip[] audioClips)
     {
         int index = UnityEngine.Random.Range(0, audioClips.Length);
-        audioSource.PlayOneShot(audioClips[index]);
+        audioSource.PlayOneShot(audioClips[index], GlobalSettings.audioVolume);
 
     }
 
