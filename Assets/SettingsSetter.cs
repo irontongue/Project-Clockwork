@@ -14,7 +14,7 @@ public class SettingsSetter : MonoBehaviour
     {
         audioSlider.value = GlobalSettings.audioVolume;
         mouseSlider.value = GlobalSettings.mouseSensitivty;
-        music.volume = audioSlider.value;
+        music.volume = audioSlider.value * 0.25f;
         Application.targetFrameRate = 9999;
         QualitySettings.maxQueuedFrames = 2;
     }
@@ -22,7 +22,7 @@ public class SettingsSetter : MonoBehaviour
     public void AudioSlider()
     {
         GlobalSettings.audioVolume = audioSlider.value;
-        music.volume = audioSlider.value;
+        music.volume = audioSlider.value * 0.25f;
     }
     public void MouseSlider()
     {

@@ -127,9 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifyer: 
   mainBodyInfo: {fileID: 0}
-  maxHealth: 8
-  health: 8
-  speed: 14
+  maxHealth: 7
+  health: 7
+  speed: 21
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -143,7 +143,8 @@ MonoBehaviour:
   floatingTextSpawnOffset: {x: 0, y: 1.21, z: 0}
   fireStacks: 0
   agent: {fileID: 5083003481326997813}
-  attackRange: 4
+  agentless: 0
+  attackRange: 1
   seccondsBetweenAttacks: 0.5
   damage: 1
   attackDelay: 0.1
@@ -156,8 +157,8 @@ MonoBehaviour:
   seccondsBetweenMovementUpdates: 0.1
   randonVarianceForMovementUpdate: 0.005
   usePolarOffset: 1
-  distanceBeforeConvergingOnPlayer: 6
-  poleOffsets: {x: 5, y: 5}
+  distanceBeforeConvergingOnPlayer: 8
+  poleOffsets: {x: 8, y: 8}
   spawner: {fileID: 0}
   source: {fileID: 8368403614439602895}
   pole: 0
@@ -172,6 +173,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 865b573aa7a95a749b85a2a8925147ee, type: 3}
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
+  timeBetweenPolarOffsets: 3
   afterAttackTimer: 1
 --- !u!195 &5083003481326997813
 NavMeshAgent:

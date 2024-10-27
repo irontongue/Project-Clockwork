@@ -464,11 +464,9 @@ public class PlayerMovement : MonoBehaviour
             if (timeSinceMinVelocity <= 0)
             {
                 slideGracePeriodActive = false;
-                print("returning here");
                 return;
             }
 
-            print("graceperiod");
             slideGracePeriodActive = true;
         }
         else
@@ -602,13 +600,53 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
     #region Misc
-    public void ResetPlayerToSafePos()
+    Vector3 respawnPos;
+    [Header("Respawn")]
+    [SerializeField] UnityEngine.UI.Image fadeOutImage;
+    [SerializeField] float fadeTimer;
+    public void ResetPlayerToSafePos(Vector3 pos)
+    {
+        StartCoroutine("Respawn");
+        if (pos == Vector3.zero)
+        {
+            respawnPos = lastPlayerSafePos;
+            print("No player respawn point found");
+        }
+           
+        else
+            respawnPos = pos;
+
+      
+     
+       
+    }
+
+    IEnumerator Respawn()
     {
         controller.enabled = false;
-        transform.position = lastPlayerSafePos;
-        controller.enabled = true;
+        float timer = 0;
+        Color color = fadeOutImage.color;
         currentVelocity = Vector3.zero;
         lastPlayerVelocity = Vector3.zero;
+        while (timer < fadeTimer)
+        {
+            timer += Time.deltaTime;
+            color.a = Mathf.Lerp(0, 1, timer / fadeTimer);
+            fadeOutImage.color = color;
+            yield return new WaitForEndOfFrame();
+        }
+        transform.position = respawnPos;
+   
+        while (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+            color.a = Mathf.Lerp(0, 1, timer / fadeTimer);
+        
+            fadeOutImage.color = color;
+            yield return new WaitForEndOfFrame();
+        }
+        controller.enabled = true;
+        yield return null;
     }
 
     #endregion

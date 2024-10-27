@@ -10,6 +10,7 @@ public class AIBase : EnemyInfo
 
     protected GameObject player;
     public NavMeshAgent agent;
+    public bool agentless;
     [Header("Attack Settings")]
 
     [SerializeField, TabGroup("Attack")] protected float attackRange;
@@ -56,7 +57,8 @@ public class AIBase : EnemyInfo
         aiBuisy = false;
         source = GetComponent<AudioSource>();
         BatchSpriteLooker.AddLooker(transform);
-        agent.speed = speed;
+        if(!agentless)
+            agent.speed = speed;
         
     }
 
@@ -74,6 +76,7 @@ public class AIBase : EnemyInfo
         }
 
         lastTimeSinceMovementUpdate -= Time.deltaTime;
+        lastTimeSincePolarOffset += Time.deltaTime;
        
     }
     bool pathingToPoint;
@@ -127,9 +130,14 @@ public class AIBase : EnemyInfo
         return true;
     }
     Vector3 modifyedPlayerVector;
+
+    [SerializeField, TabGroup("Movement")] float timeBetweenPolarOffsets;
+    float lastTimeSincePolarOffset;
  
     Vector3 GetPlayerOffset() // if using the pole offset, this adds the offset, if not it just returns the player position
     {
+        if (lastTimeSincePolarOffset < timeBetweenPolarOffsets || !usePolarOffset)
+            return player.transform.position;
         modifyedPlayerVector = PlayerMovement.playerPosition;
         switch (pole)
         {
@@ -187,7 +195,7 @@ public class AIBase : EnemyInfo
     protected void PlayDeathSound()
     {
       
-        if (source == null)
+        if (source == null || deathSounds != null)
             return;
         if (EnemySoundManager.NoiseReady(enemyType, true))
             AudioSource.PlayClipAtPoint(deathSounds[Random.Range(0, deathSounds.Length - 1)],transform.position, GlobalSettings.audioVolume * 2);
