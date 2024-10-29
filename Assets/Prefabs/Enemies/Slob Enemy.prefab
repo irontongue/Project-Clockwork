@@ -479,7 +479,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.33, y: 1.36, z: 0.02}
+  m_Size: {x: 2.33, y: 1.36, z: 1}
   m_Center: {x: 0, y: -0.27, z: 0}
 --- !u!195 &8624205586133748646
 NavMeshAgent:
@@ -536,6 +536,7 @@ MonoBehaviour:
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
+  enemyType: 0
   deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
     type: 3}
   healthPotionPrefab: {fileID: 445344903588590110, guid: 3cff64084d5df4843b65f08c362c7534,
@@ -545,6 +546,7 @@ MonoBehaviour:
   floatingTextSpawnOffset: {x: 0, y: 1.5, z: 0}
   fireStacks: 0
   agent: {fileID: 8624205586133748646}
+  agentless: 0
   attackRange: 3
   seccondsBetweenAttacks: 1
   damage: 6
@@ -561,8 +563,12 @@ MonoBehaviour:
   distanceBeforeConvergingOnPlayer: 3
   poleOffsets: {x: 1, y: 1}
   spawner: {fileID: 0}
+  source: {fileID: 0}
   pole: 0
   aiBuisy: 0
+  spawnSounds: []
+  deathSounds: []
+  timeBetweenPolarOffsets: 0
   afterAttackTimer: 1
   moveCycleRate: 0.8
 --- !u!1 &5746780244480167824
@@ -617,7 +623,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.94, y: 1.06, z: 0.1}
+  m_Size: {x: 0.94, y: 1.06, z: 1}
   m_Center: {x: 0.12, y: 0.39, z: 0}
 --- !u!114 &5898753637735566843
 MonoBehaviour:

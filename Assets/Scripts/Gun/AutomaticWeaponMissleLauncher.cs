@@ -8,6 +8,7 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
     [SerializeField] GameObject misslePrefab;
     [SerializeField] Transform missleLaunchPoint;
     GameObject missle;
+    public static Vector3 lockOnPoint;
     protected  override void Start()
     {
         base.Start();
@@ -19,6 +20,7 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
     {
         if(GameState.GamePaused)
             return;
+        SetLockOnPoint();
         if(!UpdateCoolDown())
             return;
         if(firing)
@@ -35,6 +37,17 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
             if(audioSource) 
                 PlayRandomAudioClip(fireAudioClips);
             firing = true;
+        }
+        void SetLockOnPoint()
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(playerTransform.position, cam.transform.forward, out hit, Mathf.Infinity,excludePlayerLayerMask))
+            {
+                print(hit.transform.name);
+                lockOnPoint = hit.point;
+            }
+            else
+                lockOnPoint = playerTransform.position + playerTransform.forward * 100f;
         }
 
     }
