@@ -243,6 +243,7 @@ public class UpgradeManager : MonoBehaviour
         weaponUpgradeDictionary.Add(WeaponType.Dog, dogUpgrades);
         weaponUpgradeDictionary.Add(WeaponType.GrenadeLaucher, grenadeLaucherUpgrades);
         weaponUpgradeDictionary.Add(WeaponType.ThrowingKnives, throwingKnivesUpgrades);
+        weaponUpgradeDictionary.Add(WeaponType.MissleLaucher, missleLauncherUpgrades);
 
     }
 }

@@ -32,7 +32,7 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
         }
         else
         {   
-            if(audioSource)
+            if(audioSource) 
                 PlayRandomAudioClip(fireAudioClips);
             firing = true;
         }

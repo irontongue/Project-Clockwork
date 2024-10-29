@@ -271,6 +271,8 @@ public class AutomaticWeaponBase : MonoBehaviour
     protected void PlayRandomAudioClip(AudioClip[] audioClips)
     {
         int index = UnityEngine.Random.Range(0, audioClips.Length);
+        if (audioClips == null)
+            return;
         audioSource.PlayOneShot(audioClips[index], GlobalSettings.audioVolume);
 
     }

@@ -62,6 +62,10 @@ public class UpgradeSpawnerUI : MonoBehaviour
                 case WeaponType.TeslaCoil:
                     upgradeButton.weaponSprite.sprite = teslaSprite;
                     break;
+                case WeaponType.MissleLaucher:
+                    upgradeButton.weaponSprite.sprite = rocketLauncherSprite;
+                    break;
+                    
             }
             countStatsToDisplay = upgradeInfo.statsToDisplay.Length;
             for (int i = 0; i < upgradeButton.statTexts.Length; i++)
@@ -114,7 +118,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
             case WeaponStatType.AttackSpeed:
                 value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).attackSpeed;
                 message += "Attack Speed: ";
-                subtract = true;
+            //    subtract = true;
                 unit = "s";
                 break;
             case WeaponStatType.Range:
@@ -125,7 +129,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
             case WeaponStatType.CoolDown:
                 value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).coolDown;
                 message += "Cooldown: ";
-                subtract = true;
+               // subtract = true;
                 unit = "s";
                 break;
             case WeaponStatType.Bounces:
@@ -135,6 +139,10 @@ public class UpgradeSpawnerUI : MonoBehaviour
             case WeaponStatType.NumberOfBullets:
                 value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).numberOfBullets;
                 message += "Pellets: ";
+                break;
+            case WeaponStatType.ExplosionRadius:
+                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).explosionRadius;
+                message += "Explosive Radius: ";
                 break;
 
         }

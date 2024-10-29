@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 514928934740026825}
   - component: {fileID: 3929490684742763742}
   - component: {fileID: 8101129147567164512}
+  - component: {fileID: 3092662894592655938}
   m_Layer: 0
   m_Name: GameManager 1
   m_TagString: Untagged
@@ -66,6 +67,7 @@ MonoBehaviour:
     bounceRange: 0
     moveSpeed: 1
     followDistance: 1
+    explosionRadius: 5
   - weaponType: 1
     damage: 5
     attackSpeed: 1
@@ -82,11 +84,12 @@ MonoBehaviour:
     bounceRange: 0
     moveSpeed: 1
     followDistance: 1
+    explosionRadius: 5
   - weaponType: 0
-    damage: 0.5
-    attackSpeed: 1
+    damage: 1.2
+    attackSpeed: 0.8
     coolDown: 1
-    range: 15
+    range: 10
     boxCheckWidth: 10
     chargeUpTime: 1
     bulletSpread: 2
@@ -98,11 +101,12 @@ MonoBehaviour:
     bounceRange: 0
     moveSpeed: 1
     followDistance: 1
+    explosionRadius: 5
   - weaponType: 3
-    damage: 1
+    damage: 0.5
     attackSpeed: 1
     coolDown: 1
-    range: 15
+    range: 20
     boxCheckWidth: 20
     chargeUpTime: 0
     bulletSpread: 0
@@ -110,10 +114,11 @@ MonoBehaviour:
     numberToPierce: 0
     repeateShot: 0
     lockOnDistance: 0
-    bounces: 5
-    bounceRange: 10
+    bounces: 4
+    bounceRange: 5
     moveSpeed: 1
     followDistance: 1
+    explosionRadius: 5
   - weaponType: 5
     damage: 2
     attackSpeed: 0
@@ -130,10 +135,28 @@ MonoBehaviour:
     bounceRange: 0
     moveSpeed: 0.1
     followDistance: 2
-  weaponTypeToAdd: 0
-  d_Value: 0000000001000000020000000300000004000000
-  d_Key: 0200000001000000000000000300000005000000
-  weaponToEdit: 0
+    explosionRadius: 5
+  - weaponType: 9
+    damage: 2
+    attackSpeed: 0
+    coolDown: 0.5
+    range: 0
+    boxCheckWidth: 20
+    chargeUpTime: 0
+    bulletSpread: 0
+    numberOfBullets: 1
+    numberToPierce: 0
+    repeateShot: 0
+    lockOnDistance: 0
+    bounces: 0
+    bounceRange: 0
+    moveSpeed: 1
+    followDistance: 1
+    explosionRadius: 7
+  weaponTypeToAdd: 9
+  d_Value: 000000000100000002000000030000000400000005000000
+  d_Key: 020000000100000000000000030000000500000009000000
+  weaponToEdit: 9
 --- !u!114 &2420568501883286108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 1
+  weaponToEdit: 11
   shotgunUpgrades:
   - packetName: Damage
     weaponType: 0
@@ -196,6 +219,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 1.2
     levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 00000000
   - packetName: Range
     weaponType: 0
     packet:
@@ -244,6 +269,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 7
     levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 03000000
   - packetName: Cooldown
     weaponType: 0
     packet:
@@ -292,6 +319,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 1
     levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 02000000
   sniperUpgrades:
   - packetName: Cooldown
     weaponType: 1
@@ -341,54 +370,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 0.2
     levels: 0
-  - packetName: Wind Up Speed
-    weaponType: 1
-    packet:
-    - upgradeTitle: 'Sniper Wind Up Speed I '
-      upgradeBody: Fires 10% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Wind Up Speed II
-      upgradeBody: Fires 20 % faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Wind Up Speed III
-      upgradeBody: Fires 40% Faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Wind Up Speed IV
-      upgradeBody: Fires 50% Faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.4
-    levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 02000000
   - packetName: Penetration
     weaponType: 1
     packet:
@@ -437,6 +420,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 3
     levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 
   - packetName: Damage
     weaponType: 1
     packet:
@@ -474,6 +459,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 2
     levels: 0
+    upgradeColor: {r: 0.4743681, g: 0.49056602, b: 0.48777327, a: 1}
+    statsToDisplay: 00000000
   teslaCoilUpgrades:
   - packetName: Bounces
     weaponType: 3
@@ -523,6 +510,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 5
     levels: 0
+    upgradeColor: {r: 1, g: 0, b: 0.40620613, a: 1}
+    statsToDisplay: 09000000
   - packetName: Damage
     weaponType: 3
     packet:
@@ -571,6 +560,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 1
     levels: 0
+    upgradeColor: {r: 1, g: 0, b: 0.40784314, a: 1}
+    statsToDisplay: 00000000
   - packetName: Cooldown
     weaponType: 3
     packet:
@@ -619,6 +610,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 1
     levels: 0
+    upgradeColor: {r: 1, g: 0, b: 0.40784314, a: 1}
+    statsToDisplay: 02000000
   flameThrowerUpgrades: []
   rifleUpgrades: []
   dogUpgrades:
@@ -670,9 +663,151 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 3
     levels: 0
+    upgradeColor: {r: 0, g: 0, b: 0, a: 1}
+    statsToDisplay: 
   grenadeLaucherUpgrades: []
   throwingKnivesUpgrades: []
   playerRevolverUpgrades: []
+  missleLauncherUpgrades:
+  - packetName: Explosive Radius
+    weaponType: 9
+    packet:
+    - upgradeTitle: Explosive Radius I
+      upgradeBody: Increases damage radius by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 17
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1.5
+    - upgradeTitle: Explosive Radius II
+      upgradeBody: Increases damage radius by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 17
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 1.5
+    - upgradeTitle: Explosive Radius III
+      upgradeBody: Increases damage radius by 30% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 17
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    - upgradeTitle: Explosive Radius IV
+      upgradeBody: Increases damage radius by 30% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 17
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 2
+    levels: 0
+    upgradeColor: {r: 1, g: 0.74509805, b: 0, a: 1}
+    statsToDisplay: 11000000
+  - packetName: Damage
+    weaponType: 9
+    packet:
+    - upgradeTitle: Damage I
+      upgradeBody: Increases damage by 10% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.25
+    - upgradeTitle: Damage II
+      upgradeBody: Increases damage by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.5
+    - upgradeTitle: Damage III
+      upgradeBody: Increases damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.75
+    - upgradeTitle: Damage IV
+      upgradeBody: Increases damage by 50% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.75
+    levels: 0
+    upgradeColor: {r: 1, g: 0.74509805, b: 0, a: 1}
+    statsToDisplay: 00000000
+  - packetName: FireRate
+    weaponType: 9
+    packet:
+    - upgradeTitle: FireRate I
+      upgradeBody: Increases firerate by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: FireRate II
+      upgradeBody: Increases firerate by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    - upgradeTitle: FireRate III
+      upgradeBody: Increases firerate by 20% of base
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 9
+      weaponStatType: 2
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    levels: 0
+    upgradeColor: {r: 1, g: 0.74509805, b: 0, a: 1}
+    statsToDisplay: 02000000
   autoWeapons:
   - packetName: Shotgun
     weaponType: 0
@@ -689,6 +824,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 0
     levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 000000000600000002000000
   - packetName: Tesla Coil
     weaponType: 3
     packet:
@@ -704,6 +841,8 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 0
     levels: 0
+    upgradeColor: {r: 1, g: 0, b: 0.40784314, a: 1}
+    statsToDisplay: 000000000200000009000000
   - packetName: Sniper
     weaponType: 1
     packet:
@@ -719,6 +858,25 @@ MonoBehaviour:
       weaponToEnable: {fileID: 0}
       amountToAdd: 0
     levels: 0
+    upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
+    statsToDisplay: 0000000002000000
+  - packetName: Rocket Launcher
+    weaponType: 9
+    packet:
+    - upgradeTitle: Rocket Launcher
+      upgradeBody: Shoots out a rocket that does high area damage
+      isWeapon: 1
+      upgradeType: 0
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 0
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0
+    levels: 0
+    upgradeColor: {r: 1, g: 0.7469491, b: 0, a: 1}
+    statsToDisplay: 000000000200000011000000
   gainWeaponOnStart: 1
   UpgradeSpawner: {fileID: 0}
   instantlyGainAllUpgrades: 0
@@ -740,6 +898,9 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 189324837318420978, guid: 42fb0aaf79acdf14d922f65bdafb9742, type: 3}
     - {fileID: 5693677959915782852, guid: 2885155d87ebe71408d9352be1fcc8c6, type: 3}
+    - {fileID: 5610293202375174465, guid: 2c49e252df781eb469756d6304ff88bd, type: 3}
+    - {fileID: 3166039104341066168, guid: 19ddba633be02194ea0daf795a78ed8a, type: 3}
+    - {fileID: 1246973901974257688, guid: f5ae634988dea4641a7a6fd46ea56863, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -764,7 +925,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
@@ -786,6 +947,42 @@ MonoBehaviour:
     - Name: $v
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -821,7 +1018,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dc6b9482e6881a9498e9317c40e30879, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.128
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -918,3 +1115,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultCritColor: {r: 1, g: 0.94675124, b: 0, a: 1}
+--- !u!114 &3092662894592655938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948352683630207892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5eb0dddb2b0de439ca8d0d7c691c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
