@@ -49,10 +49,17 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
             return;
         if (!UpdateCoolDown()) // wait until off cooldown
             return;
+
+        if(!RayCastForwardGameObject(everythingEnemy))
+        {
+            anim.SetBool("Armed", true);
+            return;
+        }
         onCooldown = true;
         firing = true;
-        //anim.SetBool("Armed", false);
+        anim.SetBool("Armed", false);
         anim.SetTrigger("Shoot");
+        ShootAtTarget();
         //ShootAtTarget();
     }
 
@@ -63,7 +70,7 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
     /// <param name="iterator"></param>
     public override void Shoot(int iterator = 0)
     {
-        ShootAtTarget(iterator == 0);
+        //ShootAtTarget(iterator == 0);
     }
     /// <summary>
     /// Handles damaging enemy and playing / Spawning PFX
@@ -76,17 +83,23 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
         if(audioSource)
             PlayRandomAudioClip(fireAudioClips);
 
-        lineRenderer.SetPosition(0, muzzleFlashPFX.transform.position);
+        lineRenderer.SetPosition(0, playerTransform.position);//muzzleFlashPFX.transform.position);
 
         if(stats.numberToPierce > 0)
         {
             RaycastHit[] hits = RayCastForwardRayHitEverything(excludePlayerLayerMask);
+            SortRaycastHits(ref hits);
 
             for(int i = 0; i < hits.Length; i++)
             {   
                 if(stats.numberToPierce == i)
-                   break;
-                HitCheck(hits[i]);
+                {
+                    break;
+                }
+                if(!HitCheck(hits[i]))
+                {
+                    break;
+                }
             }
             
             if(hits.Length <= stats.numberToPierce)
@@ -110,21 +123,28 @@ public class AutomaticWeaponSniper : AutomaticWeaponBase
         lineRendererMat.SetFloat("_Dissolve", 1);
         lineRendererDissolveTimer = 0;
     }
-    void HitCheck(RaycastHit hit)
+    /// <summary>
+    /// Checks if a RayCastHit is an enemy or terrain and then damages them and spawns FX
+    /// </summary>
+    /// <param name="hit"></param>
+    /// <returns> true if its an enemy</returns>
+    bool HitCheck(RaycastHit hit)
     {
         if (hit.transform == null)
-            return;
+            return false;
         EnemyDamageHandler dH;
         if(dH = hit.transform.GetComponent<EnemyDamageHandler>())
         {
             dH.DealDamage(stats.damage);
             if (bloodHitPFX)
                 Instantiate(bloodHitPFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
+            return true;
         }
         else
         {
             if(terrainFX)
                 Instantiate(terrainFX, hit.transform.position, Quaternion.identity).transform.LookAt(playerTransform.position);
+            return false;
         }
     }
     public void FinishAnimation()

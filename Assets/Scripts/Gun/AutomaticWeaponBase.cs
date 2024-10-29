@@ -228,6 +228,10 @@ public class AutomaticWeaponBase : MonoBehaviour
         iterator++;
         Shoot(iterator);
     }
+    protected void SortRaycastHits(ref RaycastHit[] hits)
+    {
+        Array.Sort(hits, (x,y) => x.distance.CompareTo(y.distance));
+    }
     /// <summary>
     /// simple Cooldown function to be put at the start of the weapon Update Loop
     /// set onCooldown to true after firing the weapon

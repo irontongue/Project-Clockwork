@@ -427,7 +427,6 @@ MonoBehaviour:
   projectileSpeed: 50
   PFXPrefab: {fileID: 5754793273295828129, guid: 7980c62b950388844851556340d57537,
     type: 3}
-  radius: 7
 --- !u!65 &2451607214588413805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -447,7 +446,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.2}
+  m_Size: {x: 0.6, y: 0.6, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3578965205458965967
 Rigidbody:
