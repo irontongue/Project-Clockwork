@@ -255,8 +255,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     float remainingJumps;
-
-    float jumpGracePeriod = 0.45f;
+    readonly float jumpGracePeriod = 0.45f;
     float currentJumpTime;
 
     bool currentlyJumping;
@@ -354,12 +353,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float slideGracePeriodSinceLoosingVelocity;
     [SerializeField] float magnitudeToStopSlide;
     [SerializeField] float timeSinceSlideBeforeAutoCancel = 0.2f;
+    [SerializeField] float groundCheckThreshold = -0.2f;
+    [Header("Collision")]
+    [SerializeField] Vector3 colliderOffset = new(0,0.5f,0);
+    [SerializeField] float colliderRadius = 0.5f;
+    [SerializeField] LayerMask enviromentLayermask;
     [Header("CameraSettings")]
     [SerializeField] float camYDrop;
     [SerializeField] float camDropSpeed;
     [Header("ColliderSettings")]
     [SerializeField] float minColliderSize;
     [SerializeField] float colliderDropSpeed;
+    
     Vector3 velocityBeforeLoosingIt;
     Camera cam;
     float initialCamY;
@@ -377,130 +382,48 @@ public class PlayerMovement : MonoBehaviour
     float timeSinceSlideStarted = 0; // its in the name
     Vector3 slideDirection; // what direction the slide was started in 
     readonly bool slideDebug = false; // used to print helpfull stuff.
-
-
     void Slide()
     {
+        SlideDebug();
+        UpdateSlideState();
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
             slidelock = false;
 
-        DevText.DisplayInfo("onSlope", "OnSlope: " + onSlope, "Sliding");
-        DevText.DisplayInfo("slidingTooSlow", "SlidingTooSlow: " + slidingTooSlow, "Sliding");
-        DevText.DisplayInfo("sliding", "Sliding: " + isSliding, "Sliding");
-        DevText.DisplayInfo("slideGracePeriodActive", "slideGracePeriodActive: " + slideGracePeriodActive, "Sliding");
-        DevText.DisplayInfo("fasingup", "facingUpSlope: " + FacingUp(), "Sliding");
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isSliding = false;
             slidelock = false;
-            if(slideDebug)
-             print("Slide canceled because jumped");
+            if (slideDebug)
+                print("Slide canceled because jumped");
             return;
         }
+        if (CheckForCollision())
+            isSliding = false;
 
-        onSlope = GroundAngle() > minAngleForSlide;
-
-        VelWithoutGravity = currentVelocity + dashVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
-        VelWithoutGravity.y = 0;
-        if (!currentlyDashing)
-            slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide;
-        else
-            slidingTooSlow = false; 
-        
-     
         if (isSliding)
         {
-            timeSinceSlideStarted += Time.deltaTime;
-            // this is the bit that lets you controll your slide.
-            if(inputVectorAtStartOfSlide == Vector3.forward)
-            {
-                float tempY = currentVelocity.y;
-                currentVelocity.y = 0;
-                currentVelocity = currentVelocity.magnitude * cam.transform.forward;
-                currentVelocity.y = tempY;
-            }
-            else
-            {
-                float tempY = currentVelocity.y;
-                currentVelocity.y = 0;
-                currentVelocity = currentVelocity.magnitude * slideDirection;
-                currentVelocity.y = tempY;
-            }
-            //this make the camera go down when sliding
-            if (cam.transform.localPosition.y > initialCamY - camYDrop) 
-            {
-                newCamPos = cam.transform.localPosition;
-                newCamPos.y -= camDropSpeed * Time.deltaTime;
-                if (newCamPos.y < initialCamY - camYDrop)
-                    newCamPos.y = initialCamY - camYDrop;
-
-                cam.transform.localPosition = newCamPos;
-                
-            }
-            // the same, but for the collider
-            if(controller.height > minColliderSize) 
-            {
-                controller.height -= Time.deltaTime * colliderDropSpeed;
-                if(controller.height < minColliderSize)
-                    controller.height = minColliderSize;
-            }
-                
-            if(FacingUp()) // if going up a steep slope
-                currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
-            else if (!onSlope)
-                currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
-            else
-                currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
-
-            if (magnitudeToStopSlide > currentVelocityWithoutY.magnitude && timeSinceSlideStarted > timeSinceSlideBeforeAutoCancel)
-            {
-                currentVelocity = Vector3.zero;
-                isSliding = false;
-                if (slideDebug)
-                    print("side canceled because going to slow");
-                
-            }
-
+            SlideMovement();
             return;
         }
-        else
+
+        RaisePlayerHeight();
+
+        Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
+
+
+        if (hit.point.y > transform.position.y - 0.5)
         {
-            if (cam.transform.localPosition.y < initialCamY)
-            {
-                newCamPos = cam.transform.localPosition;
-                newCamPos.y += camDropSpeed * Time.deltaTime;
-                if (newCamPos.y > initialCamY)
-                    newCamPos.y = initialCamY;
-
-                cam.transform.localPosition = newCamPos;
-                timeSinceSlideStarted = 0;
-            }
-            if (controller.height < initialColliderSize)
-            {
-                controller.height += Time.deltaTime * colliderDropSpeed;
-
-                if (controller.height > initialColliderSize)
-                    controller.height = initialColliderSize;
-            }
-
+            return;
         }
-       
-      
-       Physics.Raycast(transform.position + (transform.forward * 0.5f), Vector3.down, out RaycastHit hit, controller.height + 1);
 
-
-       if (hit.point.y > transform.position.y - 0.5)
-       {
-            return;
-       }
-
-        if (FacingUp())
-            return;
-        if (inputVector == Vector3.zero)
+        if (FacingUp()) // if the player is moving toward a upwoard slope
             return;
 
-        if(!onSlope)
+        if (inputVector == Vector3.zero) // if no input is being held, return
+            return;
+
+        if (!onSlope)
         {
             if (slidingTooSlow)
             {
@@ -520,21 +443,10 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
-   
+
         if (Input.GetKey(KeyCode.LeftControl) && !slidelock)
         {
-
-            slideDirection = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z).normalized;
-     
-            chainSlideCheck = true;
-            isSliding = true;
-            slidelock = true;
-            if (slideGracePeriodActive)
-                currentVelocity = velocityBeforeLoosingIt;
-
-            inputVectorAtStartOfSlide = inputVector;
-       
-            CancelDash();
+            StartSlide();
         }
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
@@ -545,33 +457,161 @@ public class PlayerMovement : MonoBehaviour
                 chainSlideCheck = false;
                 return; // dont want to instantly slide again
             }
-            
-      /*      isSliding = !isSliding;
-            if (!isSliding)
-                return;
-
-            CancelDash();*/
         }
     }
 
-   
-    RaycastHit hit;
+  
 
+    // all of the variables used to determine if you can slide, should stop sliding
+    void UpdateSlideState()
+    {
+        onSlope = GroundAngle() > minAngleForSlide;
+
+        VelWithoutGravity = currentVelocity + dashVelocity; // dont want gravity effecting the magnitude, since we only care about the plannar movements
+        VelWithoutGravity.y = 0;
+        if (!currentlyDashing && !onSlope && !FacingUp())
+            slidingTooSlow = VelWithoutGravity.magnitude < maxPlayerWalkSpeed.magnitude + extraVelRequiredToSlide;
+        else
+            slidingTooSlow = false;
+    }
+
+    //this is the code that runs when sliding
+    void SlideMovement()
+    {
+
+        timeSinceSlideStarted += Time.deltaTime;
+        // this is the bit that lets you controll your slide.
+        if (inputVectorAtStartOfSlide == Vector3.forward)
+        {
+            float tempY = currentVelocity.y;
+            currentVelocity.y = 0;
+            currentVelocity = currentVelocity.magnitude * cam.transform.forward;
+            currentVelocity.y = tempY;
+        }
+        else
+        {
+            float tempY = currentVelocity.y;
+            currentVelocity.y = 0;
+            currentVelocity = currentVelocity.magnitude * slideDirection;
+            currentVelocity.y = tempY;
+        }
+        //this make the camera go down when sliding
+        if (cam.transform.localPosition.y > initialCamY - camYDrop)
+        {
+            newCamPos = cam.transform.localPosition;
+            newCamPos.y -= camDropSpeed * Time.deltaTime;
+            if (newCamPos.y < initialCamY - camYDrop)
+                newCamPos.y = initialCamY - camYDrop;
+
+            cam.transform.localPosition = newCamPos;
+
+        }
+        // the same, but for the collider
+        if (controller.height > minColliderSize)
+        {
+            controller.height -= Time.deltaTime * colliderDropSpeed;
+            if (controller.height < minColliderSize)
+                controller.height = minColliderSize;
+        }
+
+        if (FacingUp()) // if going up a steep slope
+            currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
+        else if (!onSlope)
+            currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
+        else
+            currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
+
+        if (magnitudeToStopSlide > currentVelocityWithoutY.magnitude && timeSinceSlideStarted > timeSinceSlideBeforeAutoCancel)
+        {
+            currentVelocity = Vector3.zero;
+            isSliding = false;
+            if (slideDebug)
+                print("side canceled because going to slow");
+
+        }
+
+        return;
+    }
+
+    // moves the camera and collider up after a slide ends
+    void RaisePlayerHeight()
+    {
+        if (cam.transform.localPosition.y < initialCamY)
+        {
+            newCamPos = cam.transform.localPosition;
+            newCamPos.y += camDropSpeed * Time.deltaTime;
+            if (newCamPos.y > initialCamY)
+                newCamPos.y = initialCamY;
+
+            cam.transform.localPosition = newCamPos;
+            timeSinceSlideStarted = 0;
+        }
+        if (controller.height < initialColliderSize)
+        {
+            controller.height += Time.deltaTime * colliderDropSpeed;
+
+            if (controller.height > initialColliderSize)
+                controller.height = initialColliderSize;
+        }
+    }
+
+    void StartSlide()
+    {
+        slideDirection = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z).normalized;
+
+        chainSlideCheck = true;
+        isSliding = true;
+        slidelock = true;
+        if (slideGracePeriodActive)
+            currentVelocity = velocityBeforeLoosingIt;
+
+        inputVectorAtStartOfSlide = inputVector;
+
+        CancelDash();
+    }
+
+    // this gets the angle of the stood on ground in Degrees 
     float GroundAngle()
     {
-        if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
+        if (!Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, controller.height))
             return 0;
 
         return Vector3.Angle(hit.normal, transform.up);
     }
-    [SerializeField] float groundCheckThreshold = -0.2f;
+    // This returns true if the player is walking towards an upward slope;
     bool FacingUp()
     {
-        if (!Physics.Raycast(transform.position, -transform.up, out hit, controller.height))
+        if (!Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, controller.height))
             return false;
         if(slideDebug)
              print((currentVelocityWithoutY != Vector3.zero ? "Using Player Vel" : "Using Player Foward"));
         return Vector3.Dot((currentVelocityWithoutY != Vector3.zero ? currentVelocityWithoutY.normalized : transform.forward), hit.normal) < groundCheckThreshold; 
+    }
+
+    Collider[] hitColliders;
+    bool CheckForCollision()
+    {
+        hitColliders = Physics.OverlapSphere(transform.position + colliderOffset, colliderRadius, enviromentLayermask);
+        if(slideDebug)
+        foreach(Collider col in hitColliders)
+        {
+            print(col.transform.name);
+        }
+        if (hitColliders.Length != 0)
+        {
+            print("collided with enviroment!");
+            return true;
+        }
+        
+        return false;
+    }
+    void SlideDebug()
+    {
+        DevText.DisplayInfo("onSlope", "OnSlope: " + onSlope, "Sliding");
+        DevText.DisplayInfo("slidingTooSlow", "SlidingTooSlow: " + slidingTooSlow, "Sliding");
+        DevText.DisplayInfo("sliding", "Sliding: " + isSliding, "Sliding");
+        DevText.DisplayInfo("slideGracePeriodActive", "slideGracePeriodActive: " + slideGracePeriodActive, "Sliding");
+        DevText.DisplayInfo("fasingup", "facingUpSlope: " + FacingUp(), "Sliding");
     }
 
     #endregion
@@ -657,7 +697,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fadeTimer;
     public void ResetPlayerToSafePos(Vector3 pos)
     {
-        StartCoroutine("Respawn");
+        StartCoroutine(nameof(Respawn));
         if (pos == Vector3.zero)
         {
             respawnPos = lastPlayerSafePos;
@@ -694,6 +734,12 @@ public class PlayerMovement : MonoBehaviour
         }
         controller.enabled = true;
         yield return null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(0, 0, 1, 0.75f);
+        Gizmos.DrawSphere(transform.position + colliderOffset, colliderRadius);
     }
 
     #endregion
