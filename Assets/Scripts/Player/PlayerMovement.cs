@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
                 currentVelocity.z = lastPlayerVelocity.z;
             }
 
-
+           
             currentVelocity += ((Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * airMoveSpeed) * airJumpMultiplyer * Time.deltaTime;
             currentVelocity.y = preservedGravity;
             return;
@@ -416,6 +416,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+ 
 
         if (FacingUp()) // if the player is moving toward a upwoard slope
             return;
@@ -516,10 +517,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (FacingUp()) // if going up a steep slope
             currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
-        else if (!onSlope)
-            currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
-        else
+        else if(onSlope)
             currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
+        else if (isActuallyGrounded)
+            currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
+       
 
         if (magnitudeToStopSlide > currentVelocityWithoutY.magnitude && timeSinceSlideStarted > timeSinceSlideBeforeAutoCancel)
         {

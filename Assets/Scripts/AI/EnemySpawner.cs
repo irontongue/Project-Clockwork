@@ -87,6 +87,7 @@ public class EnemySpawner : MonoBehaviour
         {
             wEvent.WaveStart();
         }
+        GameState.inCombat = true;
     }
     void StartWave()
     {
@@ -233,8 +234,9 @@ public class EnemySpawner : MonoBehaviour
         {
             wEvent.WaveEnd();
         }
-     //   if (playerLevelUpManager.readyToLVLup)
-      //      playerLevelUpManager.LevelUp();
+        GameState.inCombat = true;
+        //   if (playerLevelUpManager.readyToLVLup)
+        //      playerLevelUpManager.LevelUp();
     }
  
 }
