@@ -410,14 +410,21 @@ MonoBehaviour:
   dashSpeed: 25
   dashLenght: 0.3
   dashCooldown: 1
-  extraVelRequiredToSlide: 4
-  slideFallOff: 20
-  uphillExtraSlideFallOff: 75
+  extraVelRequiredToSlide: 10
+  slideFallOff: 10
+  uphillExtraSlideFallOff: 50
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
-  downSlopeAccelMultiplyer: 50
+  downSlopeAccelMultiplyer: 25
   slideGracePeriodSinceLoosingVelocity: 1
-  magnitudeToStopSlide: 5
+  magnitudeToStopSlide: 3
+  timeSinceSlideBeforeAutoCancel: 0.4
+  groundCheckThreshold: -0.02
+  colliderOffset: {x: 0, y: 0.04, z: 0}
+  colliderRadius: 0.45
+  enviromentLayermask:
+    serializedVersion: 2
+    m_Bits: 307
   camYDrop: 0.7
   camDropSpeed: 6
   minColliderSize: 1
@@ -436,7 +443,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c6ae64b16741f0841a3e3cf6861da4b6, type: 3}
   - {fileID: 8300000, guid: ac445d389024cca49b3b69091bbfaece, type: 3}
   fadeOutImage: {fileID: 0}
-  fadeTimer: 0.5
+  fadeTimer: 0.1
 --- !u!114 &2885463159808772724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ea375e4fa74cc44a4d8ea7a1bf83aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expToLvlup: 19000000190000001900000019000000190000001e00000023000000280000002d00000032000000370000003c000000410000004b000000500000003c0000003c000000
+  expToLvlup: 19000000190000001e0000001e0000001e0000002300000023000000280000002d00000032000000370000003c000000410000004b000000500000003c0000003c000000
   readyToLVLup: 0
   levelUpReadyText: {fileID: 0}
   expBar: {fileID: 0}
@@ -16892,6 +16899,11 @@ PrefabInstance:
     - target: {fileID: 7568261416691558805, guid: 32e94e7b1f1018e498f4d0c77324794f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464604299887266358, guid: 32e94e7b1f1018e498f4d0c77324794f,
+        type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
