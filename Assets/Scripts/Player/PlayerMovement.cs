@@ -274,14 +274,10 @@ public class PlayerMovement : MonoBehaviour
                 return;
         }
 
-        if(remainingJumps != extraJumps) // move the extra jump in the direction you are facing
-        {
-            currentVelocity.y = 0;
-
-            currentVelocity = currentVelocity.magnitude * cam.transform.forward;
-
-            
-        }
+        currentVelocity.y = 0;
+        
+        currentVelocity = currentVelocity.magnitude * cam.transform.forward;
+      
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
         currentlyJumping = true;
@@ -396,7 +392,8 @@ public class PlayerMovement : MonoBehaviour
         SlideDebug();
         UpdateSlideState();
 
-   
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+            slidelock = false;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -520,29 +517,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (FacingUp()) // if going up a steep slope
-        {
-            print("Lost vel because facing Up");
             currentVelocity -= VelWithoutGravity.normalized * (slideFallOff + uphillExtraSlideFallOff) * Time.deltaTime;
-        }
-            
-        else if (onSlope)
-        {
-            print("gained vel because onASlope");
+        else if(onSlope)
             currentVelocity += VelWithoutGravity.normalized * downSlopeAccelMultiplyer * Time.deltaTime; // if going down slope
-        }
-            
         else if (isActuallyGrounded)
-        {
-            print("Lost Vel because on ground ");
             currentVelocity -= VelWithoutGravity.normalized * slideFallOff * Time.deltaTime; // if just on flat ground
-        }
-           
-        else
-        {
-            print("Gained Vel because Mid Air");
-            currentVelocity += VelWithoutGravity.normalized * gravity * Time.deltaTime;
-        }
-           
        
 
         if (magnitudeToStopSlide > currentVelocityWithoutY.magnitude && timeSinceSlideStarted > timeSinceSlideBeforeAutoCancel)
