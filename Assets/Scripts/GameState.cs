@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static bool GamePaused;
+    public static bool inCombat;
 
     
 }
