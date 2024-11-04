@@ -61,8 +61,9 @@ public class PlayerMovement : MonoBehaviour
 
         Gravity();
 
-        Jump();
+        
         CaculateMoveVelocity();
+        Jump();
         Dash();
         Slide();
 
@@ -192,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
             if (currentlyJumping)
                 currentVelocity += gravity * Time.deltaTime * -groundNormal;
             else
-                currentVelocity.y -= gravity * Time.deltaTime;
+                currentVelocity.y = -gravity ;
         }
         else
         {
@@ -273,12 +274,16 @@ public class PlayerMovement : MonoBehaviour
                 return;
         }
 
-
+        currentVelocity.y = 0;
+        
+        currentVelocity = currentVelocity.magnitude * cam.transform.forward;
+      
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
         currentlyJumping = true;
-
+        
         currentJumpTime = jumpGracePeriod;
+      
     }
     #endregion
     #region Dash
@@ -453,11 +458,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             slidelock = false;
-            if (chainSlideCheck)
-            {
-                chainSlideCheck = false;
-                return; // dont want to instantly slide again
-            }
+           
         }
     }
 
@@ -699,7 +700,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fadeTimer;
     public void ResetPlayerToSafePos(Vector3 pos)
     {
-        StartCoroutine(nameof(Respawn));
+        StartCoroutine(Respawn());
         if (pos == Vector3.zero)
         {
             respawnPos = lastPlayerSafePos;
