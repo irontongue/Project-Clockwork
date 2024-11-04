@@ -445,7 +445,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftControl) && !slidelock)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !slidelock)
         {
             StartSlide();
         }
