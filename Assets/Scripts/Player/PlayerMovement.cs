@@ -51,7 +51,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
+    private void FixedUpdate()
+    {
+        if(isSliding)
+         SlideMovement();
+    }
     void Update()
     {
         playerPosition = transform.position;
@@ -73,7 +77,14 @@ public class PlayerMovement : MonoBehaviour
         Footstep();
         CameraFov();
 
+        if (isActuallyGrounded)
+        {
+            lastPlayerSafePos = transform.position;
+        }
 
+        
+        if (!DevText.Debugging)
+            return;
         DevText.DisplayInfo("pMovement", "PlayerVelocity: " + currentVelocity, "Movement");
         DevText.DisplayInfo("dMovement", "DashVel: " + dashVelocity, "Movement");
         DevText.DisplayInfo("grounded", "Grounded : " + isGrounded, "Movement");
@@ -92,10 +103,7 @@ public class PlayerMovement : MonoBehaviour
         DevText.DisplayInfo("magwihy", "MagWithoutY: " + currentVelocityWithoutY.magnitude, "Movement");
         DevText.DisplayInfo("magwihya", "MaxWalkWithoutY: " + maxPlayerWalkSpeed.magnitude, "Movement");
         DevText.DisplayInfo("Heigt,", "Height: " + controller.height, "Movement");
-        if (isActuallyGrounded)
-        {
-            lastPlayerSafePos = transform.position;
-        }
+       
 
 
     }
@@ -419,7 +427,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding)
         {
-            SlideMovement();
+           // SlideMovement();
             return;
         }
 
@@ -472,9 +480,6 @@ public class PlayerMovement : MonoBehaviour
            
         }
     }
-
-  
-
     // all of the variables used to determine if you can slide, should stop sliding
     void UpdateSlideState()
     {
@@ -491,6 +496,7 @@ public class PlayerMovement : MonoBehaviour
     //this is the code that runs when sliding
     void SlideMovement()
     {
+       
 
         timeSinceSlideStarted += Time.deltaTime;
         // this is the bit that lets you controll your slide.
@@ -541,7 +547,6 @@ public class PlayerMovement : MonoBehaviour
             isSliding = false;
             if (slideDebug)
                 print("side canceled because going to slow");
-
         }
 
         return;

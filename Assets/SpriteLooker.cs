@@ -13,11 +13,7 @@ public class SpriteLooker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-       // transform.LookAt(player.transform);
-    }
-
+ 
     private void OnDestroy()
     {
         BatchSpriteLooker.RemoveLooker(this.transform);

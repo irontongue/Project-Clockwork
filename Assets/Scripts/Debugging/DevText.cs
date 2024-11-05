@@ -5,8 +5,8 @@ using TMPro;
 using System.Linq;
 public class DevText : MonoBehaviour
 {
- 
-  
+
+    static public bool Debugging;
     static Dictionary<string, TextMeshProUGUI> debugUI = new Dictionary<string, TextMeshProUGUI>(); 
     static Dictionary<string, bool> debugGroup = new Dictionary<string, bool>();
 
@@ -62,6 +62,7 @@ public class DevText : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F1) && !wasPressedThisFrame)
         {
+            Debugging = true;
             wasPressedThisFrame = true;
             print("a");
             if (uiActive)

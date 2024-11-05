@@ -48,7 +48,7 @@ PlayerSettings:
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
-  m_SpriteBatchVertexThreshold: 3200
+  m_SpriteBatchVertexThreshold: 2000
   m_MTRendering: 1
   mipStripping: 1
   numberOfMipsStripped: 0

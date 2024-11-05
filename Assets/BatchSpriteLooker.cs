@@ -21,7 +21,7 @@ public class BatchSpriteLooker : MonoBehaviour
     }
 
     Vector3 newPos;
-
+    Vector3 direction;
     private void Update()
     {
         if (GameState.GamePaused)
@@ -29,11 +29,12 @@ public class BatchSpriteLooker : MonoBehaviour
         
         foreach(Transform looker in lookers)
         {
-            newPos.x = looker.eulerAngles.x;
-            looker.LookAt(PlayerMovement.playerPosition);
-            newPos.y = looker.eulerAngles.y;
-            newPos.z = looker.eulerAngles.z;
-            looker.eulerAngles = newPos;
+            direction = (PlayerMovement.playerPosition - looker.position).normalized;
+            direction.y = 0; 
+
+            looker.forward = direction;
+
+          
         }
     }
 }
