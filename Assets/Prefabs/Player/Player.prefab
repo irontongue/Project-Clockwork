@@ -395,7 +395,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 15
-  airMoveSpeed: 3
+  airMoveSpeedWithVel: 2
+  airMoveSpeedAgainstVel: 8
   seccondsSinceMovingBeforeMaxJump: 0.15
   neutralJumpAirMoveSpeed: 6
   gravity: 16
@@ -410,13 +411,13 @@ MonoBehaviour:
   dashSpeed: 25
   dashLenght: 0.3
   dashCooldown: 1
-  extraVelRequiredToSlide: 10
+  extraVelRequiredToSlide: 15
   slideFallOff: 10
   uphillExtraSlideFallOff: 50
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
-  downSlopeAccelMultiplyer: 25
-  slideGracePeriodSinceLoosingVelocity: 1
+  downSlopeAccelMultiplyer: 30
+  slideGracePeriodSinceLoosingVelocity: 0.3
   magnitudeToStopSlide: 3
   timeSinceSlideBeforeAutoCancel: 0.4
   groundCheckThreshold: -0.02

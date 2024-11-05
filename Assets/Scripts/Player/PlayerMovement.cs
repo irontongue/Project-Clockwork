@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         initialCamY = cam.transform.localPosition.y;
         initialCamFov += cam.fieldOfView;
         initialColliderSize = controller.height;
+     
 
     }
 
@@ -103,7 +104,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Basic Movement")]
     [SerializeField] float baseSpeed;
-    [SerializeField] float airMoveSpeed;
+    [SerializeField] float airMoveSpeedWithVel;
+    [SerializeField] float airMoveSpeedAgainstVel;
 
     [Header("Initial Air Velocity")]
     [SerializeField] float seccondsSinceMovingBeforeMaxJump;
@@ -161,8 +163,14 @@ public class PlayerMovement : MonoBehaviour
                 currentVelocity.z = lastPlayerVelocity.z;
             }
 
-           
-            currentVelocity += ((Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * airMoveSpeed) * airJumpMultiplyer * Time.deltaTime;
+            
+            Vector3 predictedVelocity = currentVelocity + ((Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * airMoveSpeedAgainstVel) * airJumpMultiplyer * Time.deltaTime;
+
+            if (predictedVelocity.magnitude < currentVelocity.magnitude)
+                currentVelocity = predictedVelocity;
+            else
+                currentVelocity += ((Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z) * airMoveSpeedWithVel) * airJumpMultiplyer * Time.deltaTime;
+
             currentVelocity.y = preservedGravity;
             return;
         }
@@ -266,17 +274,21 @@ public class PlayerMovement : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
+        currentVelocity.y = 0;
+
+    
+
         if (!isGrounded)
         {
+            
+
             if (remainingJumps > 0)
                 remainingJumps--;
             else
                 return;
         }
 
-        currentVelocity.y = 0;
-        
-        currentVelocity = currentVelocity.magnitude * cam.transform.forward;
+      
       
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
@@ -378,7 +390,6 @@ public class PlayerMovement : MonoBehaviour
     bool onSlope; // are we currently on a slope
     bool slidingTooSlow; 
     Vector3 newCamPos; // used to control the height of the camerae
-    bool chainSlideCheck; // since im checking to slide on getkey, if you just keep holding controll, you stop sliding and instantly start again, so this will stop that from happening
     float timeSinceMinVelocity; // how long has it been since the player has been moving with not enough velocity
     Vector3 VelWithoutGravity; // the players current velocity, but without y
     bool slideGracePeriodActive;// if the player can slide, regardless of if they have the required velocity
@@ -562,7 +573,7 @@ public class PlayerMovement : MonoBehaviour
     {
         slideDirection = (Camera.main.transform.right * inputVector.x + Camera.main.transform.forward * inputVector.z).normalized;
 
-        chainSlideCheck = true;
+        
         isSliding = true;
         slidelock = true;
         if (slideGracePeriodActive)

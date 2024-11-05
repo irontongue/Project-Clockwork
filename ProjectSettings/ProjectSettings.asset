@@ -826,7 +826,7 @@ PlayerSettings:
     Server: 2
     Standalone: 2
   il2cppCodeGeneration:
-    Standalone: 1
+    Standalone: 0
   managedStrippingLevel:
     EmbeddedLinux: 1
     GameCoreScarlett: 1
