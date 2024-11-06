@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 35317846cb5b0a54a8999b9af30f1d2b, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d9dca9ae1786c394f9e79c637aa9a7bf, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 759591397}
-  m_IndirectSpecularColor: {r: 0.40836507, g: 0.4587494, b: 0.52288336, a: 1}
+  m_IndirectSpecularColor: {r: 0.4452097, g: 0.5624037, b: 0.54860604, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1731,12 +1731,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126418627}
   m_CullTransparentMesh: 1
---- !u!4 &127368767 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &129523753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3012,7 +3006,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094315792}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsSetter, Assembly-CSharp
         m_MethodName: MouseSlider
         m_Mode: 1
@@ -14228,6 +14222,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3230602620048832063, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
+--- !u!198 &588567628 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5252207869180993436, guid: 0eeea3279b4d1f742bd836973210dedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 669497368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &592854386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14557,6 +14557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f04bda10e34d54d9e4428a5488a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRespawnPoint: {fileID: 0}
 --- !u!1001 &624771039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15826,9 +15827,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5763983037393724092, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
+      propertyPath: terrainFX
+      value: 
+      objectReference: {fileID: 588567628}
+    - target: {fileID: 5763983037393724092, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
       propertyPath: donutImage
       value: 
       objectReference: {fileID: 872921745}
+    - target: {fileID: 5763983037393724092, guid: 0eeea3279b4d1f742bd836973210dedb,
+        type: 3}
+      propertyPath: lineRenderer
+      value: 
+      objectReference: {fileID: 854059482}
     - target: {fileID: 5907308161874936917, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       propertyPath: m_Radius
@@ -16017,31 +16028,123 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7026422433427356838, guid: 0eeea3279b4d1f742bd836973210dedb,
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2213247927309273979, guid: 0eeea3279b4d1f742bd836973210dedb,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1680904563}
-    m_AddedComponents: []
+      addedObject: {fileID: 669497377}
   m_SourcePrefab: {fileID: 100100000, guid: 0eeea3279b4d1f742bd836973210dedb, type: 3}
---- !u!1 &669497369 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3430092112341850501, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &669497370 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7241622580718292608, guid: 0eeea3279b4d1f742bd836973210dedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 669497368}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &669497371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2213247927309273979, guid: 0eeea3279b4d1f742bd836973210dedb,
     type: 3}
   m_PrefabInstance: {fileID: 669497368}
   m_PrefabAsset: {fileID: 0}
+--- !u!120 &669497377
+LineRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669497371}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    textureScale: {x: 1, y: 1}
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MaskInteraction: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
+  m_ApplyActiveColorSpace: 1
 --- !u!1001 &669581491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16332,12 +16435,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 5
+  damageType: 0
+  uiCDSprite: {fileID: 0}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
   excludePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 447
+  everythingEnemy:
+    serializedVersion: 2
+    m_Bits: 136
+  fireAudioClips: []
   spriteBase: {fileID: 21300000, guid: 17f60d67dd6c2954e91b7627ad40a8b9, type: 3}
   spriteAttack: {fileID: 21300000, guid: c816639ef1a24804fb2f6c934fdce1a1, type: 3}
   enviornmentLayerMask:
@@ -20074,6 +20183,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3541909255624798313, guid: 78cbea30f25e0a141930ae66c2943704, type: 3}
+--- !u!120 &854059482 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 4737691673808959488, guid: 0eeea3279b4d1f742bd836973210dedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 669497368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &863160678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23919,129 +24034,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2795575053555467804, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2795575053555467804, guid: 4cf5941a52388724587fd318a05bcd46,
+        type: 3}
     - target: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
         type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponToEdit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponTypeToAdd
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: d_Key.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: d_Value.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: d_Key.Array.data[4]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: d_Value.Array.data[4]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[2].damage
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[4].damage
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[1].coolDown
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[4].moveSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[4].weaponType
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[1].repeateShot
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[1].chargeUpTime
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[2].bulletSpread
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[4].boxCheckWidth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[4].followDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8948016730155698804, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      propertyPath: weaponStats.Array.data[4].numberOfBullets
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1440079881}
-    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1440079884}
-    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1440079885}
-    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1440079888}
-    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1440079889}
-    - targetCorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1440079892}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cf5941a52388724587fd318a05bcd46, type: 3}
 --- !u!1 &1059885441 stripped
 GameObject:
@@ -25873,7 +25880,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2094315792}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingsSetter, Assembly-CSharp
         m_MethodName: AudioSlider
         m_Mode: 1
@@ -29016,810 +29023,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 165042657}
   m_SourcePrefab: {fileID: 100100000, guid: 59b3b7cae9223eb498d8a782bfb0fba1, type: 3}
---- !u!1 &1440079878 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3948352683630207892, guid: 4cf5941a52388724587fd318a05bcd46,
+--- !u!82 &1440079895 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3929490684742763742, guid: 4cf5941a52388724587fd318a05bcd46,
     type: 3}
   m_PrefabInstance: {fileID: 1059829889}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1440079881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440079878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponToEdit: 1
-  shotgunUpgrades:
-  - packetName: Damage
-    weaponType: 0
-    packet:
-    - upgradeTitle: Shotgun Damage I
-      upgradeBody: Increases Damage by 20% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Shotgun Damage II
-      upgradeBody: Increases Damage by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Shotgun Damage III
-      upgradeBody: Increases Damage by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Shotgun Damage IV
-      upgradeBody: Increases Damage by 120% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1.2
-    levels: 0
-  - packetName: Range
-    weaponType: 0
-    packet:
-    - upgradeTitle: 'Shotgun Range I '
-      upgradeBody: Increases activation range by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 1
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 8
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3.75
-    - upgradeTitle: 'Shotgun Range II '
-      upgradeBody: Increases activation range by 50%  of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 1
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 8
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3.75
-    - upgradeTitle: Shotgun Range III
-      upgradeBody: Increases activation range by 50%  of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 8
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3.75
-    - upgradeTitle: Shotgun Range IV
-      upgradeBody: Increases activation range by 100%  of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 3
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 7
-    levels: 0
-  - packetName: Cooldown
-    weaponType: 0
-    packet:
-    - upgradeTitle: Shotgun Cooldown I
-      upgradeBody: Decreses cooldown by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Shotgun Cooldown II
-      upgradeBody: Decreses cooldown by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Shotgun Cooldown III
-      upgradeBody: Decreses cooldown by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0
-    - upgradeTitle: Shotgun Cooldown IV
-      upgradeBody: Decreses cooldown by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    levels: 0
-  sniperUpgrades:
-  - packetName: Cooldown
-    weaponType: 1
-    packet:
-    - upgradeTitle: Sniper Faster Cooldown I
-      upgradeBody: Cooldown 20% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Faster Cooldown II
-      upgradeBody: Cooldown 30% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.1
-    - upgradeTitle: Sniper Faster Cooldown III
-      upgradeBody: Cooldown 50% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.3
-    - upgradeTitle: Sniper Faster Cooldown III
-      upgradeBody: Coolsdown 70% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    levels: 0
-  - packetName: Wind Up Speed
-    weaponType: 1
-    packet:
-    - upgradeTitle: 'Sniper Wind Up Speed I '
-      upgradeBody: Fires 10% faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Wind Up Speed II
-      upgradeBody: Fires 20 % faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Wind Up Speed III
-      upgradeBody: Fires 40% Faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.2
-    - upgradeTitle: Sniper Wind Up Speed IV
-      upgradeBody: Fires 50% Faster
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 4
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.4
-    levels: 0
-  - packetName: Penetration
-    weaponType: 1
-    packet:
-    - upgradeTitle: Sniper Penetration I
-      upgradeBody: Bullets hit an additional another enemy
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 16
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Sniper Penetration II
-      upgradeBody: Bullets hit an additional 1 more enemies
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 16
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Sniper Penetration III
-      upgradeBody: Bullets hit an addition 2 enemies
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 16
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Sniper Penetration IV
-      upgradeBody: Bullets hit an addition 3 enemies
-      isWeapon: 0
-      upgradeType: 0
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    levels: 0
-  - packetName: Damage
-    weaponType: 1
-    packet:
-    - upgradeTitle: Sniper Damage I
-      upgradeBody: Increases damage by 2
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Sniper Damage II
-      upgradeBody: Increases damage by 2
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Sniper Damage III
-      upgradeBody: Increases damage by 2
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 1
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    levels: 0
-  teslaCoilUpgrades:
-  - packetName: Bounces
-    weaponType: 3
-    packet:
-    - upgradeTitle: Tesla Coil Increased Bounces I
-      upgradeBody: Increases bounces by 1
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 9
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Tesla Coil Increased Bounces II
-      upgradeBody: Increases bounces by 1
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 9
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Tesla Coil  Increased Bounces III
-      upgradeBody: Increases bounces by 2
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 9
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Tesla Coil  Increased Bounces IV
-      upgradeBody: Increases bounces by 5
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 9
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 5
-    levels: 0
-  - packetName: Damage
-    weaponType: 3
-    packet:
-    - upgradeTitle: Tesla Coil Damage I
-      upgradeBody: Increases damage by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Tesla Coil Damage II
-      upgradeBody: Increases Damage by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Tesla Coil Damage III
-      upgradeBody: Increases Damage by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Tesla Coil Damage IV
-      upgradeBody: Increases Damage by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    levels: 0
-  - packetName: Cooldown
-    weaponType: 3
-    packet:
-    - upgradeTitle: Tesla Coil Cooldown
-      upgradeBody: Decreses cooldown by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Tesla Coil Cooldown
-      upgradeBody: Decreses cooldown by 50% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 0.5
-    - upgradeTitle: Tesla Coil Cooldown
-      upgradeBody: Decreses cooldown by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    - upgradeTitle: Tesla Coil Cooldown
-      upgradeBody: Decreses cooldown by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 3
-      weaponStatType: 2
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 1
-    levels: 0
-  flameThrowerUpgrades: []
-  rifleUpgrades: []
-  dogUpgrades:
-  - packetName: Damage
-    weaponType: 5
-    packet:
-    - upgradeTitle: Dog Damage
-      upgradeBody: Increases Dog's damage by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 5
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Dog Damage
-      upgradeBody: Increases Dog's damage by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 5
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Dog Damage
-      upgradeBody: Increases Dog's damage by 100% of base
-      isWeapon: 0
-      upgradeType: 9
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 5
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 2
-    - upgradeTitle: Dog Damage
-      upgradeBody: Increases Dog's damage by 150% of base
-      isWeapon: 0
-      upgradeType: 5
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 0}
-      amountToAdd: 3
-    levels: 0
-  grenadeLaucherUpgrades: []
-  throwingKnivesUpgrades: []
-  playerRevolverUpgrades: []
-  autoWeapons:
-  - packetName: Shotgun
-    weaponType: 0
-    packet:
-    - upgradeTitle: Shotgun
-      upgradeBody: Fires at close enemys infront of you
-      isWeapon: 1
-      upgradeType: 0
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 669497369}
-      amountToAdd: 0
-    levels: 0
-  - packetName: Tesla Coil
-    weaponType: 3
-    packet:
-    - upgradeTitle: Tesla Coil
-      upgradeBody: Shoots lighting at enemies which arcs to hit more enemies
-      isWeapon: 1
-      upgradeType: 0
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 669497370}
-      amountToAdd: 0
-    levels: 0
-  - packetName: Sniper
-    weaponType: 1
-    packet:
-    - upgradeTitle: Sniper
-      upgradeBody: Fires a penetrating shot at targeted enemies.
-      isWeapon: 1
-      upgradeType: 0
-      shotgunUpgrades: 0
-      teslaCoilUpgrades: 0
-      sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
-      weaponToEnable: {fileID: 669497371}
-      amountToAdd: 0
-    levels: 0
-  gainWeaponOnStart: 1
-  UpgradeSpawner: {fileID: 1576424973}
-  instantlyGainAllUpgrades: 1
---- !u!114 &1440079884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440079878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08ac65185e7231944a05d2a1f3cc383b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 189324837318420978, guid: 42fb0aaf79acdf14d922f65bdafb9742, type: 3}
-    - {fileID: 5693677959915782852, guid: 2885155d87ebe71408d9352be1fcc8c6, type: 3}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: enemyList
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[EnemySpawner+Enemies, Assembly-CSharp],[UnityEngine.GameObject,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[EnemySpawner+Enemies,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
---- !u!114 &1440079885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440079878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfea1d287579d4a46973984c3c827a0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floatingTextPrefab: {fileID: 8489862797783062732, guid: 6666fe5ec2ba89d4b986000baead11f5,
-    type: 3}
---- !u!82 &1440079888
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440079878}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dc6b9482e6881a9498e9317c40e30879, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.5
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &1440079889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440079878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e39656da3d2da7b41866bb8349ef4fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultCritColor: {r: 1, g: 0.94675124, b: 0, a: 1}
---- !u!114 &1440079892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1440079878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ff342525f3168b43b9954725efc072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  measureTime: 15
-  text: {fileID: 16417299}
 --- !u!1001 &1440839559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31552,18 +30761,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2094315788}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1576424973 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 598534074536633072, guid: 081e6f4431cd9634a8cf676da0645f8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2094315788}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3411aa0e6b0274086221678fe73e54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1576753476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33530,180 +32727,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 566727104}
   m_SourcePrefab: {fileID: 100100000, guid: 78cbea30f25e0a141930ae66c2943704, type: 3}
---- !u!1001 &1680904562
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 127368767}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.782
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.655
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: -7121876257009266830, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: -6530688393828799814, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: -5349363973108650587, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: -2459082166433742734, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 236216658851537685, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 295740477742428528, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 919132149155446097, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Name
-      value: FA Superhawk
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1162380137790060255, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 1511856077635679555, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 2524545867305114625, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 2909404186348144300, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 4016042520941070153, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 4647540215329361201, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 4653029693406194432, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 5610110971511944729, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 7768934559712469661, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 8404487077410355480, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 8524555557560174986, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    - target: {fileID: 8780973901192257823, guid: 517364486e5fd274c8beb1e9043859af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5e407be3c95f16e4fb51ca4cde61037a, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 517364486e5fd274c8beb1e9043859af, type: 3}
---- !u!4 &1680904563 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 517364486e5fd274c8beb1e9043859af,
-    type: 3}
-  m_PrefabInstance: {fileID: 1680904562}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1683322347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38980,18 +38003,23 @@ MonoBehaviour:
   waves:
   - enemies:
     - enemy: 1
+      spawnInGroup: 0
+      minSpawnCount: 0
+      maxSpawnCount: 0
       spawnChances: 1
     maxEnemiesToSpawn: 1000
     spawnSpeed: 0
     enemiesToKillToEndWave: 1000
     EXPShare: 0
     EndEvent: {fileID: 0}
+    timeAfterEndingToStartNewWave: 0
   - enemies: []
     maxEnemiesToSpawn: 0
     spawnSpeed: 0
     enemiesToKillToEndWave: 0
     EXPShare: 0
     EndEvent: {fileID: 0}
+    timeAfterEndingToStartNewWave: 0
   pathRadiusFromSpawn: 0
   walkableMask:
     serializedVersion: 2
@@ -39027,7 +38055,7 @@ MonoBehaviour:
   - {fileID: 2029340067}
   minSpawnDistanceFromPlayer: 15
   currentWaveIndex: -1
-  spawnPool: 
+  spawnPool: []
 --- !u!1001 &1969313548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41306,6 +40334,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5630900819427697132, guid: 081e6f4431cd9634a8cf676da0645f8c,
+        type: 3}
+      propertyPath: music
+      value: 
+      objectReference: {fileID: 1440079895}
     - target: {fileID: 6180143022209707149, guid: 081e6f4431cd9634a8cf676da0645f8c,
         type: 3}
       propertyPath: m_IsActive
@@ -41538,11 +40571,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 664715924}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8224206681267255039, guid: 081e6f4431cd9634a8cf676da0645f8c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2094315792}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 081e6f4431cd9634a8cf676da0645f8c, type: 3}
 --- !u!114 &2094315789 stripped
 MonoBehaviour:
@@ -41562,27 +40591,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2094315788}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2094315791 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8224206681267255039, guid: 081e6f4431cd9634a8cf676da0645f8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2094315788}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2094315792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094315791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a481b5e68bf2f74f8054696df615cd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSlider: {fileID: 1213305402}
-  mouseSlider: {fileID: 167581275}
-  music: {fileID: 1440079888}
 --- !u!114 &2101698560 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5375174971888706256, guid: 081e6f4431cd9634a8cf676da0645f8c,
@@ -43249,12 +42257,16 @@ MonoBehaviour:
   waves:
   - enemies:
     - enemy: 0
+      spawnInGroup: 0
+      minSpawnCount: 0
+      maxSpawnCount: 0
       spawnChances: 1
     maxEnemiesToSpawn: 15
     spawnSpeed: 1.2
     enemiesToKillToEndWave: 15
     EXPShare: 20
     EndEvent: {fileID: 0}
+    timeAfterEndingToStartNewWave: 0
   pathRadiusFromSpawn: 0
   walkableMask:
     serializedVersion: 2
@@ -43264,7 +42276,7 @@ MonoBehaviour:
   spawnPoints: []
   minSpawnDistanceFromPlayer: 0
   currentWaveIndex: -1
-  spawnPool: 
+  spawnPool: []
 --- !u!1 &4274664779201714728
 GameObject:
   m_ObjectHideFlags: 0

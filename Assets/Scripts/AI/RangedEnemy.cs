@@ -32,8 +32,10 @@ public class RangedEnemy : AIBase
     [SerializeField, TabGroup("Ranged AI")] float repositionDistance;
     [SerializeField, TabGroup("Ranged AI")] float timeInRepositionState;
     [SerializeField, TabGroup("Ranged AI")] int findPositionTries;
+    [SerializeField, TabGroup("Ranged AI")] float cannotSeePlayerRepositionMultiplyer;
     //  [SerializeField] float cantSeePlayerTriesBeforeLeavingAttack;
 
+    bool couldNotSeePlayer = false;
 
     protected override void Update()
     {
@@ -45,8 +47,12 @@ public class RangedEnemy : AIBase
 
         timeSinceLastAttack -= Time.deltaTime;
         timeSinceLastReposition -= Time.deltaTime;
+        currentAfterAttackDelay -= Time.deltaTime;
+        if (currentAfterAttackDelay > 0)
+            return;
         switch (state)
         {
+            
             case State.Idle:
                 Idle();
                 break;
@@ -57,23 +63,28 @@ public class RangedEnemy : AIBase
                 GetInRangeOfPlayer();
                 break;
             case State.Attacking:
+                if (timeSinceLastAttack > 0)
+                    return;
                 Attacking();
                 break;
             case State.Reposition:
-                Repositioning();
+                if (couldNotSeePlayer)
+                    Repositioning(cannotSeePlayerRepositionMultiplyer);
+                else
+                    Repositioning();
                 break;
         }
     }
-
+    float playerDistance;
     void Idle()
     {
-   
-        if (DistanceToPlayer() < playerTooCloseRange)
+        playerDistance = DistanceToPlayer();
+        if (playerDistance < playerTooCloseRange)
         {
             findingNewPos = false;
             state = State.RuningFromPlayer;
         }
-        else if (DistanceToPlayer() > attackRange)
+        else if (playerDistance > attackRange)
         {
             startedMovingToPlayer = false;
             state = State.ApproachingPlayer;
@@ -152,6 +163,7 @@ public class RangedEnemy : AIBase
     }
     bool attacked;
     float timeSinceLastAttack = 0;
+    
     //float noVisionTries;
 
   
@@ -170,32 +182,40 @@ public class RangedEnemy : AIBase
 
         spriteRenderer.sprite = baseSprite;
     }
+    float currentAfterAttackDelay;
+    Vector3 vectorToPlayer;
     void Attacking()
     {
-        if(DistanceToPlayer() > attackRange)
+        if(playerDistance > attackRange)
         {
             state = State.Idle;
             return;
         }
         agent.isStopped = true;
+        
         if (!attacked)
         {
-            if (!Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackRange))
+            vectorToPlayer.x = PlayerMovement.playerPosition.x - transform.position.x;
+            vectorToPlayer.y = PlayerMovement.playerPosition.y - transform.position.y;
+            vectorToPlayer.z = PlayerMovement.playerPosition.z - transform.position.z;
+            vectorToPlayer.Normalize();
+            if (!Physics.Raycast(transform.position, vectorToPlayer, out RaycastHit hit, attackRange) || !hit.transform.CompareTag("Player"))
             {
-                state = State.Idle;
+                couldNotSeePlayer = true;
+                state = State.Reposition;
                 agent.isStopped = false;
                 attacked = false;
                 return;
             }
-            if (!hit.transform.CompareTag("Player"))
-                 return;
+        
                
    
             DamagePlayer();
             attacked = true;
             state = State.Idle;
             agent.isStopped = false;
-            timeSinceLastAttack = afterAttackTimer;
+            timeSinceLastAttack = seccondsBetweenAttacks;
+            currentAfterAttackDelay = afterAttackTimer;
             hasRepositioned = false;
         }
     }
@@ -205,16 +225,16 @@ public class RangedEnemy : AIBase
     int i = 0;
     NavMeshHit navMeshHit;
     float timeSinceLastReposition;
-    void Repositioning()
+    void Repositioning(float distanceMultiplyer = 1)
     {
         if(!repositioning)
         {
             i = 0;
             while(i < findPositionTries)
             {
-                randomPos.x = transform.position.x + Random.Range(-repositionDistance, repositionDistance);
+                randomPos.x = transform.position.x + Random.Range(-repositionDistance, repositionDistance) * distanceMultiplyer;
                 randomPos.y = transform.position.y;
-                randomPos.z = transform.position.z + Random.Range(-repositionDistance, repositionDistance);
+                randomPos.z = transform.position.z + Random.Range(-repositionDistance, repositionDistance) * distanceMultiplyer;
 
                 if (NavMesh.SamplePosition(randomPos, out navMeshHit, repositionDistance, walkableMask))
                 {

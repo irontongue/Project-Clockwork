@@ -128,7 +128,7 @@ MonoBehaviour:
   speed: 12
   EXP: 2
   damageFlashTime: 1
-  healthPotionDropChance: 0.1
+  healthPotionDropChance: 0.05
   enemyType: 1
   deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
     type: 3}
@@ -140,7 +140,7 @@ MonoBehaviour:
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
   agentless: 0
-  attackRange: 50
+  attackRange: 60
   seccondsBetweenAttacks: 2
   damage: 1
   attackDelay: 0.2
@@ -168,8 +168,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f2372ba77c16874594ba568d728f23a, type: 3}
   timeBetweenPolarOffsets: 0
   state: 0
-  afterAttackTimer: 1.5
-  findNewPositionRangeFromPlayer: 35
+  afterAttackTimer: 0.25
+  findNewPositionRangeFromPlayer: 40
   findNewPositionRangeRandomMultiplyer: 0.05
   seekPlayerRandomError: 3
   playerTooCloseRange: 10
@@ -178,9 +178,10 @@ MonoBehaviour:
   projectile: {fileID: 6170293064856852499, guid: ad992dcb8512749409890f3326a6b3e6,
     type: 3}
   projectileSpeed: 45
-  repositionDistance: 2
+  repositionDistance: 3
   timeInRepositionState: 0.25
   findPositionTries: 3
+  cannotSeePlayerRepositionMultiplyer: 3
 --- !u!195 &2712118304913471865
 NavMeshAgent:
   m_ObjectHideFlags: 0
