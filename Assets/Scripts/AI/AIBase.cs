@@ -52,18 +52,22 @@ public class AIBase : EnemyInfo
     {
       
         base.Start();
-        trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenAttacks * (1 - randonVarianceForMovementUpdate), seccondsBetweenAttacks * (1 + randonVarianceForMovementUpdate));
+        
+        trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenMovementUpdates * (1f - randonVarianceForMovementUpdate), seccondsBetweenMovementUpdates * (1f + randonVarianceForMovementUpdate));
         player = PlayerMovement.playerRef;
         aiBuisy = false;
         source = GetComponent<AudioSource>();
         BatchSpriteLooker.AddLooker(transform);
         if(!agentless)
             agent.speed = speed;
+
+        lastTimeSinceFiredProjectile = projectileFireRate;
         
     }
-
+    float lastTimeSinceFiredProjectile;
     protected override void Update()
     {
+
         
         base.Update();
 
@@ -77,6 +81,27 @@ public class AIBase : EnemyInfo
 
         lastTimeSinceMovementUpdate -= Time.deltaTime;
         lastTimeSincePolarOffset += Time.deltaTime;
+
+        if (!useProjectile)
+            return;
+
+        if (DistanceToPlayer() < minRangeToThrowProjectile)
+            return;
+
+        lastTimeSinceFiredProjectile -= Time.deltaTime;
+
+        if (lastTimeSinceFiredProjectile > 0)
+            return;
+
+        lastTimeSinceFiredProjectile = projectileFireRate;
+        float random = Random.Range(0, 100);
+
+        if (random > projectileFireChance)
+            return;
+    
+        SpawnProjectile();
+
+ 
        
     }
     bool pathingToPoint;
@@ -117,6 +142,7 @@ public class AIBase : EnemyInfo
             if (randomVariance == 0)
             {
                 agent.SetDestination(targetPos);
+                print("Moving");
                 return false;
             }
 
@@ -129,35 +155,40 @@ public class AIBase : EnemyInfo
      
         return true;
     }
-    Vector3 modifyedPlayerVector;
+
 
     [SerializeField, TabGroup("Movement")] float timeBetweenPolarOffsets;
     float lastTimeSincePolarOffset;
- 
+    Vector3 lastOffset;
     Vector3 GetPlayerOffset() // if using the pole offset, this adds the offset, if not it just returns the player position
     {
-        if (lastTimeSincePolarOffset < timeBetweenPolarOffsets || !usePolarOffset)
+        if (!usePolarOffset)
             return player.transform.position;
-        modifyedPlayerVector = PlayerMovement.playerPosition;
+        if (lastTimeSincePolarOffset < timeBetweenPolarOffsets)
+            return player.transform.position + lastOffset;
+
+  
+ 
+        lastTimeSincePolarOffset = 0;
+        lastOffset.x = 0;
+        lastOffset.z = 0;
         switch (pole)
         {
-            case Pole.North:
-                modifyedPlayerVector.x += poleOffsets.y;
-                return modifyedPlayerVector;
             case Pole.South:
-                modifyedPlayerVector.x -= poleOffsets.y;
-                return modifyedPlayerVector;
-            case Pole.East:
-                modifyedPlayerVector.x += poleOffsets.x;
-                return modifyedPlayerVector;
+            case Pole.North:
+                lastOffset.x += Random.Range(-poleOffsets.y,poleOffsets.y);
+                break;
+
             case Pole.West:
-                modifyedPlayerVector.x -= poleOffsets.x;
-                return modifyedPlayerVector;
+            case Pole.East:
+                lastOffset.z += Random.Range(-poleOffsets.x, poleOffsets.x);
+                break;
+
             case Pole.Null:
                 return PlayerMovement.playerPosition;
 
         }
-        return PlayerMovement.playerPosition;
+        return player.transform.position + lastOffset;
     }
     public void RandomisePolarOffset()
     {
@@ -255,6 +286,30 @@ public class AIBase : EnemyInfo
         HealHealth(maxHealth);
         flashTimer = 1;
 
+    }
+
+
+    Projectile spawnedProjectile;
+
+   
+    [SerializeField][TabGroup("Projectile")] bool useProjectile;
+    [SerializeField][TabGroup("Projectile")] float projectileFireRate;
+    [SerializeField][TabGroup("Projectile")] float projectileFireChance;
+    [SerializeField][TabGroup("Projectile")] float projectileDamage, projectileSpeed;
+    [SerializeField][TabGroup("Projectile")] float minRangeToThrowProjectile;
+    [SerializeField][TabGroup("Projectile")] string projectileType;
+    protected void SpawnProjectile()
+    {
+        AttackEffects();
+        spawnedProjectile = ObjectPooler.RetreiveObject(projectileType).GetComponent<Projectile>(); //Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
+        spawnedProjectile.gameObject.SetActive(true);
+        spawnedProjectile.transform.position = transform.position;
+        spawnedProjectile.transform.LookAt(player.transform.position);
+        spawnedProjectile.damage = projectileDamage;
+        spawnedProjectile.speed = projectileSpeed;
+        spawnedProjectile.origin = gameObject;
+
+        spriteRenderer.sprite = baseSprite;
     }
 
 

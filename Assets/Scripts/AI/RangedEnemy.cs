@@ -21,8 +21,6 @@ public class RangedEnemy : AIBase
     [SerializeField, TabGroup("Ranged AI")] float findNewPosRange; // how far away should i look for a new range if the player aproaches me
     [SerializeField, TabGroup("Ranged AI")] int findNewPosTrys; // how many times should i search for a new pos
 
-    [SerializeField, TabGroup("Ranged AI")] GameObject projectile;
-    [SerializeField, TabGroup("Ranged AI")] float projectileSpeed;
 
   
   
@@ -166,19 +164,12 @@ public class RangedEnemy : AIBase
     
     //float noVisionTries;
 
-  
-    Projectile spawnedProjectile;
+
     bool hasRepositioned;
     protected override void FinalizeDamage()
     {
         AttackEffects();
-        spawnedProjectile = ObjectPooler.RetreiveObject("Projectile").GetComponent<Projectile>(); //Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
-        spawnedProjectile.gameObject.SetActive(true);
-        spawnedProjectile.transform.position = transform.position;
-        spawnedProjectile.transform.LookAt(player.transform.position);
-        spawnedProjectile.damage = damage;
-        spawnedProjectile.speed = projectileSpeed;
-        spawnedProjectile.origin = gameObject;
+        SpawnProjectile();
 
         spriteRenderer.sprite = baseSprite;
     }

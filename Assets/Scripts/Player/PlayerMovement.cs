@@ -313,6 +313,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashLenght;
 
     [SerializeField] float dashCooldown;
+    [SerializeField] float dashMaxMagnitudeBeforeReducedSpeed = 50;
+    [SerializeField] float reducedDashSpeed;
     float dashCooldownTimer;
 
     bool readyToDash = true;
@@ -326,7 +328,13 @@ public class PlayerMovement : MonoBehaviour
             currentlyDashing = true;
             dashTimer = dashLenght;
             Vector3 dashDirection = (Camera.main.transform.right * Input.GetAxisRaw("Horizontal") + Camera.main.transform.forward * Input.GetAxisRaw("Vertical")).normalized;
-            dashVelocity = dashDirection * dashSpeed;
+            if (currentVelocity.magnitude > dashMaxMagnitudeBeforeReducedSpeed)
+            {
+                dashVelocity = dashDirection * reducedDashSpeed;
+            }
+            else
+                dashVelocity = dashDirection * dashSpeed;
+
             dashCooldownTimer = dashCooldown;
             readyToDash = false;
 
@@ -335,19 +343,24 @@ public class PlayerMovement : MonoBehaviour
                 isSliding = false;
                 slidelock = false;
             }
+
+            currentVelocity = currentVelocity.magnitude * dashDirection;
         }
 
         if (currentlyDashing)
         {
             dashTimer -= Time.deltaTime;
 
-            currentVelocity.x = dashVelocity.x;
-            currentVelocity.z = dashVelocity.z;
+       /*     currentVelocity.x = dashVelocity.x;
+            currentVelocity.z = dashVelocity.z;*/
 
             slideGracePeriodActive = true;
 
             if (dashTimer <= 0)
+            {
+          
                 CancelDash();
+            }
 
             return;
         }
@@ -379,6 +392,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float magnitudeToStopSlide;
     [SerializeField] float timeSinceSlideBeforeAutoCancel = 0.2f;
     [SerializeField] float groundCheckThreshold = -0.2f;
+    [SerializeField] float slidingInAirSpeedGain = 5f;
     [Header("Collision")]
     [SerializeField] Vector3 colliderOffset = new(0,0.5f,0);
     [SerializeField] float colliderRadius = 0.5f;

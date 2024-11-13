@@ -43,7 +43,6 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
             RaycastHit hit;
             if(Physics.Raycast(playerTransform.position, cam.transform.forward, out hit, Mathf.Infinity,excludePlayerLayerMask))
             {
-                print(hit.transform.name);
                 lockOnPoint = hit.point;
             }
             else

@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -139.7, y: 15.719, z: -149.8}
-  m_LocalScale: {x: 0.4, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7949159394985016330}
@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f89a0ffb150a435449fc71b20eea1cc5, type: 2}
+  - {fileID: 2100000, guid: 3d4250c111d5d63418625e49b6c02bf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dce02012f6cbc994b97603dfc7424a36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb79566f50ccea14e8c382986aa1084f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,7 +129,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 2
   health: 2
-  speed: 25
+  speed: 24
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -144,21 +144,21 @@ MonoBehaviour:
   fireStacks: 0
   agent: {fileID: 8531975678395137089}
   agentless: 0
-  attackRange: 2.5
-  seccondsBetweenAttacks: 0.5
+  attackRange: 1.5
+  seccondsBetweenAttacks: 1
   damage: 1
-  attackDelay: 0.2
+  attackDelay: 0
   attackSounds: []
   walkableMask:
     serializedVersion: 2
     m_Bits: 1
-  baseSprite: {fileID: 21300000, guid: dce02012f6cbc994b97603dfc7424a36, type: 3}
-  attackSprite: {fileID: 21300000, guid: dce02012f6cbc994b97603dfc7424a36, type: 3}
-  seccondsBetweenMovementUpdates: 0.1
-  randonVarianceForMovementUpdate: 0.005
+  baseSprite: {fileID: 21300000, guid: cb79566f50ccea14e8c382986aa1084f, type: 3}
+  attackSprite: {fileID: 21300000, guid: cb79566f50ccea14e8c382986aa1084f, type: 3}
+  seccondsBetweenMovementUpdates: 0.2
+  randonVarianceForMovementUpdate: 0.05
   usePolarOffset: 1
-  distanceBeforeConvergingOnPlayer: 8
-  poleOffsets: {x: 1, y: 1}
+  distanceBeforeConvergingOnPlayer: 2
+  poleOffsets: {x: 2, y: 2}
   spawner: {fileID: 0}
   source: {fileID: 259162966647552483}
   pole: 0
@@ -173,8 +173,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 865b573aa7a95a749b85a2a8925147ee, type: 3}
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
-  timeBetweenPolarOffsets: 10
-  afterAttackTimer: 1
+  timeBetweenPolarOffsets: 8
+  afterAttackTimer: 0.5
 --- !u!195 &8531975678395137089
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -184,19 +184,19 @@ NavMeshAgent:
   m_GameObject: {fileID: 1246973901974257688}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.38
-  m_Speed: 13
-  m_Acceleration: 999
+  m_Radius: 0.2
+  m_Speed: 3.5
+  m_Acceleration: 800000
   avoidancePriority: 50
-  m_AngularSpeed: 90000
+  m_AngularSpeed: 190
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0.98
+  m_Height: 1
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &1767684122688662034
 MonoBehaviour:
   m_ObjectHideFlags: 0
