@@ -157,8 +157,8 @@ MonoBehaviour:
   seccondsBetweenMovementUpdates: 0.2
   randonVarianceForMovementUpdate: 0.005
   usePolarOffset: 1
-  distanceBeforeConvergingOnPlayer: 4
-  poleOffsets: {x: 5, y: 5}
+  distanceBeforeConvergingOnPlayer: 3
+  poleOffsets: {x: 7, y: 7}
   spawner: {fileID: 0}
   source: {fileID: 8368403614439602895}
   pole: 0
@@ -173,12 +173,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 865b573aa7a95a749b85a2a8925147ee, type: 3}
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
-  timeBetweenPolarOffsets: 5
+  timeBetweenPolarOffsets: 4
   useProjectile: 1
-  projectileFireRate: 1.5
-  projectileFireChance: 15
+  projectileFireRate: 1
+  projectileFireChance: 25
   projectileDamage: 0.5
-  projectileSpeed: 65
+  projectileSpeed: 70
   minRangeToThrowProjectile: 10
   projectileType: Rock
   afterAttackTimer: 1
@@ -193,9 +193,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.38
   m_Speed: 13
-  m_Acceleration: 25
+  m_Acceleration: 100
   avoidancePriority: 50
-  m_AngularSpeed: 9
+  m_AngularSpeed: 25
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0

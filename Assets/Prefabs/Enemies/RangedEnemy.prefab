@@ -145,7 +145,7 @@ MonoBehaviour:
   damage: 1
   attackDelay: 0.2
   attackSounds:
-  - {fileID: 8300000, guid: f2004f73753c43143ac92cce305005e2, type: 3}
+  - {fileID: 8300000, guid: 0d83b68dbce86ec4faab7d0042ead5d4, type: 3}
   walkableMask:
     serializedVersion: 2
     m_Bits: 255
@@ -172,6 +172,7 @@ MonoBehaviour:
   projectileFireChance: 100
   projectileDamage: 1
   projectileSpeed: 85
+  minRangeToThrowProjectile: 0
   projectileType: Projectile
   state: 0
   afterAttackTimer: 0.25

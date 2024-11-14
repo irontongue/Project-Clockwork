@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileObject: {fileID: 6170293064856852499, guid: ad992dcb8512749409890f3326a6b3e6,
     type: 3}
+  rockProjectile: {fileID: 6170293064856852499, guid: c16731e931ebe9e4cb326bc7b830434a,
+    type: 3}
 --- !u!114 &4250131909749415799
 MonoBehaviour:
   m_ObjectHideFlags: 0
