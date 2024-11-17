@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dependancies")]
     CharacterController controller;
+
+    [TabGroup("Audio"), SerializeField] AudioClip startSlide, slideLoop;
+    [TabGroup("Audio"), SerializeField] AudioClip dashSound;
+    [TabGroup("Audio"), SerializeField] AudioClip jumpSound, extraJumpSound;
 
     void Awake()
     {
@@ -284,20 +289,25 @@ public class PlayerMovement : MonoBehaviour
 
         currentVelocity.y = 0;
 
-    
+
 
         if (!isGrounded)
         {
-            
 
             if (remainingJumps > 0)
                 remainingJumps--;
             else
                 return;
-        }
 
-      
-      
+            try { playerAudioSource.PlayOneShot(extraJumpSound, GlobalSettings.audioVolume); }
+            catch { print("extra jump sound not set"); }
+        }
+        else
+            try { playerAudioSource.PlayOneShot(jumpSound, GlobalSettings.audioVolume); }
+            catch { print("jump sound not set"); }
+
+
+
         currentVelocity.y = initialJumpVel;
         isGrounded = false;
         currentlyJumping = true;
@@ -326,6 +336,9 @@ public class PlayerMovement : MonoBehaviour
         if (readyToDash && Input.GetKeyDown(KeyCode.LeftShift))
         {
             currentlyDashing = true;
+            try { playerAudioSource.PlayOneShot(dashSound, GlobalSettings.audioVolume); }
+            catch { print("dash sound not set"); }
+           
             dashTimer = dashLenght;
             Vector3 dashDirection = (Camera.main.transform.right * Input.GetAxisRaw("Horizontal") + Camera.main.transform.forward * Input.GetAxisRaw("Vertical")).normalized;
             if (currentVelocity.magnitude > dashMaxMagnitudeBeforeReducedSpeed)
@@ -420,8 +433,13 @@ public class PlayerMovement : MonoBehaviour
     float timeSinceSlideStarted = 0; // its in the name
     Vector3 slideDirection; // what direction the slide was started in 
     readonly bool slideDebug = false; // used to print helpfull stuff.
+
+    [SerializeField] AudioSource slideSource; // reason for a different audio source is lazyness. i can set this source to auto loop :)
     void Slide()
     {
+        if (!isSliding)
+            slideSource.Stop();
+
         SlideDebug();
         UpdateSlideState();
 
@@ -599,7 +617,20 @@ public class PlayerMovement : MonoBehaviour
             currentVelocity = velocityBeforeLoosingIt;
 
         inputVectorAtStartOfSlide = inputVector;
-
+        try
+        {
+            playerAudioSource.PlayOneShot(startSlide, GlobalSettings.audioVolume);
+        }
+        catch { print("start slide sound not set"); }
+        try
+        {
+            slideSource.clip = slideLoop;
+            slideSource.volume = GlobalSettings.audioVolume;
+            slideSource.Play();
+        }
+        catch { print(" slide loop sound not set"); }
+        
+        
         CancelDash();
     }
 

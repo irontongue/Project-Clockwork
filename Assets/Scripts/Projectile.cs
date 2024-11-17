@@ -11,6 +11,7 @@ public class Projectile : PoolObject
     public GameObject origin;
     public bool active;
     public Vector3 fireVector;
+    public bool moveOnVector;
     [SerializeField] GameObject spriteOBJ;
 
     private void Start()

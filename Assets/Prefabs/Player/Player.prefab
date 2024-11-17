@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 5014838923294068559}
   - component: {fileID: 7867189388780044975}
   - component: {fileID: 6159610773282691837}
+  - component: {fileID: 7183603568221220461}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -394,11 +395,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3970e296142cd8142ab69b17b49f035b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSlide: {fileID: 0}
+  slideLoop: {fileID: 0}
+  dashSound: {fileID: 0}
+  jumpSound: {fileID: 0}
+  extraJumpSound: {fileID: 0}
   baseSpeed: 17
   airMoveSpeedWithVel: 0.5
   airMoveSpeedAgainstVel: 8
   seccondsSinceMovingBeforeMaxJump: 0.15
-  neutralJumpAirMoveSpeed: 6
+  neutralJumpAirMoveSpeed: 15
   gravity: 14
   groundedThreshold: 0.3
   groundMask:
@@ -411,10 +417,10 @@ MonoBehaviour:
   dashSpeed: 65
   dashLenght: 0.15
   dashCooldown: 1
-  dashMaxMagnitudeBeforeReducedSpeed: 25
+  dashMaxMagnitudeBeforeReducedSpeed: 30
   reducedDashSpeed: 0.05
-  extraVelRequiredToSlide: 15
-  slideFallOff: 10
+  extraVelRequiredToSlide: 10
+  slideFallOff: 6
   uphillExtraSlideFallOff: 50
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
@@ -433,6 +439,7 @@ MonoBehaviour:
   camDropSpeed: 6
   minColliderSize: 1
   colliderDropSpeed: 5
+  slideSource: {fileID: 7183603568221220461}
   magnitueRequiredMaxFov: 30
   minExtraMagnitureForFovIncrease: 2
   maxSprintFov: 100
@@ -626,6 +633,102 @@ MonoBehaviour:
   textFlashSpeed: 2.5
   minTextOppacity: 0.2
   promptForLevelUp: 0
+--- !u!82 &7183603568221220461
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955605711507786865}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 14.851485
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2103384624345211642
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
         public int minSpawnCount, maxSpawnCount;
         public int spawnChances;
     }
-    public enum Enemies {Melee, Ranged, Slob, LesserFly, Gremlin}
+    public enum Enemies {Melee, Ranged, Slob, LesserFly, Gremlin, EliteMelee, BossSlob}
    
   
 
@@ -234,7 +234,7 @@ public class EnemySpawner : MonoBehaviour
         {
             wEvent.WaveEnd();
         }
-        GameState.inCombat = true;
+        GameState.inCombat = false;
         //   if (playerLevelUpManager.readyToLVLup)
         //      playerLevelUpManager.LevelUp();
     }

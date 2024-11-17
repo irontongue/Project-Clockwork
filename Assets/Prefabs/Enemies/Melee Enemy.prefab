@@ -127,9 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifyer: 
   mainBodyInfo: {fileID: 0}
-  maxHealth: 6
-  health: 6
-  speed: 18
+  maxHealth: 5
+  health: 5
+  speed: 17
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -174,7 +174,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
   timeBetweenPolarOffsets: 4
-  useProjectile: 1
+  expOrb: {fileID: 2357236184651808633, guid: c958a786082e3ed48b69ecfb6bd711c3, type: 3}
+  spawnEXPorb: 1
+  useProjectile: 0
   projectileFireRate: 1
   projectileFireChance: 25
   projectileDamage: 0.5
