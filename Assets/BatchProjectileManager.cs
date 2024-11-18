@@ -8,10 +8,12 @@ public class BatchProjectileManager : MonoBehaviour
 
     [SerializeField] GameObject projectileObject;
     [SerializeField] GameObject rockProjectile;
+    [SerializeField] GameObject gooProjectile;
     void Start()
     {
         ObjectPooler.InitilizeObjectPool("Projectile", projectileObject);
         ObjectPooler.InitilizeObjectPool("Rock", rockProjectile);
+        ObjectPooler.InitilizeObjectPool("Goo", gooProjectile);
         projectiles = new();
     }
     static public void AddProjectile(Projectile projectile)

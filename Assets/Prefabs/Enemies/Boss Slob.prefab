@@ -532,7 +532,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 200
   health: 200
-  speed: 16
+  speed: 15
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
@@ -580,6 +580,8 @@ MonoBehaviour:
   projectileSpeed: 0
   minRangeToThrowProjectile: 0
   projectileType: 
+  projectileCount: 1
+  projectileSpawnOffset: 0
   afterAttackTimer: 2.5
   moveCycleRate: 1.3
   moveCycleMultiplyer: 8

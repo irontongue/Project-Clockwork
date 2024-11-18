@@ -31,6 +31,7 @@ public class Projectile : PoolObject
     }
     private void OnTriggerEnter(Collider other)
     {
+      
         PlayerDamageHandler handler = other.GetComponent<PlayerDamageHandler>();
         if (handler == null)
             return;

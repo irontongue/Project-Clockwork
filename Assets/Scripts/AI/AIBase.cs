@@ -73,7 +73,7 @@ public class AIBase : EnemyInfo
             print(enemyType.ToString() + " Does not have a spawn particle");
         
     }
-    float lastTimeSinceFiredProjectile;
+    protected float lastTimeSinceFiredProjectile;
     protected override void Update()
     {
 
@@ -108,7 +108,7 @@ public class AIBase : EnemyInfo
         if (random > projectileFireChance)
             return;
     
-        SpawnProjectile();
+        FireProjectile();
 
  
        
@@ -327,19 +327,41 @@ public class AIBase : EnemyInfo
     Projectile spawnedProjectile;
 
    
-    [SerializeField][TabGroup("Projectile")] bool useProjectile;
-    [SerializeField][TabGroup("Projectile")] float projectileFireRate;
-    [SerializeField][TabGroup("Projectile")] float projectileFireChance;
-    [SerializeField][TabGroup("Projectile")] float projectileDamage, projectileSpeed;
-    [SerializeField][TabGroup("Projectile")] float minRangeToThrowProjectile;
-    [SerializeField][TabGroup("Projectile")] string projectileType;
-    protected void SpawnProjectile()
+    [SerializeField][TabGroup("Projectile")] protected bool useProjectile;
+    [SerializeField][TabGroup("Projectile")] protected float projectileFireRate;
+    [SerializeField][TabGroup("Projectile")] protected float projectileFireChance;
+    [SerializeField][TabGroup("Projectile")] protected float projectileDamage, projectileSpeed;
+    [SerializeField][TabGroup("Projectile")] protected float minRangeToThrowProjectile;
+    [SerializeField][TabGroup("Projectile")] protected string projectileType;
+    [SerializeField][TabGroup("Projectile")] protected int projectileCount = 1;
+    [SerializeField][TabGroup("Projectile")] protected float projectileSpawnOffset;
+
+    Vector3 offset;
+    protected void FireProjectile()
     {
         AttackEffects();
+
+        if (projectileCount <= 1)
+        {
+            SpawnProjectile(Vector3.zero);
+            return;
+        }
+        
+        for(int i = 0 - (projectileCount / 2); i < (projectileCount / 2) + 1; i++)
+        {
+            offset = projectileSpawnOffset * transform.right * (projectileSpawnOffset * i);
+            SpawnProjectile(offset);
+        }
+
+    }
+   
+    void SpawnProjectile(Vector3 spawnOffset)
+    {
+        
         spawnedProjectile = ObjectPooler.RetreiveObject(projectileType).GetComponent<Projectile>(); //Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
         spawnedProjectile.gameObject.SetActive(true);
-        spawnedProjectile.transform.position = transform.position;
-        spawnedProjectile.transform.LookAt(player.transform.position);
+        spawnedProjectile.transform.position = transform.position + spawnOffset;
+        spawnedProjectile.transform.LookAt(player.transform.position + spawnOffset);
         spawnedProjectile.damage = projectileDamage;
         spawnedProjectile.speed = projectileSpeed;
         spawnedProjectile.origin = gameObject;
