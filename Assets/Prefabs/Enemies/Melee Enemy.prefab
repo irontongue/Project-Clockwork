@@ -127,12 +127,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifyer: 
   mainBodyInfo: {fileID: 0}
-  maxHealth: 6
-  health: 6
-  speed: 18
+  maxHealth: 5
+  health: 5
+  speed: 17
   EXP: 1
   damageFlashTime: 1
-  healthPotionDropChance: 0.1
+  healthPotionDropChance: 0.02
   enemyType: 0
   deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
     type: 3}
@@ -149,6 +149,7 @@ MonoBehaviour:
   damage: 1
   attackDelay: 0.1
   attackSounds: []
+  spawnParticleSystem: {fileID: 0}
   walkableMask:
     serializedVersion: 2
     m_Bits: 1
@@ -173,14 +174,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 865b573aa7a95a749b85a2a8925147ee, type: 3}
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
+  spawnerSpawnSound: []
   timeBetweenPolarOffsets: 4
-  useProjectile: 1
+  expOrb: {fileID: 2357236184651808633, guid: c958a786082e3ed48b69ecfb6bd711c3, type: 3}
+  spawnEXPorb: 1
+  useProjectile: 0
   projectileFireRate: 1
-  projectileFireChance: 25
+  projectileFireChance: 5
   projectileDamage: 0.5
   projectileSpeed: 70
   minRangeToThrowProjectile: 10
   projectileType: Rock
+  projectileCount: 1
+  projectileSpawnOffset: 0
   afterAttackTimer: 1
 --- !u!195 &5083003481326997813
 NavMeshAgent:

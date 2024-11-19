@@ -8,10 +8,12 @@ public class BatchProjectileManager : MonoBehaviour
 
     [SerializeField] GameObject projectileObject;
     [SerializeField] GameObject rockProjectile;
+    [SerializeField] GameObject gooProjectile;
     void Start()
     {
         ObjectPooler.InitilizeObjectPool("Projectile", projectileObject);
         ObjectPooler.InitilizeObjectPool("Rock", rockProjectile);
+        ObjectPooler.InitilizeObjectPool("Goo", gooProjectile);
         projectiles = new();
     }
     static public void AddProjectile(Projectile projectile)
@@ -33,8 +35,13 @@ public class BatchProjectileManager : MonoBehaviour
 
         foreach (Projectile projectile in projectiles)
         {
-            if (projectile.active)
+            if (!projectile.active)
+                continue;
+            if (projectile.moveOnVector)
+                projectile.transform.position += projectile.fireVector * projectile.speed * Time.deltaTime;
+            else
                 projectile.transform.position += projectile.speed * Time.deltaTime * projectile.transform.forward;
+
         }
     }
 }

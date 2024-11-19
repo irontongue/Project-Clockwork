@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class SlugMeleeEnemy : MeleeEnemy
 {
     [SerializeField, TabGroup("Slug")] float moveCycleRate;
+    [SerializeField, TabGroup("Slug")] float moveCycleMultiplyer;
     float maxSpeed;
 
     protected override void Start()
@@ -24,8 +25,10 @@ public class SlugMeleeEnemy : MeleeEnemy
             case State.Idle:
                 Idle();
                 break;
-            case State.Chasing: 
-                agent.speed = (Mathf.PingPong(Time.time * moveCycleRate, 1)) * speed;
+            case State.Chasing:
+                float oscillation =  Mathf.Sin(Time.time * moveCycleRate) * moveCycleMultiplyer;
+                agent.speed = Mathf.Clamp( speed + oscillation, speed, Mathf.Infinity);
+
                 Chasing();
                 break;
             case State.Attacking:

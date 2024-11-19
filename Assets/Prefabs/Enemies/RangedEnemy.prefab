@@ -141,11 +141,12 @@ MonoBehaviour:
   agent: {fileID: 2712118304913471865}
   agentless: 0
   attackRange: 60
-  seccondsBetweenAttacks: 2
+  seccondsBetweenAttacks: 1.5
   damage: 1
   attackDelay: 0.2
   attackSounds:
   - {fileID: 8300000, guid: 0d83b68dbce86ec4faab7d0042ead5d4, type: 3}
+  spawnParticleSystem: {fileID: 0}
   walkableMask:
     serializedVersion: 2
     m_Bits: 255
@@ -166,16 +167,21 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: de62b95947b25e34e80f1139ced1c5be, type: 3}
   - {fileID: 8300000, guid: 6f2372ba77c16874594ba568d728f23a, type: 3}
+  spawnerSpawnSound: []
   timeBetweenPolarOffsets: 0
+  expOrb: {fileID: 2357236184651808633, guid: c958a786082e3ed48b69ecfb6bd711c3, type: 3}
+  spawnEXPorb: 1
   useProjectile: 0
   projectileFireRate: 1
-  projectileFireChance: 100
+  projectileFireChance: 65
   projectileDamage: 1
-  projectileSpeed: 85
+  projectileSpeed: 65
   minRangeToThrowProjectile: 0
   projectileType: Projectile
+  projectileCount: 6
+  projectileSpawnOffset: 1
   state: 0
-  afterAttackTimer: 0.25
+  afterAttackTimer: 0.2
   findNewPositionRangeFromPlayer: 40
   findNewPositionRangeRandomMultiplyer: 0.05
   seekPlayerRandomError: 3

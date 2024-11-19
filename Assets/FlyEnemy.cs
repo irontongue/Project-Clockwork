@@ -40,7 +40,27 @@ public class FlyEnemy : AIBase
             FlyToPlayer();
 
 
-            
+        if (!useProjectile)
+            return;
+
+        if (DistanceToPlayer() < minRangeToThrowProjectile)
+            return;
+
+        lastTimeSinceFiredProjectile -= Time.deltaTime;
+
+        if (lastTimeSinceFiredProjectile > 0)
+            return;
+
+        lastTimeSinceFiredProjectile = projectileFireRate;
+        float random = Random.Range(0, 100);
+
+        if (random > projectileFireChance)
+            return;
+
+        FireProjectile();
+
+
+
     }
     float distFromGround;
     Vector3 velocity;

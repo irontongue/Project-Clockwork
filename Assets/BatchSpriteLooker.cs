@@ -24,8 +24,7 @@ public class BatchSpriteLooker : MonoBehaviour
     Vector3 direction;
     private void Update()
     {
-        if (GameState.GamePaused)
-            return;
+      
         
         foreach(Transform looker in lookers)
         {

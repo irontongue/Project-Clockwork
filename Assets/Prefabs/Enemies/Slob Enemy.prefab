@@ -552,6 +552,7 @@ MonoBehaviour:
   damage: 6
   attackDelay: 0.2
   attackSounds: []
+  spawnParticleSystem: {fileID: 0}
   walkableMask:
     serializedVersion: 2
     m_Bits: 511
@@ -568,9 +569,20 @@ MonoBehaviour:
   aiBuisy: 0
   spawnSounds: []
   deathSounds: []
+  spawnerSpawnSound: []
   timeBetweenPolarOffsets: 0
+  expOrb: {fileID: 2357236184651808633, guid: c958a786082e3ed48b69ecfb6bd711c3, type: 3}
+  spawnEXPorb: 1
+  useProjectile: 0
+  projectileFireRate: 0
+  projectileFireChance: 0
+  projectileDamage: 0
+  projectileSpeed: 0
+  minRangeToThrowProjectile: 0
+  projectileType: 
   afterAttackTimer: 1
   moveCycleRate: 0.8
+  moveCycleMultiplyer: 0
 --- !u!1 &5746780244480167824
 GameObject:
   m_ObjectHideFlags: 0

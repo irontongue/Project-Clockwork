@@ -11,6 +11,7 @@ public class AIBase : EnemyInfo
     protected GameObject player;
     public NavMeshAgent agent;
     public bool agentless;
+
     [Header("Attack Settings")]
 
     [SerializeField, TabGroup("Attack")] protected float attackRange;
@@ -19,6 +20,7 @@ public class AIBase : EnemyInfo
     [SerializeField, TabGroup("Attack")] protected float attackDelay = 0.1f;
     //[Header("Audio Settings")]
     [SerializeField, TabGroup("Effects")] AudioClip[] attackSounds;
+    [SerializeField, TabGroup("Effects")] GameObject spawnParticleSystem;
    // [Header("Agent Settings")]
     [SerializeField, TabGroup("Settings")] protected LayerMask walkableMask;
   //  [Header("AttackAnim")]
@@ -39,6 +41,7 @@ public class AIBase : EnemyInfo
     [TabGroup("RunTimeOnly")]public bool aiBuisy = false;
 
     [TabGroup(("Audio"))] [SerializeField] AudioClip[] spawnSounds, deathSounds;
+    [TabGroup("Audio"), SerializeField] AudioClip[] spawnerSpawnSound;
  
     protected float DistanceToPlayer()
     {
@@ -48,6 +51,7 @@ public class AIBase : EnemyInfo
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    ParticleSystem _particleSystem;
     protected override void Start()
     {
       
@@ -62,9 +66,14 @@ public class AIBase : EnemyInfo
             agent.speed = speed;
 
         lastTimeSinceFiredProjectile = projectileFireRate;
+
+        if (spawnParticleSystem != null)
+            _particleSystem = Instantiate(spawnParticleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+        else
+            print(enemyType.ToString() + " Does not have a spawn particle");
         
     }
-    float lastTimeSinceFiredProjectile;
+    protected float lastTimeSinceFiredProjectile;
     protected override void Update()
     {
 
@@ -99,7 +108,7 @@ public class AIBase : EnemyInfo
         if (random > projectileFireChance)
             return;
     
-        SpawnProjectile();
+        FireProjectile();
 
  
        
@@ -257,10 +266,18 @@ public class AIBase : EnemyInfo
         spriteRenderer.sprite = baseSprite;
         player.GetComponent<PlayerDamageHandler>().Damage(damage, transform);
     }
+    [SerializeField] GameObject expOrb;
+    [SerializeField] bool spawnEXPorb;
     protected override void DeathEvent()
     {
         BatchSpriteLooker.AddLooker(transform);
-        player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
+        if(spawnEXPorb)
+        {
+            GameObject g = Instantiate(expOrb, transform.position, Quaternion.identity);
+            g.GetComponent<EXPOrb>().expValue = EXP;
+        }    
+        else
+            player.GetComponent<PlayerLevelUpManager>().ReciveEXP(EXP);
         PlayDeathSound();
         try
         {
@@ -285,6 +302,24 @@ public class AIBase : EnemyInfo
     {
         HealHealth(maxHealth);
         flashTimer = 1;
+        if(_particleSystem != null)
+        {
+            _particleSystem.transform.position = transform.position;
+            _particleSystem.Play();
+        }
+        try
+        {
+            source.PlayOneShot(spawnerSpawnSound[Random.Range(0, spawnerSpawnSound.Length)], GlobalSettings.audioVolume);
+        }
+        catch
+        {
+            print("spawnerSpawnSound not set for" + enemyType.ToString());
+        }
+        
+
+
+      
+     
 
     }
 
@@ -292,19 +327,41 @@ public class AIBase : EnemyInfo
     Projectile spawnedProjectile;
 
    
-    [SerializeField][TabGroup("Projectile")] bool useProjectile;
-    [SerializeField][TabGroup("Projectile")] float projectileFireRate;
-    [SerializeField][TabGroup("Projectile")] float projectileFireChance;
-    [SerializeField][TabGroup("Projectile")] float projectileDamage, projectileSpeed;
-    [SerializeField][TabGroup("Projectile")] float minRangeToThrowProjectile;
-    [SerializeField][TabGroup("Projectile")] string projectileType;
-    protected void SpawnProjectile()
+    [SerializeField][TabGroup("Projectile")] protected bool useProjectile;
+    [SerializeField][TabGroup("Projectile")] protected float projectileFireRate;
+    [SerializeField][TabGroup("Projectile")] protected float projectileFireChance;
+    [SerializeField][TabGroup("Projectile")] protected float projectileDamage, projectileSpeed;
+    [SerializeField][TabGroup("Projectile")] protected float minRangeToThrowProjectile;
+    [SerializeField][TabGroup("Projectile")] protected string projectileType;
+    [SerializeField][TabGroup("Projectile")] protected int projectileCount = 1;
+    [SerializeField][TabGroup("Projectile")] protected float projectileSpawnOffset;
+
+    Vector3 offset;
+    protected void FireProjectile()
     {
         AttackEffects();
+
+        if (projectileCount <= 1)
+        {
+            SpawnProjectile(Vector3.zero);
+            return;
+        }
+        
+        for(int i = 0 - (projectileCount / 2); i < (projectileCount / 2) + 1; i++)
+        {
+            offset = projectileSpawnOffset * transform.right * (projectileSpawnOffset * i);
+            SpawnProjectile(offset);
+        }
+
+    }
+   
+    void SpawnProjectile(Vector3 spawnOffset)
+    {
+        
         spawnedProjectile = ObjectPooler.RetreiveObject(projectileType).GetComponent<Projectile>(); //Instantiate(projectile, transform.position, transform.rotation).GetComponent<Projectile>();
         spawnedProjectile.gameObject.SetActive(true);
-        spawnedProjectile.transform.position = transform.position;
-        spawnedProjectile.transform.LookAt(player.transform.position);
+        spawnedProjectile.transform.position = transform.position + spawnOffset;
+        spawnedProjectile.transform.LookAt(player.transform.position + spawnOffset);
         spawnedProjectile.damage = projectileDamage;
         spawnedProjectile.speed = projectileSpeed;
         spawnedProjectile.origin = gameObject;

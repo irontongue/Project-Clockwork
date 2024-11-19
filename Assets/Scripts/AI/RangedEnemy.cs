@@ -169,7 +169,7 @@ public class RangedEnemy : AIBase
     protected override void FinalizeDamage()
     {
         AttackEffects();
-        SpawnProjectile();
+        FireProjectile();
 
         spriteRenderer.sprite = baseSprite;
     }

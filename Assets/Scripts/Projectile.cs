@@ -11,6 +11,7 @@ public class Projectile : PoolObject
     public GameObject origin;
     public bool active;
     public Vector3 fireVector;
+    public bool moveOnVector;
     [SerializeField] GameObject spriteOBJ;
 
     private void Start()
@@ -30,6 +31,7 @@ public class Projectile : PoolObject
     }
     private void OnTriggerEnter(Collider other)
     {
+      
         PlayerDamageHandler handler = other.GetComponent<PlayerDamageHandler>();
         if (handler == null)
             return;
