@@ -420,7 +420,7 @@ MonoBehaviour:
   dashMaxMagnitudeBeforeReducedSpeed: 30
   reducedDashSpeed: 0.05
   extraVelRequiredToSlide: 10
-  slideFallOff: 6
+  slideFallOff: 3
   uphillExtraSlideFallOff: 50
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
