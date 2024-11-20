@@ -18,7 +18,7 @@ public class AutomaticWeaponMissleLauncher : AutomaticWeaponBase
     // Update is called once per frame
     void Update()
     {
-        if(GameState.GamePaused)
+        if(GameState.GamePaused || !GameState.inCombat)
             return;
         SetLockOnPoint();
         if(!UpdateCoolDown())
