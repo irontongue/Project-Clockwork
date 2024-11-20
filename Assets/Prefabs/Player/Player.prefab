@@ -16947,7 +16947,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fireAudioClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 36922bd4fa436f44183a05b421691b70, type: 3}
+      objectReference: {fileID: 8300000, guid: 82298cb380d06ca4891e25ae9fae6f0a, type: 3}
     - target: {fileID: 4051008084599665522, guid: 32e94e7b1f1018e498f4d0c77324794f,
         type: 3}
       propertyPath: m_Name
