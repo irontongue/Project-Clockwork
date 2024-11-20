@@ -102,13 +102,13 @@ public class UpgradeManager : MonoBehaviour
       //  upgradePackets.AddRange(dogUpgrades);
 
         InitilizeWeaponUpgradeDictionary();
-        if(instantlyGainAllUpgrades)
+        if (instantlyGainAllUpgrades)
         {
-            while(autoWeapons.Count > 0)
+            while (autoWeapons.Count > 0)
             {
                 UnlockWeapon(autoWeapons[0]);
             }
-            while(upgradePackets.Count > 0)
+            while (upgradePackets.Count > 0)
             {
                 UnlockUpgrade(upgradePackets[0]);
             }
@@ -116,6 +116,8 @@ public class UpgradeManager : MonoBehaviour
         else
         if (gainWeaponOnStart)
             StartWeaponUnlock();
+        else
+            Cursor.lockState = CursorLockMode.Locked;
        
     }
 

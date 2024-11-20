@@ -400,7 +400,7 @@ MonoBehaviour:
   dashSound: {fileID: 0}
   jumpSound: {fileID: 0}
   extraJumpSound: {fileID: 0}
-  baseSpeed: 17
+  baseSpeed: 18
   airMoveSpeedWithVel: 0.5
   airMoveSpeedAgainstVel: 8
   seccondsSinceMovingBeforeMaxJump: 0.15
@@ -424,7 +424,7 @@ MonoBehaviour:
   uphillExtraSlideFallOff: 50
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
-  downSlopeAccelMultiplyer: 30
+  downSlopeAccelMultiplyer: 45
   slideGracePeriodSinceLoosingVelocity: 0.3
   magnitudeToStopSlide: 3
   timeSinceSlideBeforeAutoCancel: 0.4

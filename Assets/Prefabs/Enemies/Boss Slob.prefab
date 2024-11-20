@@ -530,8 +530,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifyer: 
   mainBodyInfo: {fileID: 0}
-  maxHealth: 200
-  health: 200
+  maxHealth: 100
+  health: 100
   speed: 15
   EXP: 1
   damageFlashTime: 1

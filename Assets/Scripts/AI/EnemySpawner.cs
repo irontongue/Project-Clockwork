@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
         public int minSpawnCount, maxSpawnCount;
         public int spawnChances;
     }
-    public enum Enemies {Melee, Ranged, Slob, LesserFly, Gremlin, EliteMelee, BossSlob}
+    public enum Enemies {Melee, Ranged, Slob, LesserFly, Gremlin, EliteMelee, BossSlob, EasyMeleeEnemy}
    
   
 
@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] WaveEvent[] spawnerStartEvents;
     [SerializeField] WaveEvent[] spawnerEndEvents;
     [SerializeField] GameObject[] spawnPoints;
+    [SerializeField] bool tutorialSpawner;
 
     PlayerLevelUpManager playerLevelUpManager;
     [SerializeField] float minSpawnDistanceFromPlayer;
@@ -58,6 +59,8 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Update()
     {
+        if (tutorialSpawner && currentWaveIndex > waves.Length - 1)
+            Destroy(this);
         if (GameState.GamePaused)
             return;
 
