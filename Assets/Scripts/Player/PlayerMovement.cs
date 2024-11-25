@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
     void GroundCheck()
     {
 
-        isActuallyGrounded = Physics.SphereCast(transform.position, 0.25f, Vector3.down, out RaycastHit hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
+        isActuallyGrounded = Physics.SphereCast(transform.position, 0.05f, Vector3.down, out RaycastHit hit, (controller.height / 1.8f) + groundedThreshold, groundMask);
 
         currentCyoteTime -= Time.deltaTime;
 
@@ -459,7 +459,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding)
         {
-           // SlideMovement();
+           // SlideMovement(); // now in fixed update
             return;
         }
 
@@ -482,7 +482,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!onSlope)
         {
-            if (slidingTooSlow)
+            if (slidingTooSlow && isGrounded)
             {
                 timeSinceMinVelocity -= Time.deltaTime;
                 if (timeSinceMinVelocity <= 0)

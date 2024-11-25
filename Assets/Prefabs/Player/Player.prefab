@@ -400,9 +400,9 @@ MonoBehaviour:
   dashSound: {fileID: 0}
   jumpSound: {fileID: 0}
   extraJumpSound: {fileID: 0}
-  baseSpeed: 18
+  baseSpeed: 19
   airMoveSpeedWithVel: 0.5
-  airMoveSpeedAgainstVel: 8
+  airMoveSpeedAgainstVel: 10
   seccondsSinceMovingBeforeMaxJump: 0.15
   neutralJumpAirMoveSpeed: 15
   gravity: 14
@@ -418,9 +418,9 @@ MonoBehaviour:
   dashLenght: 0.15
   dashCooldown: 1
   dashMaxMagnitudeBeforeReducedSpeed: 30
-  reducedDashSpeed: 0.05
-  extraVelRequiredToSlide: 10
-  slideFallOff: 3
+  reducedDashSpeed: 0.15
+  extraVelRequiredToSlide: 6
+  slideFallOff: 4
   uphillExtraSlideFallOff: 50
   minMagBeforeSlideCancelMultiplyer: 0.5
   minAngleForSlide: 10
@@ -429,7 +429,7 @@ MonoBehaviour:
   magnitudeToStopSlide: 3
   timeSinceSlideBeforeAutoCancel: 0.4
   groundCheckThreshold: -0.02
-  slidingInAirSpeedGain: 5
+  slidingInAirSpeedGain: 1
   colliderOffset: {x: 0, y: 0.04, z: 0}
   colliderRadius: 0.45
   enviromentLayermask:
