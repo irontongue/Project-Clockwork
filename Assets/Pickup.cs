@@ -9,6 +9,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] float amount;
     [SerializeField] AudioClip audioClip;
 
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
@@ -19,7 +20,7 @@ public class Pickup : MonoBehaviour
 
     void Consumeable()
     {
-        AudioSource.PlayClipAtPoint(audioClip,transform.position, GlobalSettings.audioVolume);
+        PlayerMovement.playerAudioSource.PlayOneShot(audioClip, GlobalSettings.audioVolume + 0.5f);
         switch(pickUpType)
         {
             case PickUpTyp.HealthPotion:
