@@ -19,7 +19,7 @@ public class SettingsSetter : MonoBehaviour
         Application.targetFrameRate = 9999;
         QualitySettings.maxQueuedFrames = 2;
 
-        GarbageCollector.GCMode = GarbageCollector.Mode.Disabled;
+       // GarbageCollector.GCMode = GarbageCollector.Mode.Disabled;
     }
 
     public void AudioSlider()
