@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Scripting;
 
 public class SettingsSetter : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class SettingsSetter : MonoBehaviour
         music.volume = audioSlider.value * 0.05f;
         Application.targetFrameRate = 9999;
         QualitySettings.maxQueuedFrames = 2;
+
+       // GarbageCollector.GCMode = GarbageCollector.Mode.Disabled;
     }
 
     public void AudioSlider()

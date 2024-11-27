@@ -56,7 +56,7 @@ public class AIBase : EnemyInfo
     {
       
         base.Start();
-        
+        identifyer = enemyType.ToString();
         trueSeccondsBetweenMovementUpdates = Random.Range(seccondsBetweenMovementUpdates * (1f - randonVarianceForMovementUpdate), seccondsBetweenMovementUpdates * (1f + randonVarianceForMovementUpdate));
         player = PlayerMovement.playerRef;
         aiBuisy = false;

@@ -23,7 +23,7 @@ public class ObjectPooler : MonoBehaviour
         objectRefrences = new();
         loopingPool = new();
     }
-    static bool alldathings = true;
+    static bool alldathings = false;
     void Update()
     {
        
@@ -45,6 +45,7 @@ public class ObjectPooler : MonoBehaviour
 
     //use this whenever you want to start a new object pool. this pool has a dynamic size, and will create a new object if there are none currently in the pool
     // specify the object that you want to be instaniated to fill the pool. can also prespawn objects if wanted.
+    static GameObject tempSpawnedObject;
     static public void InitilizeObjectPool(string identifyer, GameObject refrenceObject, bool loopingList = false, int amountToPreSpawn = 0)
     {
         
@@ -61,11 +62,13 @@ public class ObjectPooler : MonoBehaviour
         newPool.loopingList = loopingList;
         newPool.listSize = amountToPreSpawn;
         newPool.currentIndex = 0;
-        
-    
-        for(int i = 0; i < amountToPreSpawn; i++)
+
+      
+        for (int i = 0; i < amountToPreSpawn; i++)
         {
-            newPool.objectPool.Add(Instantiate(refrenceObject, Vector3.zero, quaternion.identity));
+            tempSpawnedObject = Instantiate(refrenceObject, Vector3.zero, quaternion.identity);
+            tempSpawnedObject.SetActive(false);
+            newPool.objectPool.Add(tempSpawnedObject);
         }
 
         objectPoolCollection.Add(identifyer, newPool);
@@ -92,6 +95,8 @@ public class ObjectPooler : MonoBehaviour
                 returnedObject = objectPoolCollection[identifyer].objectPool[0];
                 objectPoolCollection[identifyer].objectPool.Remove(returnedObject);
             }
+
+            print("OBJECT USED POOLER");
             return returnedObject;
         }
         else
@@ -103,6 +108,7 @@ public class ObjectPooler : MonoBehaviour
             }
             returnedObject = Instantiate(objectRefrences[identifyer], Vector3.zero, quaternion.identity);
             returnedObject.GetComponent<PoolObject>().identifyer = identifyer;
+            print("OBJECT DID NOT USE POOLER");
             return returnedObject;
         }
     }
@@ -111,9 +117,11 @@ public class ObjectPooler : MonoBehaviour
     static PoolObject poolObject;
     static public void ReturnObject(GameObject gObject, string identifyer = "")
     {
+      
         if (identifyer != "")
         {
             objectPoolCollection[identifyer].objectPool.Add(gObject);
+            print("RETUNRED OBJECT");
             return;
         }
 
@@ -124,6 +132,7 @@ public class ObjectPooler : MonoBehaviour
             Debug.LogError(gObject.name + " Was not returned to the pool. Return object was called with no identifyer and no pool object component!");
             return;
         }
+        print(poolObject.identifyer);
         objectPoolCollection[poolObject.identifyer].objectPool.Add(gObject);
     }
 }

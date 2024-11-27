@@ -140,7 +140,7 @@ MonoBehaviour:
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
   agentless: 0
-  attackRange: 60
+  attackRange: 70
   seccondsBetweenAttacks: 1.5
   damage: 1
   attackDelay: 0.2
@@ -175,7 +175,7 @@ MonoBehaviour:
   projectileFireRate: 1
   projectileFireChance: 65
   projectileDamage: 1
-  projectileSpeed: 65
+  projectileSpeed: 35
   minRangeToThrowProjectile: 0
   projectileType: Projectile
   projectileCount: 6

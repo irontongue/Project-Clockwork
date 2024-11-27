@@ -33,14 +33,16 @@ public class Projectile : PoolObject
     {
       
         PlayerDamageHandler handler = other.GetComponent<PlayerDamageHandler>();
-        if (handler == null)
-            return;
+        if (handler != null)
+            handler.Damage(damage, origin.transform);
 
-        handler.Damage(damage, origin.transform);
+
         //BatchSpriteLooker.RemoveLooker(transform);
         //BatchProjectileManager.RemoveProjectile(this);
         DecomissionObject();
         //Destroy(gameObject);
 
     }
+
+   
 }
