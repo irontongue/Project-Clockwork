@@ -129,7 +129,7 @@ MonoBehaviour:
   mainBodyInfo: {fileID: 0}
   maxHealth: 5
   health: 5
-  speed: 17
+  speed: 16
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.02
@@ -159,7 +159,7 @@ MonoBehaviour:
   randonVarianceForMovementUpdate: 0.005
   usePolarOffset: 1
   distanceBeforeConvergingOnPlayer: 3
-  poleOffsets: {x: 7, y: 7}
+  poleOffsets: {x: 8, y: 8}
   spawner: {fileID: 0}
   source: {fileID: 8368403614439602895}
   pole: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
   - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
   spawnerSpawnSound: []
-  timeBetweenPolarOffsets: 4
+  timeBetweenPolarOffsets: 7
   expOrb: {fileID: 2357236184651808633, guid: c958a786082e3ed48b69ecfb6bd711c3, type: 3}
   spawnEXPorb: 1
   useProjectile: 0

@@ -35,7 +35,8 @@ public class PlayerCameraController : MonoBehaviour
       
         transform.eulerAngles = new Vector3(0f, cameraRotation.y, 0f);
 
-        DevText.DisplayInfo("cam", "Camera Rotation " + cameraRotation, "Camera");
+        if(DevText.Debugging)
+         DevText.DisplayInfo("cam", "Camera Rotation " + cameraRotation, "Camera");
 
         
     }

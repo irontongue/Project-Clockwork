@@ -98,7 +98,7 @@ public class EnemySpawner : MonoBehaviour
 
         currentWaveIndex++;
         enemysKilled = 0;
-        spawnedEnemies = 0 - (currentWave.enemiesToKillToEndWave - spawnedEnemies); // since there could be multiple waves going on, reduce spawned enemys by how many enemies are left in the last wave.
+        spawnedEnemies = 0;// - (currentWave.enemiesToKillToEndWave - spawnedEnemies); // since there could be multiple waves going on, reduce spawned enemys by how many enemies are left in the last wave.
         autoStartNewWave = false;
         if (currentWaveIndex >= waves.Length)
         {

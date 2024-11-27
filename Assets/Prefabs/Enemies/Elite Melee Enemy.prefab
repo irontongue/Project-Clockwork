@@ -133,7 +133,7 @@ MonoBehaviour:
   EXP: 1
   damageFlashTime: 1
   healthPotionDropChance: 0.1
-  enemyType: 0
+  enemyType: 5
   deathPFX: {fileID: 8968268943877197565, guid: ecdad8e1ab2fb614b81bb572d3fa7294,
     type: 3}
   healthPotionPrefab: {fileID: 445344903588590110, guid: 3cff64084d5df4843b65f08c362c7534,
@@ -185,6 +185,8 @@ MonoBehaviour:
   projectileSpeed: 70
   minRangeToThrowProjectile: 10
   projectileType: Rock
+  projectileCount: 1
+  projectileSpawnOffset: 0
   afterAttackTimer: 1
 --- !u!195 &5083003481326997813
 NavMeshAgent:

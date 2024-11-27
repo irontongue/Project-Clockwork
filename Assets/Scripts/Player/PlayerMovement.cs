@@ -439,8 +439,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isSliding)
             slideSource.Stop();
-
-        SlideDebug();
+        if(DevText.Debugging)
+            SlideDebug();
         UpdateSlideState();
 
         if (Input.GetKeyUp(KeyCode.LeftControl))

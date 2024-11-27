@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fab890b5156aed498581b26636bef13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoFloatDistance: 10
+  autoFloatDistance: 25
   floatSpeed: 100
-  acceleration: 35
+  acceleration: 20
   tutorialOrb: 0
   expValue: 0
