@@ -34,6 +34,11 @@ public class EnemyInfo : EnemyDamageHandler
     [TabGroup("DamageHandler")] public GameObject healthBarPivot;
     [TabGroup("DamageHandler")] public SpriteRenderer spriteRenderer;
     [TabGroup("DamageHandler"), SerializeField] Vector3 floatingTextSpawnOffset;
+
+    [TabGroup("Audio"), SerializeField] AudioClip[] hitAuidoClips;
+    [TabGroup("Audio"), SerializeField] AudioClip[] deathAudioClips;
+
+
     SpriteMaskUpdate spriteMaskUpdate;
     //Logic
     protected float flashTimer = 1;
@@ -154,7 +159,14 @@ public class EnemyInfo : EnemyDamageHandler
             }
             spriteRenderer.color = Color.white;
             //StopAllCoroutines();
+            if(deathAudioClips.Length > 0)
+                AudioSource.PlayClipAtPoint(GetRandomAudioClip(deathAudioClips),transform.position, GlobalSettings.audioVolume);
             return;
+        }
+        else
+        {
+            if(hitAuidoClips.Length > 0)
+                AudioSource.PlayClipAtPoint(GetRandomAudioClip(hitAuidoClips),transform.position, GlobalSettings.audioVolume);
         }
         if(spriteMaskUpdate  != null) 
         {
@@ -172,6 +184,11 @@ public class EnemyInfo : EnemyDamageHandler
         gameObject.SetActive(false);
     }
     #endregion
+
+    AudioClip GetRandomAudioClip(AudioClip[] clips)
+    {
+        return clips[Random.Range(0, clips.Length)];
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

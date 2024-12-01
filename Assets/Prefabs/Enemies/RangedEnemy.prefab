@@ -137,6 +137,14 @@ MonoBehaviour:
   healthBarPivot: {fileID: 3165484629595038083}
   spriteRenderer: {fileID: 0}
   floatingTextSpawnOffset: {x: 0, y: 1.89, z: 0}
+  hitAuidoClips:
+  - {fileID: 8300000, guid: c51a98e16696fff499c7889baccecfc0, type: 3}
+  - {fileID: 8300000, guid: fbc7f66629ef58c46ad85483a6e0e465, type: 3}
+  - {fileID: 8300000, guid: e6b27d5ca163f974689522f88508fea1, type: 3}
+  - {fileID: 8300000, guid: 0a8d77dd910a43a43a31010064bc2ae0, type: 3}
+  deathAudioClips:
+  - {fileID: 8300000, guid: e7c30aa934c96984ca24c459b5e2f4a3, type: 3}
+  - {fileID: 8300000, guid: 6f2372ba77c16874594ba568d728f23a, type: 3}
   fireStacks: 0
   agent: {fileID: 2712118304913471865}
   agentless: 0
