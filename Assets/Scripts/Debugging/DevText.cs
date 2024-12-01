@@ -23,7 +23,7 @@ public class DevText : MonoBehaviour
 
     static List<GameObject> freeUI = new List<GameObject>();
 
-
+    [SerializeField] TextMeshProUGUI fpsText;
 
     private void Start()
     {
@@ -53,11 +53,13 @@ public class DevText : MonoBehaviour
     {
         //fps counter
         timer -= Time.deltaTime;
-       
+        
+
         if (timer <= 0)
         {
             timer = fpsUpdateTime;
-            DisplayInfo("FPS", "FPS: " + ((int)(1.0f / Time.deltaTime)).ToString(), "Basic");
+            fpsText.text = ((int)(1.0f / Time.deltaTime)).ToString();
+          //  DisplayInfo("FPS", "FPS: " + ((int)(1.0f / Time.deltaTime)).ToString(), "Basic");
         }
 
         if(Input.GetKeyDown(KeyCode.F1) && !wasPressedThisFrame)
@@ -72,7 +74,7 @@ public class DevText : MonoBehaviour
             print(uiActive);
             if(uiActive)
             {
-                print("b");
+
                 groupSelector.gameObject.SetActive(true);
                 groupSelector.text = "Debug Groups \n";
                 int i = 1;

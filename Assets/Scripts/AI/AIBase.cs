@@ -151,7 +151,6 @@ public class AIBase : EnemyInfo
             if (randomVariance == 0)
             {
                 agent.SetDestination(targetPos);
-                print("Moving");
                 return false;
             }
 
@@ -313,7 +312,7 @@ public class AIBase : EnemyInfo
         }
         catch
         {
-            print("spawnerSpawnSound not set for" + enemyType.ToString());
+            
         }
         
 

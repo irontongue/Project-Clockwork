@@ -164,7 +164,7 @@ public class EnemySpawner : MonoBehaviour
             if (chosenEnemy.spawnInGroup)
             {
                 groupSpawnCount = Random.Range(chosenEnemy.minSpawnCount, chosenEnemy.maxSpawnCount);
-                wave.enemiesToKillToEndWave -= (groupSpawnCount - 1);
+                wave.enemiesToKillToEndWave += groupSpawnCount;
             }
                 
             else

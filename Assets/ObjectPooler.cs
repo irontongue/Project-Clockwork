@@ -96,7 +96,6 @@ public class ObjectPooler : MonoBehaviour
                 objectPoolCollection[identifyer].objectPool.Remove(returnedObject);
             }
 
-            print("OBJECT USED POOLER");
             return returnedObject;
         }
         else
@@ -108,7 +107,6 @@ public class ObjectPooler : MonoBehaviour
             }
             returnedObject = Instantiate(objectRefrences[identifyer], Vector3.zero, quaternion.identity);
             returnedObject.GetComponent<PoolObject>().identifyer = identifyer;
-            print("OBJECT DID NOT USE POOLER");
             return returnedObject;
         }
     }
@@ -121,7 +119,6 @@ public class ObjectPooler : MonoBehaviour
         if (identifyer != "")
         {
             objectPoolCollection[identifyer].objectPool.Add(gObject);
-            print("RETUNRED OBJECT");
             return;
         }
 

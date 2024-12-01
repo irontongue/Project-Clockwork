@@ -663,7 +663,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (hitColliders.Length != 0)
         {
-            print("collided with enviroment!");
+        
             return true;
         }
         
