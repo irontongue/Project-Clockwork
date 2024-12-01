@@ -20,7 +20,7 @@ public class Pickup : MonoBehaviour
 
     void Consumeable()
     {
-        PlayerMovement.playerAudioSource.PlayOneShot(audioClip, GlobalSettings.audioVolume + 0.5f);
+        PlayerMovement.playerAudioSource.PlayOneShot(audioClip, GlobalSettings.audioVolume);
         switch(pickUpType)
         {
             case PickUpTyp.HealthPotion:
