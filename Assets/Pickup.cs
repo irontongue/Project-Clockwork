@@ -7,6 +7,8 @@ public class Pickup : MonoBehaviour
     enum PickUpTyp {HealthPotion}
     [SerializeField] PickUpTyp pickUpType;
     [SerializeField] float amount;
+    [SerializeField] AudioClip audioClip;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +20,7 @@ public class Pickup : MonoBehaviour
 
     void Consumeable()
     {
+        PlayerMovement.playerAudioSource.PlayOneShot(audioClip, GlobalSettings.audioVolume + 0.5f);
         switch(pickUpType)
         {
             case PickUpTyp.HealthPotion:
