@@ -16,6 +16,7 @@ public class AutomaticWeaponBase : MonoBehaviour
     [TabGroup("LayerMasks"), SerializeField] protected LayerMask everythingEnemy = 1 << 3 | 1 << 7;
 
     [TabGroup("Audio"), SerializeField] protected AudioClip[] fireAudioClips;
+    [TabGroup("Audio"),SerializeField] protected float audioVolumeMultiplyer = 1;
     //**REFERENCES**\\
     AllWeaponStats allStats;
     protected WeaponStats stats;
@@ -277,7 +278,7 @@ public class AutomaticWeaponBase : MonoBehaviour
         int index = UnityEngine.Random.Range(0, audioClips.Length);
         if (audioClips == null)
             return;
-        audioSource.PlayOneShot(audioClips[index], GlobalSettings.audioVolume);
+        audioSource.PlayOneShot(audioClips[index], GlobalSettings.audioVolume * audioVolumeMultiplyer);
 
     }
 

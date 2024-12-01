@@ -400,7 +400,7 @@ MonoBehaviour:
   dashSound: {fileID: 0}
   jumpSound: {fileID: 0}
   extraJumpSound: {fileID: 0}
-  baseSpeed: 19
+  baseSpeed: 18
   airMoveSpeedWithVel: 0.5
   airMoveSpeedAgainstVel: 10
   seccondsSinceMovingBeforeMaxJump: 0.15
@@ -1030,6 +1030,7 @@ MonoBehaviour:
     m_Bits: 136
   fireAudioClips:
   - {fileID: 8300000, guid: 3878bf0014656df4aa4354bf3e4b2e50, type: 3}
+  audioVolumeMultiplyer: 0.8
   muzzleFlashPFX: {fileID: 4929545749913747673}
   bloodHitPFX: {fileID: 3766226238398832601, guid: 401c055fb346c2b48b4813242fdd1b78,
     type: 3}
@@ -1099,6 +1100,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e1b4c6d7305cb364d9712b1a070cf511, type: 3}
   - {fileID: 8300000, guid: 4f376d57a820fa846a4264c533bf5dcb, type: 3}
   - {fileID: 8300000, guid: 0cb007d6298ec5548b640036ed665247, type: 3}
+  audioVolumeMultiplyer: 0.55
   muzzleFlashPFX: {fileID: 5176885612826155573}
   terrainHitPFX: {fileID: 246225042234028414, guid: bbbf888f55aec3e468f612fb4f7bb8f3,
     type: 3}
@@ -11715,6 +11717,7 @@ MonoBehaviour:
     m_Bits: 136
   fireAudioClips:
   - {fileID: 8300000, guid: d5b74b4844e182e4dbad9d4e7b0b4d35, type: 3}
+  audioVolumeMultiplyer: 0.35
   lineRen: {fileID: 4737691673808959488}
   lightningMuzzlePosition: {fileID: 3216912175817541036}
   lightningActiveTime: 5

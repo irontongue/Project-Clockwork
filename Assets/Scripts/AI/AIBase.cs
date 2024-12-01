@@ -227,7 +227,7 @@ public class AIBase : EnemyInfo
     {
         try
         {
-            source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)]);
+            source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)], GlobalSettings.audioVolume * 5f);
         }
         catch { }
     }
