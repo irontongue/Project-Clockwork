@@ -54,7 +54,7 @@ public class EnemySoundManager : MonoBehaviour
 
             default:
 
-                if(currentGenericSpawnInterval > 0)
+                if(currentGenericSpawnInterval < 0)
                 {
                     currentGenericSpawnInterval = genericNoiseInterval;
                     return true;

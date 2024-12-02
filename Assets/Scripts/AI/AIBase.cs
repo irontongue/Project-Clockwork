@@ -309,6 +309,7 @@ public class AIBase : EnemyInfo
         try
         {
             source.PlayOneShot(spawnerSpawnSound[Random.Range(0, spawnerSpawnSound.Length)], GlobalSettings.audioVolume);
+            print("playingSpawnSound");
         }
         catch
         {
