@@ -141,6 +141,8 @@ MonoBehaviour:
   healthBarPivot: {fileID: 8317556816323314500}
   spriteRenderer: {fileID: 0}
   floatingTextSpawnOffset: {x: 0, y: 1.21, z: 0}
+  hitAuidoClips: []
+  deathAudioClips: []
   fireStacks: 0
   agent: {fileID: 5083003481326997813}
   agentless: 0

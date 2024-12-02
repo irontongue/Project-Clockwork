@@ -175,15 +175,11 @@ MonoBehaviour:
   pole: 0
   aiBuisy: 0
   spawnSounds:
-  - {fileID: 8300000, guid: bd0021a6b2e578b4d80f62e740bc9c38, type: 3}
-  - {fileID: 8300000, guid: 0c245b03f4121344c8622ee460dbdd37, type: 3}
-  - {fileID: 8300000, guid: 9eaa1a64146bc2940aa5f11283c01d2a, type: 3}
-  - {fileID: 8300000, guid: 76e2e8adce660754c99c11d8a9561908, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: 91906a5e499786e47b7bc2116643db71, type: 3}
-  - {fileID: 8300000, guid: 865b573aa7a95a749b85a2a8925147ee, type: 3}
-  - {fileID: 8300000, guid: 467e457e2593b16458bc892243fcc57a, type: 3}
-  - {fileID: 8300000, guid: 33b6ff6b397bb634aa30ad9bb037c4c2, type: 3}
+  - {fileID: 8300000, guid: 0e5b4024faf1648409706f16142e8c54, type: 3}
+  - {fileID: 8300000, guid: 0e5b4024faf1648409706f16142e8c54, type: 3}
+  - {fileID: 8300000, guid: 32f40fe7640885549bbead2c16afb3c4, type: 3}
+  - {fileID: 8300000, guid: db1e0d7910ddf144f8f7b3920912d70b, type: 3}
+  deathSounds: []
   spawnerSpawnSound: []
   timeBetweenPolarOffsets: 8
   expOrb: {fileID: 2357236184651808633, guid: c958a786082e3ed48b69ecfb6bd711c3, type: 3}

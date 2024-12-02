@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EnemySoundManager : MonoBehaviour
 {
-    [SerializeField] static float goblinSpawnNoiseInterval = 1f, ogerSpawnNoiseInterval = 0.25f;
-    [SerializeField] static float goblinDeathNoiseInterval = 2f, ogerDeathNoiseInterval = 0.25f;
+    [SerializeField] static float goblinSpawnNoiseInterval = 0.5f, ogerSpawnNoiseInterval = 0.25f;
+    [SerializeField] static float goblinDeathNoiseInterval = 1f, ogerDeathNoiseInterval = 0.25f;
 
    static float currentGSpawn, currentGDeath;
    static float currentOSpawn, currentODeath;
+
+
+    static float genericNoiseInterval = 0.1f;
+    static float currentGenericSpawnInterval = 0f;
 
     private void Update()
     {
@@ -16,6 +20,7 @@ public class EnemySoundManager : MonoBehaviour
         currentGSpawn -= Time.deltaTime;
         currentODeath -= Time.deltaTime;
         currentOSpawn -= Time.deltaTime;
+        currentGenericSpawnInterval -= Time.deltaTime;
     }
 
     public static bool NoiseReady(EnemySpawner.Enemies type, bool DeathNoise)
@@ -45,6 +50,16 @@ public class EnemySoundManager : MonoBehaviour
                     currentODeath = ogerDeathNoiseInterval;
                     return true;
                 }
+                break;
+
+            default:
+
+                if(currentGenericSpawnInterval > 0)
+                {
+                    currentGenericSpawnInterval = genericNoiseInterval;
+                    return true;
+                }
+
                 break;
         }
         return false;

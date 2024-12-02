@@ -55,12 +55,12 @@ public class DevText : MonoBehaviour
         timer -= Time.deltaTime;
         
 
-        if (timer <= 0)
+     /*   if (timer <= 0)
         {
             timer = fpsUpdateTime;
-            fpsText.text = ((int)(1.0f / Time.deltaTime)).ToString();
+            //fpsText.text = ((int)(1.0f / Time.deltaTime)).ToString();
           //  DisplayInfo("FPS", "FPS: " + ((int)(1.0f / Time.deltaTime)).ToString(), "Basic");
-        }
+        }*/
 
         if(Input.GetKeyDown(KeyCode.F1) && !wasPressedThisFrame)
         {
