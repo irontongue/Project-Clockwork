@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class PlayerLevelUpManager : MonoBehaviour
 {
     [SerializeField] int[] expToLvlup;
+   [SerializeField] AudioSource source;
+    [SerializeField] AudioClip expSound, lvlUpSound;
     int maxLevel;
     float currentEXP;
     int currentLevel;
@@ -43,6 +45,7 @@ public class PlayerLevelUpManager : MonoBehaviour
     {
       
         currentEXP += amount;
+        source.PlayOneShot(expSound, GlobalSettings.audioVolume * 0.25f);
 
         if (currentEXP >= expToLvlup[currentLevel])
         {
@@ -77,6 +80,7 @@ public class PlayerLevelUpManager : MonoBehaviour
 
         upgradeManager.StartUpgrade();
         levelUpReadyText.color = textColor;
+        source.PlayOneShot(lvlUpSound, GlobalSettings.audioVolume);
     }
 
     public void LevelUpFinished()

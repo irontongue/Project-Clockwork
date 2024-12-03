@@ -626,6 +626,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expToLvlup: 19000000190000001e0000001e0000001e0000002300000023000000280000002d00000032000000370000003c000000410000004b000000500000003c0000003c000000
+  source: {fileID: 7430242435101204861}
+  expSound: {fileID: 8300000, guid: 37d364e7ac8dbf948ad9de3bf0ce3764, type: 3}
+  lvlUpSound: {fileID: 8300000, guid: 5e14bbd06942310449325fa865917ee9, type: 3}
   readyToLVLup: 0
   levelUpReadyText: {fileID: 0}
   expBar: {fileID: 0}
