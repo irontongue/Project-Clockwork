@@ -65,6 +65,10 @@ public class UpgradeSpawnerUI : MonoBehaviour
                 case WeaponType.MissleLaucher:
                     upgradeButton.weaponSprite.sprite = rocketLauncherSprite;
                     break;
+                case WeaponType.PlayerRevolver:
+                    upgradeButton.weaponSprite.sprite = revolverSprite;
+                    break;
+                  
                     
             }
             countStatsToDisplay = upgradeInfo.statsToDisplay.Length;
