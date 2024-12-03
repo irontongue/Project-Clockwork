@@ -336,7 +336,7 @@ public class PlayerMovement : MonoBehaviour
         if (readyToDash && Input.GetKeyDown(KeyCode.LeftShift))
         {
             currentlyDashing = true;
-            try { playerAudioSource.PlayOneShot(dashSound, GlobalSettings.audioVolume); }
+            try { playerAudioSource.PlayOneShot(dashSound, GlobalSettings.audioVolume * 2); }
             catch { print("dash sound not set"); }
            
             dashTimer = dashLenght;
@@ -750,7 +750,7 @@ public class PlayerMovement : MonoBehaviour
 
         currentDistance = 0;
 
-        playerAudioSource.PlayOneShot(footsteps[UnityEngine.Random.Range(0, footsteps.Length)], GlobalSettings.audioVolume) ;
+        playerAudioSource.PlayOneShot(footsteps[UnityEngine.Random.Range(0, footsteps.Length)], GlobalSettings.audioVolume * 2f) ;
     }
 
     #endregion

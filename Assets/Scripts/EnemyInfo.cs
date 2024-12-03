@@ -166,7 +166,7 @@ public class EnemyInfo : EnemyDamageHandler
         else
         {
             if(hitAuidoClips.Length > 0)
-                AudioSource.PlayClipAtPoint(GetRandomAudioClip(hitAuidoClips),transform.position, GlobalSettings.audioVolume);
+                AudioSource.PlayClipAtPoint(GetRandomAudioClip(hitAuidoClips),transform.position, GlobalSettings.audioVolume * 2);
         }
         if(spriteMaskUpdate  != null) 
         {

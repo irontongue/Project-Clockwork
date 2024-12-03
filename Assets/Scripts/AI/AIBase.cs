@@ -226,7 +226,7 @@ public class AIBase : EnemyInfo
     {
         try
         {
-            source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)], GlobalSettings.audioVolume * 5f);
+            source.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length - 1)], GlobalSettings.audioVolume );
         }
         catch { }
     }
@@ -308,7 +308,7 @@ public class AIBase : EnemyInfo
         }
         try
         {
-            source.PlayOneShot(spawnerSpawnSound[Random.Range(0, spawnerSpawnSound.Length)], GlobalSettings.audioVolume);
+            source.PlayOneShot(spawnerSpawnSound[Random.Range(0, spawnerSpawnSound.Length)], GlobalSettings.audioVolume * 3);
             print("playingSpawnSound");
         }
         catch
