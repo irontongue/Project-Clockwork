@@ -397,7 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSlide: {fileID: 0}
   slideLoop: {fileID: 0}
-  dashSound: {fileID: 0}
+  dashSound: {fileID: 8300000, guid: 6d80727cf63c40345a8ce1690b31d31b, type: 3}
   jumpSound: {fileID: 0}
   extraJumpSound: {fileID: 0}
   baseSpeed: 18
@@ -6544,9 +6544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476840261eebced40ba07e51424eaf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1.5
+  damage: 0.4
   range: 100
-  seccondsBetweenShots: 0.5
+  seccondsBetweenShots: 0.1
   reloadTime: 1
   fireSounds:
   - {fileID: 8300000, guid: 8da0c4e98b9eba6408cb818340416b44, type: 3}
@@ -6558,7 +6558,7 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 255
-  magCapacity: 6
+  magCapacity: 12
   maxAmmoReserve: 128
   muzzleFlashPFX: {fileID: 5252207869180993436}
   terrainHitPFX: {fileID: 246225042234028414, guid: f00e2a1129022884ba9b6b64424b8ea1,

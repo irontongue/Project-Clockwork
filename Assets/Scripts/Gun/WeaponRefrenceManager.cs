@@ -24,7 +24,7 @@ public class WeaponRefrenceManager : MonoBehaviour
 
     void UpdateStats(BasePrimaryWeapon weapon, WeaponStatType weaponStatType, float amountToAdd)
     {
-        print("HERE");
+  
         switch(weaponStatType)
         {
             case WeaponStatType.Damage:

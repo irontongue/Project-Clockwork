@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Revolver : BasePrimaryWeapon
 {
-    
+    public static Revolver instanse;
+    protected override void Start()
+    {
+        base.Start();
+        instanse = this;
+    }
     protected override void Update()
     {
         base.Update();
-      
+       
+  
         if (GameState.GamePaused)
             return;
 

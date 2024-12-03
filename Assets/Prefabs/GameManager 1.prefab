@@ -77,7 +77,7 @@ MonoBehaviour:
     chargeUpTime: 1.6
     bulletSpread: 0
     numberOfBullets: 1
-    numberToPierce: 0
+    numberToPierce: 2
     repeateShot: 1
     lockOnDistance: 0
     bounces: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
     damage: 1.2
     attackSpeed: 0.8
     coolDown: 1
-    range: 10
+    range: 15
     boxCheckWidth: 10
     chargeUpTime: 1
     bulletSpread: 2
@@ -153,10 +153,10 @@ MonoBehaviour:
     moveSpeed: 1
     followDistance: 1
     explosionRadius: 7
-  weaponTypeToAdd: 9
+  weaponTypeToAdd: 1
   d_Value: 000000000100000002000000030000000400000005000000
   d_Key: 020000000100000000000000030000000500000009000000
-  weaponToEdit: 9
+  weaponToEdit: 0
 --- !u!114 &2420568501883286108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce245f46598632e4289c6caa045be3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToEdit: 11
+  weaponToEdit: 10
   shotgunUpgrades:
   - packetName: Damage
     weaponType: 0
@@ -232,9 +232,9 @@ MonoBehaviour:
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 0
-      weaponStatType: 8
+      weaponStatType: 3
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3.75
+      amountToAdd: 5
     - upgradeTitle: 'Shotgun Range II '
       upgradeBody: Increases activation range by 50%  of base
       isWeapon: 0
@@ -243,9 +243,9 @@ MonoBehaviour:
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 0
-      weaponStatType: 8
+      weaponStatType: 3
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3.75
+      amountToAdd: 5
     - upgradeTitle: Shotgun Range III
       upgradeBody: Increases activation range by 50%  of base
       isWeapon: 0
@@ -254,9 +254,9 @@ MonoBehaviour:
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
       weaponType: 0
-      weaponStatType: 8
+      weaponStatType: 3
       weaponToEnable: {fileID: 0}
-      amountToAdd: 3.75
+      amountToAdd: 5
     - upgradeTitle: Shotgun Range IV
       upgradeBody: Increases activation range by 100%  of base
       isWeapon: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
       weaponType: 0
       weaponStatType: 3
       weaponToEnable: {fileID: 0}
-      amountToAdd: 7
+      amountToAdd: 10
     levels: 0
     upgradeColor: {r: 0.4745098, g: 0.49019608, b: 0.4862745, a: 1}
     statsToDisplay: 03000000
@@ -411,12 +411,12 @@ MonoBehaviour:
     - upgradeTitle: Sniper Penetration IV
       upgradeBody: Bullets hit an addition 3 enemies
       isWeapon: 0
-      upgradeType: 0
+      upgradeType: 9
       shotgunUpgrades: 0
       teslaCoilUpgrades: 0
       sniperUpgrades: 0
-      weaponType: 0
-      weaponStatType: 0
+      weaponType: 1
+      weaponStatType: 16
       weaponToEnable: {fileID: 0}
       amountToAdd: 3
     levels: 0
@@ -667,7 +667,146 @@ MonoBehaviour:
     statsToDisplay: 
   grenadeLaucherUpgrades: []
   throwingKnivesUpgrades: []
-  playerRevolverUpgrades: []
+  playerRevolverUpgrades:
+  - packetName: Pistol Damage
+    weaponType: 8
+    packet:
+    - upgradeTitle: 'Pistol Damage I '
+      upgradeBody: Increased Pistol Damage by 25%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.1
+    - upgradeTitle: Pistol Damage II
+      upgradeBody: Increased Pistol Damage by 25%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.1
+    - upgradeTitle: Pistol Damage III
+      upgradeBody: Increased Pistol Damage by 25%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.1
+    - upgradeTitle: Pistol Damage IV
+      upgradeBody: Increased Pistol Damage by 50%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 0
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 0.2
+    levels: 0
+    upgradeColor: {r: 1, g: 0.5013487, b: 0, a: 1}
+    statsToDisplay: 00000000
+  - packetName: Pistol FireRate
+    weaponType: 8
+    packet:
+    - upgradeTitle: Pistol FireRate I
+      upgradeBody: Increases Fire Rate by 10%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 1
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.01
+    - upgradeTitle: Pistol FireRate II
+      upgradeBody: Increases Fire Rate by 10%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 1
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.01
+    - upgradeTitle: Pistol FireRate III
+      upgradeBody: Increases Fire Rate by 20%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 1
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.02
+    - upgradeTitle: Pistol FireRate IV
+      upgradeBody: Increases Fire Rate by 20%
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 1
+      weaponToEnable: {fileID: 0}
+      amountToAdd: -0.02
+    levels: 0
+    upgradeColor: {r: 1, g: 0.5019608, b: 0, a: 1}
+    statsToDisplay: 01000000
+  - packetName: Pistol Mag
+    weaponType: 0
+    packet:
+    - upgradeTitle: Pistol Mag Capacity I
+      upgradeBody: Increases mag size by 4
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 15
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 4
+    - upgradeTitle: Pistol Mag Capacity II
+      upgradeBody: Increases mag size by 6
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 15
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 6
+    - upgradeTitle: Pistol Mag Capacity III
+      upgradeBody: Increases mag size by 8
+      isWeapon: 0
+      upgradeType: 9
+      shotgunUpgrades: 0
+      teslaCoilUpgrades: 0
+      sniperUpgrades: 0
+      weaponType: 8
+      weaponStatType: 15
+      weaponToEnable: {fileID: 0}
+      amountToAdd: 8
+    levels: 0
+    upgradeColor: {r: 1, g: 0.5019608, b: 0, a: 1}
+    statsToDisplay: 0f000000
   missleLauncherUpgrades:
   - packetName: Explosive Radius
     weaponType: 9
@@ -901,6 +1040,8 @@ MonoBehaviour:
     - {fileID: 5610293202375174465, guid: 2c49e252df781eb469756d6304ff88bd, type: 3}
     - {fileID: 3166039104341066168, guid: 19ddba633be02194ea0daf795a78ed8a, type: 3}
     - {fileID: 1246973901974257688, guid: f5ae634988dea4641a7a6fd46ea56863, type: 3}
+    - {fileID: 189324837318420978, guid: 198e5335c5519fc4296017332c25d4f8, type: 3}
+    - {fileID: 5610293202375174465, guid: dc3fb4005be1de94783ef91c66d74ada, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -925,17 +1066,77 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
+      Data: 7
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 10
       Data: 5
     - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
-      Entry: 10
-      Data: 0
-    - Name: 
       Entry: 8
       Data: 
     - Name: 
@@ -943,46 +1144,10 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
+      Data: 6
     - Name: $v
       Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 2
-    - Name: $v
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 4
-    - Name: $v
-      Entry: 10
-      Data: 4
+      Data: 6
     - Name: 
       Entry: 8
       Data: 

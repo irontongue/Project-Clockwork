@@ -19,7 +19,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
     [SerializeField] float waitTimeUntillCardsInteractable = 0.25f;
     UpgradeManager upgradeManager;
 
-    [SerializeField] Sprite shotgunSprite, teslaSprite, sniperSprite, rocketLauncherSprite;
+    [SerializeField] Sprite shotgunSprite, teslaSprite, sniperSprite, rocketLauncherSprite, revolverSprite;
 
     private void Start()
     {
@@ -112,11 +112,18 @@ public class UpgradeSpawnerUI : MonoBehaviour
         switch (upgradeInfo.statsToDisplay[index])
         {
             case WeaponStatType.Damage:
-                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).damage;
+               
+                if(upgradeInfo.weaponType == WeaponType.PlayerRevolver)
+                    value = Revolver.instanse.damage;
+                else
+                    value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).damage;
                 message += "Damage: ";
                 break;
             case WeaponStatType.AttackSpeed:
-                value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).attackSpeed;
+                if (upgradeInfo.weaponType == WeaponType.PlayerRevolver)
+                    value = Revolver.instanse.seccondsBetweenShots;
+                else
+                    value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).attackSpeed;
                 message += "Attack Speed: ";
             //    subtract = true;
                 unit = "s";
@@ -143,6 +150,10 @@ public class UpgradeSpawnerUI : MonoBehaviour
             case WeaponStatType.ExplosionRadius:
                 value = AllWeaponStats.allWeaponStatsInstance.GetWeaponStat(upgradeInfo.weaponType).explosionRadius;
                 message += "Explosive Radius: ";
+                break;
+            case WeaponStatType.MagCapacity:
+                value = Revolver.instanse.magCapacity;
+                message += "Mag Capacity: ";
                 break;
 
         }
