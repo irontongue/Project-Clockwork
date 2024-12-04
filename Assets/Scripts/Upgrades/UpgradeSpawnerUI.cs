@@ -165,7 +165,7 @@ public class UpgradeSpawnerUI : MonoBehaviour
         if(newWeapon)
          message += value.ToString();
         else
-            message += value + " -> " + ( value + (subtract ? -upgradeInfo.packet[upgradeInfo.levels].amountToAdd : upgradeInfo.packet[upgradeInfo.levels].amountToAdd)).ToString() + " ( " + upgradeInfo.packet[upgradeInfo.levels].amountToAdd +unit + " )";
+            message += value + " -> " + ( value + (subtract ? -upgradeInfo.packet[upgradeInfo.levels].amountToAdd : upgradeInfo.packet[upgradeInfo.levels].amountToAdd)).ToString("F2") + " ( " + upgradeInfo.packet[upgradeInfo.levels].amountToAdd.ToString("F2") + unit + " )";
         return message;
     }
 

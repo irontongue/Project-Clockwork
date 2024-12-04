@@ -92,6 +92,7 @@ public class EnemySpawner : MonoBehaviour
         }
         GameState.inCombat = true;
     }
+    bool spawnerCompleted;
     void StartWave()
     {
         
@@ -159,12 +160,14 @@ public class EnemySpawner : MonoBehaviour
         WaveInfo wave = currentWave;
         while(spawnedEnemies < wave.maxEnemiesToSpawn)
         {
+            if (spawnerCompleted) // if for some reason the wave ended early stop spawning
+                break;
             chosenEnemy = spawnPool[Random.Range(0, spawnPool.Count)];
             lastTimeSinceSpawn = currentWave.spawnSpeed;
             if (chosenEnemy.spawnInGroup)
             {
                 groupSpawnCount = Random.Range(chosenEnemy.minSpawnCount, chosenEnemy.maxSpawnCount);
-                wave.enemiesToKillToEndWave += groupSpawnCount;
+                wave.enemiesToKillToEndWave += groupSpawnCount - 1;     
             }
                 
             else
@@ -221,6 +224,8 @@ public class EnemySpawner : MonoBehaviour
    
     public void EnemyKilled()
     {
+        if (spawnerCompleted)
+            return;
         enemysKilled++;
        
         if (enemysKilled >= currentWave.enemiesToKillToEndWave)
@@ -238,6 +243,7 @@ public class EnemySpawner : MonoBehaviour
             wEvent.WaveEnd();
         }
         GameState.inCombat = false;
+        spawnerCompleted = true;
         //   if (playerLevelUpManager.readyToLVLup)
         //      playerLevelUpManager.LevelUp();
     }
