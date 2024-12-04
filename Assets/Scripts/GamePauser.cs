@@ -25,6 +25,11 @@ public class GamePauser : MonoBehaviour
         }
     }
     bool systemPaused;
+    public void UnpauseGame()
+    {
+        PauseGame(false, true, gameObject);
+        OpenPauseMenu(false);
+    }
     public bool PauseGame(bool pauseGame,bool playerControlledPause, GameObject callback) // i am forcing the callback, just in case a script pauses the game weirdly without us knowing
     {
         if (!playerControlledPause)
