@@ -544,12 +544,14 @@ MonoBehaviour:
   healthBarPivot: {fileID: 2427691821568346269}
   spriteRenderer: {fileID: 855478834095770488}
   floatingTextSpawnOffset: {x: 0, y: 1.5, z: 0}
+  hitAuidoClips: []
+  deathAudioClips: []
   fireStacks: 0
   agent: {fileID: 8624205586133748646}
   agentless: 0
   attackRange: 3
   seccondsBetweenAttacks: 1
-  damage: 6
+  damage: 2
   attackDelay: 0.2
   attackSounds: []
   spawnParticleSystem: {fileID: 0}
